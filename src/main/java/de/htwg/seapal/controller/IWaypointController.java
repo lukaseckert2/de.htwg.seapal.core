@@ -8,7 +8,7 @@ import android.location.Location;
 import de.htwg.seapal.model.IWaypoint.ForeSail;
 import de.htwg.seapal.model.IWaypoint.MainSail;
 import de.htwg.seapal.model.IWaypoint.Maneuver;
-import de.htwg.seapal.observer.IObservable;
+import de.htwg.seapal.utils.observer.IObservable;
 
 public interface IWaypointController extends IObservable {
 

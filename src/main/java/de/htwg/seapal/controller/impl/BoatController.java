@@ -4,18 +4,25 @@ import java.util.ArrayList;
 import java.util.List;
 import java.util.UUID;
 
+import com.google.inject.Inject;
+import com.google.inject.Singleton;
+
 import de.htwg.seapal.controller.IBoatController;
 import de.htwg.seapal.database.IBoatDatabase;
 import de.htwg.seapal.model.IBoat;
-import de.htwg.seapal.observer.Observable;
+import de.htwg.seapal.utils.observer.Observable;
+import de.htwg.seapal.utils.logging.ILogger;
 
-
+@Singleton
 public class BoatController extends Observable implements IBoatController {
 
 	protected IBoatDatabase db;
+	private final ILogger logger;
 
-	public BoatController(IBoatDatabase db) {
+	@Inject
+	public BoatController(IBoatDatabase db, ILogger logger) {
 		this.db = db;
+		this.logger = logger;
 	}
 
 	@Override

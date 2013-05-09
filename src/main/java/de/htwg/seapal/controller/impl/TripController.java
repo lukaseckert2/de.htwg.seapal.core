@@ -4,19 +4,25 @@ import java.util.ArrayList;
 import java.util.List;
 import java.util.UUID;
 
-import android.util.Log;
+import com.google.inject.Inject;
+import com.google.inject.Singleton;
 
 import de.htwg.seapal.controller.ITripController;
 import de.htwg.seapal.database.ITripDatabase;
 import de.htwg.seapal.model.ITrip;
-import de.htwg.seapal.observer.Observable;
+import de.htwg.seapal.utils.observer.Observable;
+import de.htwg.seapal.utils.logging.ILogger;
 
+@Singleton
 public class TripController extends Observable implements ITripController {
 
 	private ITripDatabase db;
+	private final ILogger logger;
 
-	public TripController(ITripDatabase db) {
+	@Inject
+	public TripController(ITripDatabase db, ILogger logger) {
 		this.db = db;
+		this.logger = logger;
 	}
 
 	@Override
@@ -270,7 +276,7 @@ public class TripController extends Observable implements ITripController {
 	@Override
 	public List<UUID> getTrips(UUID boat) {
 		List<ITrip> query = db.getTrips();
-		Log.e("TripController", query.toString());
+		logger.info("TripController", query.toString());
 		List<UUID> list = new ArrayList<UUID>();
 		for (ITrip trip : query) {
 			if (trip.getBoat().equals(boat.toString()))

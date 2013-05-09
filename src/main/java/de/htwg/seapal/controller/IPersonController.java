@@ -3,7 +3,7 @@ package de.htwg.seapal.controller;
 import java.util.List;
 import java.util.UUID;
 
-import de.htwg.seapal.observer.IObservable;
+import de.htwg.seapal.utils.observer.IObservable;
 
 public interface IPersonController extends IObservable {
 

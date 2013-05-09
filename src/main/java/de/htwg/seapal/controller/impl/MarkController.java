@@ -4,18 +4,26 @@ import java.util.LinkedList;
 import java.util.List;
 import java.util.UUID;
 
+import com.google.inject.Inject;
+import com.google.inject.Singleton;
+
 import android.text.format.DateFormat;
 import de.htwg.seapal.controller.IMarkController;
 import de.htwg.seapal.database.IMarkDatabase;
 import de.htwg.seapal.model.IMark;
-import de.htwg.seapal.observer.Observable;
+import de.htwg.seapal.utils.observer.Observable;
+import de.htwg.seapal.utils.logging.ILogger;
 
+@Singleton
 public class MarkController extends Observable implements IMarkController {
 
 	private IMarkDatabase db;
+	private final ILogger logger;
 
-	public MarkController(IMarkDatabase db) {
+	@Inject
+	public MarkController(IMarkDatabase db, ILogger logger) {
 		this.db = db;
+		this.logger = logger;
 	}
 
 	@Override

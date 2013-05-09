@@ -1,4 +1,4 @@
-package de.htwg.seapal.observer;
+package de.htwg.seapal.utils.observer;
 
 import java.util.ArrayList;
 import java.util.Iterator;

@@ -6,6 +6,9 @@ import java.util.ArrayList;
 import java.util.List;
 import java.util.UUID;
 
+import com.google.inject.Inject;
+import com.google.inject.Singleton;
+
 import android.location.Location;
 import de.htwg.seapal.controller.IWaypointController;
 import de.htwg.seapal.database.IWaypointDatabase;
@@ -13,13 +16,16 @@ import de.htwg.seapal.model.IWaypoint;
 import de.htwg.seapal.model.IWaypoint.ForeSail;
 import de.htwg.seapal.model.IWaypoint.MainSail;
 import de.htwg.seapal.model.IWaypoint.Maneuver;
-import de.htwg.seapal.observer.Observable;
+import de.htwg.seapal.utils.observer.Observable;
+import de.htwg.seapal.utils.logging.ILogger;
 
+@Singleton
 public class WaypointController extends Observable implements
 		IWaypointController {
 
 	/** Controller handeling the persistence. */
 	private final IWaypointDatabase db;
+	private final ILogger logger;
 
 	/**
 	 * Creates an instance with a waypoint. Only for generalized classes.
@@ -27,8 +33,10 @@ public class WaypointController extends Observable implements
 	 * @param pWaypoint
 	 *            the waypoint.
 	 */
-	public WaypointController(IWaypointDatabase db) {
+	@Inject
+	public WaypointController(IWaypointDatabase db, ILogger logger) {
 		this.db = db;
+		this.logger = logger;
 	}
 
 	@Override

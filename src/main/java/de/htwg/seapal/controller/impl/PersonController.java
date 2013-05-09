@@ -4,17 +4,25 @@ import java.util.ArrayList;
 import java.util.List;
 import java.util.UUID;
 
+import com.google.inject.Inject;
+import com.google.inject.Singleton;
+
 import de.htwg.seapal.controller.IPersonController;
 import de.htwg.seapal.database.IPersonDatabase;
 import de.htwg.seapal.model.IPerson;
-import de.htwg.seapal.observer.Observable;
+import de.htwg.seapal.utils.observer.Observable;
+import de.htwg.seapal.utils.logging.ILogger;
 
+@Singleton
 public class PersonController extends Observable implements IPersonController {
 
 	protected IPersonDatabase db;
+	private final ILogger logger;
 
-	public PersonController(IPersonDatabase db) {
+	@Inject
+	public PersonController(IPersonDatabase db, ILogger logger) {
 		this.db = db;
+		this.logger = logger;
 	}
 
 	@Override
