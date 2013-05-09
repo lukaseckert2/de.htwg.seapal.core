@@ -3,13 +3,18 @@ package de.htwg.seapal.model.impl;
 import java.text.SimpleDateFormat;
 import java.util.UUID;
 
+import org.ektorp.support.CouchDbDocument;
+
 import de.htwg.seapal.model.IPerson;
 
-public class Person implements IPerson {
+public class Person extends CouchDbDocument implements IPerson {
+
+	/**
+	 * Serial version UID for serialization.
+	 */
+	private static final long serialVersionUID = 1L;
 
 	private String user; // UUID user
-
-	private String id; // UUID
 
 	private String firstname = null;
 
@@ -38,12 +43,12 @@ public class Person implements IPerson {
 	private String country = null;
 
 	public Person() {
-
+		setId(UUID.randomUUID().toString());
 	}
 
 	public Person(IPerson person) {
 		user = person.getUser();
-		id = person.getId();
+		setId(person.getId());
 
 		firstname = person.getFirstname();
 		lastname = person.getLastname();
@@ -63,27 +68,12 @@ public class Person implements IPerson {
 	}
 
 	public Person(int id) {
-		this.id = "PERSON-" + id;
+		setId("PERSON-" + id);
 	}
 
 	@Override
-	public String getId() {
-		return id;
-	}
-
-	@Override
-	public UUID getUUId() {
-		return UUID.fromString(id);
-	}
-
-	@Override
-	public void setId(String id) {
-		this.id = id;
-	}
-
-	@Override
-	public void setId(UUID id) {
-		this.id = id.toString();
+	public UUID getUUID() {
+		return UUID.fromString(getId());
 	}
 
 	@Override

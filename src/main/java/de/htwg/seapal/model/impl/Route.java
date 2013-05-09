@@ -4,11 +4,17 @@ import java.util.LinkedList;
 import java.util.List;
 import java.util.UUID;
 
+import org.ektorp.support.CouchDbDocument;
+
 import de.htwg.seapal.model.IRoute;
 
-public class Route implements IRoute {
+public class Route extends CouchDbDocument implements IRoute {
 
-	private String id; // UUID
+	/**
+	 * Serial version UID for serialization.
+	 */
+	private static final long serialVersionUID = 1L;
+
 	private String user; // UUID user
 
 	private String name;
@@ -18,13 +24,26 @@ public class Route implements IRoute {
 	private double distance;
 
 	public Route() {
-		id = UUID.randomUUID().toString();
+		setId(UUID.randomUUID().toString());
 		marks = new LinkedList<UUID>();
+	}
+	
+	public Route(IRoute r) {
+		setId(r.getId());
+		marks = new LinkedList<UUID>();
+		
+		this.user = r.getUser();
+
+		this.name = r.getName();
+		this.date = r.getDate();
+		this.marks = r.getMarks();
+		this.routeEntryPoint = r.getRouteEntryPoint();
+		this.distance = r.getDistance();
 	}
 
 	@Override
-	public UUID getId() {
-		return UUID.fromString(id);
+	public UUID getUUID() {
+		return UUID.fromString(getId());
 	}
 
 	@Override
@@ -86,5 +105,4 @@ public class Route implements IRoute {
 	public void setUser(String user) {
 		this.user = user;
 	}
-
 }

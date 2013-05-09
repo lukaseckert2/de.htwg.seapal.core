@@ -5,17 +5,25 @@ import java.util.UUID;
 
 import de.htwg.seapal.model.IRoute;
 
-public interface IRouteDatabase {
+public interface IRouteDatabase extends IDatabase {
 
-	UUID newRoute();
+	/**
+	 * Saves a route.
+	 * @param route The route to save.
+	 */
+	void save(IRoute route);
 
-	void saveRoute(IRoute route);
+	/**
+	 * Gets a route with a given UUID.
+	 * @param id The UUID of the route.
+	 * @return The route with the given UUID or NULL,
+	 *         if no route was found.
+	 */
+	IRoute get(UUID id);
 
-	void deleteRoute(UUID id);
-
-	IRoute getRoute(UUID id);
-
-	List<IRoute> getRoutes();
-
-	boolean closeDB();
+	/**
+	 * Gets a list of all routes.
+	 * @return All routes.
+	 */
+	List<IRoute> getAll();
 }

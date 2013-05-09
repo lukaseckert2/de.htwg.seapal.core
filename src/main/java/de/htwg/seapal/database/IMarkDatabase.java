@@ -5,17 +5,25 @@ import java.util.UUID;
 
 import de.htwg.seapal.model.IMark;
 
-public interface IMarkDatabase {
+public interface IMarkDatabase extends IDatabase {
 
-	UUID newMark();
+	/**
+	 * Saves a mark.
+	 * @param mark The mark to save.
+	 */
+	void save(IMark mark);
 
-	void saveMark(IMark mark);
+	/**
+	 * Gets a mark with a given UUID.
+	 * @param id The UUID of the mark.
+	 * @return The mark with the given UUID or NULL,
+	 *         if no mark was found.
+	 */
+	IMark get(UUID id);
 
-	void deleteMark(UUID id);
-
-	IMark getMark(UUID id);
-
-	List<IMark> getMarks();
-
-	boolean closeDB();
+	/**
+	 * Gets a list of all marks.
+	 * @return All marks.
+	 */
+	List<IMark> getAll();
 }

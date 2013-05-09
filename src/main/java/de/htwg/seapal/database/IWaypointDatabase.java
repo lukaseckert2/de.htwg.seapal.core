@@ -6,17 +6,25 @@ import java.util.UUID;
 import de.htwg.seapal.model.IWaypoint;
 
 
-public interface IWaypointDatabase {
+public interface IWaypointDatabase extends IDatabase {
 
-	UUID newWaypoint();
+	/**
+	 * Saves a waypoint.
+	 * @param waypoint The waypoint to save.
+	 */
+	void save(IWaypoint waypoint);
 
-	void saveWaypoint(IWaypoint waypoint);
+	/**
+	 * Gets a waypoint with a given UUID.
+	 * @param id The UUID of the waypoint.
+	 * @return The waypoint with the given UUID or NULL,
+	 *         if no waypoint was found.
+	 */
+	IWaypoint get(UUID id);
 
-	void deleteWaypoint(UUID id);
-
-	IWaypoint getWaypoint(UUID id);
-
-	List<IWaypoint> getWaypoints();
-
-	boolean closeDB();
+	/**
+	 * Gets a list of all waypoints.
+	 * @return All waypoints.
+	 */
+	List<IWaypoint> getAll();
 }

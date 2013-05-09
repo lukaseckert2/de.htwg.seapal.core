@@ -27,7 +27,7 @@ public class TripController extends Observable implements ITripController {
 
 	@Override
 	public String getName(UUID id) {
-		ITrip trip = db.getTrip(id);
+		ITrip trip = db.get(id);
 		if (trip == null)
 			return null;
 		return trip.getName();
@@ -36,27 +36,27 @@ public class TripController extends Observable implements ITripController {
 
 	@Override
 	public void setName(UUID id, String name) {
-		ITrip trip = db.getTrip(id);
+		ITrip trip = db.get(id);
 		if (trip == null)
 			return;
 		trip.setName(name);
-		db.saveTrip(trip);
+		db.save(trip);
 		notifyObservers();
 	}
 
 	@Override
 	public void setStartLocation(UUID id, String location) {
-		ITrip trip = db.getTrip(id);
+		ITrip trip = db.get(id);
 		if (trip == null)
 			return;
 		trip.setStartLocation(location);
-		db.saveTrip(trip);
+		db.save(trip);
 		notifyObservers();
 	}
 
 	@Override
 	public String getStartLocation(UUID id) {
-		ITrip trip = db.getTrip(id);
+		ITrip trip = db.get(id);
 		if (trip == null)
 			return null;
 		return trip.getStartLocation();
@@ -65,18 +65,18 @@ public class TripController extends Observable implements ITripController {
 
 	@Override
 	public void setEndLocation(UUID id, String location) {
-		ITrip trip = db.getTrip(id);
+		ITrip trip = db.get(id);
 		if (trip == null)
 			return;
 		trip.setEndLocation(location);
-		db.saveTrip(trip);
+		db.save(trip);
 		notifyObservers();
 
 	}
 
 	@Override
 	public String getEndLocation(UUID id) {
-		ITrip trip = db.getTrip(id);
+		ITrip trip = db.get(id);
 		if (trip == null)
 			return null;
 		return trip.getEndLocation();
@@ -85,18 +85,18 @@ public class TripController extends Observable implements ITripController {
 
 	@Override
 	public void setSkipper(UUID id, UUID skipper) {
-		ITrip trip = db.getTrip(id);
+		ITrip trip = db.get(id);
 		if (trip == null)
 			return;
 		trip.setSkipper(skipper.toString());
-		db.saveTrip(trip);
+		db.save(trip);
 		notifyObservers();
 
 	}
 
 	@Override
 	public UUID getSkipper(UUID id) {
-		ITrip trip = db.getTrip(id);
+		ITrip trip = db.get(id);
 		if (trip == null)
 			return null;
 		return UUID.fromString(trip.getSkipper());
@@ -105,17 +105,17 @@ public class TripController extends Observable implements ITripController {
 
 	@Override
 	public void addCrewMember(UUID id, String crewMember) {
-		ITrip trip = db.getTrip(id);
+		ITrip trip = db.get(id);
 		if (trip == null)
 			return;
 		trip.addCrewMember(crewMember);
-		db.saveTrip(trip);
+		db.save(trip);
 		notifyObservers();
 	}
 
 	@Override
 	public List<String> getCrewMembers(UUID id) {
-		ITrip trip = db.getTrip(id);
+		ITrip trip = db.get(id);
 		if (trip == null)
 			return null;
 		return trip.getCrewMembers();
@@ -123,17 +123,17 @@ public class TripController extends Observable implements ITripController {
 
 	@Override
 	public void setStartTime(UUID id, long start) {
-		ITrip trip = db.getTrip(id);
+		ITrip trip = db.get(id);
 		if (trip == null)
 			return;
 		trip.setStartTime(start);
-		db.saveTrip(trip);
+		db.save(trip);
 		notifyObservers();
 	}
 
 	@Override
 	public long getStartTime(UUID id) {
-		ITrip trip = db.getTrip(id);
+		ITrip trip = db.get(id);
 		if (trip == null)
 			return -1;
 		return trip.getStartTime();
@@ -141,17 +141,17 @@ public class TripController extends Observable implements ITripController {
 
 	@Override
 	public void setEndTime(UUID id, long end) {
-		ITrip trip = db.getTrip(id);
+		ITrip trip = db.get(id);
 		if (trip == null)
 			return;
 		trip.setEndTime(end);
-		db.saveTrip(trip);
+		db.save(trip);
 		notifyObservers();
 	}
 
 	@Override
 	public long getEndTime(UUID id) {
-		ITrip trip = db.getTrip(id);
+		ITrip trip = db.get(id);
 		if (trip == null)
 			return -1;
 		return trip.getEndTime();
@@ -159,17 +159,17 @@ public class TripController extends Observable implements ITripController {
 
 	@Override
 	public void setDuration(UUID id, long timeInSeconds) {
-		ITrip trip = db.getTrip(id);
+		ITrip trip = db.get(id);
 		if (trip == null)
 			return;
 		trip.setDuration(timeInSeconds);
-		db.saveTrip(trip);
+		db.save(trip);
 		notifyObservers();
 	}
 
 	@Override
 	public long getDuration(UUID id) {
-		ITrip trip = db.getTrip(id);
+		ITrip trip = db.get(id);
 		if (trip == null)
 			return -1;
 		return trip.getDuration();
@@ -177,17 +177,17 @@ public class TripController extends Observable implements ITripController {
 
 	@Override
 	public void setMotor(UUID id, int motor) {
-		ITrip trip = db.getTrip(id);
+		ITrip trip = db.get(id);
 		if (trip == null)
 			return;
 		trip.setMotor(motor);
-		db.saveTrip(trip);
+		db.save(trip);
 		notifyObservers();
 	}
 
 	@Override
 	public int getMotor(UUID id) {
-		ITrip trip = db.getTrip(id);
+		ITrip trip = db.get(id);
 		if (trip == null)
 			return -1;
 		return trip.getMotor();
@@ -195,17 +195,17 @@ public class TripController extends Observable implements ITripController {
 
 	@Override
 	public void setFuel(UUID id, double percent) {
-		ITrip trip = db.getTrip(id);
+		ITrip trip = db.get(id);
 		if (trip == null)
 			return;
 		trip.setFuel(percent);
-		db.saveTrip(trip);
+		db.save(trip);
 		notifyObservers();
 	}
 
 	@Override
 	public double getFuel(UUID id) {
-		ITrip trip = db.getTrip(id);
+		ITrip trip = db.get(id);
 		if (trip == null)
 			return -1;
 		return trip.getFuel();
@@ -213,17 +213,17 @@ public class TripController extends Observable implements ITripController {
 
 	@Override
 	public void setNotes(UUID id, String text) {
-		ITrip trip = db.getTrip(id);
+		ITrip trip = db.get(id);
 		if (trip == null)
 			return;
 		trip.setNotes(text);
-		db.saveTrip(trip);
+		db.save(trip);
 		notifyObservers();
 	}
 
 	@Override
 	public String getNotes(UUID id) {
-		ITrip trip = db.getTrip(id);
+		ITrip trip = db.get(id);
 		if (trip == null)
 			return null;
 		return trip.getNotes();
@@ -244,28 +244,28 @@ public class TripController extends Observable implements ITripController {
 
 	@Override
 	public UUID newTrip(UUID boat) {
-		UUID newTrip = db.newTrip();
-		ITrip trip = db.getTrip(newTrip);
+		UUID newTrip = db.create();
+		ITrip trip = db.get(newTrip);
 		trip.setBoat(boat.toString());
-		db.saveTrip(trip);
+		db.save(trip);
 		notifyObservers(); // ??
 		return newTrip;
 	}
 
 	@Override
 	public void deleteTrip(UUID id) {
-		db.deleteTrip(id);
+		db.delete(id);
 		notifyObservers();
 	}
 
 	@Override
 	public void closeDB() {
-		db.closeDB();
+		db.close();
 	}
 
 	@Override
 	public List<UUID> getTrips() {
-		List<ITrip> trips = db.getTrips();
+		List<ITrip> trips = db.getAll();
 		List<UUID> list = new ArrayList<UUID>();
 		for (ITrip trip : trips) {
 			list.add(UUID.fromString(trip.getId()));
@@ -275,7 +275,7 @@ public class TripController extends Observable implements ITripController {
 
 	@Override
 	public List<UUID> getTrips(UUID boat) {
-		List<ITrip> query = db.getTrips();
+		List<ITrip> query = db.getAll();
 		logger.info("TripController", query.toString());
 		List<UUID> list = new ArrayList<UUID>();
 		for (ITrip trip : query) {
@@ -287,7 +287,7 @@ public class TripController extends Observable implements ITripController {
 
 	@Override
 	public UUID getTrip(UUID id) {
-		ITrip trip = db.getTrip(id);
+		ITrip trip = db.get(id);
 		if (trip == null)
 			return null;
 		return UUID.fromString(trip.getId());

@@ -11,8 +11,9 @@ version := "1.0-SNAPSHOT"
 libraryDependencies ++= Seq(
 	"com.google.inject" % "guice" % "3.0",
 	"org.ektorp" % "org.ektorp" % "1.3.0",
-	"com.google.android" % "android" % "4.1.1.4"
-	//"com.couchbase" % "com.couchbase.jtouchdb" % "0.5-SNAPSHOT"//,
+	"com.google.android" % "android" % "4.1.1.4",
+	"com.google.code.jcouchdb" % "jcouchdb" % "0.11.0-1"
+	//"com.couchbase" % "com.couchbase.jtouchdb" % "0.5-SNAPSHOT"
 	//"org.daum.extra.android" % "org.daum.extra.android.touchdbektorp" % "1.0.0-SNAPSHOT"
 )
 

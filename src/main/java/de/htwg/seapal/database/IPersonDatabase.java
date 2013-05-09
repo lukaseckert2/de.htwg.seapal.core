@@ -5,17 +5,25 @@ import java.util.UUID;
 
 import de.htwg.seapal.model.IPerson;
 
-public interface IPersonDatabase {
+public interface IPersonDatabase extends IDatabase {
 
-	UUID newPerson();
+	/**
+	 * Saves a person.
+	 * @param person The person to save.
+	 */
+	void save(IPerson person);
 
-	void savePerson(IPerson person);
+	/**
+	 * Gets a person with a given UUID.
+	 * @param id The UUID of the person.
+	 * @return The person with the given UUID or NULL,
+	 *         if no person was found.
+	 */
+	IPerson get(UUID id);
 
-	void deletePerson(UUID id);
-
-	IPerson getPerson(UUID id);
-
-	List<IPerson> getPersons();
-
-	boolean closeDB();
+	/**
+	 * Gets a list of all persons.
+	 * @return All persons.
+	 */
+	List<IPerson> getAll();
 }

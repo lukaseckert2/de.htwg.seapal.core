@@ -6,17 +6,25 @@ import java.util.UUID;
 import de.htwg.seapal.model.ITrip;
 
 
-public interface ITripDatabase {
+public interface ITripDatabase extends IDatabase {
 
-	UUID newTrip();
+	/**
+	 * Saves a trip.
+	 * @param trip The trip to save.
+	 */
+	void save(ITrip trip);
 
-	void saveTrip(ITrip trip);
+	/**
+	 * Gets a trip with a given UUID.
+	 * @param id The UUID of the trip.
+	 * @return The trip with the given UUID or NULL,
+	 *         if no trip was found.
+	 */
+	ITrip get(UUID id);
 
-	void deleteTrip(UUID id);
-
-	ITrip getTrip(UUID id);
-
-	List<ITrip> getTrips();
-
-	boolean closeDB();
+	/**
+	 * Gets a list of all trips.
+	 * @return All trips.
+	 */
+	List<ITrip> getAll();
 }

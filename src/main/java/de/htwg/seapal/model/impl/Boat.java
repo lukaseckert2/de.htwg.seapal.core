@@ -3,7 +3,6 @@ package de.htwg.seapal.model.impl;
 import java.util.UUID;
 
 import org.codehaus.jackson.annotate.JsonIgnore;
-import org.codehaus.jackson.annotate.JsonProperty;
 import org.ektorp.support.CouchDbDocument;
 
 import de.htwg.seapal.model.IBoat;
@@ -11,13 +10,10 @@ import de.htwg.seapal.model.IBoat;
 public class Boat extends CouchDbDocument implements IBoat {
 
 	/**
-	 * 
+	 * Serial version UID for serialization.
 	 */
 	private static final long serialVersionUID = 1L;
 
-	
-
-	private String id; // UUID
 	private String user; // UUID User
 
 	private String boatName;
@@ -46,11 +42,11 @@ public class Boat extends CouchDbDocument implements IBoat {
 	private double spiSize;
 	
 	public Boat() {
-		this.id = UUID.randomUUID().toString();
+		setId(UUID.randomUUID().toString());
 	}
 
 	public Boat(IBoat boat) {
-		this.id = boat.getId();
+		setId(boat.getId());
 		this.user = boat.getUser();
 		this.boatName = boat.getBoatName();
 		this.registerNr = boat.getRegisterNr();
@@ -80,18 +76,8 @@ public class Boat extends CouchDbDocument implements IBoat {
 
 	@JsonIgnore
 	@Override
-	public UUID getUUId() {
-		return UUID.fromString(id);
-	}
-
-	@JsonProperty("_id")
-	public String getId() {
-		return id;
-	}
-
-	@JsonProperty("_id")
-	public void setId(UUID id) {
-		this.id = id.toString();
+	public UUID getUUID() {
+		return UUID.fromString(getId());
 	}
 
 	@Override
@@ -343,5 +329,4 @@ public class Boat extends CouchDbDocument implements IBoat {
 	public void setUser(String userId) {
 		this.user = userId;
 	}
-
 }

@@ -7,8 +7,6 @@ import de.htwg.seapal.utils.observer.IObservable;
 
 public interface IRouteController extends IObservable {
 	
-	UUID getId(UUID id);
-
 	String getName(UUID id);
 
 	void setName(UUID id, String name);

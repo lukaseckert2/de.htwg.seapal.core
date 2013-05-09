@@ -3,9 +3,7 @@ package de.htwg.seapal.model;
 import java.util.List;
 import java.util.UUID;
 
-public interface IRoute {
-
-	UUID getId();
+public interface IRoute extends IModel {
 
 	String getName();
 

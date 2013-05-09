@@ -2,7 +2,7 @@ package de.htwg.seapal.model;
 
 import java.util.UUID;
 
-public interface IWaypoint {
+public interface IWaypoint extends IModel {
 
 	public enum Maneuver {
 		NONE, TACK, JIBE, LAYTO, SET_SAILS, CHANGE_SAILS, SAILS_DOWN, REFF, ANKER_UP, ANKER_DOWN
@@ -56,8 +56,6 @@ public interface IWaypoint {
 
 	void setMainsail(MainSail mainSail);
 
-	String getId();
-
 	String getTrip();
 
 	void setTrip(String trip);
@@ -73,8 +71,4 @@ public interface IWaypoint {
 	double getLongitude();
 
 	void setLongitude(double longitude);
-
-	void setId(String id);
-
-//	UUID getUUId();
 }

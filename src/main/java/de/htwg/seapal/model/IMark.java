@@ -1,10 +1,6 @@
 package de.htwg.seapal.model;
 
-import java.util.UUID;
-
-public interface IMark {
-
-	UUID getId();
+public interface IMark extends IModel {
 
 	String getName();
 

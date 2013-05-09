@@ -4,7 +4,6 @@ import java.util.ArrayList;
 import java.util.List;
 import java.util.UUID;
 
-import org.codehaus.jackson.annotate.JsonProperty;
 import org.ektorp.support.CouchDbDocument;
 
 import de.htwg.seapal.model.ITrip;
@@ -12,11 +11,9 @@ import de.htwg.seapal.model.ITrip;
 public class Trip extends CouchDbDocument implements ITrip {
 
 	/**
-	 * 
+	 * Serial version UID for serialization.
 	 */
 	private static final long serialVersionUID = 1L;
-
-	private String id; // UUID
 
 	private String name;
 	private String startLocation;
@@ -32,9 +29,32 @@ public class Trip extends CouchDbDocument implements ITrip {
 	private String boat; // UUID Boat
 
 	public Trip() {
-		this.id = UUID.randomUUID().toString();
+		setId(UUID.randomUUID().toString());
 		this.crew = new ArrayList<String>();
 		this.skipper = UUID.randomUUID().toString();
+	}
+	
+	public Trip(ITrip t) {
+		setId(t.getId());
+		this.crew = new ArrayList<String>();
+		
+		this.name = t.getName();
+		this.startLocation = t.getStartLocation();
+		this.endLocation = t.getEndLocation();
+		this.skipper = t.getSkipper();
+		this.crew = t.getCrewMembers();
+		this.startTime = t.getStartTime();
+		this.endTime = t.getEndTime();
+		this.duration = t.getDuration();
+		this.motor = t.getMotor();
+		this.fuel = t.getFuel();
+		this.notes = t.getNotes();
+		this.boat = t.getBoat();
+	}
+	
+	@Override
+	public UUID getUUID() {
+		return UUID.fromString(getId());
 	}
 
 	public String getName() {
@@ -148,18 +168,6 @@ public class Trip extends CouchDbDocument implements ITrip {
 		return notes;
 	}
 
-
-	@JsonProperty("_id")
-	@Override
-	public String getId() {
-		return id;
-	}
-	
-	@JsonProperty("_id")
-	public void setId(UUID id) {
-		this.id = id.toString();
-	}
-
 	@Override
 	public String getBoat() {
 		return boat;
@@ -172,7 +180,7 @@ public class Trip extends CouchDbDocument implements ITrip {
 
 	@Override
 	public String toString() {
-		return "Trip [id=" + id + ", name=" + name + ", startLocation="
+		return "Trip [id=" + getId() + ", name=" + name + ", startLocation="
 				+ startLocation + ", endLocation=" + endLocation + ", skipper="
 				+ skipper + ", crew=" + crew + ", startTime=" + startTime
 				+ ", endTime=" + endTime + ", duration=" + duration

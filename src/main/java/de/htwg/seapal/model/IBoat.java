@@ -1,12 +1,6 @@
 package de.htwg.seapal.model;
 
-import java.util.UUID;
-
-public interface IBoat {
-
-	UUID getUUId();
-
-	String getId();
+public interface IBoat extends IModel {
 
 	String getBoatName();
 

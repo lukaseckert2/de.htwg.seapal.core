@@ -2,11 +2,17 @@ package de.htwg.seapal.model.impl;
 
 import java.util.UUID;
 
+import org.ektorp.support.CouchDbDocument;
+
 import de.htwg.seapal.model.IMark;
 
-public class Mark implements IMark {
+public class Mark extends CouchDbDocument implements IMark {
 
-	private String id; // UUID
+	/**
+	 * Serial version UID for serialization.
+	 */
+	private static final long serialVersionUID = 1L;
+
 	private String user; // UUID user
 
 	private String name;
@@ -21,12 +27,28 @@ public class Mark implements IMark {
 	private boolean isRouteMark;
 
 	public Mark() {
-		id = UUID.randomUUID().toString();
+		setId(UUID.randomUUID().toString());
+	}
+	
+	public Mark(IMark m) {
+		setId(m.getId());
+		this.user = m.getUser();
+
+		this.name = m.getName();
+		this.latitude = m.getLatitude();
+		this.longitude = m.getLongitude();
+		this.btm = m.getBTM();
+		this.dtm = m.getDTM();
+		this.cog = m.getCOG();
+		this.sog = m.getSOG();
+		this.note = m.getNote();
+		this.date = m.getDate();
+		this.isRouteMark = m.isRouteMark();
 	}
 
 	@Override
-	public UUID getId() {
-		return UUID.fromString(id);
+	public UUID getUUID() {
+		return UUID.fromString(getId());
 	}
 
 	@Override
@@ -138,6 +160,4 @@ public class Mark implements IMark {
 	public void setUser(String user) {
 		this.user = user;
 	}
-
-
 }

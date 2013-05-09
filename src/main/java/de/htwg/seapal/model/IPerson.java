@@ -1,10 +1,6 @@
 package de.htwg.seapal.model;
 
-import java.util.UUID;
-
-public interface IPerson {
-
-	String getId();
+public interface IPerson extends IModel {
 
 	String getFirstname();
 
@@ -60,14 +56,7 @@ public interface IPerson {
 
 	String getString();
 
-	void setId(String id);
-
 	String getUser();
 
 	void setUser(String user);
-
-	UUID getUUId();
-
-	void setId(UUID id);
-
 }

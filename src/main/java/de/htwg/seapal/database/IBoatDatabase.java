@@ -6,17 +6,25 @@ import java.util.UUID;
 import de.htwg.seapal.model.IBoat;
 
 
-public interface IBoatDatabase {
+public interface IBoatDatabase extends IDatabase {
 
-	UUID newBoat();
+	/**
+	 * Saves a boat.
+	 * @param boat The boat to save.
+	 */
+	void save(IBoat boat);
 
-	void saveBoat(IBoat boat);
+	/**
+	 * Gets a boat with a given UUID.
+	 * @param id The UUID of the boat.
+	 * @return The boat with the given UUID or NULL,
+	 *         if no boat was found.
+	 */
+	IBoat get(UUID id);
 
-	void deleteBoat(UUID id);
-
-	IBoat getBoat(UUID id);
-
-	List<IBoat> getBoats();
-
-	boolean closeDB();
+	/**
+	 * Gets a list of all boats.
+	 * @return All boats.
+	 */
+	List<IBoat> getAll();
 }

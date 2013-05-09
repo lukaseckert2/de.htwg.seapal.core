@@ -41,7 +41,7 @@ public class WaypointController extends Observable implements
 
 	@Override
 	public final String getName(UUID id) {
-		IWaypoint waypoint = db.getWaypoint(id);
+		IWaypoint waypoint = db.get(id);
 		if (waypoint == null)
 			return null;
 		return waypoint.getName();
@@ -49,7 +49,7 @@ public class WaypointController extends Observable implements
 
 	@Override
 	public double getLatitude(UUID id) {
-		IWaypoint waypoint = db.getWaypoint(id);
+		IWaypoint waypoint = db.get(id);
 		if (waypoint == null)
 			return -1;
 		return waypoint.getLatitude();
@@ -57,7 +57,7 @@ public class WaypointController extends Observable implements
 
 	@Override
 	public double getLongitude(UUID id) {
-		IWaypoint waypoint = db.getWaypoint(id);
+		IWaypoint waypoint = db.get(id);
 		if (waypoint == null)
 			return -1;
 		return waypoint.getLongitude();
@@ -65,7 +65,7 @@ public class WaypointController extends Observable implements
 
 	@Override
 	public final String getNote(UUID id) {
-		IWaypoint waypoint = db.getWaypoint(id);
+		IWaypoint waypoint = db.get(id);
 		if (waypoint == null)
 			return null;
 		return waypoint.getNote();
@@ -73,7 +73,7 @@ public class WaypointController extends Observable implements
 
 	@Override
 	public final int getBTM(UUID id) {
-		IWaypoint waypoint = db.getWaypoint(id);
+		IWaypoint waypoint = db.get(id);
 		if (waypoint == null)
 			return -1;
 		return waypoint.getBTM();
@@ -81,7 +81,7 @@ public class WaypointController extends Observable implements
 
 	@Override
 	public final int getDTM(UUID id) {
-		IWaypoint waypoint = db.getWaypoint(id);
+		IWaypoint waypoint = db.get(id);
 		if (waypoint == null)
 			return -1;
 		return waypoint.getDTM();
@@ -89,7 +89,7 @@ public class WaypointController extends Observable implements
 
 	@Override
 	public final int getCOG(UUID id) {
-		IWaypoint waypoint = db.getWaypoint(id);
+		IWaypoint waypoint = db.get(id);
 		if (waypoint == null)
 			return -1;
 		return waypoint.getCOG();
@@ -97,7 +97,7 @@ public class WaypointController extends Observable implements
 
 	@Override
 	public final int getSOG(UUID id) {
-		IWaypoint waypoint = db.getWaypoint(id);
+		IWaypoint waypoint = db.get(id);
 		if (waypoint == null)
 			return -1;
 		return waypoint.getSOG();
@@ -105,7 +105,7 @@ public class WaypointController extends Observable implements
 
 	@Override
 	public final UUID getHeadedFor(UUID id) {
-		IWaypoint waypoint = db.getWaypoint(id);
+		IWaypoint waypoint = db.get(id);
 		if (waypoint == null)
 			return null;
 		return UUID.fromString(waypoint.getHeadedFor());
@@ -113,7 +113,7 @@ public class WaypointController extends Observable implements
 
 	@Override
 	public final Maneuver getManeuver(UUID id) {
-		IWaypoint waypoint = db.getWaypoint(id);
+		IWaypoint waypoint = db.get(id);
 		if (waypoint == null)
 			return null;
 		return waypoint.getManeuver();
@@ -121,7 +121,7 @@ public class WaypointController extends Observable implements
 
 	@Override
 	public final ForeSail getForesail(UUID id) {
-		IWaypoint waypoint = db.getWaypoint(id);
+		IWaypoint waypoint = db.get(id);
 		if (waypoint == null)
 			return null;
 		return waypoint.getForesail();
@@ -129,7 +129,7 @@ public class WaypointController extends Observable implements
 
 	@Override
 	public final MainSail getMainsail(UUID id) {
-		IWaypoint waypoint = db.getWaypoint(id);
+		IWaypoint waypoint = db.get(id);
 		if (waypoint == null)
 			return null;
 		return waypoint.getMainsail();
@@ -137,128 +137,128 @@ public class WaypointController extends Observable implements
 
 	@Override
 	public final void setForesail(UUID id, final ForeSail foreSail) {
-		IWaypoint waypoint = db.getWaypoint(id);
+		IWaypoint waypoint = db.get(id);
 		if (waypoint == null)
 			return;
 		waypoint.setForesail(foreSail);
-		db.saveWaypoint(waypoint);
+		db.save(waypoint);
 		notifyObservers();
 	}
 
 	@Override
 	public final void setName(UUID id, final String name) {
-		IWaypoint waypoint = db.getWaypoint(id);
+		IWaypoint waypoint = db.get(id);
 		if (waypoint == null)
 			return;
 		waypoint.setName(name);
-		db.saveWaypoint(waypoint);
+		db.save(waypoint);
 		notifyObservers();
 
 	}
 
 	@Override
 	public void setLatitude(UUID id, double latitude) {
-		IWaypoint waypoint = db.getWaypoint(id);
+		IWaypoint waypoint = db.get(id);
 		if (waypoint == null)
 			return;
 		waypoint.setLatitude(latitude);
-		db.saveWaypoint(waypoint);
+		db.save(waypoint);
 		notifyObservers();
 	}
 
 	@Override
 	public void setLongitude(UUID id, double longitude) {
-		IWaypoint waypoint = db.getWaypoint(id);
+		IWaypoint waypoint = db.get(id);
 		if (waypoint == null)
 			return;
 		waypoint.setLongitude(longitude);
-		db.saveWaypoint(waypoint);
+		db.save(waypoint);
 		notifyObservers();
 	}
 
 	@Override
 	public final void setNote(UUID id, final String note) {
-		IWaypoint waypoint = db.getWaypoint(id);
+		IWaypoint waypoint = db.get(id);
 		if (waypoint == null)
 			return;
 		waypoint.setNote(note);
-		db.saveWaypoint(waypoint);
+		db.save(waypoint);
 		notifyObservers();
 	}
 
 	@Override
 	public final void setBTM(UUID id, final int btm) {
-		IWaypoint waypoint = db.getWaypoint(id);
+		IWaypoint waypoint = db.get(id);
 		if (waypoint == null)
 			return;
 		waypoint.setBTM(btm);
-		db.saveWaypoint(waypoint);
+		db.save(waypoint);
 		notifyObservers();
 	}
 
 	@Override
 	public final void setDTM(UUID id, final int dtm) {
-		IWaypoint waypoint = db.getWaypoint(id);
+		IWaypoint waypoint = db.get(id);
 		if (waypoint == null)
 			return;
 		waypoint.setDTM(dtm);
-		db.saveWaypoint(waypoint);
+		db.save(waypoint);
 		notifyObservers();
 	}
 
 	@Override
 	public final void setCOG(UUID id, final int cog) {
-		IWaypoint waypoint = db.getWaypoint(id);
+		IWaypoint waypoint = db.get(id);
 		if (waypoint == null)
 			return;
 		waypoint.setCOG(cog);
-		db.saveWaypoint(waypoint);
+		db.save(waypoint);
 		notifyObservers();
 	}
 
 	@Override
 	public final void setSOG(UUID id, final int sog) {
-		IWaypoint waypoint = db.getWaypoint(id);
+		IWaypoint waypoint = db.get(id);
 		if (waypoint == null)
 			return;
 		waypoint.setSOG(sog);
-		db.saveWaypoint(waypoint);
+		db.save(waypoint);
 		notifyObservers();
 	}
 
 	@Override
 	public final void setHeadedFor(UUID id, final UUID markId) {
-		IWaypoint waypoint = db.getWaypoint(id);
+		IWaypoint waypoint = db.get(id);
 		if (waypoint == null)
 			return;
 		waypoint.setHeadedFor(markId);
-		db.saveWaypoint(waypoint);
+		db.save(waypoint);
 		notifyObservers();
 	}
 
 	@Override
 	public final void setManeuver(UUID id, final Maneuver maneuver) {
-		IWaypoint waypoint = db.getWaypoint(id);
+		IWaypoint waypoint = db.get(id);
 		if (waypoint == null)
 			return;
 		waypoint.setManeuver(maneuver);
-		db.saveWaypoint(waypoint);
+		db.save(waypoint);
 		notifyObservers();
 	}
 
 	@Override
 	public final void setMainsail(UUID id, final MainSail mainSail) {
-		IWaypoint waypoint = db.getWaypoint(id);
+		IWaypoint waypoint = db.get(id);
 		if (waypoint == null)
 			return;
 		waypoint.setMainsail(mainSail);
-		db.saveWaypoint(waypoint);
+		db.save(waypoint);
 		notifyObservers();
 	}
 
 	@Override
 	public final String getString(UUID id) {
-		IWaypoint waypoint = db.getWaypoint(id);
+		IWaypoint waypoint = db.get(id);
 		if (waypoint == null)
 			return null;
 		return "Waypoint:" + waypoint.toString();
@@ -266,43 +266,43 @@ public class WaypointController extends Observable implements
 
 	@Override
 	public final UUID newWaypoint(UUID trip) {
-		UUID newWaypoint = db.newWaypoint();
-		IWaypoint waypoint = db.getWaypoint(newWaypoint);
+		UUID newWaypoint = db.create();
+		IWaypoint waypoint = db.get(newWaypoint);
 		waypoint.setTrip(trip.toString());
-		db.saveWaypoint(waypoint);
+		db.save(waypoint);
 		notifyObservers();
 		return newWaypoint;
 	}
 
 	@Override
 	public final UUID newWaypoint(UUID trip, Location location, long date) {
-		UUID newWaypoint = db.newWaypoint();
-		IWaypoint waypoint = db.getWaypoint(newWaypoint);
+		UUID newWaypoint = db.create();
+		IWaypoint waypoint = db.get(newWaypoint);
 		waypoint.setTrip(trip.toString());
 		waypoint.setLatitude(location.getLatitude());
 		waypoint.setLongitude(location.getLongitude());
 		waypoint.setDate(date);
 		DateFormat format = SimpleDateFormat.getDateTimeInstance();
 		waypoint.setName(format.format(date * 1000));
-		db.saveWaypoint(waypoint);
+		db.save(waypoint);
 		notifyObservers();
 		return newWaypoint;
 	}
 
 	@Override
 	public final void deleteWaypoint(UUID id) {
-		db.deleteWaypoint(id);
+		db.delete(id);
 		notifyObservers();
 	}
 
 	@Override
 	public final void closeDB() {
-		db.closeDB();
+		db.close();
 	}
 
 	@Override
 	public final List<UUID> getWaypoints() {
-		List<IWaypoint> waypoints = db.getWaypoints();
+		List<IWaypoint> waypoints = db.getAll();
 		List<UUID> waypointIDs = new ArrayList<UUID>();
 		for (IWaypoint waypoint : waypoints) {
 			waypointIDs.add(UUID.fromString(waypoint.getId()));
@@ -312,7 +312,7 @@ public class WaypointController extends Observable implements
 
 	@Override
 	public List<UUID> getWaypoints(UUID trip) {
-		List<IWaypoint> waypoints = db.getWaypoints();
+		List<IWaypoint> waypoints = db.getAll();
 		List<UUID> waypointIDs = new ArrayList<UUID>();
 		for (IWaypoint waypoint : waypoints) {
 			if (waypoint.getTrip().equals(trip.toString()))

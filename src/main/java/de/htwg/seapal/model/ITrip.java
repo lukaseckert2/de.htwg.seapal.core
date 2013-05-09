@@ -2,7 +2,7 @@ package de.htwg.seapal.model;
 
 import java.util.List;
 
-public interface ITrip {
+public interface ITrip extends IModel {
 
 	String getName();
 
@@ -39,8 +39,6 @@ public interface ITrip {
 	String getNotes();
 
 	void setNotes(String text);
-
-	String getId();
 
 	String getBoat();
 
