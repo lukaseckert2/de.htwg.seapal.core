@@ -113,23 +113,23 @@ public class BoatController extends Observable implements IBoatController {
 		notifyObservers();
 	}
 
-//	@Override
-//	public UUID getOwner(UUID id) {
-//		IBoat boat = db.get(id);
-//		if (boat == null)
-//			return null;
-//		return boat.getOwner();
-//	}
-//
-//	@Override
-//	public void setOwner(UUID id, UUID Owner) {
-//		IBoat boat = db.get(id);
-//		if (boat == null)
-//			return;
-//		boat.setOwner(Owner);
-//		db.save(boat);
-//		notifyObservers();
-//	}
+	@Override
+	public UUID getOwner(UUID id) {
+		IBoat boat = db.get(id);
+		if (boat == null)
+			return null;
+		return boat.getOwner();
+	}
+
+	@Override
+	public void setOwner(UUID id, UUID Owner) {
+		IBoat boat = db.get(id);
+		if (boat == null)
+			return;
+		boat.setOwner(Owner);
+		db.save(boat);
+		notifyObservers();
+	}
 
 	@Override
 	public String getInsurance(UUID id) {

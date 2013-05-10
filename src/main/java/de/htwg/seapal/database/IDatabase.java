@@ -23,8 +23,10 @@ public interface IDatabase<T> {
 	/**
 	 * Saves a data entry.
 	 * @param data The data entry to save.
+	 * @return Returns TRUE, if the data entry was newly created
+	 * 	       and FALSE when the entry was updated.
 	 */
-	void save(T data);
+	boolean save(T data);
 
 	/**
 	 * Gets a data entry with a given UUID.
