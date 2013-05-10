@@ -162,4 +162,9 @@ public class RouteController extends Observable implements IRouteController {
 	public boolean saveRoute(IRoute route) {
 		return db.save(route);
 	}
+
+	@Override
+	public IRoute getRoute(UUID routeId) {
+		return db.get(routeId);
+	}
 }

@@ -324,6 +324,11 @@ public class WaypointController extends Observable implements
 	}
 
 	@Override
+	public IWaypoint getWaypoint(UUID waypointId) {
+		return db.get(waypointId);
+	}
+	
+	@Override
 	public List<IWaypoint> getAllWaypoints() {
 		return db.getAll();
 	}

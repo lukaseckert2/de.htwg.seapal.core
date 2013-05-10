@@ -286,11 +286,8 @@ public class TripController extends Observable implements ITripController {
 	}
 
 	@Override
-	public UUID getTrip(UUID id) {
-		ITrip trip = db.get(id);
-		if (trip == null)
-			return null;
-		return UUID.fromString(trip.getId());
+	public ITrip getTrip(UUID tripId) {
+		return db.get(tripId);
 	}
 
 	@Override

@@ -60,7 +60,18 @@ public interface IMarkController extends IObservable {
 	UUID newMark();
 
 	String getString(UUID id);
+	
+	/**
+	 * Gets a mark by the given mark ID.
+	 * @param markId The mark ID.
+	 * @return The mark or NULL, if no mark was found.
+	 */
+	IMark getMark(UUID markId);
 
+	/**
+	 * Gets all marks.
+	 * @return All marks.
+	 */
 	List<IMark> getAllMarks();
 	
 	/**

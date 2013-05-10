@@ -292,6 +292,11 @@ public class PersonController extends Observable implements IPersonController {
 	}
 
 	@Override
+	public IPerson getPerson(UUID personId) {
+		return db.get(personId);
+	}
+	
+	@Override
 	public List<IPerson> getAllPersons() {
 		return db.getAll();
 	}

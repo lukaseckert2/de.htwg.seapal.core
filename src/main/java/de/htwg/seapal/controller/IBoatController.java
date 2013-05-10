@@ -137,6 +137,17 @@ public interface IBoatController extends IObservable {
 
 	List<UUID> getBoats();
 	
+	/**
+	 * Gets a boat by the given boat ID.
+	 * @param boatId The boat ID.
+	 * @return The boat or NULL, if no boat was found.
+	 */
+	IBoat getBoat(UUID boatId);
+	
+	/**
+	 * Gets all boats.
+	 * @return All boats.
+	 */
 	List<IBoat> getAllBoats();
 	
 	/**

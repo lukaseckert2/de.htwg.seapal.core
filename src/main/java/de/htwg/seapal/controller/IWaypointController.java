@@ -215,6 +215,13 @@ public interface IWaypointController extends IObservable {
 	UUID newWaypoint(UUID trip, Location location, long date);
 
 	/**
+	 * Gets a waypoint by the given waypoint ID.
+	 * @param waypointId The waypoint ID.
+	 * @return The waypoint or NULL, if no waypoint was found.
+	 */
+	IWaypoint getWaypoint(UUID waypointId);
+	
+	/**
 	 * Gets a list of all waypoints
 	 * @return All waypoints
 	 */

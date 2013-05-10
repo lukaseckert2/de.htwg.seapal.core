@@ -64,11 +64,25 @@ public interface ITripController extends IObservable {
 	UUID newTrip(UUID boat);
 
 	List<UUID> getTrips(UUID boatId);
-
-	UUID getTrip(UUID id);
 	
+	/**
+	 * Gets a trip by the given trip ID.
+	 * @param tripId The trip ID.
+	 * @return The trip or NULL, if no trip was found.
+	 */
+	ITrip getTrip(UUID tripId);
+	
+	/**
+	 * Gets all trips.
+	 * @return All trips.
+	 */
 	List<ITrip> getAllTrips();
 	
+	/**
+	 * Gets all trips of the given boat ID.
+	 * @param boatId The boat ID.
+	 * @return All Trips of the boat ID.
+	 */
 	List<ITrip> getAllTrips(UUID boatId);
 	
 	/**

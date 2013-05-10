@@ -3,7 +3,6 @@ package de.htwg.seapal.controller;
 import java.util.List;
 import java.util.UUID;
 
-import de.htwg.seapal.model.IBoat;
 import de.htwg.seapal.model.IPerson;
 import de.htwg.seapal.utils.observer.IObservable;
 
@@ -71,6 +70,17 @@ public interface IPersonController extends IObservable {
 
 	UUID newPerson();
 	
+	/**
+	 * Gets a person by the given person ID.
+	 * @param personId The person ID.
+	 * @return The person or NULL, if no person was found.
+	 */
+	IPerson getPerson(UUID personId);
+	
+	/**
+	 * Gets all persons.
+	 * @return All persons.
+	 */
 	List<IPerson> getAllPersons();
 	
 	/**

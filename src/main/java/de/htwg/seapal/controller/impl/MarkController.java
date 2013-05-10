@@ -256,6 +256,11 @@ public class MarkController extends Observable implements IMarkController {
 	}
 
 	@Override
+	public IMark getMark(UUID markId) {
+		return db.get(markId);
+	}
+	
+	@Override
 	public List<IMark> getAllMarks() {
 		return db.getAll();
 	}

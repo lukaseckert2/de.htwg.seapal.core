@@ -38,7 +38,18 @@ public interface IRouteController extends IObservable {
 	UUID newRoute();
 
 	String getString(UUID id);
-
+	
+	/**
+	 * Gets a route by the given route ID.
+	 * @param routeId The route ID.
+	 * @return The route or NULL, if no route was found.
+	 */
+	IRoute getRoute(UUID routeId);
+	
+	/**
+	 * Gets all routes.
+	 * @return All routes.
+	 */
 	List<IRoute> getAllRoutes();
 	
 	/**

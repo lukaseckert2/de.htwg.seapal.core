@@ -505,6 +505,11 @@ public class BoatController extends Observable implements IBoatController {
 	}
 
 	@Override
+	public IBoat getBoat(UUID boatId) {
+		return db.get(boatId);
+	}
+	
+	@Override
 	public List<IBoat> getAllBoats() {
 		return db.getAll();
 	}
