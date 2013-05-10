@@ -3,23 +3,25 @@ package de.htwg.seapal.database.impl;
 import java.util.List;
 import java.util.UUID;
 
+import org.apache.log4j.Logger;
 import org.ektorp.CouchDbConnector;
-import org.ektorp.support.CouchDbRepositorySupport;
-import org.ektorp.support.View;
 
 import com.google.inject.Inject;
 
 import de.htwg.seapal.database.ITripDatabase;
+import de.htwg.seapal.model.ITrip;
 import de.htwg.seapal.model.impl.Trip;
 
-@View( name="all", map = "function(doc) { if (doc.blogPostId) { emit(null, doc) } }")
-public class TripDatabase extends CouchDbRepositorySupport<Trip> implements ITripDatabase<Trip> {
+public class TripDatabase implements ITripDatabase {
 
+	private final Logger log = Logger.getLogger(TripDatabase.class);
+	
+	private CouchDbConnector db;
+	
 	@Inject
 	protected TripDatabase(CouchDbConnector db) {
-		super(Trip.class, db);
-		System.out.println(db);
-		// TODO Auto-generated constructor stub
+		log.info("Database instance: " + db);
+		this.db = db;
 	}
 
 	@Override
@@ -35,33 +37,32 @@ public class TripDatabase extends CouchDbRepositorySupport<Trip> implements ITri
 	}
 
 	@Override
+	public boolean save(ITrip data) {
+		// TODO Auto-generated method stub
+		return false;
+	}
+
+	@Override
+	public ITrip get(UUID id) {
+		return db.get(Trip.class, id.toString() );
+	}
+
+	@Override
+	public List<ITrip> getAll() {
+		// TODO Auto-generated method stub
+		return null;
+	}
+
+	@Override
 	public void delete(UUID id) {
 		// TODO Auto-generated method stub
-		
+
 	}
 
 	@Override
 	public boolean close() {
 		// TODO Auto-generated method stub
 		return false;
-	}
-
-	@Override
-	public void save(Trip trip) {
-		// TODO Auto-generated method stub
-		
-	}
-
-	@Override
-	public Trip get(UUID id) {
-		// TODO Auto-generated method stub
-		return null;
-	}
-
-	@Override
-	public List<Trip> getAll() {
-		// TODO Auto-generated method stub
-		return null;
 	}
 
 }

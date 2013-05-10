@@ -1,26 +1,30 @@
 package de.htwg.seapal.database.impl;
 
+import java.util.UUID;
+
 import org.apache.log4j.Logger;
 import org.junit.AfterClass;
 import org.junit.Before;
 import org.junit.Test;
 
+import static org.junit.Assert.*;
+
 import com.google.inject.Guice;
 import com.google.inject.Injector;
 
 import de.htwg.seapal.database.ITripDatabase;
-import de.htwg.seapal.model.impl.Trip;
+import de.htwg.seapal.model.ITrip;
 
 public class TripDatabaseTest {
 	
-	ITripDatabase<Trip> tripDatabase;
+	ITripDatabase tripDatabase;
 	
 	Logger log = Logger.getLogger(TripDatabaseTest.class);
 
 	@Before
 	public void setUp() throws Exception {
 		Injector injector = Guice.createInjector(new TripModule());
-		this.tripDatabase = injector.getInstance(TripDatabase.class);
+		this.tripDatabase = injector.getInstance(ITripDatabase.class);
 	}
 
 	@AfterClass
@@ -29,8 +33,14 @@ public class TripDatabaseTest {
 
 	@Test
 	public void test() {
-		log.debug("test");
-		assert(false);
+		ITrip trip = tripDatabase.get( UUID.fromString("234033c2-f2b7-4a4a-aba7-67d4eee3884c"));
+		log.info(trip);
+		assertTrue("Trip is not here?", trip != null);
+	}
+	
+	@Test
+	public void testsdfsdf() {
+		
 	}
 
 }
