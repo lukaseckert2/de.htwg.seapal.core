@@ -1,8 +1,13 @@
 package de.htwg.seapal.database;
 
+import java.util.List;
 import java.util.UUID;
 
-public interface IDatabase {
+/**
+ * The generic database interface.
+ * @param <T> The model interface to manage.
+ */
+public interface IDatabase<T> {
 	/**
 	 * Opens the database connection.
 	 * @return TRUE, if successful.
@@ -10,14 +15,34 @@ public interface IDatabase {
 	boolean open();
 	
 	/**
-	 * Creates a new data.
-	 * @return The UUID of the created data.
+	 * Creates a new data entry.
+	 * @return The UUID of the created data entry.
 	 */
 	UUID create();
+	
+	/**
+	 * Saves a data entry.
+	 * @param data The data entry to save.
+	 */
+	void save(T data);
 
 	/**
-	 * Deletes the data with the given UUID.
-	 * @param id The UUID of the data to delete.
+	 * Gets a data entry with a given UUID.
+	 * @param id The UUID of the data entry.
+	 * @return The data entry with the given UUID or NULL,
+	 *         if no data was found.
+	 */
+	T get(UUID id);
+
+	/**
+	 * Gets a list of all data entries.
+	 * @return All boats.
+	 */
+	List<T> getAll();
+
+	/**
+	 * Deletes the data entry with the given UUID.
+	 * @param id The UUID of the data entry to delete.
 	 */
 	void delete(UUID id);
 	
