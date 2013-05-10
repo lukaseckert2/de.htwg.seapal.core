@@ -295,4 +295,9 @@ public class PersonController extends Observable implements IPersonController {
 	public List<IPerson> getAllPersons() {
 		return db.getAll();
 	}
+	
+	@Override
+	public boolean savePerson(IPerson person) {
+		return db.save(person);
+	}
 }

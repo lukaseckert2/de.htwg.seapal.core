@@ -259,4 +259,9 @@ public class MarkController extends Observable implements IMarkController {
 	public List<IMark> getAllMarks() {
 		return db.getAll();
 	}
+	
+	@Override
+	public boolean saveMark(IMark mark) {
+		return db.save(mark);
+	}
 }

@@ -6,15 +6,37 @@ import java.util.UUID;
 import de.htwg.seapal.model.IBoat;
 import de.htwg.seapal.utils.observer.IObservable;
 
-
+/**
+ * The boat controller interface.
+ */
 public interface IBoatController extends IObservable {
 
+	/**
+	 * Gets the boat name of the given ID.
+	 * @param id The boat ID.
+	 * @return The boat name.
+	 */
 	String getBoatName(UUID id);
 
-	void setBoatName(UUID id, String BoatName);
+	/**
+	 * Sets the boat name of the given boat ID.
+	 * @param id The boat ID.
+	 * @param boatName The boat name.
+	 */
+	void setBoatName(UUID id, String boatName);
 
+	/**
+	 * Gets the register number of the given boat ID.
+	 * @param id The boat ID.
+	 * @return The register number.
+	 */
 	String getRegisterNr(UUID id);
 
+	/**
+	 * Sets the register number of the given boat ID.
+	 * @param id
+	 * @param registerNr
+	 */
 	void setRegisterNr(UUID id, String registerNr);
 
 	String getSailSign(UUID id);
@@ -116,4 +138,12 @@ public interface IBoatController extends IObservable {
 	List<UUID> getBoats();
 	
 	List<IBoat> getAllBoats();
+	
+	/**
+	 * Saves the boat.
+	 * @param boat The boat to save.
+	 * @return Returns TRUE, if the boat was newly created
+	 * 	       and FALSE when the boat was updated.
+	 */
+	boolean saveBoat(IBoat boat);
 }

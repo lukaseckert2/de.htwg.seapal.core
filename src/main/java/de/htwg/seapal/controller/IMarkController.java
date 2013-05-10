@@ -62,4 +62,12 @@ public interface IMarkController extends IObservable {
 	String getString(UUID id);
 
 	List<IMark> getAllMarks();
+	
+	/**
+	 * Saves the mark.
+	 * @param mark The mark to save.
+	 * @return Returns TRUE, if the mark was newly created
+	 * 	       and FALSE when the mark was updated.
+	 */
+	boolean saveMark(IMark mark);
 }

@@ -158,4 +158,8 @@ public class RouteController extends Observable implements IRouteController {
 		return db.getAll();
 	}
 
+	@Override
+	public boolean saveRoute(IRoute route) {
+		return db.save(route);
+	}
 }

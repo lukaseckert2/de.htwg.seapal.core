@@ -508,4 +508,9 @@ public class BoatController extends Observable implements IBoatController {
 	public List<IBoat> getAllBoats() {
 		return db.getAll();
 	}
+
+	@Override
+	public boolean saveBoat(IBoat boat) {
+		return db.save(boat);
+	}
 }

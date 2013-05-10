@@ -341,4 +341,8 @@ public class WaypointController extends Observable implements
 		return waypoints;
 	}
 
+	@Override
+	public boolean saveWaypoint(IWaypoint waypoint) {
+		return db.save(waypoint);
+	}
 }

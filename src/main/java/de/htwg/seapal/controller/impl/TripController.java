@@ -311,4 +311,8 @@ public class TripController extends Observable implements ITripController {
 		return trips;
 	}
 
+	@Override
+	public boolean saveTrip(ITrip trip) {
+		return db.save(trip);
+	}
 }
