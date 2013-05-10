@@ -5,7 +5,6 @@ import java.util.List;
 import java.util.UUID;
 
 import com.google.inject.Inject;
-import com.google.inject.Singleton;
 
 import android.text.format.DateFormat;
 import de.htwg.seapal.controller.IRouteController;
@@ -14,7 +13,6 @@ import de.htwg.seapal.model.IRoute;
 import de.htwg.seapal.utils.observer.Observable;
 import de.htwg.seapal.utils.logging.ILogger;
 
-@Singleton
 public class RouteController extends Observable implements IRouteController {
 
 	private IRouteDatabase db;
@@ -125,9 +123,9 @@ public class RouteController extends Observable implements IRouteController {
 	}
 
 	@Override
-	public void closeDB() {
+	public final void closeDB() {
 		db.close();
-
+		logger.info("RouteController", "Database closed");
 	}
 
 	@Override
@@ -153,6 +151,11 @@ public class RouteController extends Observable implements IRouteController {
 		return "ID = \t" + id + "\nName = \t" + getName(id) + "\nDistance = \t"
 				+ getDistance(id) + "\nDate = \t" + getDate(id)
 				+ "\nRouteEntryPoint = \t" + getRouteEntryPoint(id);
+	}
+
+	@Override
+	public List<IRoute> getAllRoutes() {
+		return db.getAll();
 	}
 
 }

@@ -3,6 +3,7 @@ package de.htwg.seapal.controller;
 import java.util.List;
 import java.util.UUID;
 
+import de.htwg.seapal.model.IRoute;
 import de.htwg.seapal.utils.observer.IObservable;
 
 public interface IRouteController extends IObservable {
@@ -37,4 +38,5 @@ public interface IRouteController extends IObservable {
 
 	String getString(UUID id);
 
+	List<IRoute> getAllRoutes();
 }

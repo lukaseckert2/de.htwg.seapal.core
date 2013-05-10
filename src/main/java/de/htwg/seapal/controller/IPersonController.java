@@ -3,13 +3,11 @@ package de.htwg.seapal.controller;
 import java.util.List;
 import java.util.UUID;
 
+import de.htwg.seapal.model.IBoat;
+import de.htwg.seapal.model.IPerson;
 import de.htwg.seapal.utils.observer.IObservable;
 
 public interface IPersonController extends IObservable {
-
-	List<UUID> getPersons();
-
-	UUID newPerson();
 
 	String getPersonFirstname(UUID personId);
 
@@ -64,7 +62,14 @@ public interface IPersonController extends IObservable {
 	void setPersonCountry(UUID personId, String country);
 
 	String getPersonString(UUID personId);
+	
+	void closeDB();
 
 	void deletePerson(UUID personId);
 
+	List<UUID> getPersons();
+
+	UUID newPerson();
+	
+	List<IPerson> getAllPersons();
 }
