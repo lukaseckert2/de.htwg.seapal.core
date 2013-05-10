@@ -48,7 +48,7 @@ public class TripDatabase implements ITripDatabase {
 	}
 
 	@Override
-	public List<ITrip> getAll() {
+	public List<ITrip> loadAll() {
 		// TODO Auto-generated method stub
 		return null;
 	}
