@@ -5,30 +5,30 @@ Core repository for both, the web and the android project of Seapal.
 
 ## How to get the package using SBT ##
 
-* Add the dependency *"de.htwg.seapal" % "core" % "1.0-SNAPSHOT"*
+1. Add the dependency *"de.htwg.seapal" % "core" % "1.0-SNAPSHOT"*
 
 ## How to publish changes ##
 
-* Install SBT
+1. Install SBT
 
-** http://www.scala-sbt.org/release/docs/Getting-Started/Setup.html (eg. MSI for Windows)
+* http://www.scala-sbt.org/release/docs/Getting-Started/Setup.html (eg. MSI for Windows)
 
-* Start a console/shell windows
+2. Start a console/shell windows
 
-** *sbt* 
+* *sbt* 
 
-*** To start sbt console
+> To start sbt console
 
-** *compile* 
+* *compile* 
 
-*** Compile the java files and automaticly loads the dependent libraries
+> Compile the java files and automaticly loads the dependent libraries
 
-** *package* 
+* *package* 
 
-*** Creates the **jar** package
+> Creates the **jar** package
 
-*** This jar can be used in any project, which is not an SBT project by simply referencing this java archieve in you IDE
+> This jar can be used in any project, which is not an SBT project by simply referencing this java archieve in you IDE
 
-** *publish*
+* *publish*
 
-*** Publishes the **jar** and **pom** files to the artifactory server of HTWG Konstanz
+> Publishes the **jar** and **pom** files to the artifactory server of HTWG Konstanz
