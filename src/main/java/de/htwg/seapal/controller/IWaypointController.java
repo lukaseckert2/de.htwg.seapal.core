@@ -5,7 +5,6 @@ import java.util.NoSuchElementException;
 import java.util.UUID;
 
 import android.location.Location;
-import de.htwg.seapal.model.IBoat;
 import de.htwg.seapal.model.IWaypoint;
 import de.htwg.seapal.model.IWaypoint.ForeSail;
 import de.htwg.seapal.model.IWaypoint.MainSail;
@@ -16,187 +15,210 @@ public interface IWaypointController extends IObservable {
 
 	/**
 	 * Returns the name of the waypoint.
-	 * 
-	 * @return the name
+	 * @param The waypoint ID.
+	 * @return The name.
 	 */
 	String getName(UUID id);
 
 	/**
 	 * Returns the Note of the waypoint.
-	 * 
+	 * @param the waypoint ID.
 	 * @return the note or an empty String.
 	 */
 	String getNote(UUID id);
 
 	/**
 	 * Returns the Baring To Mark value.
-	 * 
+	 * @param the waypoint ID.
 	 * @return baring to mark in degrees.
 	 */
 	int getBTM(UUID id);
 
 	/**
 	 * Returns the Distance To Mark value.
-	 * 
+	 * @param the waypoint ID.
 	 * @return distance to mark.
 	 */
 	int getDTM(UUID id);
 
 	/**
 	 * Returns the Course Over Ground value.
-	 * 
+	 * @param the waypoint ID.
 	 * @return course over ground in degrees.
 	 */
 	int getCOG(UUID id);
 
 	/**
 	 * Returns the Speed Over Ground value.
-	 * 
+	 * @param the waypoint ID.
 	 * @return speed over ground.
 	 */
 	int getSOG(UUID id);
 
 	/**
 	 * Returns the mark.
-	 * 
+	 * @param the waypoint ID.
 	 * @return the mark
 	 */
 	UUID getHeadedFor(UUID id);
 
 	/**
 	 * Returns the maneuver done at the waypoint.
-	 * 
+	 * @param the waypoint ID.
 	 * @return the maneuver
 	 */
 	Maneuver getManeuver(UUID id);
 
 	/**
 	 * Returns the foresail set at the waypoint.
-	 * 
+	 * @param the waypoint ID.
 	 * @return the foresail
 	 */
 	ForeSail getForesail(UUID id);
 
 	/**
 	 * Returns the main sail set at the waypoint.
-	 * 
+	 * @param the waypoint ID.
 	 * @return the main sail
 	 */
 	MainSail getMainsail(UUID id);
 
 	/**
 	 * Sets the name.
-	 * 
-	 * @param name
-	 *            the name
+	 * @param the waypoint ID.
+	 * @param name The name.
 	 */
 	void setName(UUID id, String name);
 
 	/**
 	 * Sets the note.
-	 * 
-	 * @param note
-	 *            the note
+	 * @param the waypoint ID.
+	 * @param note The note.
 	 */
 	void setNote(UUID id, String note);
 
 	/**
 	 * Sets the Baring To Mark in degrees.
-	 * 
-	 * @param btm
-	 *            Baring To Mark
+	 * @param the waypoint ID.
+	 * @param btm Baring To Mark.
 	 */
 	void setBTM(UUID id, int btm);
 
 	/**
 	 * Sets the Distance To Mark.
-	 * 
-	 * @param dtm
-	 *            Distance To Mark
+	 * @param the waypoint ID.
+	 * @param dtm Distance To Mark.
 	 */
 	void setDTM(UUID id, int dtm);
 
 	/**
 	 * Sets the Course Over Ground in degrees.
-	 * 
-	 * @param cog
-	 *            Course Over Ground
+	 * @param the waypoint ID.
+	 * @param cog Course Over Ground.
 	 */
 	void setCOG(UUID id, int cog);
 
 	/**
 	 * Sets the Speed Over Ground.
-	 * 
-	 * @param sog
-	 *            Speed Over Ground
+	 * @param the waypoint ID.
+	 * @param sog Speed Over Ground.
 	 */
 	void setSOG(UUID id, int sog);
 
 	/**
 	 * Sets the mark representing through its id.
-	 * 
-	 * @param markId
-	 *            id of mark
-	 * @throws NoSuchElementException
-	 *             if there is no Mark to the id
+	 * @param the waypoint ID.
+	 * @param markId The ID of mark.
+	 * @throws NoSuchElementException If there is no Mark to the id
 	 */
 	void setHeadedFor(UUID id, UUID markId);
 
 	/**
 	 * Sets the maneuver of the waypoint. Don't use <tt>null</tt> here. Use
 	 * <tt>Maneuver.NONE</tt> instead.
-	 * 
-	 * @param maneuver
-	 *            the maneuver
-	 * @throws IllegalArgumentException
-	 *             if mainSail is null
+	 * @param the waypoint ID.
+	 * @param maneuver The maneuver.
+	 * @throws IllegalArgumentException If mainSail is null.
 	 */
 	void setManeuver(UUID id, Maneuver maneuver);
 
 	/**
 	 * Sets the main sail.<br/>
 	 * Don't use <tt>null</tt> here. Use <tt>Mainsail.NONE</tt> instead.
-	 * 
-	 * @param mainSail
-	 *            the mainsail
-	 * @throws IllegalArgumentException
-	 *             if mainSail is null
+	 * @param the waypoint ID.
+	 * @param mainSail The mainsail
+	 * @throws IllegalArgumentException If mainSail is null
 	 */
 	void setMainsail(UUID id, MainSail mainSail);
 
 	/**
 	 * Sets the fore sail.<br/>
 	 * Don't use <tt>null</tt> here. Use <tt>Foresail.NONE</tt> instead.
-	 * 
-	 * @param foreSail
-	 *            the foresail
-	 * @throws IllegalArgumentException
-	 *             if foreSail is null
+	 * @param the waypoint ID.
+	 * @param foreSail The foresail.
+	 * @throws IllegalArgumentException If foreSail is null.
 	 */
 	void setForesail(UUID id, ForeSail foreSail);
 
 	/**
+	 * Sets the longitude of the given waypoint ID.
+	 * @param id The waypoint ID.
+	 * @param longitude The longitude.
+	 */
+	void setLongitude(UUID id, double longitude);
+
+	/**
+	 * Sets the latitude of the given waypoint ID.
+	 * @param id The waypoint ID.
+	 * @param latitude The longitude.
+	 */
+	void setLatitude(UUID id, double latitude);
+
+	/**
+	 * Gets the longitude of the given waypoint ID.
+	 * @param id The waypoint ID.
+	 * @return The longitude.
+	 */
+	double getLongitude(UUID id);
+
+	/**
+	 * Gets the latitude of the given waypoint ID.
+	 * @param id The waypoint ID.
+	 * @return The latitude.
+	 */
+	double getLatitude(UUID id);
+	
+	/**
 	 * Returns the string representing the current modifying waypoint.
-	 * 
-	 * @return string representing the current modifying waypoint
+	 * @param the waypoint ID.
+	 * @return string Representing the current modifying waypoint.
 	 */
 	String getString(UUID id);
 
 	/**
 	 * Creates a new WaypointElement.
+	 * @param the trip ID.
+	 * @return All waypoints of the given trip.
 	 */
 	UUID newWaypoint(UUID trip);
 
 	/**
 	 * Delete the currently selected waypoint.
+	 * @param the waypoint ID.
 	 */
 	void deleteWaypoint(UUID id);
 
 	/**
 	 * Gets a list of all waypoints.
+	 * @return All waypoints.
 	 */
 	List<UUID> getWaypoints();
 
+	/**
+	 * Gets a list of all waypoints of the given trip ID.
+	 * @param tripId The trip ID.
+	 * @return All waypoints of the given trip ID.
+	 */
 	List<UUID> getWaypoints(UUID tripId);
 
 	/**
@@ -204,15 +226,14 @@ public interface IWaypointController extends IObservable {
 	 */
 	void closeDB();
 
-	void setLongitude(UUID id, double longitude);
-
-	void setLatitude(UUID id, double latitude);
-
-	double getLongitude(UUID id);
-
-	double getLatitude(UUID id);
-
-	UUID newWaypoint(UUID trip, Location location, long date);
+	/**
+	 * Creates a new waypoint.
+	 * @param tripId The trip ID.
+	 * @param location The location.
+	 * @param date The date.
+	 * @return The waypoint ID.
+	 */
+	UUID newWaypoint(UUID tripId, Location location, long date);
 
 	/**
 	 * Gets a waypoint by the given waypoint ID.
