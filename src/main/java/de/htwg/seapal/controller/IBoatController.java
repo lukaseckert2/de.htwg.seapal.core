@@ -3,6 +3,7 @@ package de.htwg.seapal.controller;
 import java.util.List;
 import java.util.UUID;
 
+import de.htwg.seapal.model.IBoat;
 import de.htwg.seapal.utils.observer.IObservable;
 
 
@@ -28,9 +29,9 @@ public interface IBoatController extends IObservable {
 
 	void setYachtclub(UUID id, String yachtclub);
 
-//	UUID getOwner(UUID id);
-//
-//	void setOwner(UUID id, UUID Owner);
+	UUID getOwner(UUID id);
+
+	void setOwner(UUID id, UUID Owner);
 
 	String getInsurance(UUID id);
 
@@ -113,4 +114,6 @@ public interface IBoatController extends IObservable {
 	void closeDB();
 
 	List<UUID> getBoats();
+	
+	List<IBoat> getAllBoats();
 }

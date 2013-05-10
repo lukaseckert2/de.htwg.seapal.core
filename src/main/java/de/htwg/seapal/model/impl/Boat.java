@@ -21,7 +21,7 @@ public class Boat extends CouchDbDocument implements IBoat {
 	private String sailSign;
 	private String homePort;
 	private String yachtclub;
-	// private String owner; // Person TODO
+	private String owner;
 	private String insurance;
 	private String callSign;
 	private String type;
@@ -53,7 +53,7 @@ public class Boat extends CouchDbDocument implements IBoat {
 		this.sailSign = boat.getSailSign();
 		this.homePort = boat.getHomePort();
 		this.yachtclub = boat.getYachtclub();
-		// this.owner = boat.getOwner().toString();
+		this.owner = boat.getOwner().toString();
 		this.insurance = boat.getInsurance();
 		this.callSign = boat.getCallSign();
 		this.type = boat.getType();
@@ -130,15 +130,15 @@ public class Boat extends CouchDbDocument implements IBoat {
 		this.yachtclub = yachtclub;
 	}
 
-	// @Override TODO
-	// public UUID getOwner() { // Person
-	// return UUID.fromString(owner);
-	// }
-	//
-	// @Override
-	// public void setOwner(UUID owner) { // Person
-	// this.owner = owner.toString();
-	// }
+	 @Override
+	 public UUID getOwner() { // Person
+		 return UUID.fromString(owner);
+	 }
+	
+	 @Override
+	 public void setOwner(UUID owner) { // Person
+		 this.owner = owner.toString();
+	 }
 
 	@Override
 	public String getInsurance() {

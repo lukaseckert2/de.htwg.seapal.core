@@ -5,7 +5,6 @@ import java.util.List;
 import java.util.UUID;
 
 import com.google.inject.Inject;
-import com.google.inject.Singleton;
 
 import de.htwg.seapal.controller.ITripController;
 import de.htwg.seapal.database.ITripDatabase;
@@ -13,7 +12,6 @@ import de.htwg.seapal.model.ITrip;
 import de.htwg.seapal.utils.observer.Observable;
 import de.htwg.seapal.utils.logging.ILogger;
 
-@Singleton
 public class TripController extends Observable implements ITripController {
 
 	private ITripDatabase db;
@@ -259,8 +257,9 @@ public class TripController extends Observable implements ITripController {
 	}
 
 	@Override
-	public void closeDB() {
+	public final void closeDB() {
 		db.close();
+		logger.info("TripController", "Database closed");
 	}
 
 	@Override
@@ -274,12 +273,13 @@ public class TripController extends Observable implements ITripController {
 	}
 
 	@Override
-	public List<UUID> getTrips(UUID boat) {
+	public List<UUID> getTrips(UUID boatId) {
 		List<ITrip> query = db.getAll();
 		logger.info("TripController", query.toString());
+		// TODO: filtering should be moved to database layer.
 		List<UUID> list = new ArrayList<UUID>();
 		for (ITrip trip : query) {
-			if (trip.getBoat().equals(boat.toString()))
+			if (trip.getBoat().equals(boatId.toString()))
 				list.add(UUID.fromString(trip.getId()));
 		}
 		return list;
@@ -291,6 +291,24 @@ public class TripController extends Observable implements ITripController {
 		if (trip == null)
 			return null;
 		return UUID.fromString(trip.getId());
+	}
+
+	@Override
+	public List<ITrip> getAllTrips() {
+		return db.getAll();
+	}
+
+	@Override
+	public List<ITrip> getAllTrips(UUID boatId) {
+		List<ITrip> trips = db.getAll();
+		logger.info("TripController", trips.toString());
+		// TODO: filtering should be moved to database layer.
+		for (int i = trips.size() - 1; i >= 0; ++i) {
+			if (!trips.get(i).getBoat().equals(boatId.toString())) {
+				trips.remove(i);
+			}
+		}
+		return trips;
 	}
 
 }

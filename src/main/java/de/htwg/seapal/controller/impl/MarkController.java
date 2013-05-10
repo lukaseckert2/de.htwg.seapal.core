@@ -5,7 +5,6 @@ import java.util.List;
 import java.util.UUID;
 
 import com.google.inject.Inject;
-import com.google.inject.Singleton;
 
 import android.text.format.DateFormat;
 import de.htwg.seapal.controller.IMarkController;
@@ -14,7 +13,6 @@ import de.htwg.seapal.model.IMark;
 import de.htwg.seapal.utils.observer.Observable;
 import de.htwg.seapal.utils.logging.ILogger;
 
-@Singleton
 public class MarkController extends Observable implements IMarkController {
 
 	private IMarkDatabase db;
@@ -214,8 +212,9 @@ public class MarkController extends Observable implements IMarkController {
 	}
 
 	@Override
-	public void closeDB() {
+	public final void closeDB() {
 		db.close();
+		logger.info("MarkController", "Database closed");
 	}
 
 	@Override
@@ -254,5 +253,10 @@ public class MarkController extends Observable implements IMarkController {
 				+ "\nCOG = \t" + getCOG(id) + "\nSOG = \t" + getSOG(id)
 				+ "\nBTM = \t" + getBTM(id) + "\nDTM = \t" + getDTM(id)
 				+ "\nDate = \t" + getDate(id) + "\nNotes = \t" + getNote(id);
+	}
+
+	@Override
+	public List<IMark> getAllMarks() {
+		return db.getAll();
 	}
 }

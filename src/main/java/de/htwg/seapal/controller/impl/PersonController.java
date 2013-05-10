@@ -5,7 +5,6 @@ import java.util.List;
 import java.util.UUID;
 
 import com.google.inject.Inject;
-import com.google.inject.Singleton;
 
 import de.htwg.seapal.controller.IPersonController;
 import de.htwg.seapal.database.IPersonDatabase;
@@ -13,7 +12,6 @@ import de.htwg.seapal.model.IPerson;
 import de.htwg.seapal.utils.observer.Observable;
 import de.htwg.seapal.utils.logging.ILogger;
 
-@Singleton
 public class PersonController extends Observable implements IPersonController {
 
 	protected IPersonDatabase db;
@@ -285,5 +283,16 @@ public class PersonController extends Observable implements IPersonController {
 			list.add(person.getUUID());
 		}
 		return list;
+	}
+
+	@Override
+	public final void closeDB() {
+		db.close();
+		logger.info("PersonController", "Database closed");
+	}
+
+	@Override
+	public List<IPerson> getAllPersons() {
+		return db.getAll();
 	}
 }

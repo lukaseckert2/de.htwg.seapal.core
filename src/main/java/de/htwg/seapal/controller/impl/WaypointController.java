@@ -7,7 +7,6 @@ import java.util.List;
 import java.util.UUID;
 
 import com.google.inject.Inject;
-import com.google.inject.Singleton;
 
 import android.location.Location;
 import de.htwg.seapal.controller.IWaypointController;
@@ -19,18 +18,19 @@ import de.htwg.seapal.model.IWaypoint.Maneuver;
 import de.htwg.seapal.utils.observer.Observable;
 import de.htwg.seapal.utils.logging.ILogger;
 
-@Singleton
 public class WaypointController extends Observable implements
 		IWaypointController {
 
-	/** Controller handeling the persistence. */
+	/** 
+	 * Controller handling the persistence. 
+	 */
 	private final IWaypointDatabase db;
 	private final ILogger logger;
 
 	/**
 	 * Creates an instance with a waypoint. Only for generalized classes.
 	 * 
-	 * @param pWaypoint
+	 * @param p Waypoint
 	 *            the waypoint.
 	 */
 	@Inject
@@ -298,6 +298,7 @@ public class WaypointController extends Observable implements
 	@Override
 	public final void closeDB() {
 		db.close();
+		logger.info("WaypointController", "Database closed");
 	}
 
 	@Override
@@ -311,14 +312,33 @@ public class WaypointController extends Observable implements
 	}
 
 	@Override
-	public List<UUID> getWaypoints(UUID trip) {
+	public List<UUID> getWaypoints(UUID tripId) {
 		List<IWaypoint> waypoints = db.getAll();
+		// TODO: filtering should be moved to database layer.
 		List<UUID> waypointIDs = new ArrayList<UUID>();
 		for (IWaypoint waypoint : waypoints) {
-			if (waypoint.getTrip().equals(trip.toString()))
+			if (waypoint.getTrip().equals(tripId.toString()))
 				waypointIDs.add(UUID.fromString(waypoint.getId()));
 		}
 		return waypointIDs;
+	}
+
+	@Override
+	public List<IWaypoint> getAllWaypoints() {
+		return db.getAll();
+	}
+
+	@Override
+	public List<IWaypoint> getAllWaypoints(UUID tripId) {
+		List<IWaypoint> waypoints = db.getAll();
+		logger.info("TripController", waypoints.toString());
+		// TODO: filtering should be moved to database layer.
+		for (int i = waypoints.size() - 1; i >= 0; ++i) {
+			if (!waypoints.get(i).getTrip().equals(tripId.toString())) {
+				waypoints.remove(i);
+			}
+		}
+		return waypoints;
 	}
 
 }

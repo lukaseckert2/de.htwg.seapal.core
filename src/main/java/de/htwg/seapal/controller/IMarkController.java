@@ -3,6 +3,8 @@ package de.htwg.seapal.controller;
 import java.util.List;
 import java.util.UUID;
 
+import de.htwg.seapal.model.IBoat;
+import de.htwg.seapal.model.IMark;
 import de.htwg.seapal.utils.observer.IObservable;
 
 public interface IMarkController extends IObservable {
@@ -59,4 +61,5 @@ public interface IMarkController extends IObservable {
 
 	String getString(UUID id);
 
+	List<IMark> getAllMarks();
 }

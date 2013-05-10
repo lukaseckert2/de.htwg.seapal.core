@@ -3,6 +3,7 @@ package de.htwg.seapal.controller;
 import java.util.List;
 import java.util.UUID;
 
+import de.htwg.seapal.model.ITrip;
 import de.htwg.seapal.utils.observer.IObservable;
 
 public interface ITripController extends IObservable {
@@ -61,7 +62,11 @@ public interface ITripController extends IObservable {
 
 	UUID newTrip(UUID boat);
 
-	List<UUID> getTrips(UUID boat);
+	List<UUID> getTrips(UUID boatId);
 
 	UUID getTrip(UUID id);
+	
+	List<ITrip> getAllTrips();
+	
+	List<ITrip> getAllTrips(UUID boatId);
 }

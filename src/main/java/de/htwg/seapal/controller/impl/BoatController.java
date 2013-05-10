@@ -5,7 +5,6 @@ import java.util.List;
 import java.util.UUID;
 
 import com.google.inject.Inject;
-import com.google.inject.Singleton;
 
 import de.htwg.seapal.controller.IBoatController;
 import de.htwg.seapal.database.IBoatDatabase;
@@ -13,7 +12,6 @@ import de.htwg.seapal.model.IBoat;
 import de.htwg.seapal.utils.observer.Observable;
 import de.htwg.seapal.utils.logging.ILogger;
 
-@Singleton
 public class BoatController extends Observable implements IBoatController {
 
 	protected IBoatDatabase db;
@@ -115,23 +113,23 @@ public class BoatController extends Observable implements IBoatController {
 		notifyObservers();
 	}
 
-//	@Override
-//	public UUID getOwner(UUID id) {
-//		IBoat boat = db.get(id);
-//		if (boat == null)
-//			return null;
-//		return boat.getOwner();
-//	}
-//
-//	@Override
-//	public void setOwner(UUID id, UUID Owner) {
-//		IBoat boat = db.get(id);
-//		if (boat == null)
-//			return;
-//		boat.setOwner(Owner);
-//		db.save(boat);
-//		notifyObservers();
-//	}
+	@Override
+	public UUID getOwner(UUID id) {
+		IBoat boat = db.get(id);
+		if (boat == null)
+			return null;
+		return boat.getOwner();
+	}
+
+	@Override
+	public void setOwner(UUID id, UUID Owner) {
+		IBoat boat = db.get(id);
+		if (boat == null)
+			return;
+		boat.setOwner(Owner);
+		db.save(boat);
+		notifyObservers();
+	}
 
 	@Override
 	public String getInsurance(UUID id) {
@@ -485,8 +483,9 @@ public class BoatController extends Observable implements IBoatController {
 		return newBoat;
 	}
 
-	public void closeDB() {
+	public final void closeDB() {
 		db.close();
+		logger.info("BoatController", "Database closed");
 	}
 
 	@Override
@@ -503,5 +502,10 @@ public class BoatController extends Observable implements IBoatController {
 			list.add(boat.getUUID());
 		}
 		return list;
+	}
+
+	@Override
+	public List<IBoat> getAllBoats() {
+		return db.getAll();
 	}
 }
