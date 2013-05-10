@@ -11,7 +11,7 @@ Core repository for both, the web and the android project of Seapal.
 
 1. Install SBT
 
-* http://www.scala-sbt.org/release/docs/Getting-Started/Setup.html (eg. MSI for Windows)
+> http://www.scala-sbt.org/release/docs/Getting-Started/Setup.html (eg. MSI for Windows)
 
 2. Start a console/shell windows
 
