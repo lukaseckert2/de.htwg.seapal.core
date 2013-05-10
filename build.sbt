@@ -16,10 +16,12 @@ libraryDependencies ++= Seq(
 	"com.google.android" % "android" % "4.1.1.4",
 	"com.google.code.jcouchdb" % "jcouchdb" % "0.11.0-1",
 	"junit" % "junit" % "4.10" ,
-	"com.novocode" % "junit-interface" % "0.10-M1" % "test" 
+	"com.novocode" % "junit-interface" % "0.10-M1" % "test->default"
 	//"com.couchbase" % "com.couchbase.jtouchdb" % "0.5-SNAPSHOT"
 	//"org.daum.extra.android" % "org.daum.extra.android.touchdbektorp" % "1.0.0-SNAPSHOT"
 )
+
+EclipseKeys.projectFlavor := EclipseProjectFlavor.Java
 
 // disable using the Scala version in output paths and artifacts
 crossPaths := false
@@ -43,4 +45,3 @@ pomExtra :=
 
 // publishing target
 publishTo := Some("HtwgPublishTo" at "http://lenny2.in.htwg-konstanz.de:8081/artifactory/libs-snapshot-local;build.timestamp=" + new java.util.Date().getTime())
-

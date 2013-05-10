@@ -29,15 +29,15 @@ public class Trip extends CouchDbDocument implements ITrip {
 	private String boat; // UUID Boat
 
 	public Trip() {
-		setId(UUID.randomUUID().toString());
+		//setId(UUID.randomUUID().toString());
 		this.crew = new ArrayList<String>();
 		this.skipper = UUID.randomUUID().toString();
 	}
-	
+
 	public Trip(ITrip t) {
 		setId(t.getId());
 		this.crew = new ArrayList<String>();
-		
+
 		this.name = t.getName();
 		this.startLocation = t.getStartLocation();
 		this.endLocation = t.getEndLocation();
@@ -51,7 +51,7 @@ public class Trip extends CouchDbDocument implements ITrip {
 		this.notes = t.getNotes();
 		this.boat = t.getBoat();
 	}
-	
+
 	@Override
 	public UUID getUUID() {
 		return UUID.fromString(getId());
@@ -85,18 +85,15 @@ public class Trip extends CouchDbDocument implements ITrip {
 		return endLocation;
 	}
 
-
 	@Override
 	public void setSkipper(String skipper) {
 		this.skipper = skipper;
 	}
 
-	
 	@Override
 	public String getSkipper() {
 		return skipper;
 	}
-
 
 	@Override
 	public void addCrewMember(String crewMember) {

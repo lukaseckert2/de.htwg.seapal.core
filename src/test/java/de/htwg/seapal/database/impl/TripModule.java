@@ -13,6 +13,8 @@ import com.google.inject.Provides;
 import com.google.inject.name.Named;
 import com.google.inject.name.Names;
 
+import de.htwg.seapal.database.ITripDatabase;
+
 public class TripModule extends AbstractModule {
 
 	@Override
@@ -20,7 +22,8 @@ public class TripModule extends AbstractModule {
 		bind(String.class).annotatedWith(Names.named("databaseURL"))
 				.toInstance("http://roroettg.iriscouch.com");
 		bind(String.class).annotatedWith(Names.named("databaseName"))
-				.toInstance("some_db");
+				.toInstance("seapal_trips_db");
+		bind(ITripDatabase.class).to(TripDatabase.class);
 		bind(CouchDbConnector.class).to(StdCouchDbConnector.class);
 	}
 
