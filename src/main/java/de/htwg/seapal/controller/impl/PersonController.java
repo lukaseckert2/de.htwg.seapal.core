@@ -277,7 +277,7 @@ public class PersonController extends Observable implements IPersonController {
 
 	@Override
 	public List<UUID> getPersons() {
-		List<IPerson> persons = db.getAll();
+		List<IPerson> persons = db.loadAll();
 		List<UUID> list = new ArrayList<UUID>();
 		for (IPerson person : persons) {
 			list.add(person.getUUID());
@@ -298,7 +298,7 @@ public class PersonController extends Observable implements IPersonController {
 	
 	@Override
 	public List<IPerson> getAllPersons() {
-		return db.getAll();
+		return db.loadAll();
 	}
 	
 	@Override

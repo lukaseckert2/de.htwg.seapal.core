@@ -496,7 +496,7 @@ public class BoatController extends Observable implements IBoatController {
 
 	@Override
 	public List<UUID> getBoats() {
-		List<IBoat> query = db.getAll();
+		List<IBoat> query = db.loadAll();
 		List<UUID> list = new ArrayList<UUID>();
 		for (IBoat boat : query) {
 			list.add(boat.getUUID());
@@ -511,7 +511,7 @@ public class BoatController extends Observable implements IBoatController {
 	
 	@Override
 	public List<IBoat> getAllBoats() {
-		return db.getAll();
+		return db.loadAll();
 	}
 
 	@Override

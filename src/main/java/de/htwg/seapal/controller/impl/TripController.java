@@ -264,7 +264,7 @@ public class TripController extends Observable implements ITripController {
 
 	@Override
 	public List<UUID> getTrips() {
-		List<ITrip> trips = db.getAll();
+		List<ITrip> trips = db.loadAll();
 		List<UUID> list = new ArrayList<UUID>();
 		for (ITrip trip : trips) {
 			list.add(UUID.fromString(trip.getId()));
@@ -274,7 +274,7 @@ public class TripController extends Observable implements ITripController {
 
 	@Override
 	public List<UUID> getTrips(UUID boatId) {
-		List<ITrip> query = db.getAll();
+		List<ITrip> query = db.loadAll();
 		logger.info("TripController", query.toString());
 		// TODO: filtering should be moved to database layer.
 		List<UUID> list = new ArrayList<UUID>();
@@ -292,12 +292,12 @@ public class TripController extends Observable implements ITripController {
 
 	@Override
 	public List<ITrip> getAllTrips() {
-		return db.getAll();
+		return db.loadAll();
 	}
 
 	@Override
 	public List<ITrip> getAllTrips(UUID boatId) {
-		List<ITrip> trips = db.getAll();
+		List<ITrip> trips = db.loadAll();
 		logger.info("TripController", trips.toString());
 		// TODO: filtering should be moved to database layer.
 		for (int i = trips.size() - 1; i >= 0; ++i) {

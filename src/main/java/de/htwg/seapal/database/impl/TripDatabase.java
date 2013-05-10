@@ -10,10 +10,11 @@ import org.ektorp.support.View;
 import com.google.inject.Inject;
 
 import de.htwg.seapal.database.ITripDatabase;
+import de.htwg.seapal.model.ITrip;
 import de.htwg.seapal.model.impl.Trip;
 
 @View( name="all", map = "function(doc) { if (doc.blogPostId) { emit(null, doc) } }")
-public class TripDatabase extends CouchDbRepositorySupport<Trip> implements ITripDatabase<Trip> {
+public class TripDatabase extends CouchDbRepositorySupport<Trip> implements ITripDatabase {
 
 	@Inject
 	protected TripDatabase(CouchDbConnector db) {
@@ -36,8 +37,7 @@ public class TripDatabase extends CouchDbRepositorySupport<Trip> implements ITri
 
 	@Override
 	public void delete(UUID id) {
-		// TODO Auto-generated method stub
-		
+		// TODO Auto-generated method stub	
 	}
 
 	@Override
@@ -47,9 +47,9 @@ public class TripDatabase extends CouchDbRepositorySupport<Trip> implements ITri
 	}
 
 	@Override
-	public void save(Trip trip) {
+	public boolean save(ITrip trip) {
 		// TODO Auto-generated method stub
-		
+		return true;
 	}
 
 	@Override
@@ -59,7 +59,7 @@ public class TripDatabase extends CouchDbRepositorySupport<Trip> implements ITri
 	}
 
 	@Override
-	public List<Trip> getAll() {
+	public List<ITrip> loadAll() {
 		// TODO Auto-generated method stub
 		return null;
 	}
