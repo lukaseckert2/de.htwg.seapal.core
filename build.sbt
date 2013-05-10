@@ -9,10 +9,14 @@ version := "1.0-SNAPSHOT"
 
 // general project dependencies
 libraryDependencies ++= Seq(
+	"org.slf4j" % "slf4j-api" % "1.6.4",
+	"org.slf4j" % "slf4j-log4j12" % "1.6.4",
 	"com.google.inject" % "guice" % "3.0",
 	"org.ektorp" % "org.ektorp" % "1.3.0",
 	"com.google.android" % "android" % "4.1.1.4",
-	"com.google.code.jcouchdb" % "jcouchdb" % "0.11.0-1"
+	"com.google.code.jcouchdb" % "jcouchdb" % "0.11.0-1",
+	"junit" % "junit" % "4.10" ,
+	"com.novocode" % "junit-interface" % "0.10-M1" % "test" 
 	//"com.couchbase" % "com.couchbase.jtouchdb" % "0.5-SNAPSHOT"
 	//"org.daum.extra.android" % "org.daum.extra.android.touchdbektorp" % "1.0.0-SNAPSHOT"
 )
@@ -34,7 +38,7 @@ pomExtra :=
       </resource>
     </resources>
   </build>
-
+  
 //resolvers += "TouchdbResolver" at "http://maven.kevoree.org/daum/snapshots"
 
 // publishing target
