@@ -1,5 +1,12 @@
 package de.htwg.seapal.utils.observer;
 
+/**
+ * Observer interface for the observer pattern.
+ */
 public interface IObserver {
-	void update(Event e);
+	/**
+	 * Updates the observer.
+	 * @param event The update event.
+	 */
+	void update(Event event);
 }

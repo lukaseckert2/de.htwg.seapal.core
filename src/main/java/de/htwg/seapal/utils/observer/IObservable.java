@@ -1,10 +1,35 @@
 package de.htwg.seapal.utils.observer;
 
+/**
+ *  Observable interface for the observer pattern.
+ */
 public interface IObservable {
 
-	void addObserver(IObserver s);
-	void removeObserver(IObserver s);
+	/**
+	 * Adds an observer.
+	 * @param observer The observer to add.
+	 */
+	void addObserver(IObserver observer);
+
+	/**
+	 * Removes an observer.
+	 * @param observer The observer to remove.
+	 */
+	void removeObserver(IObserver observer);
+
+	/**
+	 * Removes all observers.
+	 */
 	void removeAllObservers();
+
+	/**
+	 * Notifies all observers.
+	 */
 	void notifyObservers();
-	void notifyObservers(Event e);
+
+	/**
+	 * Notifies all oberservers.
+	 * @param event The notify event.
+	 */
+	void notifyObservers(Event event);
 }
