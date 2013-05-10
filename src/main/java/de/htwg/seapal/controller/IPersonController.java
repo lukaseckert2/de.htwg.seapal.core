@@ -70,5 +70,24 @@ public interface IPersonController extends IObservable {
 
 	UUID newPerson();
 	
+	/**
+	 * Gets a person by the given person ID.
+	 * @param personId The person ID.
+	 * @return The person or NULL, if no person was found.
+	 */
+	IPerson getPerson(UUID personId);
+	
+	/**
+	 * Gets all persons.
+	 * @return All persons.
+	 */
 	List<IPerson> getAllPersons();
+	
+	/**
+	 * Saves the person.
+	 * @param person The person to save.
+	 * @return Returns TRUE, if the person was newly created
+	 * 	       and FALSE when the person was updated.
+	 */
+	boolean savePerson(IPerson person);
 }

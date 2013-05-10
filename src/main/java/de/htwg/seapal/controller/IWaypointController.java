@@ -5,6 +5,7 @@ import java.util.NoSuchElementException;
 import java.util.UUID;
 
 import android.location.Location;
+import de.htwg.seapal.model.IBoat;
 import de.htwg.seapal.model.IWaypoint;
 import de.htwg.seapal.model.IWaypoint.ForeSail;
 import de.htwg.seapal.model.IWaypoint.MainSail;
@@ -214,6 +215,13 @@ public interface IWaypointController extends IObservable {
 	UUID newWaypoint(UUID trip, Location location, long date);
 
 	/**
+	 * Gets a waypoint by the given waypoint ID.
+	 * @param waypointId The waypoint ID.
+	 * @return The waypoint or NULL, if no waypoint was found.
+	 */
+	IWaypoint getWaypoint(UUID waypointId);
+	
+	/**
 	 * Gets a list of all waypoints
 	 * @return All waypoints
 	 */
@@ -225,4 +233,12 @@ public interface IWaypointController extends IObservable {
 	 * @return The waypoints of the trip.
 	 */
 	List<IWaypoint> getAllWaypoints(UUID tripId);
+	
+	/**
+	 * Saves the waypoint.
+	 * @param waypoint The waypoint to save.
+	 * @return Returns TRUE, if the waypoint was newly created
+	 * 	       and FALSE when the waypoint was updated.
+	 */
+	boolean saveWaypoint(IWaypoint waypoint);
 }

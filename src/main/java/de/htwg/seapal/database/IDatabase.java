@@ -40,7 +40,7 @@ public interface IDatabase<T> {
 	 * Gets a list of all data entries.
 	 * @return All boats.
 	 */
-	List<T> getAll();
+	List<T> loadAll();
 
 	/**
 	 * Deletes the data entry with the given UUID.

@@ -3,6 +3,7 @@ package de.htwg.seapal.controller;
 import java.util.List;
 import java.util.UUID;
 
+import de.htwg.seapal.model.IBoat;
 import de.htwg.seapal.model.IRoute;
 import de.htwg.seapal.utils.observer.IObservable;
 
@@ -37,6 +38,25 @@ public interface IRouteController extends IObservable {
 	UUID newRoute();
 
 	String getString(UUID id);
-
+	
+	/**
+	 * Gets a route by the given route ID.
+	 * @param routeId The route ID.
+	 * @return The route or NULL, if no route was found.
+	 */
+	IRoute getRoute(UUID routeId);
+	
+	/**
+	 * Gets all routes.
+	 * @return All routes.
+	 */
 	List<IRoute> getAllRoutes();
+	
+	/**
+	 * Saves the route.
+	 * @param route The route to save.
+	 * @return Returns TRUE, if the route was newly created
+	 * 	       and FALSE when the route was updated.
+	 */
+	boolean saveRoute(IRoute route);
 }

@@ -131,7 +131,7 @@ public class RouteController extends Observable implements IRouteController {
 	@Override
 	public List<UUID> getRoutes() {
 		List<UUID> list = new LinkedList<UUID>();
-		List<IRoute> routes = db.getAll();
+		List<IRoute> routes = db.loadAll();
 		for (IRoute entry : routes) {
 			list.add(entry.getUUID());
 		}
@@ -155,7 +155,16 @@ public class RouteController extends Observable implements IRouteController {
 
 	@Override
 	public List<IRoute> getAllRoutes() {
-		return db.getAll();
+		return db.loadAll();
 	}
 
+	@Override
+	public boolean saveRoute(IRoute route) {
+		return db.save(route);
+	}
+
+	@Override
+	public IRoute getRoute(UUID routeId) {
+		return db.get(routeId);
+	}
 }

@@ -303,7 +303,7 @@ public class WaypointController extends Observable implements
 
 	@Override
 	public final List<UUID> getWaypoints() {
-		List<IWaypoint> waypoints = db.getAll();
+		List<IWaypoint> waypoints = db.loadAll();
 		List<UUID> waypointIDs = new ArrayList<UUID>();
 		for (IWaypoint waypoint : waypoints) {
 			waypointIDs.add(UUID.fromString(waypoint.getId()));
@@ -313,7 +313,7 @@ public class WaypointController extends Observable implements
 
 	@Override
 	public List<UUID> getWaypoints(UUID tripId) {
-		List<IWaypoint> waypoints = db.getAll();
+		List<IWaypoint> waypoints = db.loadAll();
 		// TODO: filtering should be moved to database layer.
 		List<UUID> waypointIDs = new ArrayList<UUID>();
 		for (IWaypoint waypoint : waypoints) {
@@ -324,13 +324,18 @@ public class WaypointController extends Observable implements
 	}
 
 	@Override
+	public IWaypoint getWaypoint(UUID waypointId) {
+		return db.get(waypointId);
+	}
+	
+	@Override
 	public List<IWaypoint> getAllWaypoints() {
-		return db.getAll();
+		return db.loadAll();
 	}
 
 	@Override
 	public List<IWaypoint> getAllWaypoints(UUID tripId) {
-		List<IWaypoint> waypoints = db.getAll();
+		List<IWaypoint> waypoints = db.loadAll();
 		logger.info("TripController", waypoints.toString());
 		// TODO: filtering should be moved to database layer.
 		for (int i = waypoints.size() - 1; i >= 0; ++i) {
@@ -341,4 +346,8 @@ public class WaypointController extends Observable implements
 		return waypoints;
 	}
 
+	@Override
+	public boolean saveWaypoint(IWaypoint waypoint) {
+		return db.save(waypoint);
+	}
 }

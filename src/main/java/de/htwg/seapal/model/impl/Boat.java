@@ -14,14 +14,14 @@ public class Boat extends CouchDbDocument implements IBoat {
 	 */
 	private static final long serialVersionUID = 1L;
 
-	private String user; // UUID User
+	private String user; // person UUID
 
 	private String boatName;
 	private String registerNr;
 	private String sailSign;
 	private String homePort;
 	private String yachtclub;
-	private String owner;
+	private UUID owner;
 	private String insurance;
 	private String callSign;
 	private String type;
@@ -53,7 +53,7 @@ public class Boat extends CouchDbDocument implements IBoat {
 		this.sailSign = boat.getSailSign();
 		this.homePort = boat.getHomePort();
 		this.yachtclub = boat.getYachtclub();
-		this.owner = boat.getOwner().toString();
+		this.owner = boat.getOwner();
 		this.insurance = boat.getInsurance();
 		this.callSign = boat.getCallSign();
 		this.type = boat.getType();
@@ -132,12 +132,12 @@ public class Boat extends CouchDbDocument implements IBoat {
 
 	 @Override
 	 public UUID getOwner() { // Person
-		 return UUID.fromString(owner);
+		 return owner;
 	 }
 	
 	 @Override
 	 public void setOwner(UUID owner) { // Person
-		 this.owner = owner.toString();
+		 this.owner = owner;
 	 }
 
 	@Override
