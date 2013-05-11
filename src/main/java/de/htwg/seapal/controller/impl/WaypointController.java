@@ -28,10 +28,9 @@ public class WaypointController extends Observable implements
 	private final ILogger logger;
 
 	/**
-	 * Creates an instance with a waypoint. Only for generalized classes.
-	 * 
-	 * @param p Waypoint
-	 *            the waypoint.
+	 * Creates an instance with a waypoint.
+	 * @param db The waypoint database.
+	 * @param logger The logger.
 	 */
 	@Inject
 	public WaypointController(IWaypointDatabase db, ILogger logger) {
