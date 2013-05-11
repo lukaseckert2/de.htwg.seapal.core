@@ -4,11 +4,10 @@ import java.util.LinkedList;
 import java.util.List;
 import java.util.UUID;
 
-import org.ektorp.support.CouchDbDocument;
-
 import de.htwg.seapal.model.IRoute;
+import de.htwg.seapal.model.ModelDocument;
 
-public class Route extends CouchDbDocument implements IRoute {
+public class Route extends ModelDocument implements IRoute {
 
 	/**
 	 * Serial version UID for serialization.
@@ -39,11 +38,6 @@ public class Route extends CouchDbDocument implements IRoute {
 		this.marks = r.getMarks();
 		this.routeEntryPoint = r.getRouteEntryPoint();
 		this.distance = r.getDistance();
-	}
-
-	@Override
-	public UUID getUUID() {
-		return UUID.fromString(getId());
 	}
 
 	@Override

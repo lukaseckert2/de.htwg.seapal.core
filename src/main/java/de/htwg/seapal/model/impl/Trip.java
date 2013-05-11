@@ -7,21 +7,16 @@ import java.util.UUID;
 import org.apache.commons.lang.builder.EqualsBuilder;
 import org.apache.commons.lang.builder.HashCodeBuilder;
 import org.apache.commons.lang.builder.ReflectionToStringBuilder;
-import org.codehaus.jackson.annotate.JsonIgnore;
-import org.codehaus.jackson.annotate.JsonProperty;
-import org.ektorp.support.CouchDbDocument;
 
 import de.htwg.seapal.model.ITrip;
+import de.htwg.seapal.model.ModelDocument;
 
-public class Trip extends CouchDbDocument implements ITrip {
+public class Trip extends ModelDocument implements ITrip {
 
 	/**
 	 * Serial version UID for serialization.
 	 */
 	private static final long serialVersionUID = 1L;
-
-	@JsonProperty("_id")
-	private String id;
 
 	private String name;
 	private String startLocation;
@@ -58,22 +53,6 @@ public class Trip extends CouchDbDocument implements ITrip {
 		this.fuel = t.getFuel();
 		this.notes = t.getNotes();
 		this.boat = t.getBoat();
-	}
-
-	@Override
-	public void setId(String s) {
-		this.id = s;
-	}
-
-	@Override
-	public String getId() {
-		return this.id;
-	}
-
-	@Override
-	@JsonIgnore
-	public UUID getUUID() {
-		return UUID.fromString(getId());
 	}
 
 	public String getName() {

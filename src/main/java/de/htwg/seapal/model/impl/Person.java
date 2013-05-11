@@ -3,11 +3,10 @@ package de.htwg.seapal.model.impl;
 import java.text.SimpleDateFormat;
 import java.util.UUID;
 
-import org.ektorp.support.CouchDbDocument;
-
 import de.htwg.seapal.model.IPerson;
+import de.htwg.seapal.model.ModelDocument;
 
-public class Person extends CouchDbDocument implements IPerson {
+public class Person extends ModelDocument implements IPerson {
 
 	/**
 	 * Serial version UID for serialization.
@@ -69,11 +68,6 @@ public class Person extends CouchDbDocument implements IPerson {
 
 	public Person(int id) {
 		setId("PERSON-" + id);
-	}
-
-	@Override
-	public UUID getUUID() {
-		return UUID.fromString(getId());
 	}
 
 	@Override

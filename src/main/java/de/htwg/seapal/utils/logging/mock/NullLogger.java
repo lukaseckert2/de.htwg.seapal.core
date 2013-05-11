@@ -1,4 +1,4 @@
-package de.htwg.seapal.utils.logging.impl;
+package de.htwg.seapal.utils.logging.mock;
 
 import de.htwg.seapal.utils.logging.ILogger;
 

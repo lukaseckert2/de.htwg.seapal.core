@@ -2,11 +2,10 @@ package de.htwg.seapal.model.impl;
 
 import java.util.UUID;
 
-import org.ektorp.support.CouchDbDocument;
-
 import de.htwg.seapal.model.IMark;
+import de.htwg.seapal.model.ModelDocument;
 
-public class Mark extends CouchDbDocument implements IMark {
+public class Mark extends ModelDocument implements IMark {
 
 	/**
 	 * Serial version UID for serialization.
@@ -44,11 +43,6 @@ public class Mark extends CouchDbDocument implements IMark {
 		this.note = m.getNote();
 		this.date = m.getDate();
 		this.isRouteMark = m.isRouteMark();
-	}
-
-	@Override
-	public UUID getUUID() {
-		return UUID.fromString(getId());
 	}
 
 	@Override

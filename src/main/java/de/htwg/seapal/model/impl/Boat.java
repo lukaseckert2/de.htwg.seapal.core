@@ -2,12 +2,10 @@ package de.htwg.seapal.model.impl;
 
 import java.util.UUID;
 
-import org.codehaus.jackson.annotate.JsonIgnore;
-import org.ektorp.support.CouchDbDocument;
-
 import de.htwg.seapal.model.IBoat;
+import de.htwg.seapal.model.ModelDocument;
 
-public class Boat extends CouchDbDocument implements IBoat {
+public class Boat extends ModelDocument implements IBoat {
 
 	/**
 	 * Serial version UID for serialization.
@@ -73,11 +71,12 @@ public class Boat extends CouchDbDocument implements IBoat {
 		this.genuaSize = boat.getGenuaSize();
 		this.spiSize = boat.getGenuaSize();
 	}
-
-	@JsonIgnore
+	
 	@Override
-	public UUID getUUID() {
-		return UUID.fromString(getId());
+	public void setId(String id) {
+		if (super.getId() == null) {
+			setId(id);
+		}
 	}
 
 	@Override

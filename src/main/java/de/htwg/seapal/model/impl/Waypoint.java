@@ -4,11 +4,11 @@ import java.util.UUID;
 
 import org.codehaus.jackson.annotate.JsonCreator;
 import org.codehaus.jackson.annotate.JsonProperty;
-import org.ektorp.support.CouchDbDocument;
 
 import de.htwg.seapal.model.IWaypoint;
+import de.htwg.seapal.model.ModelDocument;
 
-public class Waypoint extends CouchDbDocument implements IWaypoint {
+public class Waypoint extends ModelDocument implements IWaypoint {
 
 	/**
 	 * Serial version UID for serialization.
@@ -64,11 +64,6 @@ public class Waypoint extends CouchDbDocument implements IWaypoint {
 		this.foreSail = w.getForesail();
 		this.mainSail = w.getMainsail();
 		this.trip = w.getTrip();
-	}
-	
-	@Override
-	public UUID getUUID() {
-		return UUID.fromString(getId());
 	}
 
 	@Override
