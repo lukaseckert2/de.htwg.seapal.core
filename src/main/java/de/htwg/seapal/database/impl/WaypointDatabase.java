@@ -12,17 +12,20 @@ import com.google.inject.Inject;
 import com.google.inject.name.Named;
 
 import de.htwg.seapal.database.ITripDatabase;
+import de.htwg.seapal.database.IWaypointDatabase;
 import de.htwg.seapal.model.ITrip;
+import de.htwg.seapal.model.IWaypoint;
 import de.htwg.seapal.model.impl.Trip;
+import de.htwg.seapal.model.impl.Waypoint;
 
-public class TripDatabase extends CouchDbRepositorySupport<Trip> implements
-		ITripDatabase {
+public class WaypointDatabase extends CouchDbRepositorySupport<Waypoint> implements
+		IWaypointDatabase {
 
 	private final Logger logger;
 	
 	@Inject
-	protected TripDatabase(@Named("tripCouchDbConnector") CouchDbConnector db, Logger logger) {
-		super(Trip.class, db);
+	protected WaypointDatabase(@Named("waypointCouchDbConnector") CouchDbConnector db, Logger logger) {
+		super(Waypoint.class, db);
 		this.logger = logger;
 	}
 
@@ -37,20 +40,20 @@ public class TripDatabase extends CouchDbRepositorySupport<Trip> implements
 	}
 
 	@Override
-	public boolean save(ITrip data) {
-		add((Trip) data);
+	public boolean save(IWaypoint data) {
+		add((Waypoint) data);
 
 		return false;
 	}
 
 	@Override
-	public Trip get(UUID id) {
+	public Waypoint get(UUID id) {
 		return get(id.toString());
 	}
 
 	@Override
-	public List<ITrip> loadAll() {
-		return new LinkedList<ITrip>(getAll());
+	public List<IWaypoint> loadAll() {
+		return new LinkedList<IWaypoint>(getAll());
 	}
 
 	@Override

@@ -9,31 +9,31 @@ import com.google.inject.Provides;
 import com.google.inject.name.Named;
 import com.google.inject.name.Names;
 
-import de.htwg.seapal.database.ITripDatabase;
-import de.htwg.seapal.database.impl.TripDatabase;
+import de.htwg.seapal.database.IWaypointDatabase;
+import de.htwg.seapal.database.impl.WaypointDatabase;
 
-public class TripCouchDbModule extends CouchDbModule {
-	private static final String SEAPAL_TRIPS_DB = "seapal_trips_db";
+public class WaypointCouchDbModule extends CouchDbModule {
+	private static final String SEAPAL_WAYPOINT_DB = "seapal_waypoint_db";
 
 	@Override
 	protected void configure() {
 		super.configure();
-		
-		bind(String.class).annotatedWith(Names.named("databaseOfTrip"))
-				.toInstance(SEAPAL_TRIPS_DB);
-		
-		bind(ITripDatabase.class).to(TripDatabase.class);
-		
+
+		bind(String.class).annotatedWith(Names.named("databaseOfWaypoint"))
+				.toInstance(SEAPAL_WAYPOINT_DB);
+
+		bind(IWaypointDatabase.class).to(WaypointDatabase.class);
+
 		bind(CouchDbConnector.class).annotatedWith(
-				Names.named("tripCouchDbConnector")).to(
+				Names.named("waypointCouchDbConnector")).to(
 				Key.get(StdCouchDbConnector.class,
-						Names.named("tripCouchDbConnector")));
+						Names.named("waypointCouchDbConnector")));
 	}
 
 	@Provides
-	@Named("tripCouchDbConnector")
+	@Named("waypointCouchDbConnector")
 	StdCouchDbConnector getStdCouchDbConnector(
-			@Named("databaseOfTrip") String databaseName,
+			@Named("databaseOfWaypoint") String databaseName,
 			StdCouchDbInstance stdCouchDbInstance) {
 		return new StdCouchDbConnector(databaseName, stdCouchDbInstance);
 	}

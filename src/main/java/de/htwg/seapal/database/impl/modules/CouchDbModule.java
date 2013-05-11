@@ -22,8 +22,7 @@ public class CouchDbModule extends AbstractModule {
 	protected void configure() {
 		bind(String.class).annotatedWith(Names.named("databaseURL"))
 				.toInstance("http://roroettg.iriscouch.com");
-		bind(ITripDatabase.class).to(TripDatabase.class);
-		bind(CouchDbConnector.class).to(StdCouchDbConnector.class);
+		
 	}
 
 	@Provides
@@ -39,12 +38,4 @@ public class CouchDbModule extends AbstractModule {
 	StdCouchDbInstance getStdCouchDbInstance(HttpClient httpClient) {
 		return new StdCouchDbInstance(httpClient);
 	}
-
-	@Provides
-	StdCouchDbConnector getStdCouchDbConnector(
-			@Named("databaseName") String databaseName,
-			StdCouchDbInstance stdCouchDbInstance) {
-		return new StdCouchDbConnector(databaseName, stdCouchDbInstance);
-	}
-
 }

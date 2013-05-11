@@ -2,6 +2,9 @@ package de.htwg.seapal.model.impl;
 
 import java.util.UUID;
 
+import org.apache.commons.lang.builder.EqualsBuilder;
+import org.apache.commons.lang.builder.HashCodeBuilder;
+import org.apache.commons.lang.builder.ReflectionToStringBuilder;
 import org.codehaus.jackson.annotate.JsonCreator;
 import org.codehaus.jackson.annotate.JsonProperty;
 
@@ -167,16 +170,6 @@ public class Waypoint extends ModelDocument implements IWaypoint {
 	}
 
 	@Override
-	public String toString() {
-		return "Waypoint [id=" + getId() + ", name=" + name + ", latitude="
-				+ latitude + ", longitude=" + longitude + ", date=" + date
-				+ ", note=" + note + ", btm=" + btm + ", dtm=" + dtm + ", cog="
-				+ cog + ", sog=" + sog + ", headedFor=" + headedFor
-				+ ", maneuver=" + maneuver + ", foreSail=" + foreSail
-				+ ", mainSail=" + mainSail + ", trip=" + trip + "]";
-	}
-
-	@Override
 	public String getTrip() {
 		return trip;
 	}
@@ -214,5 +207,20 @@ public class Waypoint extends ModelDocument implements IWaypoint {
 	@Override
 	public void setLongitude(double longitude) {
 		this.longitude = longitude;
+	}
+	
+	@Override
+	public String toString() {
+		return ReflectionToStringBuilder.toString(this);
+	}
+
+	@Override
+	public boolean equals(Object obj) {
+		return EqualsBuilder.reflectionEquals(this, obj);
+	}
+	
+	@Override
+	public int hashCode() {
+		return HashCodeBuilder.reflectionHashCode(this);
 	}
 }

@@ -6,6 +6,7 @@ import static org.junit.Assert.assertFalse;
 import org.apache.log4j.Logger;
 import org.junit.AfterClass;
 import org.junit.Before;
+import org.junit.Ignore;
 import org.junit.Test;
 
 import com.google.inject.Guice;
@@ -66,6 +67,7 @@ public class TripDatabaseTest {
 	}
 
 	@Test
+	@Ignore
 	public void testGetAllDocuments_shouldReturnAList() {
 		log.info(tripDatabase.loadAll());
 	}
