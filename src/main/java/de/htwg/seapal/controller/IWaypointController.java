@@ -15,119 +15,119 @@ public interface IWaypointController extends IObservable {
 
 	/**
 	 * Returns the name of the waypoint.
-	 * @param The waypoint ID.
+	 * @param id The waypoint ID.
 	 * @return The name.
 	 */
 	String getName(UUID id);
 
 	/**
 	 * Returns the Note of the waypoint.
-	 * @param the waypoint ID.
-	 * @return the note or an empty String.
+	 * @param id The waypoint ID.
+	 * @return The note or an empty String.
 	 */
 	String getNote(UUID id);
 
 	/**
 	 * Returns the Baring To Mark value.
-	 * @param the waypoint ID.
-	 * @return baring to mark in degrees.
+	 * @param id The waypoint ID.
+	 * @return Baring to mark in degrees.
 	 */
 	int getBTM(UUID id);
 
 	/**
 	 * Returns the Distance To Mark value.
-	 * @param the waypoint ID.
-	 * @return distance to mark.
+	 * @param id The waypoint ID.
+	 * @return Distance to mark.
 	 */
 	int getDTM(UUID id);
 
 	/**
 	 * Returns the Course Over Ground value.
-	 * @param the waypoint ID.
+	 * @param id The waypoint ID.
 	 * @return course over ground in degrees.
 	 */
 	int getCOG(UUID id);
 
 	/**
 	 * Returns the Speed Over Ground value.
-	 * @param the waypoint ID.
-	 * @return speed over ground.
+	 * @param id The waypoint ID.
+	 * @return Speed over ground.
 	 */
 	int getSOG(UUID id);
 
 	/**
 	 * Returns the mark.
-	 * @param the waypoint ID.
-	 * @return the mark
+	 * @param id The waypoint ID.
+	 * @return The mark
 	 */
 	UUID getHeadedFor(UUID id);
 
 	/**
 	 * Returns the maneuver done at the waypoint.
-	 * @param the waypoint ID.
-	 * @return the maneuver
+	 * @param id The waypoint ID.
+	 * @return The maneuver
 	 */
 	Maneuver getManeuver(UUID id);
 
 	/**
 	 * Returns the foresail set at the waypoint.
-	 * @param the waypoint ID.
-	 * @return the foresail
+	 * @param id The waypoint ID.
+	 * @return The foresail
 	 */
 	ForeSail getForesail(UUID id);
 
 	/**
 	 * Returns the main sail set at the waypoint.
-	 * @param the waypoint ID.
-	 * @return the main sail
+	 * @param id The waypoint ID.
+	 * @return The main sail
 	 */
 	MainSail getMainsail(UUID id);
 
 	/**
 	 * Sets the name.
-	 * @param the waypoint ID.
+	 * @param id The waypoint ID.
 	 * @param name The name.
 	 */
 	void setName(UUID id, String name);
 
 	/**
 	 * Sets the note.
-	 * @param the waypoint ID.
+	 * @param id The waypoint ID.
 	 * @param note The note.
 	 */
 	void setNote(UUID id, String note);
 
 	/**
 	 * Sets the Baring To Mark in degrees.
-	 * @param the waypoint ID.
+	 * @param id The waypoint ID.
 	 * @param btm Baring To Mark.
 	 */
 	void setBTM(UUID id, int btm);
 
 	/**
 	 * Sets the Distance To Mark.
-	 * @param the waypoint ID.
+	 * @param id The waypoint ID.
 	 * @param dtm Distance To Mark.
 	 */
 	void setDTM(UUID id, int dtm);
 
 	/**
 	 * Sets the Course Over Ground in degrees.
-	 * @param the waypoint ID.
+	 * @param id The waypoint ID.
 	 * @param cog Course Over Ground.
 	 */
 	void setCOG(UUID id, int cog);
 
 	/**
 	 * Sets the Speed Over Ground.
-	 * @param the waypoint ID.
+	 * @param id The waypoint ID.
 	 * @param sog Speed Over Ground.
 	 */
 	void setSOG(UUID id, int sog);
 
 	/**
 	 * Sets the mark representing through its id.
-	 * @param the waypoint ID.
+	 * @param id The waypoint ID.
 	 * @param markId The ID of mark.
 	 * @throws NoSuchElementException If there is no Mark to the id
 	 */
@@ -136,7 +136,7 @@ public interface IWaypointController extends IObservable {
 	/**
 	 * Sets the maneuver of the waypoint. Don't use <tt>null</tt> here. Use
 	 * <tt>Maneuver.NONE</tt> instead.
-	 * @param the waypoint ID.
+	 * @param id The waypoint ID.
 	 * @param maneuver The maneuver.
 	 * @throws IllegalArgumentException If mainSail is null.
 	 */
@@ -145,7 +145,7 @@ public interface IWaypointController extends IObservable {
 	/**
 	 * Sets the main sail.<br/>
 	 * Don't use <tt>null</tt> here. Use <tt>Mainsail.NONE</tt> instead.
-	 * @param the waypoint ID.
+	 * @param id The waypoint ID.
 	 * @param mainSail The mainsail
 	 * @throws IllegalArgumentException If mainSail is null
 	 */
@@ -154,7 +154,7 @@ public interface IWaypointController extends IObservable {
 	/**
 	 * Sets the fore sail.<br/>
 	 * Don't use <tt>null</tt> here. Use <tt>Foresail.NONE</tt> instead.
-	 * @param the waypoint ID.
+	 * @param id The waypoint ID.
 	 * @param foreSail The foresail.
 	 * @throws IllegalArgumentException If foreSail is null.
 	 */
@@ -190,21 +190,21 @@ public interface IWaypointController extends IObservable {
 	
 	/**
 	 * Returns the string representing the current modifying waypoint.
-	 * @param the waypoint ID.
+	 * @param id The waypoint ID.
 	 * @return string Representing the current modifying waypoint.
 	 */
 	String getString(UUID id);
 
 	/**
 	 * Creates a new WaypointElement.
-	 * @param the trip ID.
+	 * @param id The trip ID.
 	 * @return All waypoints of the given trip.
 	 */
 	UUID newWaypoint(UUID trip);
 
 	/**
 	 * Delete the currently selected waypoint.
-	 * @param the waypoint ID.
+	 * @param id The waypoint ID.
 	 */
 	void deleteWaypoint(UUID id);
 

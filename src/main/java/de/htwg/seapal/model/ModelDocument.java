@@ -33,7 +33,7 @@ public abstract class ModelDocument implements IModel, Serializable {
     
     /**
      * Sets the UUID.
-     * @param id The UUID.
+     * @param uuid The UUID.
      */
     @JsonProperty("_id")
     public void setId(String uuid) {
