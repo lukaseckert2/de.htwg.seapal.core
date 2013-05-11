@@ -1,4 +1,4 @@
-package de.htwg.seapal.database.impl;
+package de.htwg.seapal.database.impl.modules;
 
 import java.net.MalformedURLException;
 
@@ -14,15 +14,14 @@ import com.google.inject.name.Named;
 import com.google.inject.name.Names;
 
 import de.htwg.seapal.database.ITripDatabase;
+import de.htwg.seapal.database.impl.TripDatabase;
 
-public class TripModule extends AbstractModule {
+public class CouchDbModule extends AbstractModule {
 
 	@Override
 	protected void configure() {
 		bind(String.class).annotatedWith(Names.named("databaseURL"))
 				.toInstance("http://roroettg.iriscouch.com");
-		bind(String.class).annotatedWith(Names.named("databaseName"))
-				.toInstance("seapal_trips_db");
 		bind(ITripDatabase.class).to(TripDatabase.class);
 		bind(CouchDbConnector.class).to(StdCouchDbConnector.class);
 	}

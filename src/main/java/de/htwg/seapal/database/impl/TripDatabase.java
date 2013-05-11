@@ -1,10 +1,11 @@
 package de.htwg.seapal.database.impl;
 
+import java.util.LinkedList;
 import java.util.List;
 import java.util.UUID;
 
-import org.apache.log4j.Logger;
 import org.ektorp.CouchDbConnector;
+import org.ektorp.support.CouchDbRepositorySupport;
 
 import com.google.inject.Inject;
 
@@ -12,56 +13,48 @@ import de.htwg.seapal.database.ITripDatabase;
 import de.htwg.seapal.model.ITrip;
 import de.htwg.seapal.model.impl.Trip;
 
-public class TripDatabase implements ITripDatabase {
+public class TripDatabase extends CouchDbRepositorySupport<Trip> implements
+		ITripDatabase {
 
-	private final Logger log = Logger.getLogger(TripDatabase.class);
-	
-	private CouchDbConnector db;
-	
 	@Inject
 	protected TripDatabase(CouchDbConnector db) {
-		log.info("Database instance: " + db);
-		this.db = db;
+		super(Trip.class, db);
 	}
 
 	@Override
 	public boolean open() {
-		// TODO Auto-generated method stub
 		return false;
 	}
 
 	@Override
 	public UUID create() {
-		// TODO Auto-generated method stub
 		return null;
 	}
 
 	@Override
 	public boolean save(ITrip data) {
-		// TODO Auto-generated method stub
+		add((Trip) data);
+
 		return false;
 	}
 
 	@Override
-	public ITrip get(UUID id) {
-		return db.get(Trip.class, id.toString() );
+	public Trip get(UUID id) {
+		return get(id.toString());
 	}
 
 	@Override
 	public List<ITrip> loadAll() {
-		// TODO Auto-generated method stub
-		return null;
+		return new LinkedList<ITrip>(getAll());
 	}
 
 	@Override
 	public void delete(UUID id) {
-		// TODO Auto-generated method stub
-
+		remove(get(id));
 	}
 
 	@Override
 	public boolean close() {
-		// TODO Auto-generated method stub
 		return false;
 	}
 

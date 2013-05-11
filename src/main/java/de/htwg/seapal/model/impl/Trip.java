@@ -4,6 +4,11 @@ import java.util.ArrayList;
 import java.util.List;
 import java.util.UUID;
 
+import org.apache.commons.lang.builder.EqualsBuilder;
+import org.apache.commons.lang.builder.HashCodeBuilder;
+import org.apache.commons.lang.builder.ReflectionToStringBuilder;
+import org.codehaus.jackson.annotate.JsonIgnore;
+import org.codehaus.jackson.annotate.JsonProperty;
 import org.ektorp.support.CouchDbDocument;
 
 import de.htwg.seapal.model.ITrip;
@@ -14,6 +19,9 @@ public class Trip extends CouchDbDocument implements ITrip {
 	 * Serial version UID for serialization.
 	 */
 	private static final long serialVersionUID = 1L;
+
+	@JsonProperty("_id")
+	private String id;
 
 	private String name;
 	private String startLocation;
@@ -29,7 +37,7 @@ public class Trip extends CouchDbDocument implements ITrip {
 	private String boat; // UUID Boat
 
 	public Trip() {
-		//setId(UUID.randomUUID().toString());
+		setId(UUID.randomUUID().toString());
 		this.crew = new ArrayList<String>();
 		this.skipper = UUID.randomUUID().toString();
 	}
@@ -53,6 +61,17 @@ public class Trip extends CouchDbDocument implements ITrip {
 	}
 
 	@Override
+	public void setId(String s) {
+		this.id = s;
+	}
+
+	@Override
+	public String getId() {
+		return this.id;
+	}
+
+	@Override
+	@JsonIgnore
 	public UUID getUUID() {
 		return UUID.fromString(getId());
 	}
@@ -177,11 +196,16 @@ public class Trip extends CouchDbDocument implements ITrip {
 
 	@Override
 	public String toString() {
-		return "Trip [id=" + getId() + ", name=" + name + ", startLocation="
-				+ startLocation + ", endLocation=" + endLocation + ", skipper="
-				+ skipper + ", crew=" + crew + ", startTime=" + startTime
-				+ ", endTime=" + endTime + ", duration=" + duration
-				+ ", motor=" + motor + ", fuel=" + fuel + ", notes=" + notes
-				+ ", boat=" + boat + "]";
+		return ReflectionToStringBuilder.toString(this);
+	}
+
+	@Override
+	public boolean equals(Object obj) {
+		return EqualsBuilder.reflectionEquals(this, obj);
+	}
+	
+	@Override
+	public int hashCode() {
+		return HashCodeBuilder.reflectionHashCode(this);
 	}
 }
