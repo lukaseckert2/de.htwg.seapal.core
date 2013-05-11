@@ -197,10 +197,10 @@ public interface IWaypointController extends IObservable {
 
 	/**
 	 * Creates a new WaypointElement.
-	 * @param id The trip ID.
+	 * @param tripId The trip ID.
 	 * @return All waypoints of the given trip.
 	 */
-	UUID newWaypoint(UUID trip);
+	UUID newWaypoint(UUID tripId);
 
 	/**
 	 * Delete the currently selected waypoint.
