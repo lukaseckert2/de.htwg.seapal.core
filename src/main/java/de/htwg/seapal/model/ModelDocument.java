@@ -14,21 +14,19 @@ import org.ektorp.util.*;
  * does not implements attachments, because this CouchDB feature is not required.
  * @author Benjamin
  */
-public abstract class ModelDocument implements Serializable {
+public abstract class ModelDocument implements IModel, Serializable {
 	private static final long serialVersionUID = 1L;
     private String id;
     private String revision;
     
     @JsonIgnore
+    @Override
 	public UUID getUUID() {
 		return UUID.fromString(id);
 	}
     
-    /**
-     * Gets the UUID.
-     * @return The UUID.
-     */
     @JsonProperty("_id")
+    @Override
     public String getId() {
             return id;
     }
