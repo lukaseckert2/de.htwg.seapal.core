@@ -17,7 +17,8 @@ libraryDependencies ++= Seq(
 	"com.google.code.jcouchdb" % "jcouchdb" % "0.11.0-1",
 	"junit" % "junit" % "4.10" ,
 	"com.novocode" % "junit-interface" % "0.10-M1" % "test->default",
-	"commons-lang" % "commons-lang" % "2.6"
+	"commons-lang" % "commons-lang" % "2.6",
+  "com.google.guava" % "guava" % "14.0.1"
 	//"com.couchbase" % "com.couchbase.jtouchdb" % "0.5-SNAPSHOT"
 	//"org.daum.extra.android" % "org.daum.extra.android.touchdbektorp" % "1.0.0-SNAPSHOT"
 )
