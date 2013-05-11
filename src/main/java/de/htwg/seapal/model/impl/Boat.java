@@ -71,13 +71,6 @@ public class Boat extends ModelDocument implements IBoat {
 		this.genuaSize = boat.getGenuaSize();
 		this.spiSize = boat.getGenuaSize();
 	}
-	
-	@Override
-	public void setId(String id) {
-		if (super.getId() == null) {
-			setId(id);
-		}
-	}
 
 	@Override
 	public String getBoatName() {
