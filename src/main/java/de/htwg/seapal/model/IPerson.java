@@ -10,17 +10,17 @@ public interface IPerson extends IModel {
 
 	void setLastname(String lastname);
 
-	long getBirth();
+	Long getBirth();
 
-	void setBirth(long birth);
+	void setBirth(Long birth);
 
-	long getRegistration();
+	Long getRegistration();
 
-	void setRegistration(long registration);
+	void setRegistration(Long registration);
 
-	int getAge();
+	Integer getAge();
 
-	void setAge(int age);
+	void setAge(Integer age);
 
 	String getNationality();
 
@@ -42,9 +42,9 @@ public interface IPerson extends IModel {
 
 	void setStreet(String street);
 
-	int getPostcode();
+	Integer getPostcode();
 
-	void setPostcode(int postcode);
+	void setPostcode(Integer postcode);
 
 	String getCity();
 

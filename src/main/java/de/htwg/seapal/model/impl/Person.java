@@ -19,11 +19,11 @@ public class Person extends ModelDocument implements IPerson {
 
 	private String lastname = null;
 
-	private long birth; // unix timestamp
+	private Long birth; // unix timestamp
 
-	private long registration; // unix timestamp
+	private Long registration; // unix timestamp
 
-	private int age = 0;
+	private Integer age = 0;
 
 	private String nationality = null;
 
@@ -35,7 +35,7 @@ public class Person extends ModelDocument implements IPerson {
 
 	private String street = null;
 
-	private int postcode = 0;
+	private Integer postcode = 0;
 
 	private String city = null;
 
@@ -66,7 +66,7 @@ public class Person extends ModelDocument implements IPerson {
 		country = person.getCountry();
 	}
 
-	public Person(int id) {
+	public Person(Integer id) {
 		setId("PERSON-" + id);
 	}
 
@@ -91,32 +91,32 @@ public class Person extends ModelDocument implements IPerson {
 	}
 
 	@Override
-	public long getBirth() {
+	public Long getBirth() {
 		return birth;
 	}
 
 	@Override
-	public void setBirth(long birth) {
+	public void setBirth(Long birth) {
 		this.birth = birth;
 	}
 
 	@Override
-	public long getRegistration() {
+	public Long getRegistration() {
 		return registration;
 	}
 
 	@Override
-	public void setRegistration(long registration) {
+	public void setRegistration(Long registration) {
 		this.registration = registration;
 	}
 
 	@Override
-	public int getAge() {
+	public Integer getAge() {
 		return age;
 	}
 
 	@Override
-	public void setAge(int age) {
+	public void setAge(Integer age) {
 		this.age = age;
 	}
 
@@ -171,12 +171,12 @@ public class Person extends ModelDocument implements IPerson {
 	}
 
 	@Override
-	public int getPostcode() {
+	public Integer getPostcode() {
 		return postcode;
 	}
 
 	@Override
-	public void setPostcode(int postcode) {
+	public void setPostcode(Integer postcode) {
 		this.postcode = postcode;
 	}
 

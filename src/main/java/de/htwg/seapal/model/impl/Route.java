@@ -17,10 +17,10 @@ public class Route extends ModelDocument implements IRoute {
 	private String user; // UUID user
 
 	private String name;
-	private long date;
+	private Long date;
 	private List<UUID> marks;
-	private UUID routeEntryPoint;
-	private double distance;
+	private UUID routeEntryPoInteger;
+	private Double distance;
 
 	public Route() {
 		setId(UUID.randomUUID().toString());
@@ -36,7 +36,7 @@ public class Route extends ModelDocument implements IRoute {
 		this.name = r.getName();
 		this.date = r.getDate();
 		this.marks = r.getMarks();
-		this.routeEntryPoint = r.getRouteEntryPoint();
+		this.routeEntryPoInteger = r.getRouteEntryPoint();
 		this.distance = r.getDistance();
 	}
 
@@ -51,12 +51,12 @@ public class Route extends ModelDocument implements IRoute {
 	}
 
 	@Override
-	public long getDate() {
+	public Long getDate() {
 		return date;
 	}
 
 	@Override
-	public void setDate(long date) {
+	public void setDate(Long date) {
 		this.date = date;
 	}
 
@@ -72,21 +72,21 @@ public class Route extends ModelDocument implements IRoute {
 
 	@Override
 	public UUID getRouteEntryPoint() {
-		return routeEntryPoint;
+		return routeEntryPoInteger;
 	}
 
 	@Override
 	public void setRouteEntryPoint(UUID mark) {
-		this.routeEntryPoint = mark;
+		this.routeEntryPoInteger = mark;
 	}
 
 	@Override
-	public double getDistance() {
+	public Double getDistance() {
 		return distance;
 	}
 
 	@Override
-	public void setDistance(double distance) {
+	public void setDistance(Double distance) {
 		this.distance = distance;
 	}
 

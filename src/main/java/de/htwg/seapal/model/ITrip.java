@@ -24,17 +24,17 @@ public interface ITrip extends IModel {
 
 	void addCrewMember(String crewMember); // Person
 
-	long getDuration();
+	Long getDuration();
 
-	void setDuration(long timeInSeconds);
+	void setDuration(Long timeInSeconds);
 
-	int getMotor();
+	Integer getMotor();
 
-	void setMotor(int motor);
+	void setMotor(Integer motor);
 
-	double getFuel();
+	Double getFuel();
 
-	void setFuel(double percent);
+	void setFuel(Double percent);
 
 	String getNotes();
 
@@ -44,11 +44,11 @@ public interface ITrip extends IModel {
 
 	void setBoat(String boat);
 
-	void setStartTime(long start);
+	void setStartTime(Long start);
 
-	long getStartTime();
+	Long getStartTime();
 
-	void setEndTime(long end);
+	void setEndTime(Long end);
 
-	long getEndTime();
+	Long getEndTime();
 }

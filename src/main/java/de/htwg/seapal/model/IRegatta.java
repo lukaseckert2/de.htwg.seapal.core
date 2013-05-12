@@ -7,26 +7,26 @@ public interface IRegatta extends IModel {
 	String getName();
 	void setName(String name);
 
-	String getHost();
-	void setHost(String host);
+	UUID getHost();
+	void setHost(UUID host);
 
-	long getEstimatedStartDate();
-	void setEstimatedStartDate(long date);
+	Long getEstimatedStartDate();
+	void setEstimatedStartDate(Long date);
 
-	long getEstimatedFinishTime();
-	void setEstimatedFinishTime(long date);
+	Long getEstimatedFinishTime();
+	void setEstimatedFinishTime(Long date);
 
-	long getRealStartTime();
-	void setRealStartTime(long date);
+	Long getRealStartTime();
+	void setRealStartTime(Long date);
 
-	long getRealFinishTime();
-	void setRealFinishTime(long date);
+	Long getRealFinishTime();
+	void setRealFinishTime(Long date);
 	
-	String getBoat();
-	void setBoat(String boat);
+	List<UUID> getBoats();
+	void addBoats(UUID boat);
 	
-	List<String> getTrips();
-	void addTrip(String tripId);
+	List<UUID> getTrips();
+	void addTrip(UUID tripId);
 
 	String getString();
 }

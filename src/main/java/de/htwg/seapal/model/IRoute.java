@@ -9,9 +9,9 @@ public interface IRoute extends IModel {
 
 	void setName(String name);
 
-	long getDate();
+	Long getDate();
 
-	void setDate(long date);
+	void setDate(Long date);
 
 	List<UUID> getMarks();
 
@@ -21,9 +21,9 @@ public interface IRoute extends IModel {
 
 	void setRouteEntryPoint(UUID mark);
 
-	double getDistance();
+	Double getDistance();
 
-	void setDistance(double distance);
+	void setDistance(Double distance);
 
 	String getUser();
 

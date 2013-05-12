@@ -23,11 +23,11 @@ public class Trip extends ModelDocument implements ITrip {
 	private String endLocation;
 	private String skipper; // UUID Person
 	private List<String> crew; // UUID Person ?/ or just Name TODO
-	private long startTime; // unix timestamp
-	private long endTime; // unix timestamp
-	private long duration; // TODO do we need this ? could be calculated
-	private int motor;
-	private double fuel;
+	private Long startTime; // unix timestamp
+	private Long endTime; // unix timestamp
+	private Long duration; // TODO do we need this ? could be calculated
+	private Integer motor;
+	private Double fuel;
 	private String notes;
 	private String boat; // UUID Boat
 
@@ -104,52 +104,52 @@ public class Trip extends ModelDocument implements ITrip {
 	}
 
 	@Override
-	public void setStartTime(long start) {
+	public void setStartTime(Long start) {
 		this.startTime = start;
 	}
 
 	@Override
-	public long getStartTime() {
+	public Long getStartTime() {
 		return startTime;
 	}
 
 	@Override
-	public void setEndTime(long end) {
+	public void setEndTime(Long end) {
 		this.endTime = end;
 	}
 
 	@Override
-	public long getEndTime() {
+	public Long getEndTime() {
 		return endTime;
 	}
 
 	@Override
-	public void setDuration(long timeInSeconds) {
+	public void setDuration(Long timeInSeconds) {
 		this.duration = timeInSeconds;
 	}
 
 	@Override
-	public long getDuration() {
+	public Long getDuration() {
 		return duration;
 	}
 
 	@Override
-	public void setMotor(int motor) {
+	public void setMotor(Integer motor) {
 		this.motor = motor;
 	}
 
 	@Override
-	public int getMotor() {
+	public Integer getMotor() {
 		return motor;
 	}
 
 	@Override
-	public void setFuel(double percent) {
+	public void setFuel(Double percent) {
 		this.fuel = percent;
 	}
 
 	@Override
-	public double getFuel() {
+	public Double getFuel() {
 		return fuel;
 	}
 

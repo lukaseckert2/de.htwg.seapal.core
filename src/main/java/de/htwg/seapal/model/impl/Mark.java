@@ -15,14 +15,14 @@ public class Mark extends ModelDocument implements IMark {
 	private String user; // UUID user
 
 	private String name;
-	private double latitude;
-	private double longitude;
-	private int btm;
-	private int dtm;
-	private int cog;
-	private int sog;
+	private Double latitude;
+	private Double Longitude;
+	private Integer btm;
+	private Integer dtm;
+	private Integer cog;
+	private Integer sog;
 	private String note;
-	private long date;
+	private Long date;
 	private boolean isRouteMark;
 
 	public Mark() {
@@ -35,7 +35,7 @@ public class Mark extends ModelDocument implements IMark {
 
 		this.name = m.getName();
 		this.latitude = m.getLatitude();
-		this.longitude = m.getLongitude();
+		this.Longitude = m.getLongitude();
 		this.btm = m.getBTM();
 		this.dtm = m.getDTM();
 		this.cog = m.getCOG();
@@ -56,23 +56,23 @@ public class Mark extends ModelDocument implements IMark {
 	}
 
 	@Override
-	public double getLatitude() {
+	public Double getLatitude() {
 		return this.latitude;
 	}
 
 	@Override
-	public void setLatitude(double latitude) {
+	public void setLatitude(Double latitude) {
 		this.latitude = latitude;
 	}
 
 	@Override
-	public double getLongitude() {
-		return this.longitude;
+	public Double getLongitude() {
+		return this.Longitude;
 	}
 
 	@Override
-	public void setLongitude(double longitude) {
-		this.longitude = longitude;
+	public void setLongitude(Double Longitude) {
+		this.Longitude = Longitude;
 	}
 
 	@Override
@@ -86,52 +86,52 @@ public class Mark extends ModelDocument implements IMark {
 	}
 
 	@Override
-	public int getBTM() {
+	public Integer getBTM() {
 		return btm;
 	}
 
 	@Override
-	public void setBTM(int btm) {
+	public void setBTM(Integer btm) {
 		this.btm = btm;
 	}
 
 	@Override
-	public int getDTM() {
+	public Integer getDTM() {
 		return dtm;
 	}
 
 	@Override
-	public void setDTM(int dtm) {
+	public void setDTM(Integer dtm) {
 		this.dtm = dtm;
 	}
 
 	@Override
-	public int getCOG() {
+	public Integer getCOG() {
 		return cog;
 	}
 
 	@Override
-	public void setCOG(int cog) {
+	public void setCOG(Integer cog) {
 		this.cog = cog;
 	}
 
 	@Override
-	public int getSOG() {
+	public Integer getSOG() {
 		return sog;
 	}
 
 	@Override
-	public void setSOG(int sog) {
+	public void setSOG(Integer sog) {
 		this.sog = sog;
 	}
 
 	@Override
-	public long getDate() {
+	public Long getDate() {
 		return date;
 	}
 
 	@Override
-	public void setDate(long date) {
+	public void setDate(Long date) {
 		this.date = date;
 	}
 
