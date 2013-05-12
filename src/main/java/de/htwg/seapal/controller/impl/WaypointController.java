@@ -335,15 +335,8 @@ public class WaypointController extends Observable implements
 
 	@Override
 	public List<IWaypoint> getAllWaypoints(UUID tripId) {
-		List<IWaypoint> waypoints = db.loadAll();
-		logger.info("WaypointController", "All waypoints: " + waypoints.toString());
-		// TODO: filtering should be moved to database layer.
-		for (int i = waypoints.size() - 1; i >= 0; --i) {
-			String currentTripId = waypoints.get(i).getTrip();
-			if (currentTripId != null && !currentTripId.equals(tripId.toString())) {
-				waypoints.remove(i);
-			}
-		}
+		List<IWaypoint> waypoints = db.loadAllByTripId(tripId);
+		logger.info("WaypointController", "Waypoints by ID count: " + waypoints.size());
 		return waypoints;
 	}
 

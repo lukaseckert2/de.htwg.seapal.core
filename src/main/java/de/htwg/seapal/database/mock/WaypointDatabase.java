@@ -72,4 +72,10 @@ public class WaypointDatabase implements IWaypointDatabase {
 	public List<IWaypoint> loadAll() {
 		return ImmutableList.copyOf(db.values());
 	}
+
+	@Override
+	public List<IWaypoint> loadAllByTripId(UUID tripId) {
+		// TODO Auto-generated method stub
+		return null;
+	}
 }
