@@ -67,4 +67,53 @@ public abstract class ModelDocument implements IModel, Serializable {
     public boolean isNew() {
             return revision == null;
     }
+    
+    /**
+     * Gets the revision.
+     * <p>
+     * Note: This duplicated method is necessary for Forms.bindFromRequest() of Play!.
+     * </p>
+     * @return The revision.
+     */
+    @JsonIgnore
+    public String get_rev() {
+            return revision;
+    }
+    
+    /**
+     * Sets the revision.
+     * <p>
+     * Note: This duplicated method is necessary for Forms.bindFromRequest() of Play!.
+     * </p>
+     * @param rev The revision.
+     */
+    @JsonIgnore
+    public void set_rev(String rev) {
+            this.revision = rev;
+    }
+    
+    /**
+     * Gets the UUID.
+     * <p>
+     * Note: This duplicated method is necessary for Forms.bindFromRequest() of Play!.
+     * </p>
+     * @return The UUID.
+     */
+    @JsonIgnore
+    public String get_id() {
+            return id;
+    }
+    
+    /**
+     * Sets the UUID.
+     * <p>
+     * Note: This duplicated method is necessary for Forms.bindFromRequest() of Play!.
+     * </p>
+     * @param uuid The UUID.
+     */
+    @JsonIgnore
+    public void set_id(String uuid) {
+            Assert.hasText(uuid, "id must have a value");
+            id = uuid;
+    }
 }
