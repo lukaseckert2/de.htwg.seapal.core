@@ -169,13 +169,13 @@ public interface IMarkController extends IObservable {
 	 * Creates a new route mark.
 	 * @return The mark ID.
 	 */
-	UUID newRouteMark();
+	UUID newRouteMark(double longitude, double latitude);
 
 	/**
 	 * Creates a new mark.
 	 * @return The mark ID.
 	 */
-	UUID newMark();
+	UUID newMark(double longitude, double latitude);
 
 	/**
 	 * Gets the output string of the given mark ID.

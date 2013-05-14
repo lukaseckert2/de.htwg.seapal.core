@@ -1,17 +1,15 @@
 package de.htwg.seapal.controller.impl;
 
+import java.text.DateFormat;
 import java.util.LinkedList;
 import java.util.List;
 import java.util.UUID;
 
-import com.google.inject.Inject;
-
-import android.text.format.DateFormat;
 import de.htwg.seapal.controller.IMarkController;
 import de.htwg.seapal.database.IMarkDatabase;
 import de.htwg.seapal.model.IMark;
-import de.htwg.seapal.utils.observer.Observable;
 import de.htwg.seapal.utils.logging.ILogger;
+import de.htwg.seapal.utils.observer.Observable;
 
 public class MarkController extends Observable implements IMarkController {
 
@@ -229,21 +227,25 @@ public class MarkController extends Observable implements IMarkController {
 	}
 
 	@Override
-	public UUID newMark() {
-		UUID create = db.create();
-		setDate(create, System.currentTimeMillis());
-		setIsRouteMark(create, false);
+	public UUID newMark(double longitude, double latitude) {
+		UUID newMark = db.newMark();
+		setDate(newMark, System.currentTimeMillis());
+		setIsRouteMark(newMark, false);
+		setLatitude(newMark, latitude);
+		setLongitude(newMark, longitude);
 		notifyObservers();
-		return create;
+		return newMark;
 	}
 
 	@Override
-	public UUID newRouteMark() {
-		UUID create = db.create();
-		setDate(create, System.currentTimeMillis());
-		setIsRouteMark(create, true);
+	public UUID newRouteMark(double longitude, double latitude) {
+		UUID newMark = db.newMark();
+		setDate(newMark, System.currentTimeMillis());
+		setIsRouteMark(newMark, true);
+		setLatitude(newMark, latitude);
+		setLongitude(newMark, longitude);
 		notifyObservers();
-		return create;
+		return newMark;
 	}
 
 	@Override
