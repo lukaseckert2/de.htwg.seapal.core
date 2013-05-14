@@ -69,6 +69,11 @@ public class Route extends ModelDocument implements IRoute {
 	public void addMark(UUID mark) {
 		this.marks.add(mark);
 	}
+	
+	@Override
+	public void deleteMark(UUID mark) {
+		this.marks.remove(mark);
+	}
 
 	@Override
 	public UUID getRouteEntryPoint() {

@@ -49,6 +49,13 @@ public interface IRouteController extends IObservable {
 	 * @param markId The mark ID.
 	 */
 	void addMark(UUID id, UUID markId);
+	
+	/**
+	 * Deletes a given mark of the route.
+	 * @param id The route ID.
+	 * @param markId The mark ID.
+	 */
+	void deleteMark(UUID id, UUID markId);
 
 	/**
 	 * Gets a route entry point of the given route ID.
