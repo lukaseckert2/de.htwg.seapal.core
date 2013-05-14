@@ -118,11 +118,11 @@ public class RouteController extends Observable implements IRouteController {
 	
 	@Override
 	public void deleteMark(UUID id, UUID mark) {
-		IRoute route = db.getRoute(id);
+		IRoute route = db.get(id);
 		if (route == null)
 			return;
 		route.deleteMark(mark);
-		db.saveRoute(route);
+		db.save(route);
 		notifyObservers();
 	}
 
