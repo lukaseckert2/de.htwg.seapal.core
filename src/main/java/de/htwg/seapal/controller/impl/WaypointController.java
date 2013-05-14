@@ -8,29 +8,31 @@ import java.util.UUID;
 
 import com.google.inject.Inject;
 
-import android.location.Location;
 import de.htwg.seapal.controller.IWaypointController;
 import de.htwg.seapal.database.IWaypointDatabase;
 import de.htwg.seapal.model.IWaypoint;
 import de.htwg.seapal.model.IWaypoint.ForeSail;
 import de.htwg.seapal.model.IWaypoint.MainSail;
 import de.htwg.seapal.model.IWaypoint.Maneuver;
-import de.htwg.seapal.utils.observer.Observable;
 import de.htwg.seapal.utils.logging.ILogger;
+import de.htwg.seapal.utils.observer.Observable;
 
 public class WaypointController extends Observable implements
 		IWaypointController {
 
-	/** 
-	 * Controller handling the persistence. 
+	/**
+	 * Controller handling the persistence.
 	 */
 	private final IWaypointDatabase db;
 	private final ILogger logger;
 
 	/**
 	 * Creates an instance with a waypoint.
-	 * @param db The waypoint database.
-	 * @param logger The logger.
+	 * 
+	 * @param db
+	 *            The waypoint database.
+	 * @param logger
+	 *            The logger.
 	 */
 	@Inject
 	public WaypointController(IWaypointDatabase db, ILogger logger) {
@@ -274,12 +276,13 @@ public class WaypointController extends Observable implements
 	}
 
 	@Override
-	public final UUID newWaypoint(UUID trip, Location location, long date) {
+	public final UUID newWaypoint(UUID trip, long date, double longitude,
+			double latitude) {
 		UUID newWaypoint = db.create();
 		IWaypoint waypoint = db.get(newWaypoint);
 		waypoint.setTrip(trip.toString());
-		waypoint.setLatitude(location.getLatitude());
-		waypoint.setLongitude(location.getLongitude());
+		waypoint.setLatitude(latitude);
+		waypoint.setLongitude(longitude);
 		waypoint.setDate(date);
 		DateFormat format = SimpleDateFormat.getDateTimeInstance();
 		waypoint.setName(format.format(date * 1000));
@@ -313,7 +316,8 @@ public class WaypointController extends Observable implements
 	@Override
 	public List<UUID> getWaypoints(UUID tripId) {
 		List<IWaypoint> waypoints = db.loadAll();
-		logger.info("WaypointController", "All waypoints: " + waypoints.toString());
+		logger.info("WaypointController",
+				"All waypoints: " + waypoints.toString());
 		// TODO: filtering should be moved to database layer.
 		List<UUID> waypointIDs = new ArrayList<UUID>();
 		for (IWaypoint waypoint : waypoints) {
@@ -327,7 +331,7 @@ public class WaypointController extends Observable implements
 	public IWaypoint getWaypoint(UUID waypointId) {
 		return db.get(waypointId);
 	}
-	
+
 	@Override
 	public List<IWaypoint> getAllWaypoints() {
 		return db.loadAll();
@@ -336,7 +340,8 @@ public class WaypointController extends Observable implements
 	@Override
 	public List<IWaypoint> getAllWaypoints(UUID tripId) {
 		List<IWaypoint> waypoints = db.loadAllByTripId(tripId);
-		logger.info("WaypointController", "Waypoints by ID count: " + waypoints.size());
+		logger.info("WaypointController",
+				"Waypoints by ID count: " + waypoints.size());
 		return waypoints;
 	}
 
