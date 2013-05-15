@@ -5,6 +5,8 @@ import java.util.LinkedList;
 import java.util.List;
 import java.util.UUID;
 
+import com.google.inject.Inject;
+
 import de.htwg.seapal.controller.IMarkController;
 import de.htwg.seapal.database.IMarkDatabase;
 import de.htwg.seapal.model.IMark;
