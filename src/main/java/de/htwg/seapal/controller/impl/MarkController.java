@@ -1,6 +1,5 @@
 package de.htwg.seapal.controller.impl;
 
-import java.text.DateFormat;
 import java.util.LinkedList;
 import java.util.List;
 import java.util.UUID;
@@ -169,12 +168,11 @@ public class MarkController extends Observable implements IMarkController {
 	}
 
 	@Override
-	public String getDate(UUID id) {
+	public long getDate(UUID id) {
 		IMark mark = db.get(id);
 		if (mark == null)
-			return null;
-		long currentMillis = mark.getDate();
-		return DateFormat.format("yyyy/MM/dd hh:mm", currentMillis).toString();
+			return -1;
+		return mark.getDate();
 	}
 
 	@Override
@@ -230,7 +228,7 @@ public class MarkController extends Observable implements IMarkController {
 
 	@Override
 	public UUID newMark(double longitude, double latitude) {
-		UUID newMark = db.newMark();
+		UUID newMark = db.create();
 		setDate(newMark, System.currentTimeMillis());
 		setIsRouteMark(newMark, false);
 		setLatitude(newMark, latitude);
@@ -241,7 +239,7 @@ public class MarkController extends Observable implements IMarkController {
 
 	@Override
 	public UUID newRouteMark(double longitude, double latitude) {
-		UUID newMark = db.newMark();
+		UUID newMark = db.create();
 		setDate(newMark, System.currentTimeMillis());
 		setIsRouteMark(newMark, true);
 		setLatitude(newMark, latitude);

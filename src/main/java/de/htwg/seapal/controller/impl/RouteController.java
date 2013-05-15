@@ -6,12 +6,11 @@ import java.util.UUID;
 
 import com.google.inject.Inject;
 
-import android.text.format.DateFormat;
 import de.htwg.seapal.controller.IRouteController;
 import de.htwg.seapal.database.IRouteDatabase;
 import de.htwg.seapal.model.IRoute;
-import de.htwg.seapal.utils.observer.Observable;
 import de.htwg.seapal.utils.logging.ILogger;
+import de.htwg.seapal.utils.observer.Observable;
 
 public class RouteController extends Observable implements IRouteController {
 
@@ -43,12 +42,11 @@ public class RouteController extends Observable implements IRouteController {
 	}
 
 	@Override
-	public String getDate(UUID id) {
+	public long getDate(UUID id) {
 		IRoute route = db.get(id);
 		if (route == null)
-			return null;
-		long currentMillis = route.getDate();
-		return DateFormat.format("yyyy/MM/dd hh:mm", currentMillis).toString();
+			return -1;
+		return route.getDate();
 	}
 
 	@Override

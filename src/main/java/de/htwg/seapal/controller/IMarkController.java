@@ -125,7 +125,7 @@ public interface IMarkController extends IObservable {
 	 * @param id The mark ID.
 	 * @return The date.
 	 */
-	String getDate(UUID id);
+	long getDate(UUID id);
 
 	/**
 	 * Sets the date of the given mark ID.

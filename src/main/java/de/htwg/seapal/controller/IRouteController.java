@@ -27,7 +27,7 @@ public interface IRouteController extends IObservable {
 	 * @param id The route ID.
 	 * @return The date.
 	 */
-	String getDate(UUID id);
+	long getDate(UUID id);
 
 	/**
 	 * Sets the date of the given route ID.
