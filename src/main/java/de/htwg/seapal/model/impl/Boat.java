@@ -148,15 +148,17 @@ public class Boat extends ModelDocument implements IBoat {
 	}
 
 	@Override
-	public UUID getOwner() { // Person
+	public String getOwner() { // Person
 		if(owner == null)
 			return null;
-		return UUID.fromString(owner);
+		//return UUID.fromString(owner);
+		return owner;
 	}
 
 	@Override
-	public void setOwner(UUID owner) { // Person
-		this.owner = owner.toString();
+	public void setOwner(String owner) { // Person
+		//this.owner = owner.toString();
+		this.owner = owner;
 	}
 
 	@Override

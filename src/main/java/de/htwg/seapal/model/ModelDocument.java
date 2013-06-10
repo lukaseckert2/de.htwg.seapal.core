@@ -65,7 +65,7 @@ public abstract class ModelDocument implements IModel, Serializable {
      */
     @JsonIgnore
     public boolean isNew() {
-            return revision == null;
+            return revision == null || revision == "";
     }
     
     /**
@@ -113,7 +113,7 @@ public abstract class ModelDocument implements IModel, Serializable {
      */
     @JsonIgnore
     public void set_id(String uuid) {
-            Assert.hasText(uuid, "id must have a value");
+            //Assert.hasText(uuid, "id must have a value");
             id = uuid;
     }
 }
