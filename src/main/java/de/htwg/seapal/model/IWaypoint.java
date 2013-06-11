@@ -1,7 +1,5 @@
 package de.htwg.seapal.model;
 
-import java.util.UUID;
-
 public interface IWaypoint extends IModel {
 
 	public enum Maneuver {
@@ -28,7 +26,11 @@ public interface IWaypoint extends IModel {
 
 	Integer getSOG();
 
-	UUID getHeadedFor();
+	/**
+	 * Gets the mark UUID of the target.
+	 * @return The mark UUID as String.
+	 */
+	String getHeadedFor();
 
 	Maneuver getManeuver();
 
@@ -50,15 +52,15 @@ public interface IWaypoint extends IModel {
 
 	void setSOG(Integer sog);
 
-	void setHeadedFor(UUID mark);
+	void setHeadedFor(String markId);
 
 	void setManeuver(Maneuver maneuver);
 
 	void setMainsail(MainSail mainSail);
 
-	UUID getTrip();
+	String getTrip();
 
-	void setTrip(UUID trip);
+	void setTrip(String tripId);
 
 	Long getDate();
 

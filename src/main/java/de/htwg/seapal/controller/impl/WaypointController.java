@@ -109,7 +109,7 @@ public class WaypointController extends Observable implements
 		IWaypoint waypoint = db.get(id);
 		if (waypoint == null)
 			return null;
-		return waypoint.getHeadedFor();
+		return UUID.fromString(waypoint.getHeadedFor());
 	}
 
 	@Override
@@ -232,7 +232,7 @@ public class WaypointController extends Observable implements
 		IWaypoint waypoint = db.get(id);
 		if (waypoint == null)
 			return;
-		waypoint.setHeadedFor(markId);
+		waypoint.setHeadedFor(markId.toString());
 		db.save(waypoint);
 		notifyObservers();
 	}
@@ -269,7 +269,7 @@ public class WaypointController extends Observable implements
 	public final UUID newWaypoint(UUID trip) {
 		UUID newWaypoint = db.create();
 		IWaypoint waypoint = db.get(newWaypoint);
-		waypoint.setTrip(trip);
+		waypoint.setTrip(trip.toString());
 		db.save(waypoint);
 		notifyObservers();
 		return newWaypoint;
@@ -280,7 +280,7 @@ public class WaypointController extends Observable implements
 			double latitude) {
 		UUID newWaypoint = db.create();
 		IWaypoint waypoint = db.get(newWaypoint);
-		waypoint.setTrip(trip);
+		waypoint.setTrip(trip.toString());
 		waypoint.setLatitude(latitude);
 		waypoint.setLongitude(longitude);
 		waypoint.setDate(date);

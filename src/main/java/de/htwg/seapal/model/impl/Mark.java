@@ -23,7 +23,7 @@ public class Mark extends ModelDocument implements IMark {
 	private Integer sog;
 	private String note;
 	private Long date;
-	private boolean isRouteMark;
+	private Boolean isRouteMark;
 
 	public Mark() {
 		setId(UUID.randomUUID().toString());
@@ -146,12 +146,12 @@ public class Mark extends ModelDocument implements IMark {
 	}
 
 	@Override
-	public boolean isRouteMark() {
+	public Boolean isRouteMark() {
 		return isRouteMark;
 	}
 
 	@Override
-	public void setIsRouteMark(boolean isRouteMark) {
+	public void setIsRouteMark(Boolean isRouteMark) {
 		this.isRouteMark = isRouteMark;
 	}
 

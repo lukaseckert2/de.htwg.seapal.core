@@ -1,5 +1,7 @@
 package de.htwg.seapal.model;
 
+import org.codehaus.jackson.annotate.JsonProperty;
+
 public interface IMark extends IModel {
 
 	String getName();
@@ -38,9 +40,11 @@ public interface IMark extends IModel {
 
 	void setDate(Long date);
 
-	boolean isRouteMark();
+	@JsonProperty("is_route")
+	Boolean isRouteMark();
 
-	void setIsRouteMark(boolean isRouteMark);
+	@JsonProperty("is_route")
+	void setIsRouteMark(Boolean isRouteMark);
 
 	void setUser(String user);
 

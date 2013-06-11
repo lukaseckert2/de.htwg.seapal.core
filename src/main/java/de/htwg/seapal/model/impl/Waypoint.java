@@ -112,8 +112,8 @@ public class Waypoint extends ModelDocument implements IWaypoint {
 	}
 
 	@Override
-	public UUID getHeadedFor() {
-		return UUID.fromString(headedFor);
+	public String getHeadedFor() {
+		return headedFor;
 	}
 
 	@Override
@@ -167,8 +167,8 @@ public class Waypoint extends ModelDocument implements IWaypoint {
 	}
 
 	@Override
-	public void setHeadedFor(final UUID headedFor) {
-		this.headedFor = headedFor.toString();
+	public void setHeadedFor(final String headedFor) {
+		this.headedFor = headedFor;
 	}
 
 	@Override
@@ -182,13 +182,13 @@ public class Waypoint extends ModelDocument implements IWaypoint {
 	}
 
 	@Override
-	public UUID getTrip() {
-		return UUID.fromString(trip);
+	public String getTrip() {
+		return trip;
 	}
 
 	@Override
-	public void setTrip(UUID trip) {
-		this.trip = trip.toString();
+	public void setTrip(String tripId) {
+		this.trip = tripId;
 	}
 
 	@Override
