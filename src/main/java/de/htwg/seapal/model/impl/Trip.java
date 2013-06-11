@@ -36,8 +36,7 @@ public class Trip extends ModelDocument implements ITrip {
 	public Trip() {
 		setId(UUID.randomUUID().toString());
 		this.crew = new ArrayList<String>();
-		this.skipper = (UUID.randomUUID().toString());
-
+		this.skipper = "";
 		this.name = "";
 		this.startLocation = "";
 		this.endLocation = "";

@@ -97,7 +97,10 @@ public class TripController extends Observable implements ITripController {
 		ITrip trip = db.get(id);
 		if (trip == null)
 			return null;
-		return UUID.fromString(trip.getSkipper());
+		if(trip.getSkipper().equals(""))
+			return null;
+		else
+			return UUID.fromString(trip.getSkipper());
 
 	}
 
