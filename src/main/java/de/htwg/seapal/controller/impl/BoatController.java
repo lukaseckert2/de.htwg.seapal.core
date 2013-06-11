@@ -118,7 +118,10 @@ public class BoatController extends Observable implements IBoatController {
 		IBoat boat = db.get(id);
 		if (boat == null)
 			return null;
-		return UUID.fromString(boat.getOwner());
+		if(boat.getOwner().equals(""))
+			return null;
+		else
+			return UUID.fromString(boat.getOwner());
 	}
 
 	@Override
@@ -460,15 +463,16 @@ public class BoatController extends Observable implements IBoatController {
 		return "ID = " + id + " \n" + "BoatName = " + getBoatName(id) + "\n"
 				+ "RegisterNr = " + getRegisterNr(id) + "\n" + "SailSign = "
 				+ getSailSign(id) + "\n" + "HomePort = " + getHomePort(id)
-				+ "\n" + "Yachtclub = " + getYachtclub(id) + "\n" + "\n" + "Insurance = " + getInsurance(id)
-				+ "\n" + "CallSign = " + getCallSign(id) + "\n" + "Type = "
-				+ getType(id) + "\n" + "Constructor = " + getConstructor(id)
-				+ "\n" + "Length = " + getLength(id) + "\n" + "Width = "
-				+ getWidth(id) + "\n" + "Draft = " + getDraft(id) + "\n"
-				+ "MastHeight = " + getMastHeight(id) + "Displacement = "
-				+ getDisplacement(id) + "\n" + "Rigging = " + getRigging(id)
-				+ "\n" + "YearOfConstruction = " + getYearOfConstruction(id)
-				+ "\n" + "Motor = " + getMotor(id) + "\n" + "TankSize = "
+				+ "\n" + "Yachtclub = " + getYachtclub(id) + "\n" + "\n"
+				+ "Insurance = " + getInsurance(id) + "\n" + "CallSign = "
+				+ getCallSign(id) + "\n" + "Type = " + getType(id) + "\n"
+				+ "Constructor = " + getConstructor(id) + "\n" + "Length = "
+				+ getLength(id) + "\n" + "Width = " + getWidth(id) + "\n"
+				+ "Draft = " + getDraft(id) + "\n" + "MastHeight = "
+				+ getMastHeight(id) + "Displacement = " + getDisplacement(id)
+				+ "\n" + "Rigging = " + getRigging(id) + "\n"
+				+ "YearOfConstruction = " + getYearOfConstruction(id) + "\n"
+				+ "Motor = " + getMotor(id) + "\n" + "TankSize = "
 				+ getTankSize(id) + "\n" + "WasteWaterTankSize = "
 				+ getWasteWaterTankSize(id) + "\n" + "FreshWaterTankSize = "
 				+ getFreshWaterTankSize(id) + "\n" + "MainSailSize = "
@@ -507,7 +511,7 @@ public class BoatController extends Observable implements IBoatController {
 	public IBoat getBoat(UUID boatId) {
 		return db.get(boatId);
 	}
-	
+
 	@Override
 	public List<IBoat> getAllBoats() {
 		return db.loadAll();

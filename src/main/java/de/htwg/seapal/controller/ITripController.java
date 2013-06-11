@@ -36,10 +36,6 @@ public interface ITripController extends IObservable {
 
 	void setEndTime(UUID id, long end);
 
-	long getDuration(UUID id);
-
-	void setDuration(UUID id, long timeInSeconds);
-
 	int getMotor(UUID id);
 
 	void setMotor(UUID id, int motor);
@@ -58,37 +54,46 @@ public interface ITripController extends IObservable {
 
 	void closeDB();
 
+	String getBoat(UUID id);
+
 	List<UUID> getTrips();
 
 	UUID newTrip(UUID boat);
 
 	List<UUID> getTrips(UUID boatId);
-	
+
 	/**
 	 * Gets a trip by the given trip ID.
-	 * @param tripId The trip ID.
+	 * 
+	 * @param tripId
+	 *            The trip ID.
 	 * @return The trip or NULL, if no trip was found.
 	 */
 	ITrip getTrip(UUID tripId);
-	
+
 	/**
 	 * Gets all trips.
+	 * 
 	 * @return All trips.
 	 */
 	List<ITrip> getAllTrips();
-	
+
 	/**
 	 * Gets all trips of the given boat ID.
-	 * @param boatId The boat ID.
+	 * 
+	 * @param boatId
+	 *            The boat ID.
 	 * @return All Trips of the boat ID.
 	 */
 	List<ITrip> getAllTrips(UUID boatId);
-	
+
 	/**
 	 * Saves the trip.
-	 * @param trip The trip to save.
-	 * @return Returns TRUE, if the trip was newly created
-	 * 	       and FALSE when the trip was updated.
+	 * 
+	 * @param trip
+	 *            The trip to save.
+	 * @return Returns TRUE, if the trip was newly created and FALSE when the
+	 *         trip was updated.
 	 */
 	boolean saveTrip(ITrip trip);
 }

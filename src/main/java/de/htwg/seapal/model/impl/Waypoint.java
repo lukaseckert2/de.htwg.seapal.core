@@ -113,6 +113,9 @@ public class Waypoint extends ModelDocument implements IWaypoint {
 
 	@Override
 	public String getHeadedFor() {
+		if (headedFor == "") {
+			return null;
+		}
 		return headedFor;
 	}
 
@@ -183,8 +186,12 @@ public class Waypoint extends ModelDocument implements IWaypoint {
 
 	@Override
 	public String getTrip() {
+		if (trip == "") {
+			return null;
+		}
 		return trip;
 	}
+
 
 	@Override
 	public void setTrip(String tripId) {

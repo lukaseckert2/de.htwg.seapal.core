@@ -9,8 +9,8 @@ import com.google.inject.Inject;
 import de.htwg.seapal.controller.ITripController;
 import de.htwg.seapal.database.ITripDatabase;
 import de.htwg.seapal.model.ITrip;
-import de.htwg.seapal.utils.observer.Observable;
 import de.htwg.seapal.utils.logging.ILogger;
+import de.htwg.seapal.utils.observer.Observable;
 
 public class TripController extends Observable implements ITripController {
 
@@ -97,7 +97,10 @@ public class TripController extends Observable implements ITripController {
 		ITrip trip = db.get(id);
 		if (trip == null)
 			return null;
-		return UUID.fromString(trip.getSkipper());
+		if(trip.getSkipper().equals(""))
+			return null;
+		else
+			return UUID.fromString(trip.getSkipper());
 
 	}
 
@@ -153,24 +156,6 @@ public class TripController extends Observable implements ITripController {
 		if (trip == null)
 			return -1;
 		return trip.getEndTime();
-	}
-
-	@Override
-	public void setDuration(UUID id, long timeInSeconds) {
-		ITrip trip = db.get(id);
-		if (trip == null)
-			return;
-		trip.setDuration(timeInSeconds);
-		db.save(trip);
-		notifyObservers();
-	}
-
-	@Override
-	public long getDuration(UUID id) {
-		ITrip trip = db.get(id);
-		if (trip == null)
-			return -1;
-		return trip.getDuration();
 	}
 
 	@Override
@@ -234,10 +219,9 @@ public class TripController extends Observable implements ITripController {
 				+ "\n endLocation = \t" + getEndLocation(id)
 				+ "\n skipper = \t" + getSkipper(id) + "\n crew = \t"
 				+ getCrewMembers(id) + "\n startTime = \t" + getStartTime(id)
-				+ "\n endTime = \t" + getEndTime(id) + "\n duration = \t"
-				+ getDuration(id) + "\n motor = \t" + getMotor(id)
-				+ "\n fuel = \t" + getFuel(id) + "\n notes = \t" + getNotes(id)
-				+ "\n boat = \t" + getTrip(id) + "\n";
+				+ "\n endTime = \t" + getEndTime(id) + "\n motor = \t"
+				+ getMotor(id) + "\n fuel = \t" + getFuel(id) + "\n notes = \t"
+				+ getNotes(id) + "\n boat = \t" + getBoat(id) + "\n";
 	}
 
 	@Override
@@ -302,7 +286,8 @@ public class TripController extends Observable implements ITripController {
 		// TODO: filtering should be moved to database layer.
 		for (int i = trips.size() - 1; i >= 0; --i) {
 			String currentBoatId = trips.get(i).getBoat();
-			if (currentBoatId != null && !currentBoatId.equals(boatId.toString())) {
+			if (currentBoatId != null
+					&& !currentBoatId.equals(boatId.toString())) {
 				trips.remove(i);
 			}
 		}
@@ -312,5 +297,10 @@ public class TripController extends Observable implements ITripController {
 	@Override
 	public boolean saveTrip(ITrip trip) {
 		return db.save(trip);
+	}
+
+	@Override
+	public String getBoat(UUID id) {
+		return db.get(id).getBoat();
 	}
 }
