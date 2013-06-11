@@ -1,7 +1,5 @@
 package de.htwg.seapal.model;
 
-import java.util.UUID;
-
 public interface IBoat extends IModel {
 
 	String getBoatName();
@@ -24,9 +22,9 @@ public interface IBoat extends IModel {
 
 	void setYachtclub(String yachtclub);
 
-	UUID getOwner(); // Person
+	String getOwner(); // Person
 	
-	void setOwner(UUID owner); // Person
+	void setOwner(String owner); // Person
 
 	String getInsurance();
 
