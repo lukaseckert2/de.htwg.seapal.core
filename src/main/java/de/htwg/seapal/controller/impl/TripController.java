@@ -157,6 +157,24 @@ public class TripController extends Observable implements ITripController {
 			return -1;
 		return trip.getEndTime();
 	}
+	
+	@Override
+	public void setDuration(UUID id, long duration) {
+		ITrip trip = db.get(id);
+		if (trip == null)
+			return;
+		trip.setDuration(duration);
+		db.save(trip);
+		notifyObservers();
+	}
+
+	@Override
+	public long getDuration(UUID id) {
+		ITrip trip = db.get(id);
+		if (trip == null)
+			return -1;
+		return trip.getDuration();
+	}
 
 	@Override
 	public void setMotor(UUID id, int motor) {

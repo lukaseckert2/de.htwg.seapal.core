@@ -35,6 +35,11 @@ public interface ITripController extends IObservable {
 	long getEndTime(UUID id);
 
 	void setEndTime(UUID id, long end);
+	
+	long getDuration(UUID id);
+
+	void setDuration(UUID id, long duration);
+
 
 	int getMotor(UUID id);
 

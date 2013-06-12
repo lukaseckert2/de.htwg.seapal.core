@@ -339,7 +339,7 @@ public class WaypointController extends Observable implements
 
 	@Override
 	public List<IWaypoint> getAllWaypoints(UUID tripId) {
-		List<IWaypoint> waypoints = db.loadAllByTripId(tripId);
+		List<IWaypoint> waypoints = db.findByTrip(tripId);
 		logger.info("WaypointController",
 				"Waypoints by ID count: " + waypoints.size());
 		return waypoints;

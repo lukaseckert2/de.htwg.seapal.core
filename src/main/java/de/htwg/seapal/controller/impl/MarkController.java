@@ -190,7 +190,7 @@ public class MarkController extends Observable implements IMarkController {
 		IMark mark = db.get(id);
 		if (mark == null)
 			return false;
-		return mark.isRouteMark();
+		return mark.getIsRouteMark();
 	}
 
 	@Override
@@ -220,7 +220,7 @@ public class MarkController extends Observable implements IMarkController {
 		List<UUID> list = new LinkedList<UUID>();
 		List<IMark> marks = db.loadAll();
 		for (IMark mark : marks) {
-			if (!mark.isRouteMark()) // only normal Marks
+			if (!mark.getIsRouteMark()) // only normal Marks
 				list.add(mark.getUUID());
 		}
 		return list;

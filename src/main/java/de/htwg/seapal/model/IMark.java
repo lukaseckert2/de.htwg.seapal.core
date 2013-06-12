@@ -41,7 +41,7 @@ public interface IMark extends IModel {
 	void setDate(Long date);
 
 	@JsonProperty("is_route")
-	Boolean isRouteMark();
+	Boolean getIsRouteMark();
 
 	@JsonProperty("is_route")
 	void setIsRouteMark(Boolean isRouteMark);

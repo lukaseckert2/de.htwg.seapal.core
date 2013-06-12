@@ -2,8 +2,6 @@ package de.htwg.seapal.model.impl;
 
 import java.util.UUID;
 
-import org.codehaus.jackson.annotate.JsonProperty;
-
 import de.htwg.seapal.model.IMark;
 import de.htwg.seapal.model.ModelDocument;
 
@@ -54,7 +52,7 @@ public class Mark extends ModelDocument implements IMark {
 		this.sog = m.getSOG();
 		this.note = m.getNote();
 		this.date = m.getDate();
-		this.isRouteMark = m.isRouteMark();
+		this.isRouteMark = m.getIsRouteMark();
 	}
 
 	@Override
@@ -147,18 +145,14 @@ public class Mark extends ModelDocument implements IMark {
 		this.date = date;
 	}
 
-	@JsonProperty("is_route")
 	@Override
-	public Boolean isRouteMark() {
+	public Boolean getIsRouteMark() {
 		return isRouteMark;
 	}
 
-	@JsonProperty("is_route")
 	@Override
 	public void setIsRouteMark(Boolean isRouteMark) {
 		this.isRouteMark = isRouteMark;
-		// String abc = String.valueOf(isRouteMark);
-		// Boolean b = Boolean.getBoolean(abc);
 	}
 
 	@Override
