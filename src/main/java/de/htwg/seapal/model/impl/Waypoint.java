@@ -10,6 +10,7 @@ import org.codehaus.jackson.annotate.JsonProperty;
 
 import de.htwg.seapal.model.IWaypoint;
 import de.htwg.seapal.model.ModelDocument;
+import de.htwg.seapal.utils.logging.ILogger;
 
 public class Waypoint extends ModelDocument implements IWaypoint {
 

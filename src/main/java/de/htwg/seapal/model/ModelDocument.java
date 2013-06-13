@@ -41,7 +41,8 @@ public abstract class ModelDocument implements IModel, Serializable {
 	 */
 	@JsonProperty("_id")
 	public void setId(String uuid) {
-		Assert.hasText(uuid, "id must have a value");
+		if (uuid == null || uuid.equals(""))
+			return;
 		id = uuid;
 	}
 
@@ -73,7 +74,7 @@ public abstract class ModelDocument implements IModel, Serializable {
 	 */
 	@JsonIgnore
 	public boolean isNew() {
-		return revision == null;
+		return revision == null || revision.equals("");
 	}
 
 	/**
@@ -131,7 +132,8 @@ public abstract class ModelDocument implements IModel, Serializable {
 	 */
 	@JsonIgnore
 	public void set_id(String uuid) {
-		Assert.hasText(uuid, "id must have a value");
+		if (uuid == null || uuid.equals(""))
+			return;
 		id = uuid;
 	}
 }
