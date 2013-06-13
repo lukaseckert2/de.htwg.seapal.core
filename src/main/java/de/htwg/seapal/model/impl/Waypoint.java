@@ -58,9 +58,9 @@ public class Waypoint extends ModelDocument implements IWaypoint {
 		this.cog = 0;
 		this.sog = 0;
 		this.headedFor = "";
-		this.maneuver = Maneuver.NONE;
-		this.foreSail = ForeSail.NONE;
-		this.mainSail = MainSail.NONE;
+		this.maneuver = m;
+		this.foreSail = f;
+		this.mainSail = msail;
 		this.trip = "";
 	}
 
