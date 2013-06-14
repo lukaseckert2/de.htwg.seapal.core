@@ -77,14 +77,14 @@ public interface IRace extends IModel {
 	 * @author Benjamin
 	 */
 	public static class RaceBoat {
-		public String _id;
+		public String id;
 		public String name;
 		public String IOCCode;
 		
 		public RaceBoat() { }
 		
 		public RaceBoat(String id, String name, String iocCode) {
-			this._id = id;
+			this.id = id;
 			this.name = name;
 			this.IOCCode = iocCode;
 		}
@@ -95,7 +95,7 @@ public interface IRace extends IModel {
 	 * @author Benjamin
 	 */
 	public static class RaceWaypoint {
-		public String _id;
+		public String id;
 		public Double lat;
 		public Double lng;
 		public Long timestamp;
@@ -105,7 +105,7 @@ public interface IRace extends IModel {
 		public RaceWaypoint() { }
 		
 		public RaceWaypoint(String id, Double lat, Double lng, Long timestamp, Integer sog, String markPassing) {
-			this._id = id;
+			this.id = id;
 			this.lat = lat;
 			this.lng = lng;
 			this.timestamp = timestamp;
@@ -122,13 +122,13 @@ public interface IRace extends IModel {
 	 * @author Benjamin
 	 */
 	public static class RaceControlPoint {
-		public String _id;
+		public String id;
 		public List<RaceCoordinate> coords = new ArrayList<RaceCoordinate>();
 	
 		public RaceControlPoint() { }
 		
 		public RaceControlPoint(String id, List<RaceCoordinate> coords) {
-			this._id = id;
+			this.id = id;
 			this.coords = coords;
 		}
 	}
