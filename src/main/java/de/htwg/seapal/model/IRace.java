@@ -57,7 +57,7 @@ public interface IRace extends IModel {
 	 * @author Benjamin
 	 */
 	public static class RaceTrip {
-		public String _id;
+		public String id;
 		public String name;
 		public RaceBoat boat;
 		public List<RaceWaypoint> waypoints = new ArrayList<RaceWaypoint>();
@@ -65,7 +65,7 @@ public interface IRace extends IModel {
 		public RaceTrip() { }
 		
 		public RaceTrip(String id, String name, RaceBoat boat, List<RaceWaypoint> waypoints) {
-			this._id = id;
+			this.id = id;
 			this.name = name;
 			this.boat = boat;
 			this.waypoints = waypoints;
