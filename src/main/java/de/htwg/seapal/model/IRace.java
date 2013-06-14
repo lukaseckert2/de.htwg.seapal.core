@@ -1,10 +1,19 @@
 package de.htwg.seapal.model;
 
+import java.util.ArrayList;
 import java.util.List;
-import java.util.UUID;
 
 public interface IRace extends IModel {
+	/**
+	 * Gets the race name.
+	 * @return The race name.
+	 */
 	String getName();
+	
+	/**
+	 * Sets the race name.
+	 * @param name The race name.
+	 */
 	void setName(String name);
 	
 	/**
@@ -19,15 +28,124 @@ public interface IRace extends IModel {
 	 */
 	void setBoatClass(String boatClass);
 	
-	List<UUID> getTrips();
-	void addTrip(UUID tripId);
+	/**
+	 * Gets the trips.
+	 * @return The trips.
+	 */
+	List<RaceTrip> getTrips();
 	
-	List<UUID> getMarkPassings();
-	void addMarkPassing(UUID markId);
+	/**
+	 * Sets the trips.
+	 * @param trips The trips.
+	 */
+	void setTrips(List<RaceTrip> trips);
 	
-	List<UUID> getStart();
-	void setStart(UUID markId1, UUID markId2);
+	/**
+	 * Gets the control points
+	 * @return The control points.
+	 */
+	List<RaceControlPoint> getControlPoints();
 	
-	List<UUID> getGoal();
-	void setGoal(UUID markId1, UUID markId2);
+	/**
+	 * Sets the control points.
+	 * @param controlPoints The control points.
+	 */
+	void setControlPoints(List<RaceControlPoint> controlPoints);
+	
+	/**
+	 * The class of an inner trip.
+	 * @author Benjamin
+	 */
+	public static class RaceTrip {
+		public String _id;
+		public String name;
+		public RaceBoat boat;
+		public List<RaceWaypoint> waypoints = new ArrayList<RaceWaypoint>();
+		
+		public RaceTrip() { }
+		
+		public RaceTrip(String id, String name, RaceBoat boat, List<RaceWaypoint> waypoints) {
+			this._id = id;
+			this.name = name;
+			this.boat = boat;
+			this.waypoints = waypoints;
+		}
+	}
+	
+	/**
+	 * The class of an inner boat.
+	 * @author Benjamin
+	 */
+	public static class RaceBoat {
+		public String _id;
+		public String name;
+		public String IOCCode;
+		
+		public RaceBoat() { }
+		
+		public RaceBoat(String id, String name, String iocCode) {
+			this._id = id;
+			this.name = name;
+			this.IOCCode = iocCode;
+		}
+	}
+	
+	/**
+	 * The class of an inner waypoint.
+	 * @author Benjamin
+	 */
+	public static class RaceWaypoint {
+		public String _id;
+		public Double lat;
+		public Double lng;
+		public Long timestamp;
+		public Integer sog;
+		public String markPassing;
+		
+		public RaceWaypoint() { }
+		
+		public RaceWaypoint(String id, Double lat, Double lng, Long timestamp, Integer sog, String markPassing) {
+			this._id = id;
+			this.lat = lat;
+			this.lng = lng;
+			this.timestamp = timestamp;
+			this.sog = sog;
+			this.markPassing = markPassing;
+		}
+	}
+	
+	/**
+	 * The class of an inner control point.
+	 * <p>
+	 * Note: Start and goal have two coordinates, simple courese marks just one.
+	 * </p>
+	 * @author Benjamin
+	 */
+	public static class RaceControlPoint {
+		public String _id;
+		public List<RaceCoordinate> coords = new ArrayList<RaceCoordinate>();
+	
+		public RaceControlPoint() { }
+		
+		public RaceControlPoint(String id, List<RaceCoordinate> coords) {
+			this._id = id;
+			this.coords = coords;
+		}
+	}
+	
+	/**
+	 * The class of an inner coordiante.
+	 * @author Benjamin
+	 */
+	public static class RaceCoordinate {
+		public Double lat;
+		public Double lng;
+		
+		public RaceCoordinate() { }
+		
+		public RaceCoordinate(Double lat, Double lng) {
+			this.lat = lat;
+			this.lng = lng;
+		}
+	}
 }
