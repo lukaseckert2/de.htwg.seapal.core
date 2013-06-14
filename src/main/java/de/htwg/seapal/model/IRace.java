@@ -99,15 +99,22 @@ public interface IRace extends IModel {
 		public RaceCoordinate coord;
 		public Long timestamp;
 		public Integer sog;
+		public Integer cog;
+		public Integer btm;
+		public Integer dtm;
 		public String markPassing;
 		
 		public RaceWaypoint() { }
 		
-		public RaceWaypoint(String id, RaceCoordinate coord, Long timestamp, Integer sog, String markPassing) {
+		public RaceWaypoint(String id, RaceCoordinate coord, Long timestamp,
+				Integer sog, Integer cog, Integer btm, Integer dtm, String markPassing) {
 			this.id = id;
 			this.coord = coord;
 			this.timestamp = timestamp;
 			this.sog = sog;
+			this.cog = cog;
+			this.btm = btm;
+			this.dtm = dtm;
 			this.markPassing = markPassing;
 		}
 	}

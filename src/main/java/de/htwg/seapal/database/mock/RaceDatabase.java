@@ -75,18 +75,30 @@ public class RaceDatabase implements IRaceDatabase {
 
 	private List<RaceTrip> generateTrips() {
 		List<RaceTrip> trips = new ArrayList<RaceTrip>();
-		trips.add(new RaceTrip(UUID.randomUUID().toString(), "trip1", generateBoat("trip1-boatname"), generateWaypoints(0.0)));
-		trips.add(new RaceTrip(UUID.randomUUID().toString(), "trip2", generateBoat("trip2-boatname"), generateWaypoints(0.1)));
+		trips.add(new RaceTrip(
+				UUID.randomUUID().toString(),
+				"trip1",
+				generateBoat("trip1-boatname"),
+				generateWaypoints(0.0)));
+		trips.add(new RaceTrip(UUID.randomUUID().toString(),
+				"trip2", 
+				generateBoat("trip2-boatname"), 
+				generateWaypoints(0.1)));
 		return trips;
 	}
 
 	private List<RaceWaypoint> generateWaypoints(Double posOffset) {
 		List<RaceWaypoint> waypoints = new ArrayList<RaceWaypoint>();
-		waypoints.add(new RaceWaypoint(UUID.randomUUID().toString(), new RaceCoordinate(0.1 + posOffset, 0.3 + posOffset), 1000000000L, 2, null));
-		waypoints.add(new RaceWaypoint(UUID.randomUUID().toString(), new RaceCoordinate(0.2 + posOffset, 0.4 + posOffset), 1000001000L, 3, null));
-		waypoints.add(new RaceWaypoint(UUID.randomUUID().toString(), new RaceCoordinate(0.3 + posOffset, 0.5 + posOffset), 1000002000L, 4, null));
-		waypoints.add(new RaceWaypoint(UUID.randomUUID().toString(), new RaceCoordinate(0.4 + posOffset, 0.6 + posOffset), 1000003000L, 4, null));
-		waypoints.add(new RaceWaypoint(UUID.randomUUID().toString(), new RaceCoordinate(0.4 + posOffset, 0.7 + posOffset), 1000004000L, 3, null));
+		waypoints.add(new RaceWaypoint(UUID.randomUUID().toString(), 
+				new RaceCoordinate(0.1 + posOffset, 0.3 + posOffset), 1000000000L, 2, 3, 4, 5, null));
+		waypoints.add(new RaceWaypoint(UUID.randomUUID().toString(), 
+				new RaceCoordinate(0.2 + posOffset, 0.4 + posOffset), 1000001000L, 3, 3, 4, 5, null));
+		waypoints.add(new RaceWaypoint(UUID.randomUUID().toString(), 
+				new RaceCoordinate(0.3 + posOffset, 0.5 + posOffset), 1000002000L, 4, 3, 4, 5, null));
+		waypoints.add(new RaceWaypoint(UUID.randomUUID().toString(), 
+				new RaceCoordinate(0.4 + posOffset, 0.6 + posOffset), 1000003000L, 4, 4, 5, 6, null));
+		waypoints.add(new RaceWaypoint(UUID.randomUUID().toString(), 
+				new RaceCoordinate(0.4 + posOffset, 0.7 + posOffset), 1000004000L, 3, 5, 5, 4, null));
 		return waypoints;
 	}
 
