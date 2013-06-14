@@ -26,7 +26,7 @@ public interface IRaceController extends IObservable {
 	/**
 	 * Sets the boat class.
 	 * @param id The race UUID.
-	 * @param name The new boat class.
+	 * @param boatClass The new boat class.
 	 */
 	void setBoatClass(UUID id, String boatClass);
 	
@@ -61,7 +61,7 @@ public interface IRaceController extends IObservable {
 	/**
 	 * Sets the control points.
 	 * @param id The race UUID.
-	 * @param trips The new control points of the race.
+	 * @param controlPoints The new control points of the race.
 	 */
 	void setControlPoints(UUID id, List<RaceControlPoint> controlPoints);
 	

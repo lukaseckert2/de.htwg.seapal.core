@@ -96,18 +96,16 @@ public interface IRace extends IModel {
 	 */
 	public static class RaceWaypoint {
 		public String id;
-		public Double lat;
-		public Double lng;
+		public RaceCoordinate coord;
 		public Long timestamp;
 		public Integer sog;
 		public String markPassing;
 		
 		public RaceWaypoint() { }
 		
-		public RaceWaypoint(String id, Double lat, Double lng, Long timestamp, Integer sog, String markPassing) {
+		public RaceWaypoint(String id, RaceCoordinate coord, Long timestamp, Integer sog, String markPassing) {
 			this.id = id;
-			this.lat = lat;
-			this.lng = lng;
+			this.coord = coord;
 			this.timestamp = timestamp;
 			this.sog = sog;
 			this.markPassing = markPassing;
