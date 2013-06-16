@@ -65,12 +65,12 @@ public class RaceDatabase implements IRaceDatabase {
 		List<RaceCoordinate> coords = new ArrayList<RaceCoordinate>();
 		coords.add(new RaceCoordinate(lat1, lng1));
 		coords.add(new RaceCoordinate(lat2, lng2));
-		return new RaceControlPoint(UUID.randomUUID().toString(), coords);
+		return new RaceControlPoint(UUID.randomUUID().toString(), "line", coords);
 	}
 		private RaceControlPoint generateMark(double lat, double lng) {
 		List<RaceCoordinate> coords = new ArrayList<RaceCoordinate>();
 		coords.add(new RaceCoordinate(lat, lng));
-		return new RaceControlPoint(UUID.randomUUID().toString(), coords);
+		return new RaceControlPoint(UUID.randomUUID().toString(), "buoy", coords);
 	}
 
 	private List<RaceTrip> generateTrips() {

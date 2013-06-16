@@ -128,12 +128,14 @@ public interface IRace extends IModel {
 	 */
 	public static class RaceControlPoint {
 		public String id;
+		public String name;
 		public List<RaceCoordinate> coords = new ArrayList<RaceCoordinate>();
 	
 		public RaceControlPoint() { }
 		
-		public RaceControlPoint(String id, List<RaceCoordinate> coords) {
+		public RaceControlPoint(String id, String name, List<RaceCoordinate> coords) {
 			this.id = id;
+			this.name = name;
 			this.coords = coords;
 		}
 	}
