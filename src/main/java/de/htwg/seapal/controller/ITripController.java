@@ -24,9 +24,9 @@ public interface ITripController extends IObservable {
 
 	void setSkipper(UUID id, UUID skipper);
 
-	List<String> getCrewMembers(UUID id);
+	String getCrewMembers(UUID id);
 
-	void addCrewMember(UUID id, String crewMember);
+	void setCrewMember(UUID id, String crewMember);
 
 	long getStartTime(UUID id);
 
@@ -35,11 +35,6 @@ public interface ITripController extends IObservable {
 	long getEndTime(UUID id);
 
 	void setEndTime(UUID id, long end);
-	
-	long getDuration(UUID id);
-
-	void setDuration(UUID id, long duration);
-
 
 	int getMotor(UUID id);
 
