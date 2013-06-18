@@ -303,10 +303,10 @@ public interface IWaypointController extends IObservable {
 	 * 
 	 * @param tripId
 	 *            The trip ID.
-	 * @param longitude
-	 *            The longitude.
-	 * @param latitude
-	 *            The latitude.
+	 * @param location
+	 *            The location.
+	 * @param date
+	 *            The date.
 	 * @return The waypoint ID.
 	 */
 	UUID newWaypoint(UUID tripId, long date, double longitude, double latitude);
@@ -345,4 +345,8 @@ public interface IWaypointController extends IObservable {
 	 *         the waypoint was updated.
 	 */
 	boolean saveWaypoint(IWaypoint waypoint);
+	
+	void setDate(UUID id, long date);
+	
+	long getDate(UUID id);
 }

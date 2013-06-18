@@ -3,6 +3,7 @@ package de.htwg.seapal.controller.impl;
 import java.text.DateFormat;
 import java.text.SimpleDateFormat;
 import java.util.ArrayList;
+import java.util.LinkedList;
 import java.util.List;
 import java.util.UUID;
 
@@ -109,7 +110,7 @@ public class WaypointController extends Observable implements
 		IWaypoint waypoint = db.get(id);
 		if (waypoint == null)
 			return null;
-		return UUID.fromString(waypoint.getHeadedFor());
+		return waypoint.getHeadedFor();
 	}
 
 	@Override
@@ -232,7 +233,7 @@ public class WaypointController extends Observable implements
 		IWaypoint waypoint = db.get(id);
 		if (waypoint == null)
 			return;
-		waypoint.setHeadedFor(markId.toString());
+		waypoint.setHeadedFor(markId);
 		db.save(waypoint);
 		notifyObservers();
 	}
@@ -269,7 +270,7 @@ public class WaypointController extends Observable implements
 	public final UUID newWaypoint(UUID trip) {
 		UUID newWaypoint = db.create();
 		IWaypoint waypoint = db.get(newWaypoint);
-		waypoint.setTrip(trip.toString());
+		waypoint.setTrip(trip);
 		db.save(waypoint);
 		notifyObservers();
 		return newWaypoint;
@@ -280,7 +281,7 @@ public class WaypointController extends Observable implements
 			double latitude) {
 		UUID newWaypoint = db.create();
 		IWaypoint waypoint = db.get(newWaypoint);
-		waypoint.setTrip(trip.toString());
+		waypoint.setTrip(trip);
 		waypoint.setLatitude(latitude);
 		waypoint.setLongitude(longitude);
 		waypoint.setDate(date);
@@ -315,15 +316,18 @@ public class WaypointController extends Observable implements
 
 	@Override
 	public List<UUID> getWaypoints(UUID tripId) {
-		List<IWaypoint> waypoints = db.loadAll();
-		logger.info("WaypointController",
-				"All waypoints: " + waypoints.toString());
+		List<IWaypoint> waypoints = db.loadAllByTripId(tripId);
+		
 		// TODO: filtering should be moved to database layer.
 		List<UUID> waypointIDs = new ArrayList<UUID>();
 		for (IWaypoint waypoint : waypoints) {
-			if (waypoint.getTrip().equals(tripId))
-				waypointIDs.add(UUID.fromString(waypoint.getId()));
+			if(tripId.equals(waypoint.getTrip())) {
+				waypointIDs.add(waypoint.getUUID());
+			}
+					
 		}
+		logger.info("WaypointController",
+				"All waypoints: " + waypointIDs.toString());
 		return waypointIDs;
 	}
 
@@ -339,14 +343,43 @@ public class WaypointController extends Observable implements
 
 	@Override
 	public List<IWaypoint> getAllWaypoints(UUID tripId) {
-		List<IWaypoint> waypoints = db.findByTrip(tripId);
+		/**
+		 * 
+		 * Fixing needed
+		 */
+		List<IWaypoint> waypoints = db.loadAllByTripId(tripId);
+		List<IWaypoint> res = new LinkedList<IWaypoint>();
+		for(IWaypoint wp : waypoints) {
+			if(wp.getTrip().equals(tripId)) {
+				res.add(wp);
+			}
+		}
 		logger.info("WaypointController",
 				"Waypoints by ID count: " + waypoints.size());
-		return waypoints;
+		return res;
 	}
 
 	@Override
 	public boolean saveWaypoint(IWaypoint waypoint) {
 		return db.save(waypoint);
+	}
+
+	@Override
+	public void setDate(UUID id, long date) {
+		IWaypoint waypoint = db.get(id);
+		if (waypoint == null)
+			return;
+		waypoint.setDate(date);
+		db.save(waypoint);
+		notifyObservers();
+		
+	}
+
+	@Override
+	public long getDate(UUID id) {
+		IWaypoint waypoint = db.get(id);
+		if (waypoint == null)
+			return -1;
+		return waypoint.getDate();
 	}
 }
