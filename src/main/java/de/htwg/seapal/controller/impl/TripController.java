@@ -259,10 +259,15 @@ public class TripController extends Observable implements ITripController {
 
 	@Override
 	public List<UUID> getTrips(UUID boatId) {
-		List<UUID> query = db.loadAllById(boatId);
+		List<ITrip> query = db.findByBoat(boatId);
 		logger.info("TripController", "All trips: " + query.toString());
+		List<UUID> trips = new ArrayList<UUID>();
 		
-		return query;
+		for(ITrip trip : query) {
+			trips.add(trip.getUUID());
+		}
+		
+		return trips;
 	}
 
 	@Override
@@ -277,14 +282,7 @@ public class TripController extends Observable implements ITripController {
 
 	@Override
 	public List<ITrip> getAllTrips(UUID boatId) {
-		List<ITrip> trips = new LinkedList<ITrip>();
-		List<UUID> ids = db.loadAllById(boatId);
-		logger.info("TripController", "All trips: " + trips.toString());
-		// TODO: filtering should be moved to database layer.
-		for(UUID id : ids) {
-			trips.add(getTrip(id));
-		}
-		return trips;
+		return db.findByBoat(boatId);
 	}
 
 	@Override
