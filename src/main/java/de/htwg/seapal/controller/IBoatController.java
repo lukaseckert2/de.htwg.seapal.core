@@ -1,10 +1,11 @@
 package de.htwg.seapal.controller;
 
+import de.htwg.seapal.model.IBoat;
+import de.htwg.seapal.model.impl.Boat;
+import de.htwg.seapal.utils.observer.IObservable;
+
 import java.util.List;
 import java.util.UUID;
-
-import de.htwg.seapal.model.IBoat;
-import de.htwg.seapal.utils.observer.IObservable;
 
 /**
  * The boat controller interface.
@@ -13,7 +14,7 @@ public interface IBoatController extends IObservable {
 
 	/**
 	 * Gets the boat name of the given ID.
-	 * 
+	 *
 	 * @param id
 	 *            The boat ID.
 	 * @return The boat name.
@@ -22,7 +23,7 @@ public interface IBoatController extends IObservable {
 
 	/**
 	 * Sets the boat name of the given boat ID.
-	 * 
+	 *
 	 * @param id
 	 *            The boat ID.
 	 * @param boatName
@@ -32,7 +33,7 @@ public interface IBoatController extends IObservable {
 
 	/**
 	 * Gets the register number of the given boat ID.
-	 * 
+	 *
 	 * @param id
 	 *            The boat ID.
 	 * @return The register number.
@@ -41,7 +42,7 @@ public interface IBoatController extends IObservable {
 
 	/**
 	 * Sets the register number of the given boat ID.
-	 * 
+	 *
 	 * @param id
 	 * @param registerNr
 	 */
@@ -49,7 +50,7 @@ public interface IBoatController extends IObservable {
 
 	/**
 	 * Gets the sail sign of the given boat ID.
-	 * 
+	 *
 	 * @param id
 	 *            The boat ID
 	 * @return The sail sign.
@@ -58,7 +59,7 @@ public interface IBoatController extends IObservable {
 
 	/**
 	 * Sets the sail sign of the given boat ID.
-	 * 
+	 *
 	 * @param id
 	 *            The boat ID.
 	 * @param sailSign
@@ -68,7 +69,7 @@ public interface IBoatController extends IObservable {
 
 	/**
 	 * Gets the home port of the given boat ID.
-	 * 
+	 *
 	 * @param id
 	 *            The boat ID.
 	 * @return The home port.
@@ -77,7 +78,7 @@ public interface IBoatController extends IObservable {
 
 	/**
 	 * Sets the home port of the given boat ID.
-	 * 
+	 *
 	 * @param id
 	 *            The boat ID.
 	 * @param homePort
@@ -87,7 +88,7 @@ public interface IBoatController extends IObservable {
 
 	/**
 	 * Gets the yacht club of the given boat ID.
-	 * 
+	 *
 	 * @param id
 	 *            The boat ID.
 	 * @return The yacht club.
@@ -96,7 +97,7 @@ public interface IBoatController extends IObservable {
 
 	/**
 	 * Sets the yacht club of the given boat ID.
-	 * 
+	 *
 	 * @param id
 	 *            The boat ID.
 	 * @param yachtclub
@@ -106,7 +107,7 @@ public interface IBoatController extends IObservable {
 
 	/**
 	 * Gets the owner ID by the given boat ID.
-	 * 
+	 *
 	 * @param id
 	 *            The boat ID.
 	 * @return The owner ID.
@@ -115,7 +116,7 @@ public interface IBoatController extends IObservable {
 
 	/**
 	 * Sets the owner by the given boat ID.
-	 * 
+	 *
 	 * @param id
 	 *            The boat ID.
 	 * @param owner
@@ -125,7 +126,7 @@ public interface IBoatController extends IObservable {
 
 	/**
 	 * Gets the insurance of the given boat ID.
-	 * 
+	 *
 	 * @param id
 	 *            The boat ID.
 	 * @return The insurance.
@@ -134,7 +135,7 @@ public interface IBoatController extends IObservable {
 
 	/**
 	 * Sets the insurance of the given boat ID.
-	 * 
+	 *
 	 * @param id
 	 *            The boat ID.
 	 * @param insurance
@@ -144,7 +145,7 @@ public interface IBoatController extends IObservable {
 
 	/**
 	 * Gets the call sign of the given boat ID.
-	 * 
+	 *
 	 * @param id
 	 *            The boat ID.
 	 * @return The call sign.
@@ -153,7 +154,7 @@ public interface IBoatController extends IObservable {
 
 	/**
 	 * Sets the call sign of the given boat ID.
-	 * 
+	 *
 	 * @param id
 	 *            The boat ID.
 	 * @param callSign
@@ -163,7 +164,7 @@ public interface IBoatController extends IObservable {
 
 	/**
 	 * Gets the type of the given boat ID.
-	 * 
+	 *
 	 * @param id
 	 *            The boat ID.
 	 * @return The type.
@@ -172,7 +173,7 @@ public interface IBoatController extends IObservable {
 
 	/**
 	 * Sets the type of the given boat ID.
-	 * 
+	 *
 	 * @param id
 	 *            The boat ID.
 	 * @param type
@@ -182,7 +183,7 @@ public interface IBoatController extends IObservable {
 
 	/**
 	 * Gets the constructor of the given boat ID.
-	 * 
+	 *
 	 * @param id
 	 *            The boat ID.
 	 * @return The constructor.
@@ -191,7 +192,7 @@ public interface IBoatController extends IObservable {
 
 	/**
 	 * Sets the constructor of the given boat ID.
-	 * 
+	 *
 	 * @param id
 	 *            The boat ID.
 	 * @param constructor
@@ -201,7 +202,7 @@ public interface IBoatController extends IObservable {
 
 	/**
 	 * Gets the length of the given boat ID.
-	 * 
+	 *
 	 * @param id
 	 *            The boat ID.
 	 * @return The length.
@@ -210,7 +211,7 @@ public interface IBoatController extends IObservable {
 
 	/**
 	 * Sets the length of the given boat ID.
-	 * 
+	 *
 	 * @param id
 	 *            The boat ID.
 	 * @param length
@@ -220,7 +221,7 @@ public interface IBoatController extends IObservable {
 
 	/**
 	 * Gets the width of the given boat ID.
-	 * 
+	 *
 	 * @param id
 	 *            The boat ID.
 	 * @return The width.
@@ -229,7 +230,7 @@ public interface IBoatController extends IObservable {
 
 	/**
 	 * Sets the width of the given boat ID.
-	 * 
+	 *
 	 * @param id
 	 *            The boat ID.
 	 * @param width
@@ -239,7 +240,7 @@ public interface IBoatController extends IObservable {
 
 	/**
 	 * Gets the draft of the given boat ID.
-	 * 
+	 *
 	 * @param id
 	 *            The boat ID.
 	 * @return The draft.
@@ -248,7 +249,7 @@ public interface IBoatController extends IObservable {
 
 	/**
 	 * Sets the draft of the given boat ID.
-	 * 
+	 *
 	 * @param id
 	 *            The boat ID.
 	 * @param draft
@@ -258,7 +259,7 @@ public interface IBoatController extends IObservable {
 
 	/**
 	 * Gets the mast height of the given boat ID.
-	 * 
+	 *
 	 * @param id
 	 *            The boat ID.
 	 * @return The mast height.
@@ -267,7 +268,7 @@ public interface IBoatController extends IObservable {
 
 	/**
 	 * Sets the mast height of the given boat ID.
-	 * 
+	 *
 	 * @param id
 	 *            The boat ID.
 	 * @param mastHeight
@@ -277,7 +278,7 @@ public interface IBoatController extends IObservable {
 
 	/**
 	 * Gets the displacement of the given boat ID.
-	 * 
+	 *
 	 * @param id
 	 *            The boat ID.
 	 * @return The displacement.
@@ -286,7 +287,7 @@ public interface IBoatController extends IObservable {
 
 	/**
 	 * Sets the displacement of the given boat ID.
-	 * 
+	 *
 	 * @param id
 	 *            The boat ID.
 	 * @param displacement
@@ -296,7 +297,7 @@ public interface IBoatController extends IObservable {
 
 	/**
 	 * Gets the rigging of the given boat ID.
-	 * 
+	 *
 	 * @param id
 	 *            The boat ID.
 	 * @return The rigging.
@@ -305,7 +306,7 @@ public interface IBoatController extends IObservable {
 
 	/**
 	 * Sets the rigging of the given boat ID.
-	 * 
+	 *
 	 * @param id
 	 *            The boat ID.
 	 * @param rigging
@@ -315,7 +316,7 @@ public interface IBoatController extends IObservable {
 
 	/**
 	 * Gets the year of construction of the given boat ID.
-	 * 
+	 *
 	 * @param id
 	 *            The boat ID.
 	 * @return The year of construction.
@@ -324,7 +325,7 @@ public interface IBoatController extends IObservable {
 
 	/**
 	 * Sets the year of construction of the given boat ID.
-	 * 
+	 *
 	 * @param id
 	 *            The boat ID.
 	 * @param yearOfConstruction
@@ -334,7 +335,7 @@ public interface IBoatController extends IObservable {
 
 	/**
 	 * Gets the motor of the given boat ID.
-	 * 
+	 *
 	 * @param id
 	 *            The boat ID.
 	 * @return The motor.
@@ -343,7 +344,7 @@ public interface IBoatController extends IObservable {
 
 	/**
 	 * Sets the motor of the given boat ID.
-	 * 
+	 *
 	 * @param id
 	 *            The boat ID.
 	 * @param motor
@@ -353,7 +354,7 @@ public interface IBoatController extends IObservable {
 
 	/**
 	 * Gets the tank size of the given boat ID.
-	 * 
+	 *
 	 * @param id
 	 *            The boat ID.
 	 * @return The tank size.
@@ -362,7 +363,7 @@ public interface IBoatController extends IObservable {
 
 	/**
 	 * Sets the tank size of the given boat ID.
-	 * 
+	 *
 	 * @param id
 	 *            The boat ID.
 	 * @param tankSize
@@ -372,7 +373,7 @@ public interface IBoatController extends IObservable {
 
 	/**
 	 * Gets the waste water tank size of the given boat ID.
-	 * 
+	 *
 	 * @param id
 	 *            The boat ID.
 	 * @return The waste water tank size.
@@ -381,7 +382,7 @@ public interface IBoatController extends IObservable {
 
 	/**
 	 * Sets the waste water tank size of the given boat ID.
-	 * 
+	 *
 	 * @param id
 	 *            The boat ID.
 	 * @param wasteWaterTankSize
@@ -391,7 +392,7 @@ public interface IBoatController extends IObservable {
 
 	/**
 	 * Gets the fresh water tank size of the given boat ID.
-	 * 
+	 *
 	 * @param id
 	 *            The boat ID.
 	 * @return The fresh water tank size.
@@ -400,7 +401,7 @@ public interface IBoatController extends IObservable {
 
 	/**
 	 * Sets the fresh water tank size of the given boat ID.
-	 * 
+	 *
 	 * @param id
 	 *            The boat ID.
 	 * @param freshWaterTankSize
@@ -410,7 +411,7 @@ public interface IBoatController extends IObservable {
 
 	/**
 	 * Gets the main sail size of the given boat ID.
-	 * 
+	 *
 	 * @param id
 	 *            The boat ID.
 	 * @return The main sail size.
@@ -419,7 +420,7 @@ public interface IBoatController extends IObservable {
 
 	/**
 	 * Sets the main sail size of the given boat ID.
-	 * 
+	 *
 	 * @param id
 	 *            The boat ID.
 	 * @param mainSailSize
@@ -429,7 +430,7 @@ public interface IBoatController extends IObservable {
 
 	/**
 	 * Gets the genua size of the given boat ID.
-	 * 
+	 *
 	 * @param id
 	 *            The boat ID.
 	 * @return The genua size.
@@ -438,7 +439,7 @@ public interface IBoatController extends IObservable {
 
 	/**
 	 * Sets the genua size of the given boat ID.
-	 * 
+	 *
 	 * @param id
 	 *            The boat ID.
 	 * @param genuaSize
@@ -448,7 +449,7 @@ public interface IBoatController extends IObservable {
 
 	/**
 	 * Gets the spi size of the given boat ID.
-	 * 
+	 *
 	 * @param id
 	 *            The boat ID.
 	 * @return The spi size.
@@ -457,7 +458,7 @@ public interface IBoatController extends IObservable {
 
 	/**
 	 * Sets the spi size of the given boat ID.
-	 * 
+	 *
 	 * @param id
 	 *            The boat ID.
 	 * @param spiSize
@@ -467,7 +468,7 @@ public interface IBoatController extends IObservable {
 
 	/**
 	 * Gets the output string of the given boat ID.
-	 * 
+	 *
 	 * @param id
 	 *            The boat ID.
 	 * @return The output string.
@@ -476,14 +477,14 @@ public interface IBoatController extends IObservable {
 
 	/**
 	 * Creates a new boat.
-	 * 
+	 *
 	 * @return The boat ID.
 	 */
 	UUID newBoat();
 
 	/**
 	 * Deletes a boat.
-	 * 
+	 *
 	 * @param id
 	 *            The boat ID to delete.
 	 */
@@ -496,14 +497,16 @@ public interface IBoatController extends IObservable {
 
 	/**
 	 * Gets a list of all boat IDs.
-	 * 
+	 *
 	 * @return All boat IDs.
 	 */
 	List<UUID> getBoats();
 
-	/**
+    List<Boat> getBoats(String userid, String viewId);
+
+    /**
 	 * Gets a boat by the given boat ID.
-	 * 
+	 *
 	 * @param boatId
 	 *            The boat ID.
 	 * @return The boat or NULL, if no boat was found.
@@ -512,14 +515,14 @@ public interface IBoatController extends IObservable {
 
 	/**
 	 * Gets all boats.
-	 * 
+	 *
 	 * @return All boats.
 	 */
 	List<IBoat> getAllBoats();
 
 	/**
 	 * Saves the boat.
-	 * 
+	 *
 	 * @param boat
 	 *            The boat to save.
 	 * @return Returns TRUE, if the boat was newly created and FALSE when the

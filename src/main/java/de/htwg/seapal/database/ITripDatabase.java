@@ -1,11 +1,11 @@
 package de.htwg.seapal.database;
 
-import java.util.List;
-import java.util.UUID;
-
+import de.htwg.seapal.model.ITrip;
+import de.htwg.seapal.model.impl.Trip;
 import org.ektorp.support.GenerateView;
 
-import de.htwg.seapal.model.ITrip;
+import java.util.List;
+import java.util.UUID;
 
 /**
  * The trip database interface.
@@ -17,7 +17,7 @@ import de.htwg.seapal.model.ITrip;
  *       - [Property] must exist in target class (by_color -> e.g. public String getColor())
  *       - iterable fields: plural -> getColors()
  *       - initStandardDesignDocument() of CouchDbRepositorySupport must be triggered
- * Remark: the design file "_design/Trip" must be created manually. 
+ * Remark: the design file "_design/Trip" must be created manually.
  * </p>
  */
 public interface ITripDatabase extends IDatabase<ITrip> {
@@ -27,5 +27,7 @@ public interface ITripDatabase extends IDatabase<ITrip> {
 	 * @return All matching trips.
 	 */
 	@GenerateView
-	List<ITrip> findByBoat(UUID boatId);
+    List<ITrip> findByBoat(UUID boatId);
+
+    public List<Trip> getTrips(String key, String viewId);
 }

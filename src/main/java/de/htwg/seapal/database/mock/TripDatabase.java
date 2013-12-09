@@ -1,10 +1,9 @@
 package de.htwg.seapal.database.mock;
 
-import java.util.HashMap;
-import java.util.List;
-import java.util.Map;
-import java.util.UUID;
+import java.util.*;
 
+import de.htwg.seapal.model.IBoat;
+import de.htwg.seapal.model.impl.Boat;
 import org.ektorp.support.GenerateView;
 
 import com.google.common.collect.ImmutableList;
@@ -17,11 +16,11 @@ public class TripDatabase implements ITripDatabase {
 
 	Map<UUID, ITrip> db = new HashMap<UUID, ITrip>();
 	private ITrip newTrip;
-	
+
 	public TripDatabase() {
 		open();
 	}
-	
+
 	private UUID createNewTripInDatabase() {
 		ITrip trip = new Trip();
 		UUID id = trip.getUUID();
@@ -44,7 +43,7 @@ public class TripDatabase implements ITripDatabase {
 		}
 		return true;
 	}
-	
+
 	@Override
 	public boolean close() {
 		return true;
@@ -80,4 +79,16 @@ public class TripDatabase implements ITripDatabase {
 		// TODO Auto-generated method stub
 		return null;
 	}
+    @Override
+    public List<Trip> getTrips(final String key, final String viewId) {
+        List<Trip> trips = new LinkedList<Trip>();
+        Collection<ITrip> collection = db.values();
+        for (ITrip trip : collection) {
+            if (trip.getSkipper().equals(key)) {
+                trips.add((Trip) trip);
+            }
+        }
+
+        return trips;
+    }
 }

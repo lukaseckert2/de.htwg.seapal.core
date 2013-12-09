@@ -1,17 +1,16 @@
 package de.htwg.seapal.controller.impl;
 
-import java.util.ArrayList;
-import java.util.LinkedList;
-import java.util.List;
-import java.util.UUID;
-
 import com.google.inject.Inject;
-
 import de.htwg.seapal.controller.ITripController;
 import de.htwg.seapal.database.ITripDatabase;
 import de.htwg.seapal.model.ITrip;
+import de.htwg.seapal.model.impl.Trip;
 import de.htwg.seapal.utils.logging.ILogger;
 import de.htwg.seapal.utils.observer.Observable;
+
+import java.util.ArrayList;
+import java.util.List;
+import java.util.UUID;
 
 public class TripController extends Observable implements ITripController {
 
@@ -262,11 +261,11 @@ public class TripController extends Observable implements ITripController {
 		List<ITrip> query = db.findByBoat(boatId);
 		logger.info("TripController", "All trips: " + query.toString());
 		List<UUID> trips = new ArrayList<UUID>();
-		
+
 		for(ITrip trip : query) {
 			trips.add(trip.getUUID());
 		}
-		
+
 		return trips;
 	}
 
@@ -290,7 +289,12 @@ public class TripController extends Observable implements ITripController {
 		return db.save(trip);
 	}
 
-	@Override
+    @Override
+    public List<Trip> getTrips(final String userid, final String viewId) {
+        return db.getTrips(userid,viewId);
+    }
+
+    @Override
 	public String getBoat(UUID id) {
 		return db.get(id).getBoat();
 	}

@@ -1,10 +1,11 @@
 package de.htwg.seapal.controller;
 
+import de.htwg.seapal.model.ITrip;
+import de.htwg.seapal.model.impl.Trip;
+import de.htwg.seapal.utils.observer.IObservable;
+
 import java.util.List;
 import java.util.UUID;
-
-import de.htwg.seapal.model.ITrip;
-import de.htwg.seapal.utils.observer.IObservable;
 
 public interface ITripController extends IObservable {
 
@@ -64,7 +65,7 @@ public interface ITripController extends IObservable {
 
 	/**
 	 * Gets a trip by the given trip ID.
-	 * 
+	 *
 	 * @param tripId
 	 *            The trip ID.
 	 * @return The trip or NULL, if no trip was found.
@@ -73,14 +74,14 @@ public interface ITripController extends IObservable {
 
 	/**
 	 * Gets all trips.
-	 * 
+	 *
 	 * @return All trips.
 	 */
 	List<ITrip> getAllTrips();
 
 	/**
 	 * Gets all trips of the given boat ID.
-	 * 
+	 *
 	 * @param boatId
 	 *            The boat ID.
 	 * @return All Trips of the boat ID.
@@ -89,11 +90,13 @@ public interface ITripController extends IObservable {
 
 	/**
 	 * Saves the trip.
-	 * 
+	 *
 	 * @param trip
 	 *            The trip to save.
 	 * @return Returns TRUE, if the trip was newly created and FALSE when the
 	 *         trip was updated.
 	 */
 	boolean saveTrip(ITrip trip);
+
+    List<Trip> getTrips(String userid, String viewId);
 }

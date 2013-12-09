@@ -1,15 +1,13 @@
 package de.htwg.seapal.database.mock;
 
-import java.util.HashMap;
-import java.util.List;
-import java.util.Map;
-import java.util.UUID;
-
 import com.google.common.collect.ImmutableList;
-
+import de.htwg.seapal.Constants;
 import de.htwg.seapal.database.IBoatDatabase;
 import de.htwg.seapal.model.IBoat;
 import de.htwg.seapal.model.impl.Boat;
+import org.ektorp.ViewQuery;
+
+import java.util.*;
 
 public class BoatDatabase implements IBoatDatabase {
 
@@ -19,7 +17,7 @@ public class BoatDatabase implements IBoatDatabase {
 	public BoatDatabase() {
 		open();
 	}
-	
+
 	@Override
 	public boolean open() {
 		// create test data
@@ -35,7 +33,7 @@ public class BoatDatabase implements IBoatDatabase {
 		}
 		return true;
 	}
-	
+
 	@Override
 	public boolean close() {
 		return true;
@@ -46,7 +44,20 @@ public class BoatDatabase implements IBoatDatabase {
 		return newBoat.getUUID();
 	}
 
-	private UUID createNewBoatInDatabase() {
+    @Override
+    public List<Boat> getBoats(final String userid, String viewId) {
+        List<Boat> boats = new LinkedList<Boat>();
+        Collection<IBoat> collection = db.values();
+        for (IBoat boat : collection) {
+            if (boat.getOwner().equals(userid)) {
+                boats.add((Boat) boat);
+            }
+        }
+
+        return boats;
+    }
+
+    private UUID createNewBoatInDatabase() {
 		IBoat boat = new Boat();
 		boat.setRegisterNr("AB7737");
 		boat.setType("Yacht");
