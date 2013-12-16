@@ -1,13 +1,12 @@
 package de.htwg.seapal.model.impl;
 
-import java.util.UUID;
-
+import de.htwg.seapal.model.ITrip;
+import de.htwg.seapal.model.ModelDocument;
 import org.apache.commons.lang.builder.EqualsBuilder;
 import org.apache.commons.lang.builder.HashCodeBuilder;
 import org.apache.commons.lang.builder.ReflectionToStringBuilder;
 
-import de.htwg.seapal.model.ITrip;
-import de.htwg.seapal.model.ModelDocument;
+import java.util.UUID;
 
 public class Trip extends ModelDocument implements ITrip {
 
@@ -20,8 +19,7 @@ public class Trip extends ModelDocument implements ITrip {
 	private String name;
 	private String startLocation;
 	private String endLocation;
-	private String skipper; // UUID Person
-	private String crewMembers; 
+	private String crewMembers;
 	private Long startTime; // unix timestamp
 	private Long endTime; // unix timestamp
 	private Long duration;
@@ -33,7 +31,6 @@ public class Trip extends ModelDocument implements ITrip {
 	public Trip() {
 		setId(UUID.randomUUID().toString());
 		this.crewMembers = "";
-		this.skipper = "";
 		this.name = "";
 		this.startLocation = "";
 		this.endLocation = "";
@@ -52,7 +49,6 @@ public class Trip extends ModelDocument implements ITrip {
 		this.name = t.getName();
 		this.startLocation = t.getStartLocation();
 		this.endLocation = t.getEndLocation();
-		this.skipper = t.getSkipper();
 		this.crewMembers = t.getCrewMembers();
 		this.startTime = t.getStartTime();
 		this.endTime = t.getEndTime();
@@ -89,16 +85,6 @@ public class Trip extends ModelDocument implements ITrip {
 	@Override
 	public String getEndLocation() {
 		return endLocation;
-	}
-
-	@Override
-	public void setSkipper(String skipper) {
-		this.skipper = skipper;
-	}
-
-	@Override
-	public String getSkipper() {
-		return skipper;
 	}
 
 	@Override

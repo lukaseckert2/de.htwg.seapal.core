@@ -1,9 +1,9 @@
 package de.htwg.seapal.model.impl;
 
-import java.util.UUID;
-
 import de.htwg.seapal.model.IPerson;
 import de.htwg.seapal.model.ModelDocument;
+
+import java.util.UUID;
 
 public class Person extends ModelDocument implements IPerson {
 
@@ -12,15 +12,13 @@ public class Person extends ModelDocument implements IPerson {
 	 */
 	private static final long serialVersionUID = 1L;
 
-	private String user; // UUID user
-
 	private String firstname = null;
 
 	private String lastname = null;
 
-	private Long birth; // unix timestamp
+	private Long birth;
 
-	private Long registration; // unix timestamp
+	private Long registration;
 
 	private Integer age = 0;
 
@@ -42,8 +40,6 @@ public class Person extends ModelDocument implements IPerson {
 
 	public Person() {
 		setId(UUID.randomUUID().toString());
-		user = "";
-
 		firstname = "";
 		lastname = "";
 		birth = 0L;
@@ -62,7 +58,6 @@ public class Person extends ModelDocument implements IPerson {
 	}
 
 	public Person(IPerson person) {
-		user = person.getUser();
 		setId(person.getId());
 
 		firstname = person.getFirstname();
@@ -214,15 +209,5 @@ public class Person extends ModelDocument implements IPerson {
 	@Override
 	public void setCountry(String country) {
 		this.country = country;
-	}
-
-	@Override
-	public String getUser() {
-		return user;
-	}
-
-	@Override
-	public void setUser(String user) {
-		this.user = user;
 	}
 }

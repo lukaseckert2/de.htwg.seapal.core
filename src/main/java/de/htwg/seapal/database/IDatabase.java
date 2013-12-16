@@ -1,5 +1,7 @@
 package de.htwg.seapal.database;
 
+import de.htwg.seapal.model.IModel;
+
 import java.util.List;
 import java.util.UUID;
 
@@ -7,19 +9,19 @@ import java.util.UUID;
  * The generic database interface.
  * @param <T> The model interface to manage.
  */
-public interface IDatabase<T> {
+public interface IDatabase<T extends IModel> {
 	/**
 	 * Opens the database connection.
 	 * @return TRUE, if successful.
 	 */
 	boolean open();
-	
+
 	/**
 	 * Creates a new data entry.
 	 * @return The UUID of the created data entry.
 	 */
 	UUID create();
-	
+
 	/**
 	 * Saves a data entry.
 	 * @param data The data entry to save.
@@ -47,7 +49,7 @@ public interface IDatabase<T> {
 	 * @param id The UUID of the data entry to delete.
 	 */
 	void delete(UUID id);
-	
+
 	/**
 	 * Closes the database connection.
 	 * @return TRUE, if successful.

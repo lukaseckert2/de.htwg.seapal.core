@@ -1,25 +1,27 @@
 package de.htwg.seapal.model;
 
-import java.io.Serializable;
-import java.util.UUID;
-
 import org.codehaus.jackson.annotate.JsonIgnore;
 import org.codehaus.jackson.annotate.JsonProperty;
 
-import org.ektorp.util.*;
+import java.io.Serializable;
+import java.util.LinkedList;
+import java.util.List;
+import java.util.UUID;
 
 /**
  * Alternative base class to CouchDbDocument, which allows to set an ID twice.
  * This is neccessary to override the default ID with the UUID of seapal. Also
  * this implementation does not implements attachments, because this CouchDB
  * feature is not required.
- * 
+ *
  * @author Benjamin
  */
 public abstract class ModelDocument implements IModel, Serializable {
 	private static final long serialVersionUID = 1L;
 	private String id;
 	private String revision;
+    private String owner;
+    private List<String> crew = new LinkedList<>();
 
 	@JsonIgnore
 	@Override
@@ -35,7 +37,7 @@ public abstract class ModelDocument implements IModel, Serializable {
 
 	/**
 	 * Sets the UUID.
-	 * 
+	 *
 	 * @param uuid
 	 *            The UUID.
 	 */
@@ -48,7 +50,7 @@ public abstract class ModelDocument implements IModel, Serializable {
 
 	/**
 	 * Gets the revision.
-	 * 
+	 *
 	 * @return The revision.
 	 */
 	@JsonProperty("_rev")
@@ -58,7 +60,7 @@ public abstract class ModelDocument implements IModel, Serializable {
 
 	/**
 	 * Sets the revision.
-	 * 
+	 *
 	 * @param rev
 	 *            The revision.
 	 */
@@ -69,7 +71,7 @@ public abstract class ModelDocument implements IModel, Serializable {
 
 	/**
 	 * Indicates whether the data entry is new.
-	 * 
+	 *
 	 * @return TRUE, if there is no revision and the data is newly created.
 	 */
 	@JsonIgnore
@@ -83,7 +85,7 @@ public abstract class ModelDocument implements IModel, Serializable {
 	 * Note: This duplicated method is necessary for Forms.bindFromRequest() of
 	 * Play!.
 	 * </p>
-	 * 
+	 *
 	 * @return The revision.
 	 */
 	@JsonIgnore
@@ -97,7 +99,7 @@ public abstract class ModelDocument implements IModel, Serializable {
 	 * Note: This duplicated method is necessary for Forms.bindFromRequest() of
 	 * Play!.
 	 * </p>
-	 * 
+	 *
 	 * @param rev
 	 *            The revision.
 	 */
@@ -112,7 +114,7 @@ public abstract class ModelDocument implements IModel, Serializable {
 	 * Note: This duplicated method is necessary for Forms.bindFromRequest() of
 	 * Play!.
 	 * </p>
-	 * 
+	 *
 	 * @return The UUID.
 	 */
 	@JsonIgnore
@@ -126,7 +128,7 @@ public abstract class ModelDocument implements IModel, Serializable {
 	 * Note: This duplicated method is necessary for Forms.bindFromRequest() of
 	 * Play!.
 	 * </p>
-	 * 
+	 *
 	 * @param uuid
 	 *            The UUID.
 	 */
@@ -136,4 +138,33 @@ public abstract class ModelDocument implements IModel, Serializable {
 			return;
 		id = uuid;
 	}
+
+    @JsonProperty("owner")
+    @Override
+    public String getOwner() {
+        return owner;
+    }
+
+    @JsonProperty("owner")
+    @Override
+    public void setOwner(String owner) {
+        this.owner = owner;
+    }
+
+    @JsonProperty("crew")
+    @Override
+    public List<String> getCrew() {
+        return crew;
+    }
+
+    @JsonProperty("crew")
+    @Override
+    public void setCrew(final List<String> crew) {
+        this.crew = crew;
+    }
+
+    @JsonIgnore
+    public void addCrewMember(final String crewMember) {
+        this.crew.add(crewMember);
+    }
 }

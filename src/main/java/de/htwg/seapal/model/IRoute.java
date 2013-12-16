@@ -27,8 +27,4 @@ public interface IRoute extends IModel {
 
 	void setDistance(Double distance);
 
-	String getUser();
-
-	void setUser(String user);
-
 }

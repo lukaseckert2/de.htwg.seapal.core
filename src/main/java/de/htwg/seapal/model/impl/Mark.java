@@ -1,9 +1,9 @@
 package de.htwg.seapal.model.impl;
 
-import java.util.UUID;
-
 import de.htwg.seapal.model.IMark;
 import de.htwg.seapal.model.ModelDocument;
+
+import java.util.UUID;
 
 public class Mark extends ModelDocument implements IMark {
 
@@ -11,8 +11,6 @@ public class Mark extends ModelDocument implements IMark {
 	 * Serial version UID for serialization.
 	 */
 	private static final long serialVersionUID = 1L;
-
-	private String user; // UUID user
 
 	private String name;
 	private Double latitude;
@@ -27,7 +25,6 @@ public class Mark extends ModelDocument implements IMark {
 
 	public Mark() {
 		setId(UUID.randomUUID().toString());
-		this.user = "";
 		this.latitude = 0D;
 		this.Longitude = 0D;
 		this.btm = 0;
@@ -41,7 +38,6 @@ public class Mark extends ModelDocument implements IMark {
 
 	public Mark(IMark m) {
 		setId(m.getId());
-		this.user = m.getUser();
 
 		this.name = m.getName();
 		this.latitude = m.getLatitude();
@@ -154,15 +150,4 @@ public class Mark extends ModelDocument implements IMark {
 	public void setIsRouteMark(Boolean isRouteMark) {
 		this.isRouteMark = isRouteMark;
 	}
-
-	@Override
-	public String getUser() {
-		return user;
-	}
-
-	@Override
-	public void setUser(String user) {
-		this.user = user;
-	}
-
 }

@@ -15,13 +15,9 @@ public interface ITrip extends IModel {
 
 	void setEndLocation(String location);
 
-	String getSkipper(); // Person
+	String getCrewMembers();
 
-	void setSkipper(String skipper); // Person
-
-	String getCrewMembers(); 
-
-	void setCrewMember(String crewMember); 
+	void setCrewMember(String crewMember);
 
 	Integer getMotor();
 

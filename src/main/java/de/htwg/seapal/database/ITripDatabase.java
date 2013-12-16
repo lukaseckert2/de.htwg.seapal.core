@@ -1,7 +1,6 @@
 package de.htwg.seapal.database;
 
 import de.htwg.seapal.model.ITrip;
-import de.htwg.seapal.model.impl.Trip;
 import org.ektorp.support.GenerateView;
 
 import java.util.List;
@@ -28,6 +27,4 @@ public interface ITripDatabase extends IDatabase<ITrip> {
 	 */
 	@GenerateView
     List<ITrip> findByBoat(UUID boatId);
-
-    public List<Trip> getTrips(String key, String viewId);
 }

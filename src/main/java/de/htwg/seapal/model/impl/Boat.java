@@ -1,9 +1,9 @@
 package de.htwg.seapal.model.impl;
 
-import java.util.UUID;
-
 import de.htwg.seapal.model.IBoat;
 import de.htwg.seapal.model.ModelDocument;
+
+import java.util.UUID;
 
 public class Boat extends ModelDocument implements IBoat {
 
@@ -12,14 +12,11 @@ public class Boat extends ModelDocument implements IBoat {
 	 */
 	private static final long serialVersionUID = 1L;
 
-	private String user; // person UUID
-
 	private String boatName;
 	private String registerNr;
 	private String sailSign;
 	private String homePort;
 	private String yachtclub;
-	private String owner;
 	private String insurance;
 	private String callSign;
 	private String type;
@@ -41,13 +38,11 @@ public class Boat extends ModelDocument implements IBoat {
 
 	public Boat() {
 		setId(UUID.randomUUID().toString());
-		this.user = "";
 		this.boatName = "";
 		this.registerNr = "";
 		this.sailSign = "";
 		this.homePort = "";
 		this.yachtclub = "";
-		this.owner = "";
 		this.insurance = "";
 		this.callSign = "";
 		this.type = "";
@@ -70,13 +65,11 @@ public class Boat extends ModelDocument implements IBoat {
 
 	public Boat(IBoat boat) {
 		setId(boat.getId());
-		this.user = boat.getUser();
 		this.boatName = boat.getBoatName();
 		this.registerNr = boat.getRegisterNr();
 		this.sailSign = boat.getSailSign();
 		this.homePort = boat.getHomePort();
 		this.yachtclub = boat.getYachtclub();
-		this.owner = boat.getOwner();
 		this.insurance = boat.getInsurance();
 		this.callSign = boat.getCallSign();
 		this.type = boat.getType();
@@ -147,19 +140,7 @@ public class Boat extends ModelDocument implements IBoat {
 		this.yachtclub = yachtclub;
 	}
 
-	@Override
-	public String getOwner() { // Person
-		if (owner == null)
-			return null;
-		return owner;
-	}
-
-	@Override
-	public void setOwner(String owner) { // Person
-		this.owner = owner.toString();
-	}
-
-	@Override
+    @Override
 	public String getInsurance() {
 		return insurance;
 	}
@@ -337,15 +318,5 @@ public class Boat extends ModelDocument implements IBoat {
 	@Override
 	public void setSpiSize(Double spiSize) {
 		this.spiSize = spiSize;
-	}
-
-	@Override
-	public String getUser() {
-		return user;
-	}
-
-	@Override
-	public void setUser(String userId) {
-		this.user = userId;
 	}
 }

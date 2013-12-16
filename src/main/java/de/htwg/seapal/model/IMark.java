@@ -46,8 +46,4 @@ public interface IMark extends IModel {
 	@JsonProperty("is_route")
 	void setIsRouteMark(Boolean isRouteMark);
 
-	void setUser(String user);
-
-	String getUser();
-
 }

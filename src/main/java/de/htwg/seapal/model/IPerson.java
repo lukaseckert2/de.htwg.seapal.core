@@ -53,8 +53,4 @@ public interface IPerson extends IModel {
 	String getCountry();
 
 	void setCountry(String country);
-
-	String getUser();
-
-	void setUser(String user);
 }

@@ -1,11 +1,11 @@
 package de.htwg.seapal.model.impl;
 
+import de.htwg.seapal.model.IRoute;
+import de.htwg.seapal.model.ModelDocument;
+
 import java.util.LinkedList;
 import java.util.List;
 import java.util.UUID;
-
-import de.htwg.seapal.model.IRoute;
-import de.htwg.seapal.model.ModelDocument;
 
 public class Route extends ModelDocument implements IRoute {
 
@@ -13,8 +13,6 @@ public class Route extends ModelDocument implements IRoute {
 	 * Serial version UID for serialization.
 	 */
 	private static final long serialVersionUID = 1L;
-
-	private String user; // UUID user
 
 	private String name;
 	private Long date;
@@ -25,7 +23,6 @@ public class Route extends ModelDocument implements IRoute {
 	public Route() {
 		setId(UUID.randomUUID().toString());
 		marks = new LinkedList<String>();
-		this.user = "";
 		this.name = "";
 		this.date = 0L;
 		this.routeEntryPoint = null;
@@ -34,7 +31,6 @@ public class Route extends ModelDocument implements IRoute {
 
 	public Route(IRoute r) {
 		setId(r.getId());
-		this.user = r.getUser();
 		this.name = r.getName();
 		this.date = r.getDate();
 		List<String> list = new LinkedList<String>();
@@ -105,15 +101,5 @@ public class Route extends ModelDocument implements IRoute {
 	@Override
 	public void setDistance(Double distance) {
 		this.distance = distance;
-	}
-
-	@Override
-	public String getUser() {
-		return user;
-	}
-
-	@Override
-	public void setUser(String user) {
-		this.user = user;
 	}
 }

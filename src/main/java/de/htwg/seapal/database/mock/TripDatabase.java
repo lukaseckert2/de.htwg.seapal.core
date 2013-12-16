@@ -1,16 +1,12 @@
 package de.htwg.seapal.database.mock;
 
-import java.util.*;
-
-import de.htwg.seapal.model.IBoat;
-import de.htwg.seapal.model.impl.Boat;
-import org.ektorp.support.GenerateView;
-
 import com.google.common.collect.ImmutableList;
-
 import de.htwg.seapal.database.ITripDatabase;
 import de.htwg.seapal.model.ITrip;
 import de.htwg.seapal.model.impl.Trip;
+import org.ektorp.support.GenerateView;
+
+import java.util.*;
 
 public class TripDatabase implements ITripDatabase {
 
@@ -79,16 +75,4 @@ public class TripDatabase implements ITripDatabase {
 		// TODO Auto-generated method stub
 		return null;
 	}
-    @Override
-    public List<Trip> getTrips(final String key, final String viewId) {
-        List<Trip> trips = new LinkedList<Trip>();
-        Collection<ITrip> collection = db.values();
-        for (ITrip trip : collection) {
-            if (trip.getSkipper().equals(key)) {
-                trips.add((Trip) trip);
-            }
-        }
-
-        return trips;
-    }
 }

@@ -1,16 +1,14 @@
 package de.htwg.seapal.model.impl;
 
-import java.util.UUID;
-
+import de.htwg.seapal.model.IWaypoint;
+import de.htwg.seapal.model.ModelDocument;
 import org.apache.commons.lang.builder.EqualsBuilder;
 import org.apache.commons.lang.builder.HashCodeBuilder;
 import org.apache.commons.lang.builder.ReflectionToStringBuilder;
 import org.codehaus.jackson.annotate.JsonCreator;
 import org.codehaus.jackson.annotate.JsonProperty;
 
-import de.htwg.seapal.model.IWaypoint;
-import de.htwg.seapal.model.ModelDocument;
-import de.htwg.seapal.utils.logging.ILogger;
+import java.util.UUID;
 
 public class Waypoint extends ModelDocument implements IWaypoint {
 

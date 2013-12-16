@@ -1,6 +1,5 @@
 package de.htwg.seapal.model;
 
-
 public interface IBoat extends IModel {
 
 	String getBoatName();
@@ -22,10 +21,6 @@ public interface IBoat extends IModel {
 	String getYachtclub();
 
 	void setYachtclub(String yachtclub);
-
-	String getOwner(); // Person
-
-	void setOwner(String owner); // Person
 
 	String getInsurance();
 
@@ -98,8 +93,4 @@ public interface IBoat extends IModel {
 	Double getSpiSize();
 
 	void setSpiSize(Double spiSize);
-
-	void setUser(String userId);
-
-	String getUser();
 }

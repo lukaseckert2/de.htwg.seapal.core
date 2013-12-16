@@ -86,7 +86,7 @@ public class TripController extends Observable implements ITripController {
 		ITrip trip = db.get(id);
 		if (trip == null)
 			return;
-		trip.setSkipper(skipper.toString());
+		trip.setOwner(skipper.toString());
 		db.save(trip);
 		notifyObservers();
 
@@ -97,10 +97,10 @@ public class TripController extends Observable implements ITripController {
 		ITrip trip = db.get(id);
 		if (trip == null)
 			return null;
-		if(trip.getSkipper().equals(""))
+		if(trip.getOwner().equals(""))
 			return null;
 		else
-			return UUID.fromString(trip.getSkipper());
+			return UUID.fromString(trip.getOwner());
 
 	}
 
@@ -291,7 +291,7 @@ public class TripController extends Observable implements ITripController {
 
     @Override
     public List<Trip> getTrips(final String userid, final String viewId) {
-        return db.getTrips(userid,viewId);
+        return db
     }
 
     @Override
