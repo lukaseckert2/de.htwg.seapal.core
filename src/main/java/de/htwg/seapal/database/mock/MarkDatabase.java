@@ -1,15 +1,14 @@
 package de.htwg.seapal.database.mock;
 
+import com.google.common.collect.ImmutableList;
+import de.htwg.seapal.database.IMarkDatabase;
+import de.htwg.seapal.model.IMark;
+import de.htwg.seapal.model.impl.Mark;
+
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 import java.util.UUID;
-
-import com.google.common.collect.ImmutableList;
-
-import de.htwg.seapal.database.IMarkDatabase;
-import de.htwg.seapal.model.IMark;
-import de.htwg.seapal.model.impl.Mark;
 
 public class MarkDatabase implements IMarkDatabase {
 	Map<UUID, IMark> db = new HashMap<UUID, IMark>();
@@ -18,7 +17,7 @@ public class MarkDatabase implements IMarkDatabase {
 	public MarkDatabase() {
 		open();
 	}
-	
+
 	@Override
 	public boolean open() {
 		// create test data
@@ -34,13 +33,17 @@ public class MarkDatabase implements IMarkDatabase {
 		}
 		return true;
 	}
-	
+
 	@Override
 	public boolean close() {
 		return true;
 	}
+    @Override
+    public List<? extends IMark> queryViews(final String viewName, final String key) {
+        return null;  //To change body of implemented methods use File | Settings | File Templates.
+    }
 
-	@Override
+    @Override
 	public UUID create() {
 		return newMark.getUUID();
 	}
@@ -59,7 +62,7 @@ public class MarkDatabase implements IMarkDatabase {
 
 	@Override
 	public void delete(UUID id) {
-		
+
 	}
 
 	@Override

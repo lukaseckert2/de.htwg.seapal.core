@@ -1,10 +1,6 @@
 package de.htwg.seapal.database;
 
 import de.htwg.seapal.model.ITrip;
-import org.ektorp.support.GenerateView;
-
-import java.util.List;
-import java.util.UUID;
 
 /**
  * The trip database interface.
@@ -20,11 +16,4 @@ import java.util.UUID;
  * </p>
  */
 public interface ITripDatabase extends IDatabase<ITrip> {
-	/**
-	 * Gets all trips by the given boat UUID.
-	 * @param boatId The boats UUID.
-	 * @return All matching trips.
-	 */
-	@GenerateView
-    List<ITrip> findByBoat(UUID boatId);
 }

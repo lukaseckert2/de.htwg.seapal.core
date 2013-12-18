@@ -1,15 +1,14 @@
 package de.htwg.seapal.database.mock;
 
+import com.google.common.collect.ImmutableList;
+import de.htwg.seapal.database.IWaypointDatabase;
+import de.htwg.seapal.model.IWaypoint;
+import de.htwg.seapal.model.impl.Waypoint;
+
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 import java.util.UUID;
-
-import com.google.common.collect.ImmutableList;
-
-import de.htwg.seapal.database.IWaypointDatabase;
-import de.htwg.seapal.model.IWaypoint;
-import de.htwg.seapal.model.impl.Waypoint;
 
 public class WaypointDatabase implements IWaypointDatabase {
 
@@ -19,7 +18,7 @@ public class WaypointDatabase implements IWaypointDatabase {
 	public WaypointDatabase() {
 		open();
 	}
-	
+
 	@Override
 	public boolean open() {
 		// create test data
@@ -35,13 +34,17 @@ public class WaypointDatabase implements IWaypointDatabase {
 		}
 		return true;
 	}
-	
+
 	@Override
 	public boolean close() {
 		return true;
 	}
+    @Override
+    public List<? extends IWaypoint> queryViews(final String viewName, final String key) {
+        return null;  //To change body of implemented methods use File | Settings | File Templates.
+    }
 
-	@Override
+    @Override
 	public UUID create() {
 		return newWaypoint.getUUID();
 	}
@@ -70,11 +73,5 @@ public class WaypointDatabase implements IWaypointDatabase {
 	@Override
 	public List<IWaypoint> loadAll() {
 		return ImmutableList.copyOf(db.values());
-	}
-
-	@Override
-	public List<IWaypoint> findByTrip(UUID tripId) {
-		// TODO Auto-generated method stub
-		return null;
 	}
 }

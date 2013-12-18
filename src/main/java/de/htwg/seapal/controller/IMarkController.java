@@ -1,16 +1,16 @@
 package de.htwg.seapal.controller;
 
-import java.util.List;
-import java.util.UUID;
-
 import de.htwg.seapal.model.IMark;
 import de.htwg.seapal.utils.observer.IObservable;
+
+import java.util.List;
+import java.util.UUID;
 
 public interface IMarkController extends IObservable {
 
 	/**
 	 * Gets the name of the given mark ID.
-	 * 
+	 *
 	 * @param id
 	 *            The mark ID.
 	 * @return The name.
@@ -19,7 +19,7 @@ public interface IMarkController extends IObservable {
 
 	/**
 	 * Sets the name of the given mark ID.
-	 * 
+	 *
 	 * @param id
 	 *            The mark ID.
 	 * @param name
@@ -29,7 +29,7 @@ public interface IMarkController extends IObservable {
 
 	/**
 	 * Gets the latitude of the given mark ID.
-	 * 
+	 *
 	 * @param id
 	 *            The mark ID.
 	 * @return The latitude.
@@ -38,7 +38,7 @@ public interface IMarkController extends IObservable {
 
 	/**
 	 * Sets the latitude of the given mark ID.
-	 * 
+	 *
 	 * @param id
 	 *            The mark ID.
 	 * @param latitute
@@ -48,7 +48,7 @@ public interface IMarkController extends IObservable {
 
 	/**
 	 * Gets the longitude of the give mark ID.
-	 * 
+	 *
 	 * @param id
 	 *            The mark ID.
 	 * @return The longitude.
@@ -57,7 +57,7 @@ public interface IMarkController extends IObservable {
 
 	/**
 	 * Sets the longitude of the give mark ID.
-	 * 
+	 *
 	 * @param id
 	 *            The mark ID.
 	 * @param longitude
@@ -67,7 +67,7 @@ public interface IMarkController extends IObservable {
 
 	/**
 	 * Gets the note of the given mark ID.
-	 * 
+	 *
 	 * @param id
 	 *            The mark ID.
 	 * @return The note.
@@ -76,7 +76,7 @@ public interface IMarkController extends IObservable {
 
 	/**
 	 * Sets the note of the given mark ID.
-	 * 
+	 *
 	 * @param id
 	 *            The mark ID.
 	 * @param note
@@ -86,7 +86,7 @@ public interface IMarkController extends IObservable {
 
 	/**
 	 * Gets the BTM of the given mark ID.
-	 * 
+	 *
 	 * @param id
 	 *            The mark ID.
 	 * @return The BTM.
@@ -95,7 +95,7 @@ public interface IMarkController extends IObservable {
 
 	/**
 	 * Sets the BTM of the given mark ID.
-	 * 
+	 *
 	 * @param id
 	 *            The mark ID.
 	 * @param btm
@@ -105,7 +105,7 @@ public interface IMarkController extends IObservable {
 
 	/**
 	 * Gets the DTM of the given mark ID.
-	 * 
+	 *
 	 * @param id
 	 *            The mark ID.
 	 * @return The DTM.
@@ -114,7 +114,7 @@ public interface IMarkController extends IObservable {
 
 	/**
 	 * Sets the DTM of the given mark ID.
-	 * 
+	 *
 	 * @param id
 	 *            The mark ID.
 	 * @param dtm
@@ -124,7 +124,7 @@ public interface IMarkController extends IObservable {
 
 	/**
 	 * Gets the COG of the given mark ID.
-	 * 
+	 *
 	 * @param id
 	 *            The mark ID.
 	 * @return The COG.
@@ -133,7 +133,7 @@ public interface IMarkController extends IObservable {
 
 	/**
 	 * Sets the COG of the given mark ID.
-	 * 
+	 *
 	 * @param id
 	 *            The mark ID.
 	 * @param cog
@@ -143,7 +143,7 @@ public interface IMarkController extends IObservable {
 
 	/**
 	 * Gets the SOG of the given mark ID.
-	 * 
+	 *
 	 * @param id
 	 *            The mark ID.
 	 * @return The SOG.
@@ -152,7 +152,7 @@ public interface IMarkController extends IObservable {
 
 	/**
 	 * Sets the SOG of the given mark ID.
-	 * 
+	 *
 	 * @param id
 	 *            The mark ID.
 	 * @param sog
@@ -162,7 +162,7 @@ public interface IMarkController extends IObservable {
 
 	/**
 	 * Gets the date of the given mark ID.
-	 * 
+	 *
 	 * @param id
 	 *            The mark ID.
 	 * @return The date.
@@ -171,7 +171,7 @@ public interface IMarkController extends IObservable {
 
 	/**
 	 * Sets the date of the given mark ID.
-	 * 
+	 *
 	 * @param id
 	 *            The mark ID.
 	 * @param date
@@ -181,7 +181,7 @@ public interface IMarkController extends IObservable {
 
 	/**
 	 * Indicates whether the given mark ID is a route mark.
-	 * 
+	 *
 	 * @param id
 	 *            The mark ID.
 	 * @return TRUE, if it is a route mark.
@@ -190,7 +190,7 @@ public interface IMarkController extends IObservable {
 
 	/**
 	 * Sets the value whether the given mark ID is a route mark.
-	 * 
+	 *
 	 * @param id
 	 *            The mark ID.
 	 * @param isRouteMark
@@ -200,7 +200,7 @@ public interface IMarkController extends IObservable {
 
 	/**
 	 * Deletes a mark.
-	 * 
+	 *
 	 * @param id
 	 *            The mark ID.
 	 */
@@ -213,28 +213,28 @@ public interface IMarkController extends IObservable {
 
 	/**
 	 * Gets a list of all mark IDs.
-	 * 
+	 *
 	 * @return All mark IDs.
 	 */
 	List<UUID> getMarks();
 
 	/**
 	 * Creates a new route mark.
-	 * 
+	 *
 	 * @return The mark ID.
 	 */
 	UUID newRouteMark(double longitude, double latitude);
 
 	/**
 	 * Creates a new mark.
-	 * 
+	 *
 	 * @return The mark ID.
 	 */
 	UUID newMark(double longitude, double latitude);
 
 	/**
 	 * Gets the output string of the given mark ID.
-	 * 
+	 *
 	 * @param id
 	 *            The mark ID.
 	 * @return The output string.
@@ -243,7 +243,7 @@ public interface IMarkController extends IObservable {
 
 	/**
 	 * Gets a mark by the given mark ID.
-	 * 
+	 *
 	 * @param markId
 	 *            The mark ID.
 	 * @return The mark or NULL, if no mark was found.
@@ -252,18 +252,20 @@ public interface IMarkController extends IObservable {
 
 	/**
 	 * Gets all marks.
-	 * 
+	 *
 	 * @return All marks.
 	 */
 	List<IMark> getAllMarks();
 
 	/**
 	 * Saves the mark.
-	 * 
+	 *
 	 * @param mark
 	 *            The mark to save.
 	 * @return Returns TRUE, if the mark was newly created and FALSE when the
 	 *         mark was updated.
 	 */
 	boolean saveMark(IMark mark);
+
+    List<? extends IMark> queryView(String viewName, String key);
 }

@@ -1,32 +1,31 @@
 package de.htwg.seapal.database.mock;
 
+import com.google.common.collect.ImmutableList;
+import de.htwg.seapal.database.IPersonDatabase;
+import de.htwg.seapal.model.IPerson;
+import de.htwg.seapal.model.impl.Person;
+
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 import java.util.UUID;
 
-import com.google.common.collect.ImmutableList;
-
-import de.htwg.seapal.database.IPersonDatabase;
-import de.htwg.seapal.model.IPerson;
-import de.htwg.seapal.model.impl.Person;
-
 public class PersonDatabase implements IPersonDatabase {
 
 	Map<UUID, IPerson> db = new HashMap<UUID, IPerson>();
 	private IPerson newPerson;
-	
+
 	public PersonDatabase() {
 		open();
 	}
-	
+
 	private UUID createNewPersonInDatabase() {
 		IPerson person = new Person();
 		UUID id = person.getUUID();
 		db.put(id, person);
 		return id;
 	}
-	
+
 	@Override
 	public boolean open() {
 		// create test data
@@ -44,13 +43,17 @@ public class PersonDatabase implements IPersonDatabase {
 		}
 		return true;
 	}
-	
+
 	@Override
 	public boolean close() {
 		return true;
 	}
+    @Override
+    public List<? extends IPerson> queryViews(final String viewName, final String key) {
+        return null;  //To change body of implemented methods use File | Settings | File Templates.
+    }
 
-	@Override
+    @Override
 	public void delete(UUID id) {
 	}
 

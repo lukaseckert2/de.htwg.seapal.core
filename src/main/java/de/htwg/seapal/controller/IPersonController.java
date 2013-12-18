@@ -1,10 +1,10 @@
 package de.htwg.seapal.controller;
 
-import java.util.List;
-import java.util.UUID;
-
 import de.htwg.seapal.model.IPerson;
 import de.htwg.seapal.utils.observer.IObservable;
+
+import java.util.List;
+import java.util.UUID;
 
 public interface IPersonController extends IObservable {
 
@@ -72,7 +72,7 @@ public interface IPersonController extends IObservable {
 
 	/**
 	 * Gets a person by the given person ID.
-	 * 
+	 *
 	 * @param personId
 	 *            The person ID.
 	 * @return The person or NULL, if no person was found.
@@ -81,18 +81,20 @@ public interface IPersonController extends IObservable {
 
 	/**
 	 * Gets all persons.
-	 * 
+	 *
 	 * @return All persons.
 	 */
 	List<IPerson> getAllPersons();
 
 	/**
 	 * Saves the person.
-	 * 
+	 *
 	 * @param person
 	 *            The person to save.
 	 * @return Returns TRUE, if the person was newly created and FALSE when the
 	 *         person was updated.
 	 */
 	boolean savePerson(IPerson person);
+
+    List<? extends IPerson> queryView(String viewName, String key);
 }

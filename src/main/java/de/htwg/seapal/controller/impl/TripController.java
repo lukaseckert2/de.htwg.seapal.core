@@ -4,7 +4,6 @@ import com.google.inject.Inject;
 import de.htwg.seapal.controller.ITripController;
 import de.htwg.seapal.database.ITripDatabase;
 import de.htwg.seapal.model.ITrip;
-import de.htwg.seapal.model.impl.Trip;
 import de.htwg.seapal.utils.logging.ILogger;
 import de.htwg.seapal.utils.observer.Observable;
 
@@ -257,8 +256,8 @@ public class TripController extends Observable implements ITripController {
 	}
 
 	@Override
-	public List<UUID> getTrips(UUID boatId) {
-		List<ITrip> query = db.findByBoat(boatId);
+	public List<UUID> getTrips(String boatId) {
+        List<? extends ITrip> query = queryView("by_boat", boatId);
 		logger.info("TripController", "All trips: " + query.toString());
 		List<UUID> trips = new ArrayList<UUID>();
 
@@ -268,31 +267,15 @@ public class TripController extends Observable implements ITripController {
 
 		return trips;
 	}
+    @Override
+    public List<? extends ITrip> queryView(final String viewName, final String key) {
+        return db.queryViews(viewName, key);
+    }
 
-	@Override
-	public ITrip getTrip(UUID tripId) {
-		return db.get(tripId);
-	}
-
-	@Override
-	public List<ITrip> getAllTrips() {
-		return db.loadAll();
-	}
-
-	@Override
-	public List<ITrip> getAllTrips(UUID boatId) {
-		return db.findByBoat(boatId);
-	}
-
-	@Override
+    @Override
 	public boolean saveTrip(ITrip trip) {
 		return db.save(trip);
 	}
-
-    @Override
-    public List<Trip> getTrips(final String userid, final String viewId) {
-        return db
-    }
 
     @Override
 	public String getBoat(UUID id) {

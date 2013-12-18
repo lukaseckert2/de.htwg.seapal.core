@@ -1,7 +1,6 @@
 package de.htwg.seapal.controller;
 
 import de.htwg.seapal.model.IBoat;
-import de.htwg.seapal.model.impl.Boat;
 import de.htwg.seapal.utils.observer.IObservable;
 
 import java.util.List;
@@ -502,8 +501,6 @@ public interface IBoatController extends IObservable {
 	 */
 	List<UUID> getBoats();
 
-    List<Boat> getBoats(String userid, String viewId);
-
     /**
 	 * Gets a boat by the given boat ID.
 	 *
@@ -529,4 +526,6 @@ public interface IBoatController extends IObservable {
 	 *         boat was updated.
 	 */
 	boolean saveBoat(IBoat boat);
+
+    List<? extends IBoat> queryView(String viewName, String key);
 }

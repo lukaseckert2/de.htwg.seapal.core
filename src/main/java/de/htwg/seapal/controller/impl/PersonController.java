@@ -333,4 +333,8 @@ public class PersonController extends Observable implements IPersonController {
 	public boolean savePerson(IPerson person) {
 		return db.save(person);
 	}
+    @Override
+    public List<? extends IPerson> queryView(final String viewName, final String key) {
+        return db.queryViews(viewName, key);
+    }
 }

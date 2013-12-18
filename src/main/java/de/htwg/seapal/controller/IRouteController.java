@@ -1,16 +1,16 @@
 package de.htwg.seapal.controller;
 
-import java.util.List;
-import java.util.UUID;
-
 import de.htwg.seapal.model.IRoute;
 import de.htwg.seapal.utils.observer.IObservable;
+
+import java.util.List;
+import java.util.UUID;
 
 public interface IRouteController extends IObservable {
 
 	/**
 	 * Gets the name of the given route ID.
-	 * 
+	 *
 	 * @param id
 	 *            The route ID.
 	 * @return The name.
@@ -19,7 +19,7 @@ public interface IRouteController extends IObservable {
 
 	/**
 	 * Sets the name of the given route ID.
-	 * 
+	 *
 	 * @param id
 	 *            The route ID.
 	 * @param name
@@ -29,7 +29,7 @@ public interface IRouteController extends IObservable {
 
 	/**
 	 * Gets the date of the given route ID.
-	 * 
+	 *
 	 * @param id
 	 *            The route ID.
 	 * @return The date.
@@ -38,7 +38,7 @@ public interface IRouteController extends IObservable {
 
 	/**
 	 * Sets the date of the given route ID.
-	 * 
+	 *
 	 * @param id
 	 *            The route ID.
 	 * @param date
@@ -48,7 +48,7 @@ public interface IRouteController extends IObservable {
 
 	/**
 	 * Gets a list of all mark IDs of the given route ID.
-	 * 
+	 *
 	 * @param id
 	 *            The route ID.
 	 * @return All mark IDs of the given route.
@@ -57,7 +57,7 @@ public interface IRouteController extends IObservable {
 
 	/**
 	 * Adds a given mark to the route.
-	 * 
+	 *
 	 * @param id
 	 *            The route ID.
 	 * @param markId
@@ -67,7 +67,7 @@ public interface IRouteController extends IObservable {
 
 	/**
 	 * Deletes a given mark of the route.
-	 * 
+	 *
 	 * @param id
 	 *            The route ID.
 	 * @param markId
@@ -77,7 +77,7 @@ public interface IRouteController extends IObservable {
 
 	/**
 	 * Gets a route entry point of the given route ID.
-	 * 
+	 *
 	 * @param id
 	 *            The route ID.
 	 * @return The route entry point.
@@ -86,7 +86,7 @@ public interface IRouteController extends IObservable {
 
 	/**
 	 * Sets a route entry point of the given route ID.
-	 * 
+	 *
 	 * @param id
 	 *            The route ID.
 	 * @param markId
@@ -96,7 +96,7 @@ public interface IRouteController extends IObservable {
 
 	/**
 	 * Gets the distance of the given route ID.
-	 * 
+	 *
 	 * @param id
 	 *            The route ID.
 	 * @return The distance.
@@ -105,7 +105,7 @@ public interface IRouteController extends IObservable {
 
 	/**
 	 * Sets the distance of the given route ID.
-	 * 
+	 *
 	 * @param id
 	 *            The route ID.
 	 * @param distance
@@ -115,7 +115,7 @@ public interface IRouteController extends IObservable {
 
 	/**
 	 * Deletes a route.
-	 * 
+	 *
 	 * @param id
 	 *            The route ID.
 	 */
@@ -128,21 +128,21 @@ public interface IRouteController extends IObservable {
 
 	/**
 	 * Gets a list of all route IDs.
-	 * 
+	 *
 	 * @return All route IDs.
 	 */
 	List<UUID> getRoutes();
 
 	/**
 	 * Creates a new route.
-	 * 
+	 *
 	 * @return The route ID.
 	 */
 	UUID newRoute();
 
 	/**
 	 * Gets the output string of the given route ID.
-	 * 
+	 *
 	 * @param id
 	 *            The route ID.
 	 * @return The output string.
@@ -151,7 +151,7 @@ public interface IRouteController extends IObservable {
 
 	/**
 	 * Gets a route by the given route ID.
-	 * 
+	 *
 	 * @param routeId
 	 *            The route ID.
 	 * @return The route or NULL, if no route was found.
@@ -160,18 +160,20 @@ public interface IRouteController extends IObservable {
 
 	/**
 	 * Gets all routes.
-	 * 
+	 *
 	 * @return All routes.
 	 */
 	List<IRoute> getAllRoutes();
 
 	/**
 	 * Saves the route.
-	 * 
+	 *
 	 * @param route
 	 *            The route to save.
 	 * @return Returns TRUE, if the route was newly created and FALSE when the
 	 *         route was updated.
 	 */
 	boolean saveRoute(IRoute route);
+
+    List<? extends IRoute> queryView(String viewName, String key);
 }

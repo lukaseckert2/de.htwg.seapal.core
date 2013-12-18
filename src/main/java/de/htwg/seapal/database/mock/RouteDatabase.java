@@ -1,15 +1,14 @@
 package de.htwg.seapal.database.mock;
 
+import com.google.common.collect.ImmutableList;
+import de.htwg.seapal.database.IRouteDatabase;
+import de.htwg.seapal.model.IRoute;
+import de.htwg.seapal.model.impl.Route;
+
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 import java.util.UUID;
-
-import com.google.common.collect.ImmutableList;
-
-import de.htwg.seapal.database.IRouteDatabase;
-import de.htwg.seapal.model.IRoute;
-import de.htwg.seapal.model.impl.Route;
 
 public class RouteDatabase implements IRouteDatabase {
 	Map<UUID, IRoute> db = new HashMap<UUID, IRoute>();
@@ -18,7 +17,7 @@ public class RouteDatabase implements IRouteDatabase {
 	public RouteDatabase() {
 		open();
 	}
-	
+
 	@Override
 	public boolean open() {
 		// create test data
@@ -34,13 +33,17 @@ public class RouteDatabase implements IRouteDatabase {
 		}
 		return true;
 	}
-	
+
 	@Override
 	public boolean close() {
 		return true;
 	}
+    @Override
+    public List<? extends IRoute> queryViews(final String viewName, final String key) {
+        return null;  //To change body of implemented methods use File | Settings | File Templates.
+    }
 
-	@Override
+    @Override
 	public UUID create() {
 		return newRoute.getUUID();
 	}

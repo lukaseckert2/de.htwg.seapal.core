@@ -1,11 +1,6 @@
 package de.htwg.seapal.controller.impl;
 
-import java.util.ArrayList;
-import java.util.List;
-import java.util.UUID;
-
 import com.google.inject.Inject;
-
 import de.htwg.seapal.controller.IRaceController;
 import de.htwg.seapal.database.IRaceDatabase;
 import de.htwg.seapal.model.IRace;
@@ -14,17 +9,21 @@ import de.htwg.seapal.model.IRace.RaceTrip;
 import de.htwg.seapal.utils.logging.ILogger;
 import de.htwg.seapal.utils.observer.Observable;
 
+import java.util.ArrayList;
+import java.util.List;
+import java.util.UUID;
+
 public class RaceController extends Observable implements IRaceController {
 
 	protected IRaceDatabase db;
 	private final ILogger logger;
-	
+
 	@Inject
 	public RaceController(IRaceDatabase db, ILogger logger) {
 		this.db = db;
 		this.logger = logger;
 	}
-	
+
 	@Override
 	public void setName(UUID id, String name) {
 		IRace race = db.get(id);
@@ -138,5 +137,8 @@ public class RaceController extends Observable implements IRaceController {
 	public boolean saveRace(IRace race) {
 		return db.save(race);
 	}
-
+    @Override
+    public List<? extends IRace> queryView(final String viewName, final String key) {
+        return db.queryViews(viewName, key);
+    }
 }

@@ -1,31 +1,22 @@
 package de.htwg.seapal.database.mock;
 
-import java.util.ArrayList;
-import java.util.HashMap;
-import java.util.List;
-import java.util.Map;
-import java.util.UUID;
-
 import com.google.common.collect.ImmutableList;
-
 import de.htwg.seapal.database.IRaceDatabase;
 import de.htwg.seapal.model.IRace;
-import de.htwg.seapal.model.IRace.RaceBoat;
-import de.htwg.seapal.model.IRace.RaceControlPoint;
-import de.htwg.seapal.model.IRace.RaceCoordinate;
-import de.htwg.seapal.model.IRace.RaceTrip;
-import de.htwg.seapal.model.IRace.RaceWaypoint;
+import de.htwg.seapal.model.IRace.*;
 import de.htwg.seapal.model.impl.Race;
+
+import java.util.*;
 
 public class RaceDatabase implements IRaceDatabase {
 
 	Map<UUID, IRace> db = new HashMap<UUID, IRace>();
 	private IRace newRace;
-	
+
 	public RaceDatabase() {
 		open();
 	}
-	
+
 	@Override
 	public boolean open() {
 		// create test data
@@ -40,14 +31,14 @@ public class RaceDatabase implements IRaceDatabase {
 	public UUID create() {
 		return newRace.getUUID();
 	}
-	
+
 	private UUID saveNewRaceInDatabase(String name, String boatClass) {
 		IRace race = new Race();
 		race.setName(name);
 		race.setBoatClass(boatClass);
 		race.setTrips(generateTrips());
 		race.setControlPoints(generateControlPoints());
-		
+
 		save(race);
 		return race.getUUID();
 	}
@@ -60,14 +51,15 @@ public class RaceDatabase implements IRaceDatabase {
 		controlPoints.add(generateLine(0.4, 0.4, 0.5, 0.5));
 		return controlPoints;
 	}
-	
+
 	private RaceControlPoint generateLine(double lat1, double lng1, double lat2, double lng2) {
 		List<RaceCoordinate> coords = new ArrayList<RaceCoordinate>();
 		coords.add(new RaceCoordinate(lat1, lng1));
 		coords.add(new RaceCoordinate(lat2, lng2));
 		return new RaceControlPoint(UUID.randomUUID().toString(), "line", coords);
 	}
-		private RaceControlPoint generateMark(double lat, double lng) {
+
+	private RaceControlPoint generateMark(double lat, double lng) {
 		List<RaceCoordinate> coords = new ArrayList<RaceCoordinate>();
 		coords.add(new RaceCoordinate(lat, lng));
 		return new RaceControlPoint(UUID.randomUUID().toString(), "buoy", coords);
@@ -81,23 +73,23 @@ public class RaceDatabase implements IRaceDatabase {
 				generateBoat("trip1-boatname"),
 				generateWaypoints(0.0)));
 		trips.add(new RaceTrip(UUID.randomUUID().toString(),
-				"trip2", 
-				generateBoat("trip2-boatname"), 
+				"trip2",
+				generateBoat("trip2-boatname"),
 				generateWaypoints(0.1)));
 		return trips;
 	}
 
 	private List<RaceWaypoint> generateWaypoints(Double posOffset) {
 		List<RaceWaypoint> waypoints = new ArrayList<RaceWaypoint>();
-		waypoints.add(new RaceWaypoint(UUID.randomUUID().toString(), 
+		waypoints.add(new RaceWaypoint(UUID.randomUUID().toString(),
 				new RaceCoordinate(0.1 + posOffset, 0.3 + posOffset), 1000000000L, 2, 3, 4, 5, null));
-		waypoints.add(new RaceWaypoint(UUID.randomUUID().toString(), 
+		waypoints.add(new RaceWaypoint(UUID.randomUUID().toString(),
 				new RaceCoordinate(0.2 + posOffset, 0.4 + posOffset), 1000001000L, 3, 3, 4, 5, null));
-		waypoints.add(new RaceWaypoint(UUID.randomUUID().toString(), 
+		waypoints.add(new RaceWaypoint(UUID.randomUUID().toString(),
 				new RaceCoordinate(0.3 + posOffset, 0.5 + posOffset), 1000002000L, 4, 3, 4, 5, null));
-		waypoints.add(new RaceWaypoint(UUID.randomUUID().toString(), 
+		waypoints.add(new RaceWaypoint(UUID.randomUUID().toString(),
 				new RaceCoordinate(0.4 + posOffset, 0.6 + posOffset), 1000003000L, 4, 4, 5, 6, null));
-		waypoints.add(new RaceWaypoint(UUID.randomUUID().toString(), 
+		waypoints.add(new RaceWaypoint(UUID.randomUUID().toString(),
 				new RaceCoordinate(0.4 + posOffset, 0.7 + posOffset), 1000004000L, 3, 5, 5, 4, null));
 		return waypoints;
 	}
@@ -134,5 +126,8 @@ public class RaceDatabase implements IRaceDatabase {
 	public boolean close() {
 		return true;
 	}
-
+    @Override
+    public List<? extends IRace> queryViews(final String viewName, final String key) {
+        return null;  //To change body of implemented methods use File | Settings | File Templates.
+    }
 }

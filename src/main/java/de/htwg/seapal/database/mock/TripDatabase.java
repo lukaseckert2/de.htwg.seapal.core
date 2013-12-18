@@ -4,9 +4,11 @@ import com.google.common.collect.ImmutableList;
 import de.htwg.seapal.database.ITripDatabase;
 import de.htwg.seapal.model.ITrip;
 import de.htwg.seapal.model.impl.Trip;
-import org.ektorp.support.GenerateView;
 
-import java.util.*;
+import java.util.HashMap;
+import java.util.List;
+import java.util.Map;
+import java.util.UUID;
 
 public class TripDatabase implements ITripDatabase {
 
@@ -45,7 +47,12 @@ public class TripDatabase implements ITripDatabase {
 		return true;
 	}
 
-	@Override
+    @Override
+    public List<? extends ITrip> queryViews(final String viewName, final String key) {
+        return null;
+    }
+
+    @Override
 	public UUID create() {
 		return newTrip.getUUID();
 	}
@@ -67,12 +74,5 @@ public class TripDatabase implements ITripDatabase {
 	@Override
 	public boolean save(ITrip trip) {
 		return true;
-	}
-
-	@Override
-	@GenerateView
-	public List<ITrip> findByBoat(UUID boatId) {
-		// TODO Auto-generated method stub
-		return null;
 	}
 }

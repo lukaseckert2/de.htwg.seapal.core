@@ -1,16 +1,15 @@
 package de.htwg.seapal.controller.impl;
 
-import java.util.LinkedList;
-import java.util.List;
-import java.util.UUID;
-
 import com.google.inject.Inject;
-
 import de.htwg.seapal.controller.IMarkController;
 import de.htwg.seapal.database.IMarkDatabase;
 import de.htwg.seapal.model.IMark;
 import de.htwg.seapal.utils.logging.ILogger;
 import de.htwg.seapal.utils.observer.Observable;
+
+import java.util.LinkedList;
+import java.util.List;
+import java.util.UUID;
 
 public class MarkController extends Observable implements IMarkController {
 
@@ -271,4 +270,8 @@ public class MarkController extends Observable implements IMarkController {
 	public boolean saveMark(IMark mark) {
 		return db.save(mark);
 	}
+    @Override
+    public List<? extends IMark> queryView(final String viewName, final String key) {
+        return db.queryViews(viewName, key);
+    }
 }

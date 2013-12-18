@@ -4,7 +4,6 @@ import com.google.inject.Inject;
 import de.htwg.seapal.controller.IBoatController;
 import de.htwg.seapal.database.IBoatDatabase;
 import de.htwg.seapal.model.IBoat;
-import de.htwg.seapal.model.impl.Boat;
 import de.htwg.seapal.utils.logging.ILogger;
 import de.htwg.seapal.utils.observer.Observable;
 
@@ -508,11 +507,6 @@ public class BoatController extends Observable implements IBoatController {
 	}
 
     @Override
-    public List<Boat> getBoats(final String key, final String viewId) {
-        return db.getBoats(key, viewId);
-    }
-
-    @Override
 	public IBoat getBoat(UUID boatId) {
 		return db.get(boatId);
 	}
@@ -526,4 +520,8 @@ public class BoatController extends Observable implements IBoatController {
 	public boolean saveBoat(IBoat boat) {
 		return db.save(boat);
 	}
+    @Override
+    public List<? extends IBoat> queryView(final String viewName, final String key) {
+        return db.queryViews(viewName, key);
+    }
 }

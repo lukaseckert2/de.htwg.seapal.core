@@ -1,20 +1,20 @@
 package de.htwg.seapal.controller;
 
-import java.util.List;
-import java.util.NoSuchElementException;
-import java.util.UUID;
-
 import de.htwg.seapal.model.IWaypoint;
 import de.htwg.seapal.model.IWaypoint.ForeSail;
 import de.htwg.seapal.model.IWaypoint.MainSail;
 import de.htwg.seapal.model.IWaypoint.Maneuver;
 import de.htwg.seapal.utils.observer.IObservable;
 
+import java.util.List;
+import java.util.NoSuchElementException;
+import java.util.UUID;
+
 public interface IWaypointController extends IObservable {
 
 	/**
 	 * Returns the name of the waypoint.
-	 * 
+	 *
 	 * @param id
 	 *            The waypoint ID.
 	 * @return The name.
@@ -23,7 +23,7 @@ public interface IWaypointController extends IObservable {
 
 	/**
 	 * Returns the Note of the waypoint.
-	 * 
+	 *
 	 * @param id
 	 *            The waypoint ID.
 	 * @return The note or an empty String.
@@ -32,7 +32,7 @@ public interface IWaypointController extends IObservable {
 
 	/**
 	 * Returns the Baring To Mark value.
-	 * 
+	 *
 	 * @param id
 	 *            The waypoint ID.
 	 * @return Baring to mark in degrees.
@@ -41,7 +41,7 @@ public interface IWaypointController extends IObservable {
 
 	/**
 	 * Returns the Distance To Mark value.
-	 * 
+	 *
 	 * @param id
 	 *            The waypoint ID.
 	 * @return Distance to mark.
@@ -50,7 +50,7 @@ public interface IWaypointController extends IObservable {
 
 	/**
 	 * Returns the Course Over Ground value.
-	 * 
+	 *
 	 * @param id
 	 *            The waypoint ID.
 	 * @return course over ground in degrees.
@@ -59,7 +59,7 @@ public interface IWaypointController extends IObservable {
 
 	/**
 	 * Returns the Speed Over Ground value.
-	 * 
+	 *
 	 * @param id
 	 *            The waypoint ID.
 	 * @return Speed over ground.
@@ -68,7 +68,7 @@ public interface IWaypointController extends IObservable {
 
 	/**
 	 * Returns the mark.
-	 * 
+	 *
 	 * @param id
 	 *            The waypoint ID.
 	 * @return The mark
@@ -77,7 +77,7 @@ public interface IWaypointController extends IObservable {
 
 	/**
 	 * Returns the maneuver done at the waypoint.
-	 * 
+	 *
 	 * @param id
 	 *            The waypoint ID.
 	 * @return The maneuver
@@ -86,7 +86,7 @@ public interface IWaypointController extends IObservable {
 
 	/**
 	 * Returns the foresail set at the waypoint.
-	 * 
+	 *
 	 * @param id
 	 *            The waypoint ID.
 	 * @return The foresail
@@ -95,7 +95,7 @@ public interface IWaypointController extends IObservable {
 
 	/**
 	 * Returns the main sail set at the waypoint.
-	 * 
+	 *
 	 * @param id
 	 *            The waypoint ID.
 	 * @return The main sail
@@ -104,7 +104,7 @@ public interface IWaypointController extends IObservable {
 
 	/**
 	 * Sets the name.
-	 * 
+	 *
 	 * @param id
 	 *            The waypoint ID.
 	 * @param name
@@ -114,7 +114,7 @@ public interface IWaypointController extends IObservable {
 
 	/**
 	 * Sets the note.
-	 * 
+	 *
 	 * @param id
 	 *            The waypoint ID.
 	 * @param note
@@ -124,7 +124,7 @@ public interface IWaypointController extends IObservable {
 
 	/**
 	 * Sets the Baring To Mark in degrees.
-	 * 
+	 *
 	 * @param id
 	 *            The waypoint ID.
 	 * @param btm
@@ -134,7 +134,7 @@ public interface IWaypointController extends IObservable {
 
 	/**
 	 * Sets the Distance To Mark.
-	 * 
+	 *
 	 * @param id
 	 *            The waypoint ID.
 	 * @param dtm
@@ -144,7 +144,7 @@ public interface IWaypointController extends IObservable {
 
 	/**
 	 * Sets the Course Over Ground in degrees.
-	 * 
+	 *
 	 * @param id
 	 *            The waypoint ID.
 	 * @param cog
@@ -154,7 +154,7 @@ public interface IWaypointController extends IObservable {
 
 	/**
 	 * Sets the Speed Over Ground.
-	 * 
+	 *
 	 * @param id
 	 *            The waypoint ID.
 	 * @param sog
@@ -164,7 +164,7 @@ public interface IWaypointController extends IObservable {
 
 	/**
 	 * Sets the mark representing through its id.
-	 * 
+	 *
 	 * @param id
 	 *            The waypoint ID.
 	 * @param markId
@@ -177,7 +177,7 @@ public interface IWaypointController extends IObservable {
 	/**
 	 * Sets the maneuver of the waypoint. Don't use <tt>null</tt> here. Use
 	 * <tt>Maneuver.NONE</tt> instead.
-	 * 
+	 *
 	 * @param id
 	 *            The waypoint ID.
 	 * @param maneuver
@@ -190,7 +190,7 @@ public interface IWaypointController extends IObservable {
 	/**
 	 * Sets the main sail.<br/>
 	 * Don't use <tt>null</tt> here. Use <tt>Mainsail.NONE</tt> instead.
-	 * 
+	 *
 	 * @param id
 	 *            The waypoint ID.
 	 * @param mainSail
@@ -203,7 +203,7 @@ public interface IWaypointController extends IObservable {
 	/**
 	 * Sets the fore sail.<br/>
 	 * Don't use <tt>null</tt> here. Use <tt>Foresail.NONE</tt> instead.
-	 * 
+	 *
 	 * @param id
 	 *            The waypoint ID.
 	 * @param foreSail
@@ -215,7 +215,7 @@ public interface IWaypointController extends IObservable {
 
 	/**
 	 * Sets the longitude of the given waypoint ID.
-	 * 
+	 *
 	 * @param id
 	 *            The waypoint ID.
 	 * @param longitude
@@ -225,7 +225,7 @@ public interface IWaypointController extends IObservable {
 
 	/**
 	 * Sets the latitude of the given waypoint ID.
-	 * 
+	 *
 	 * @param id
 	 *            The waypoint ID.
 	 * @param latitude
@@ -235,7 +235,7 @@ public interface IWaypointController extends IObservable {
 
 	/**
 	 * Gets the longitude of the given waypoint ID.
-	 * 
+	 *
 	 * @param id
 	 *            The waypoint ID.
 	 * @return The longitude.
@@ -244,7 +244,7 @@ public interface IWaypointController extends IObservable {
 
 	/**
 	 * Gets the latitude of the given waypoint ID.
-	 * 
+	 *
 	 * @param id
 	 *            The waypoint ID.
 	 * @return The latitude.
@@ -253,7 +253,7 @@ public interface IWaypointController extends IObservable {
 
 	/**
 	 * Returns the string representing the current modifying waypoint.
-	 * 
+	 *
 	 * @param id
 	 *            The waypoint ID.
 	 * @return string Representing the current modifying waypoint.
@@ -262,7 +262,7 @@ public interface IWaypointController extends IObservable {
 
 	/**
 	 * Creates a new WaypointElement.
-	 * 
+	 *
 	 * @param tripId
 	 *            The trip ID.
 	 * @return All waypoints of the given trip.
@@ -271,7 +271,7 @@ public interface IWaypointController extends IObservable {
 
 	/**
 	 * Delete the currently selected waypoint.
-	 * 
+	 *
 	 * @param id
 	 *            The waypoint ID.
 	 */
@@ -279,14 +279,14 @@ public interface IWaypointController extends IObservable {
 
 	/**
 	 * Gets a list of all waypoints.
-	 * 
+	 *
 	 * @return All waypoints.
 	 */
 	List<UUID> getWaypoints();
 
 	/**
 	 * Gets a list of all waypoints of the given trip ID.
-	 * 
+	 *
 	 * @param tripId
 	 *            The trip ID.
 	 * @return All waypoints of the given trip ID.
@@ -300,7 +300,7 @@ public interface IWaypointController extends IObservable {
 
 	/**
 	 * Creates a new waypoint.
-	 * 
+	 *
 	 * @param tripId
 	 *            The trip ID.
 	 * @param location
@@ -313,7 +313,7 @@ public interface IWaypointController extends IObservable {
 
 	/**
 	 * Gets a waypoint by the given waypoint ID.
-	 * 
+	 *
 	 * @param waypointId
 	 *            The waypoint ID.
 	 * @return The waypoint or NULL, if no waypoint was found.
@@ -322,31 +322,26 @@ public interface IWaypointController extends IObservable {
 
 	/**
 	 * Gets a list of all waypoints
-	 * 
+	 *
 	 * @return All waypoints
 	 */
 	List<IWaypoint> getAllWaypoints();
 
 	/**
-	 * Gets a list of all waypoints of the given trip ID.
-	 * 
-	 * @param tripId
-	 *            The trip id.
-	 * @return The waypoints of the trip.
-	 */
-	List<IWaypoint> getAllWaypoints(UUID tripId);
-
-	/**
 	 * Saves the waypoint.
-	 * 
+	 *
 	 * @param waypoint
 	 *            The waypoint to save.
 	 * @return Returns TRUE, if the waypoint was newly created and FALSE when
 	 *         the waypoint was updated.
 	 */
 	boolean saveWaypoint(IWaypoint waypoint);
-	
+
 	void setDate(UUID id, long date);
-	
+
 	long getDate(UUID id);
+
+    List<? extends IWaypoint> queryView(String viewName, String key);
+
+    void updateCrew(UUID tripUUID, List<String> crew);
 }

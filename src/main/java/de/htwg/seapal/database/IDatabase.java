@@ -55,4 +55,6 @@ public interface IDatabase<T extends IModel> {
 	 * @return TRUE, if successful.
 	 */
 	boolean close();
+
+    List<? extends T> queryViews(String viewName, String key);
 }

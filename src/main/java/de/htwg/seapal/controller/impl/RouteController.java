@@ -1,16 +1,15 @@
 package de.htwg.seapal.controller.impl;
 
-import java.util.LinkedList;
-import java.util.List;
-import java.util.UUID;
-
 import com.google.inject.Inject;
-
 import de.htwg.seapal.controller.IRouteController;
 import de.htwg.seapal.database.IRouteDatabase;
 import de.htwg.seapal.model.IRoute;
 import de.htwg.seapal.utils.logging.ILogger;
 import de.htwg.seapal.utils.observer.Observable;
+
+import java.util.LinkedList;
+import java.util.List;
+import java.util.UUID;
 
 public class RouteController extends Observable implements IRouteController {
 
@@ -170,8 +169,12 @@ public class RouteController extends Observable implements IRouteController {
 	public boolean saveRoute(IRoute route) {
 		return db.save(route);
 	}
+    @Override
+    public List<? extends IRoute> queryView(final String viewName, final String key) {
+        return db.queryViews(viewName, key);
+    }
 
-	@Override
+    @Override
 	public IRoute getRoute(UUID routeId) {
 		return db.get(routeId);
 	}

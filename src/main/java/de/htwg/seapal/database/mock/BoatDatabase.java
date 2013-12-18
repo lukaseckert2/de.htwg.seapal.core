@@ -1,11 +1,9 @@
 package de.htwg.seapal.database.mock;
 
 import com.google.common.collect.ImmutableList;
-import de.htwg.seapal.Constants;
 import de.htwg.seapal.database.IBoatDatabase;
 import de.htwg.seapal.model.IBoat;
 import de.htwg.seapal.model.impl.Boat;
-import org.ektorp.ViewQuery;
 
 import java.util.*;
 
@@ -38,8 +36,12 @@ public class BoatDatabase implements IBoatDatabase {
 	public boolean close() {
 		return true;
 	}
+    @Override
+    public List<? extends IBoat> queryViews(final String viewName, final String key) {
+        return null;
+    }
 
-	@Override
+    @Override
 	public UUID create() {
 		return newBoat.getUUID();
 	}
