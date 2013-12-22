@@ -43,8 +43,8 @@ public abstract class ModelDocument implements IModel, Serializable {
 	 */
 	@JsonProperty("_id")
 	public void setId(String uuid) {
-		if (uuid == null || uuid.equals(""))
-			return;
+		//if (uuid == null || uuid.equals(""))
+		//	return;
 		id = uuid;
 	}
 

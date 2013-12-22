@@ -46,4 +46,15 @@ public interface IMark extends IModel {
 	@JsonProperty("is_route")
 	void setIsRouteMark(Boolean isRouteMark);
 
+    @JsonProperty("image_big")
+    String getPhoto();
+
+    @JsonProperty("image_big")
+    void setPhoto(String image);
+
+    @JsonProperty("image_thumb")
+    String getThumbnail();
+
+    @JsonProperty("image_thumb")
+    void setThumbnail(String image);
 }

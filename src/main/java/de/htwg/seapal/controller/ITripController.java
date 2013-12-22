@@ -73,4 +73,6 @@ public interface ITripController extends IObservable {
 	 *         trip was updated.
 	 */
 	boolean saveTrip(ITrip trip);
+
+    Object getTrip(UUID uuid);
 }

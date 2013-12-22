@@ -276,6 +276,10 @@ public class TripController extends Observable implements ITripController {
 	public boolean saveTrip(ITrip trip) {
 		return db.save(trip);
 	}
+    @Override
+    public Object getTrip(final UUID uuid) {
+        return db.get(uuid);
+    }
 
     @Override
 	public String getBoat(UUID id) {

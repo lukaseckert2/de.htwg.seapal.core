@@ -18,6 +18,8 @@ public interface IModel {
 	 */
 	String getId();
 
+    void setId(String uuid);
+
     String getOwner();
 
     void setOwner(String owner);

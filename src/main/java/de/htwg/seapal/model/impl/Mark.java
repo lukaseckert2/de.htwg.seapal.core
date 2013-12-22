@@ -22,8 +22,10 @@ public class Mark extends ModelDocument implements IMark {
 	private String note;
 	private Long date;
 	private Boolean isRouteMark;
+    private String photo;
+    private String thumbnail;
 
-	public Mark() {
+    public Mark() {
 		setId(UUID.randomUUID().toString());
 		this.latitude = 0D;
 		this.Longitude = 0D;
@@ -34,6 +36,8 @@ public class Mark extends ModelDocument implements IMark {
 		this.note = "";
 		this.date = 0L;
 		this.isRouteMark = false;
+        this.photo = "iVBORw0KGgoAAAANSUhEUgAAAAEAAAABCAIAAACQd1PeAAAACXBIWXMAAAsTAAALEwEAmpwYAAAAB3RJTUUH3QwWDTUH5nuEVQAAAB1pVFh0Q29tbWVudAAAAAAAQ3JlYXRlZCB3aXRoIEdJTVBkLmUHAAAADElEQVQI12P4//8/AAX+Av7czFnnAAAAAElFTkSuQmCC";
+        this.thumbnail = this.photo;
 	}
 
 	public Mark(IMark m) {
@@ -49,6 +53,8 @@ public class Mark extends ModelDocument implements IMark {
 		this.note = m.getNote();
 		this.date = m.getDate();
 		this.isRouteMark = m.getIsRouteMark();
+        this.photo = m.getPhoto();
+        this.thumbnail = m.getThumbnail();
 	}
 
 	@Override
@@ -150,4 +156,20 @@ public class Mark extends ModelDocument implements IMark {
 	public void setIsRouteMark(Boolean isRouteMark) {
 		this.isRouteMark = isRouteMark;
 	}
+    @Override
+    public String getPhoto() {
+        return this.photo;
+    }
+    @Override
+    public void setPhoto(final String image) {
+        this.photo = image;
+    }
+    @Override
+    public String getThumbnail() {
+        return this.thumbnail;
+    }
+    @Override
+    public void setThumbnail(final String image) {
+        this.thumbnail = image;
+    }
 }
