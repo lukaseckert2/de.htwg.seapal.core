@@ -117,10 +117,10 @@ public class BoatController extends Observable implements IBoatController {
 		IBoat boat = db.get(id);
 		if (boat == null)
 			return null;
-		if(boat.getOwner().equals(""))
+		if(boat.getAccount().equals(""))
 			return null;
 		else
-			return UUID.fromString(boat.getOwner());
+			return UUID.fromString(boat.getAccount());
 	}
 
 	@Override
@@ -128,7 +128,7 @@ public class BoatController extends Observable implements IBoatController {
 		IBoat boat = db.get(id);
 		if (boat == null)
 			return;
-		boat.setOwner(owner.toString());
+		boat.setAccount(owner.toString());
 		db.save(boat);
 		notifyObservers();
 	}

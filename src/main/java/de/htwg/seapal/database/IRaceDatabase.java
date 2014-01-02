@@ -1,6 +1,6 @@
 package de.htwg.seapal.database;
 
-import de.htwg.seapal.model.IRace;
+import de.htwg.seapal.model._IRace;
 
 /**
  * The race database interface.
@@ -12,9 +12,9 @@ import de.htwg.seapal.model.IRace;
  *       - [Property] must exist in target class (by_color -> e.g. public String getColor())
  *       - iterable fields: plural -> getColors()
  *       - initStandardDesignDocument() of CouchDbRepositorySupport must be triggered
- * Remark: the design file "_design/Boat" must be created manually. 
+ * Remark: the design file "_design/Boat" must be created manually.
  * </p>
  */
-public interface IRaceDatabase extends IDatabase<IRace> {
+public interface IRaceDatabase extends IDatabase<_IRace> {
 
 }

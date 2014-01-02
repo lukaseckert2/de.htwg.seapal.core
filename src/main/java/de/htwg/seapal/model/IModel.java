@@ -1,6 +1,5 @@
 package de.htwg.seapal.model;
 
-import java.util.List;
 import java.util.UUID;
 
 public interface IModel {
@@ -20,13 +19,7 @@ public interface IModel {
 
     void setId(String uuid);
 
-    String getOwner();
+    String getAccount();
 
-    void setOwner(String owner);
-
-    List<String> getCrew();
-
-    void setCrew(List<String> crew);
-
-    void addCrewMember(String crewMember);
+    void setAccount(String uuid);
 }

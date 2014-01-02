@@ -3,6 +3,8 @@ package de.htwg.seapal.model.impl;
 import de.htwg.seapal.model.IPerson;
 import de.htwg.seapal.model.ModelDocument;
 
+import java.util.ArrayList;
+import java.util.List;
 import java.util.UUID;
 
 public class Person extends ModelDocument implements IPerson {
@@ -38,8 +40,12 @@ public class Person extends ModelDocument implements IPerson {
 
 	private String country = null;
 
+    private String password = null;
+
+    private List<String> friendList = new ArrayList<>();
+
 	public Person() {
-		setId(UUID.randomUUID().toString());
+		super(UUID.randomUUID().toString());
 		firstname = "";
 		lastname = "";
 		birth = 0L;
@@ -58,7 +64,7 @@ public class Person extends ModelDocument implements IPerson {
 	}
 
 	public Person(IPerson person) {
-		setId(person.getId());
+		super(person.getId());
 
 		firstname = person.getFirstname();
 		lastname = person.getLastname();
@@ -75,10 +81,6 @@ public class Person extends ModelDocument implements IPerson {
 		postcode = person.getPostcode();
 		city = person.getCity();
 		country = person.getCountry();
-	}
-
-	public Person(Integer id) {
-		setId("PERSON-" + id);
 	}
 
 	@Override
@@ -210,4 +212,24 @@ public class Person extends ModelDocument implements IPerson {
 	public void setCountry(String country) {
 		this.country = country;
 	}
+
+    @Override
+    public List<String> getFriendList() {
+        return friendList;
+    }
+
+    @Override
+    public void setFriendList(final List<String> friendList) {
+        this.friendList = friendList;
+    }
+
+    @Override
+    public String getPassword() {
+        return this.password;
+    }
+
+    @Override
+    public void setPassword(final String password) {
+        this.password = password;
+    }
 }

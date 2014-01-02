@@ -1,5 +1,7 @@
 package de.htwg.seapal.model;
 
+import java.util.List;
+
 public interface IPerson extends IModel {
 
 	String getFirstname();
@@ -53,4 +55,12 @@ public interface IPerson extends IModel {
 	String getCountry();
 
 	void setCountry(String country);
+
+    List<String> getFriendList();
+
+    void setFriendList(List<String> friendList);
+
+    String getPassword();
+
+    void setPassword(String password);
 }

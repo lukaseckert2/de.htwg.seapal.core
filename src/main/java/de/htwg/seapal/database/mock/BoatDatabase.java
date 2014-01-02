@@ -51,7 +51,7 @@ public class BoatDatabase implements IBoatDatabase {
         List<Boat> boats = new LinkedList<Boat>();
         Collection<IBoat> collection = db.values();
         for (IBoat boat : collection) {
-            if (boat.getOwner().equals(userid)) {
+            if (boat.getAccount().equals(userid)) {
                 boats.add((Boat) boat);
             }
         }

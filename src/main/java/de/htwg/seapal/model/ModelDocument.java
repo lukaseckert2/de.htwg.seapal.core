@@ -4,8 +4,6 @@ import org.codehaus.jackson.annotate.JsonIgnore;
 import org.codehaus.jackson.annotate.JsonProperty;
 
 import java.io.Serializable;
-import java.util.LinkedList;
-import java.util.List;
 import java.util.UUID;
 
 /**
@@ -20,8 +18,11 @@ public abstract class ModelDocument implements IModel, Serializable {
 	private static final long serialVersionUID = 1L;
 	private String id;
 	private String revision;
-    private String owner;
-    private List<String> crew = new LinkedList<>();
+    private String account;
+
+    public ModelDocument(final String uuid) {
+        this.id = uuid;
+    }
 
 	@JsonIgnore
 	@Override
@@ -44,7 +45,7 @@ public abstract class ModelDocument implements IModel, Serializable {
 	@JsonProperty("_id")
 	public void setId(String uuid) {
 		//if (uuid == null || uuid.equals(""))
-		//	return;
+		//	return; // TODO find out what this code was supposed to do
 		id = uuid;
 	}
 
@@ -134,37 +135,20 @@ public abstract class ModelDocument implements IModel, Serializable {
 	 */
 	@JsonIgnore
 	public void set_id(String uuid) {
-		if (uuid == null || uuid.equals(""))
-			return;
-		id = uuid;
+        //if (uuid == null || uuid.equals(""))
+        //	return; // TODO find out what this code was supposed to do
+        id = uuid;
 	}
 
-    @JsonProperty("owner")
+    @JsonProperty("account")
     @Override
-    public String getOwner() {
-        return owner;
+    public String getAccount() {
+        return account;
     }
 
-    @JsonProperty("owner")
+    @JsonProperty("account")
     @Override
-    public void setOwner(String owner) {
-        this.owner = owner;
-    }
-
-    @JsonProperty("crew")
-    @Override
-    public List<String> getCrew() {
-        return crew;
-    }
-
-    @JsonProperty("crew")
-    @Override
-    public void setCrew(final List<String> crew) {
-        this.crew = crew;
-    }
-
-    @JsonIgnore
-    public void addCrewMember(final String crewMember) {
-        this.crew.add(crewMember);
+    public void setAccount(String uuid) {
+        this.account = uuid;
     }
 }

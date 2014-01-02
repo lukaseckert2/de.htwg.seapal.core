@@ -1,8 +1,8 @@
 package de.htwg.seapal.controller;
 
-import de.htwg.seapal.model.IRace;
-import de.htwg.seapal.model.IRace.RaceControlPoint;
-import de.htwg.seapal.model.IRace.RaceTrip;
+import de.htwg.seapal.model._IRace;
+import de.htwg.seapal.model._IRace.RaceControlPoint;
+import de.htwg.seapal.model._IRace.RaceTrip;
 import de.htwg.seapal.utils.observer.IObservable;
 
 import java.util.List;
@@ -93,13 +93,13 @@ public interface IRaceController extends IObservable {
 	 * @param raceId The race UUID.
 	 * @return The race.
 	 */
-	IRace getRace(UUID raceId);
+	_IRace getRace(UUID raceId);
 
 	/**
 	 * Gets all races.
 	 * @return All races.
 	 */
-	List<IRace> getAllRaces();
+	List<_IRace> getAllRaces();
 
 	/**
 	 * Saves the race.
@@ -107,7 +107,7 @@ public interface IRaceController extends IObservable {
 	 * @return Returns TRUE, if the race was newly created and FALSE when the
 	 *         race was updated.
 	 */
-	boolean saveRace(IRace race);
+	boolean saveRace(_IRace race);
 
-    List<? extends IRace> queryView(String viewName, String key);
+    List<? extends _IRace> queryView(String viewName, String key);
 }

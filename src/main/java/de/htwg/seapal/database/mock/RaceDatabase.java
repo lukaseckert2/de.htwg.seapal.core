@@ -2,16 +2,16 @@ package de.htwg.seapal.database.mock;
 
 import com.google.common.collect.ImmutableList;
 import de.htwg.seapal.database.IRaceDatabase;
-import de.htwg.seapal.model.IRace;
-import de.htwg.seapal.model.IRace.*;
-import de.htwg.seapal.model.impl.Race;
+import de.htwg.seapal.model._IRace;
+import de.htwg.seapal.model._IRace.*;
+import de.htwg.seapal.model.impl._Race;
 
 import java.util.*;
 
 public class RaceDatabase implements IRaceDatabase {
 
-	Map<UUID, IRace> db = new HashMap<UUID, IRace>();
-	private IRace newRace;
+	Map<UUID, _IRace> db = new HashMap<UUID, _IRace>();
+	private _IRace newRace;
 
 	public RaceDatabase() {
 		open();
@@ -20,9 +20,9 @@ public class RaceDatabase implements IRaceDatabase {
 	@Override
 	public boolean open() {
 		// create test data
-		saveNewRaceInDatabase("NEW-Race", "Class");
+		saveNewRaceInDatabase("NEW-_Race", "Class");
 		for (int i = 1; i < 10; i++) {
-			saveNewRaceInDatabase("Race-" + i, "Class");
+			saveNewRaceInDatabase("_Race-" + i, "Class");
 		}
 		return true;
 	}
@@ -33,7 +33,7 @@ public class RaceDatabase implements IRaceDatabase {
 	}
 
 	private UUID saveNewRaceInDatabase(String name, String boatClass) {
-		IRace race = new Race();
+		_IRace race = new _Race();
 		race.setName(name);
 		race.setBoatClass(boatClass);
 		race.setTrips(generateTrips());
@@ -99,7 +99,7 @@ public class RaceDatabase implements IRaceDatabase {
 	}
 
 	@Override
-	public boolean save(IRace data) {
+	public boolean save(_IRace data) {
 		if (!db.containsKey(data)) {
 			newRace = data;
 		}
@@ -108,12 +108,12 @@ public class RaceDatabase implements IRaceDatabase {
 	}
 
 	@Override
-	public IRace get(UUID id) {
-		return new Race(db.get(id));
+	public _IRace get(UUID id) {
+		return new _Race(db.get(id));
 	}
 
 	@Override
-	public List<IRace> loadAll() {
+	public List<_IRace> loadAll() {
 		return ImmutableList.copyOf(db.values());
 	}
 
@@ -127,7 +127,7 @@ public class RaceDatabase implements IRaceDatabase {
 		return true;
 	}
     @Override
-    public List<? extends IRace> queryViews(final String viewName, final String key) {
+    public List<? extends _IRace> queryViews(final String viewName, final String key) {
         return null;  //To change body of implemented methods use File | Settings | File Templates.
     }
 }

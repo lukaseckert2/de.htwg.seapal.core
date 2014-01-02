@@ -4,22 +4,23 @@ import java.util.ArrayList;
 import java.util.List;
 import java.util.UUID;
 
-import de.htwg.seapal.model.IRace;
+import de.htwg.seapal.model._IRace;
 import de.htwg.seapal.model.ModelDocument;
 
-public class Race extends ModelDocument implements IRace {
+public class _Race
+        extends ModelDocument implements _IRace {
 
 	/**
 	 * Serial version UID for serialization.
 	 */
 	private static final long serialVersionUID = 1L;
-	
+
 	private String name;
 	private String boatClass;
 	private List<RaceTrip> trips;
 	private List<RaceControlPoint> controlPoints;
-	
-	public Race() {
+
+	public _Race() {
 		setId(UUID.randomUUID().toString());
 		this.name = "";
 		this.boatClass = "";
@@ -27,14 +28,14 @@ public class Race extends ModelDocument implements IRace {
 		this.controlPoints = new ArrayList<RaceControlPoint>();
 	}
 
-	public Race(IRace race) {
+	public _Race(_IRace race) {
 		setId(race.getId());
 		this.name = race.getName();
 		this.boatClass = race.getBoatClass();
 		this.trips = race.getTrips();
 		this.controlPoints = race.getControlPoints();
 	}
-	
+
 	@Override
 	public String getName() {
 		return this.name;

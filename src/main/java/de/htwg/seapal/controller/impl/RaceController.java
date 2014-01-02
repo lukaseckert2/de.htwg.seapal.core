@@ -3,9 +3,9 @@ package de.htwg.seapal.controller.impl;
 import com.google.inject.Inject;
 import de.htwg.seapal.controller.IRaceController;
 import de.htwg.seapal.database.IRaceDatabase;
-import de.htwg.seapal.model.IRace;
-import de.htwg.seapal.model.IRace.RaceControlPoint;
-import de.htwg.seapal.model.IRace.RaceTrip;
+import de.htwg.seapal.model._IRace;
+import de.htwg.seapal.model._IRace.RaceControlPoint;
+import de.htwg.seapal.model._IRace.RaceTrip;
 import de.htwg.seapal.utils.logging.ILogger;
 import de.htwg.seapal.utils.observer.Observable;
 
@@ -26,7 +26,7 @@ public class RaceController extends Observable implements IRaceController {
 
 	@Override
 	public void setName(UUID id, String name) {
-		IRace race = db.get(id);
+		_IRace race = db.get(id);
 		if (race == null)
 			return;
 		race.setName(name);
@@ -36,7 +36,7 @@ public class RaceController extends Observable implements IRaceController {
 
 	@Override
 	public String getName(UUID id) {
-		IRace race = db.get(id);
+		_IRace race = db.get(id);
 		if (race == null)
 			return null;
 		return db.get(id).getName();
@@ -44,7 +44,7 @@ public class RaceController extends Observable implements IRaceController {
 
 	@Override
 	public void setBoatClass(UUID id, String boatClass) {
-		IRace race = db.get(id);
+		_IRace race = db.get(id);
 		if (race == null)
 			return;
 		race.setBoatClass(boatClass);
@@ -54,7 +54,7 @@ public class RaceController extends Observable implements IRaceController {
 
 	@Override
 	public String getBoatClass(UUID id) {
-		IRace race = db.get(id);
+		_IRace race = db.get(id);
 		if (race == null)
 			return null;
 		return db.get(id).getBoatClass();
@@ -62,7 +62,7 @@ public class RaceController extends Observable implements IRaceController {
 
 	@Override
 	public List<RaceTrip> getTrips(UUID id) {
-		IRace race = db.get(id);
+		_IRace race = db.get(id);
 		if (race == null)
 			return null;
 		return db.get(id).getTrips();
@@ -70,7 +70,7 @@ public class RaceController extends Observable implements IRaceController {
 
 	@Override
 	public void setTrips(UUID id, List<RaceTrip> trips) {
-		IRace race = db.get(id);
+		_IRace race = db.get(id);
 		if (race == null)
 			return;
 		race.setTrips(trips);
@@ -80,7 +80,7 @@ public class RaceController extends Observable implements IRaceController {
 
 	@Override
 	public List<RaceControlPoint> getControlPoints(UUID id) {
-		IRace race = db.get(id);
+		_IRace race = db.get(id);
 		if (race == null)
 			return null;
 		return db.get(id).getControlPoints();
@@ -88,7 +88,7 @@ public class RaceController extends Observable implements IRaceController {
 
 	@Override
 	public void setControlPoints(UUID id, List<RaceControlPoint> controlPoints) {
-		IRace race = db.get(id);
+		_IRace race = db.get(id);
 		if (race == null)
 			return;
 		race.setControlPoints(controlPoints);
@@ -115,30 +115,30 @@ public class RaceController extends Observable implements IRaceController {
 
 	@Override
 	public List<UUID> getRaces() {
-		List<IRace> query = db.loadAll();
+		List<_IRace> query = db.loadAll();
 		List<UUID> list = new ArrayList<UUID>();
-		for (IRace race : query) {
+		for (_IRace race : query) {
 			list.add(race.getUUID());
 		}
 		return list;
 	}
 
 	@Override
-	public IRace getRace(UUID raceId) {
+	public _IRace getRace(UUID raceId) {
 		return db.get(raceId);
 	}
 
 	@Override
-	public List<IRace> getAllRaces() {
+	public List<_IRace> getAllRaces() {
 		return db.loadAll();
 	}
 
 	@Override
-	public boolean saveRace(IRace race) {
+	public boolean saveRace(_IRace race) {
 		return db.save(race);
 	}
     @Override
-    public List<? extends IRace> queryView(final String viewName, final String key) {
+    public List<? extends _IRace> queryView(final String viewName, final String key) {
         return db.queryViews(viewName, key);
     }
 }
