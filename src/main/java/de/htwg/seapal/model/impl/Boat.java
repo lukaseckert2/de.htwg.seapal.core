@@ -37,7 +37,7 @@ public class Boat extends ModelDocument implements IBoat {
 	private Double spiSize;
 
 	public Boat() {
-		setId(UUID.randomUUID().toString());
+        super(UUID.randomUUID().toString());
 		this.boatName = "";
 		this.registerNr = "";
 		this.sailSign = "";
@@ -64,7 +64,7 @@ public class Boat extends ModelDocument implements IBoat {
 	}
 
 	public Boat(IBoat boat) {
-		setId(boat.getId());
+        super(boat.getId());
 		this.boatName = boat.getBoatName();
 		this.registerNr = boat.getRegisterNr();
 		this.sailSign = boat.getSailSign();

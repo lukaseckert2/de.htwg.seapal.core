@@ -180,25 +180,6 @@ public interface IMarkController extends IObservable {
 	void setDate(UUID id, long date);
 
 	/**
-	 * Indicates whether the given mark ID is a route mark.
-	 *
-	 * @param id
-	 *            The mark ID.
-	 * @return TRUE, if it is a route mark.
-	 */
-	boolean isRouteMark(UUID id);
-
-	/**
-	 * Sets the value whether the given mark ID is a route mark.
-	 *
-	 * @param id
-	 *            The mark ID.
-	 * @param isRouteMark
-	 *            The value indication whether it is a route mark or not.
-	 */
-	void setIsRouteMark(UUID id, boolean isRouteMark);
-
-	/**
 	 * Deletes a mark.
 	 *
 	 * @param id
@@ -211,12 +192,6 @@ public interface IMarkController extends IObservable {
 	 */
 	void closeDB();
 
-	/**
-	 * Gets a list of all mark IDs.
-	 *
-	 * @return All mark IDs.
-	 */
-	List<UUID> getMarks();
 
 	/**
 	 * Creates a new route mark.

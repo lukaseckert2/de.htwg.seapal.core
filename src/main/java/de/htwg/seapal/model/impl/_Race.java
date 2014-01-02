@@ -1,11 +1,11 @@
 package de.htwg.seapal.model.impl;
 
+import de.htwg.seapal.model.ModelDocument;
+import de.htwg.seapal.model._IRace;
+
 import java.util.ArrayList;
 import java.util.List;
 import java.util.UUID;
-
-import de.htwg.seapal.model._IRace;
-import de.htwg.seapal.model.ModelDocument;
 
 public class _Race
         extends ModelDocument implements _IRace {
@@ -21,7 +21,7 @@ public class _Race
 	private List<RaceControlPoint> controlPoints;
 
 	public _Race() {
-		setId(UUID.randomUUID().toString());
+		super(UUID.randomUUID().toString());
 		this.name = "";
 		this.boatClass = "";
 		this.trips = new ArrayList<RaceTrip>();
@@ -29,7 +29,7 @@ public class _Race
 	}
 
 	public _Race(_IRace race) {
-		setId(race.getId());
+        super(race.getId());
 		this.name = race.getName();
 		this.boatClass = race.getBoatClass();
 		this.trips = race.getTrips();

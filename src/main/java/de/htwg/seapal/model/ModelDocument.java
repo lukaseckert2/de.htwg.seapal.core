@@ -140,13 +140,13 @@ public abstract class ModelDocument implements IModel, Serializable {
         id = uuid;
 	}
 
-    @JsonProperty("account")
+    @JsonProperty("owner")
     @Override
     public String getAccount() {
         return account;
     }
 
-    @JsonProperty("account")
+    @JsonProperty("owner")
     @Override
     public void setAccount(String uuid) {
         this.account = uuid;

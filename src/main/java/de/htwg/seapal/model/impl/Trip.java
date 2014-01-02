@@ -29,7 +29,7 @@ public class Trip extends ModelDocument implements ITrip {
 	private String boat; // UUID Boat
 
 	public Trip() {
-		setId(UUID.randomUUID().toString());
+		super(UUID.randomUUID().toString());
 		this.crewMembers = "";
 		this.name = "";
 		this.startLocation = "";
@@ -44,7 +44,7 @@ public class Trip extends ModelDocument implements ITrip {
 	}
 
 	public Trip(ITrip t) {
-		setId(t.getId());
+        super(t.getId());
 
 		this.name = t.getName();
 		this.startLocation = t.getStartLocation();

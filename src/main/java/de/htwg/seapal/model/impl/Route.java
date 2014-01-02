@@ -21,7 +21,7 @@ public class Route extends ModelDocument implements IRoute {
 	private Double distance;
 
 	public Route() {
-		setId(UUID.randomUUID().toString());
+        super(UUID.randomUUID().toString());
 		marks = new LinkedList<String>();
 		this.name = "";
 		this.date = 0L;
@@ -30,7 +30,7 @@ public class Route extends ModelDocument implements IRoute {
 	}
 
 	public Route(IRoute r) {
-		setId(r.getId());
+        super(r.getId());
 		this.name = r.getName();
 		this.date = r.getDate();
 		List<String> list = new LinkedList<String>();

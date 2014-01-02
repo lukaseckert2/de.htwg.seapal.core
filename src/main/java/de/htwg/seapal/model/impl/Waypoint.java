@@ -5,8 +5,6 @@ import de.htwg.seapal.model.ModelDocument;
 import org.apache.commons.lang.builder.EqualsBuilder;
 import org.apache.commons.lang.builder.HashCodeBuilder;
 import org.apache.commons.lang.builder.ReflectionToStringBuilder;
-import org.codehaus.jackson.annotate.JsonCreator;
-import org.codehaus.jackson.annotate.JsonProperty;
 
 import java.util.UUID;
 
@@ -32,17 +30,18 @@ public class Waypoint extends ModelDocument implements IWaypoint {
 	private String trip; // UUID Trip
 
 	public Waypoint() {
-		setId(UUID.randomUUID().toString());
+		super(UUID.randomUUID().toString());
 		maneuver = Maneuver.NONE;
 		foreSail = ForeSail.NONE;
 		mainSail = MainSail.NONE;
 	}
 
+    /*
 	@JsonCreator
 	public Waypoint(@JsonProperty("maneuver") Maneuver m,
 			@JsonProperty("foresail") ForeSail f,
 			@JsonProperty("mainsail") MainSail msail) {
-		setId(UUID.randomUUID().toString());
+		super(UUID.randomUUID().toString());
 		maneuver = m;
 		foreSail = f;
 		mainSail = msail;
@@ -61,9 +60,10 @@ public class Waypoint extends ModelDocument implements IWaypoint {
 		this.mainSail = msail;
 		this.trip = "";
 	}
+    */
 
 	public Waypoint(IWaypoint w) {
-		setId(w.getId());
+		super(w.getId());
 		this.name = w.getName();
 		this.latitude = w.getLatitude();
 		this.Longitude = w.getLongitude();

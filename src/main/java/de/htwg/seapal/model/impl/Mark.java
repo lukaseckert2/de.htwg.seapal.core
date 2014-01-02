@@ -21,12 +21,11 @@ public class Mark extends ModelDocument implements IMark {
 	private Integer sog;
 	private String note;
 	private Long date;
-	private Boolean isRouteMark;
     private String photo;
     private String thumbnail;
 
     public Mark() {
-		setId(UUID.randomUUID().toString());
+		super(UUID.randomUUID().toString());
 		this.latitude = 0D;
 		this.Longitude = 0D;
 		this.btm = 0;
@@ -35,13 +34,12 @@ public class Mark extends ModelDocument implements IMark {
 		this.sog = 0;
 		this.note = "";
 		this.date = 0L;
-		this.isRouteMark = false;
         this.photo = "iVBORw0KGgoAAAANSUhEUgAAAAEAAAABCAIAAACQd1PeAAAACXBIWXMAAAsTAAALEwEAmpwYAAAAB3RJTUUH3QwWDTUH5nuEVQAAAB1pVFh0Q29tbWVudAAAAAAAQ3JlYXRlZCB3aXRoIEdJTVBkLmUHAAAADElEQVQI12P4//8/AAX+Av7czFnnAAAAAElFTkSuQmCC";
         this.thumbnail = this.photo;
 	}
 
 	public Mark(IMark m) {
-		setId(m.getId());
+        super(m.getId());
 
 		this.name = m.getName();
 		this.latitude = m.getLatitude();
@@ -52,7 +50,6 @@ public class Mark extends ModelDocument implements IMark {
 		this.sog = m.getSOG();
 		this.note = m.getNote();
 		this.date = m.getDate();
-		this.isRouteMark = m.getIsRouteMark();
         this.photo = m.getPhoto();
         this.thumbnail = m.getThumbnail();
 	}
@@ -147,15 +144,6 @@ public class Mark extends ModelDocument implements IMark {
 		this.date = date;
 	}
 
-	@Override
-	public Boolean getIsRouteMark() {
-		return isRouteMark;
-	}
-
-	@Override
-	public void setIsRouteMark(Boolean isRouteMark) {
-		this.isRouteMark = isRouteMark;
-	}
     @Override
     public String getPhoto() {
         return this.photo;

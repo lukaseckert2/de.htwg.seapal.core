@@ -337,7 +337,6 @@ public class WaypointController
     public void updateCrew(final UUID tripUUID, final List<String> crew) {
         List<? extends IWaypoint> waypoints = queryView("Waypoint/waypointsAsJson", tripUUID.toString());
         for (IWaypoint waypoint : waypoints) {
-            waypoint.setCrew(crew);
             db.save(waypoint);
         }
     }

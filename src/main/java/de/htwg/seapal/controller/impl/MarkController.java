@@ -7,7 +7,6 @@ import de.htwg.seapal.model.IMark;
 import de.htwg.seapal.utils.logging.ILogger;
 import de.htwg.seapal.utils.observer.Observable;
 
-import java.util.LinkedList;
 import java.util.List;
 import java.util.UUID;
 
@@ -184,6 +183,7 @@ public class MarkController extends Observable implements IMarkController {
 		notifyObservers();
 	}
 
+    /*
 	@Override
 	public boolean isRouteMark(UUID id) {
 		IMark mark = db.get(id);
@@ -200,7 +200,7 @@ public class MarkController extends Observable implements IMarkController {
 		mark.setIsRouteMark(isRouteMark);
 		db.save(mark);
 		notifyObservers();
-	}
+	}*/
 
 	@Override
 	public void deleteMark(UUID id) {
@@ -214,6 +214,7 @@ public class MarkController extends Observable implements IMarkController {
 		logger.info("MarkController", "Database closed");
 	}
 
+    /*
 	@Override
 	public List<UUID> getMarks() {
 		List<UUID> list = new LinkedList<UUID>();
@@ -223,13 +224,12 @@ public class MarkController extends Observable implements IMarkController {
 				list.add(mark.getUUID());
 		}
 		return list;
-	}
+	}*/
 
 	@Override
 	public UUID newMark(double longitude, double latitude) {
 		UUID newMark = db.create();
 		setDate(newMark, System.currentTimeMillis());
-		setIsRouteMark(newMark, false);
 		setLatitude(newMark, latitude);
 		setLongitude(newMark, longitude);
 		notifyObservers();
@@ -240,7 +240,6 @@ public class MarkController extends Observable implements IMarkController {
 	public UUID newRouteMark(double longitude, double latitude) {
 		UUID newMark = db.create();
 		setDate(newMark, System.currentTimeMillis());
-		setIsRouteMark(newMark, true);
 		setLatitude(newMark, latitude);
 		setLongitude(newMark, longitude);
 		notifyObservers();
