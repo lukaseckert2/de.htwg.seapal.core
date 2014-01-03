@@ -71,4 +71,6 @@ public interface IPerson extends IModel {
     void setResetTimeout(long timeout);
 
     long getResetTimeout();
+
+    void addFriend(String uuid);
 }

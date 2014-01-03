@@ -2,6 +2,7 @@ package de.htwg.seapal.model.impl;
 
 import de.htwg.seapal.model.IPerson;
 import de.htwg.seapal.model.ModelDocument;
+import org.codehaus.jackson.annotate.JsonIgnore;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -253,5 +254,10 @@ public class Person
     @Override
     public long getResetTimeout() {
         return this.timeout;
+    }
+    @Override
+    @JsonIgnore
+    public void addFriend(final String uuid) {
+        friendList.add(uuid);
     }
 }

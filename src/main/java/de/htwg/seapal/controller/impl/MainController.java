@@ -89,4 +89,18 @@ public final class MainController
 
         return stdDB.get(document).queryView(viewQuery, classes.get(document));
     }
+    @Override
+    public List<? extends IModel> getByParent(final String document, final String parent, final String session, final UUID id) {
+        return db.get(document).queryViews(parent, session+id.toString());
+    }
+
+    @Override
+    public String creatDocument(final String type, final ModelDocument document) {
+        if (document.isNew()) {
+            stdDB.get(type).create(document);
+        } else {
+            stdDB.get(type).update(document);
+        }
+        return document.get_id();
+    }
 }

@@ -1,6 +1,7 @@
 package de.htwg.seapal.controller;
 
 import de.htwg.seapal.model.IModel;
+import de.htwg.seapal.model.ModelDocument;
 
 import java.util.List;
 import java.util.UUID;
@@ -14,4 +15,8 @@ public interface IMainController {
     List<? extends IModel> getOwnDocuments(String document, final String session);
 
     List<? extends IModel> getForeignDocuments(String document, final String session);
+
+    List<? extends IModel> getByParent(String document, String parent, String session, final UUID id);
+
+    public String creatDocument(final String type, final ModelDocument document);
 }

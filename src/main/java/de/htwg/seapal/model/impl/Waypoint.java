@@ -28,8 +28,9 @@ public class Waypoint extends ModelDocument implements IWaypoint {
 	private ForeSail foreSail;
 	private MainSail mainSail;
 	private String trip; // UUID Trip
+    private String boat;
 
-	public Waypoint() {
+    public Waypoint() {
 		super(UUID.randomUUID().toString());
 		maneuver = Maneuver.NONE;
 		foreSail = ForeSail.NONE;
@@ -226,8 +227,16 @@ public class Waypoint extends ModelDocument implements IWaypoint {
 	public void setLongitude(Double Longitude) {
 		this.Longitude = Longitude;
 	}
+    @Override
+    public void setBoat(final String s) {
+        this.boat = s;
+    }
+    @Override
+    public String getBoat() {
+        return this.boat;
+    }
 
-	@Override
+    @Override
 	public String toString() {
 		return ReflectionToStringBuilder.toString(this);
 	}

@@ -2,18 +2,21 @@ package de.htwg.seapal.model;
 
 public interface IWaypoint extends IModel {
 
-	public enum Maneuver {
-		NONE, TACK, JIBE, LAYTO, SET_SAILS, CHANGE_SAILS, SAILS_DOWN, REFF, ANKER_UP, ANKER_DOWN
-	}
+
+
+    public enum Maneuver {
+		NONE, TACK, JIBE, LAYTO, SET_SAILS, CHANGE_SAILS, SAILS_DOWN, REFF, ANKER_UP, ANKER_DOWN;
+    }
+
 
 	public enum ForeSail {
-		NONE, GENUA1, GENUA2, GENUA3, FOCK, STORM_FOCK, BISTER, SPINACKER
-	}
+		NONE, GENUA1, GENUA2, GENUA3, FOCK, STORM_FOCK, BISTER, SPINACKER;
+    }
+
 
 	public enum MainSail {
-		NONE, FULL, REEF1, REEF2
-	}
-
+		NONE, FULL, REEF1, REEF2;
+    }
 	String getName();
 
 	String getNote();
@@ -73,4 +76,8 @@ public interface IWaypoint extends IModel {
 	Double getLongitude();
 
 	void setLongitude(Double Longitude);
+
+    void setBoat(String s);
+
+    String getBoat();
 }
