@@ -344,7 +344,7 @@ public class PersonController extends Observable implements IPersonController {
         IPerson savedAccount = db.getAccount(account.getEmail());
 
         if (PasswordHash.validatePassword(account.getPassword(), savedAccount.getPassword())) {
-            return account;
+            return savedAccount;
         }
 
         return null;
