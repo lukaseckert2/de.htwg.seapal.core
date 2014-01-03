@@ -54,6 +54,12 @@ public class PersonDatabase implements IPersonDatabase {
     }
 
     @Override
+    public Person getAccount(final String email)
+            throws Exception {
+        return null;  //To change body of implemented methods use File | Settings | File Templates.
+    }
+
+    @Override
 	public void delete(UUID id) {
 	}
 

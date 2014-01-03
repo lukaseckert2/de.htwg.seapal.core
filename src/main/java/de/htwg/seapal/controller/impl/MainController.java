@@ -1,6 +1,7 @@
 package de.htwg.seapal.controller.impl;
 
 import com.google.inject.Inject;
+import de.htwg.seapal.controller.IMainController;
 import de.htwg.seapal.database.*;
 import de.htwg.seapal.model.IModel;
 import de.htwg.seapal.model.ModelDocument;

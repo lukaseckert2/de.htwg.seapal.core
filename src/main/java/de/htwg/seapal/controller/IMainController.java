@@ -1,4 +1,4 @@
-package de.htwg.seapal.controller.impl;
+package de.htwg.seapal.controller;
 
 import de.htwg.seapal.model.IModel;
 

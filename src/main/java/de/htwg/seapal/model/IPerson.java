@@ -63,4 +63,12 @@ public interface IPerson extends IModel {
     String getPassword();
 
     void setPassword(String password);
+
+    void setResetToken(String token);
+
+    String getResetToken();
+
+    void setResetTimeout(long timeout);
+
+    long getResetTimeout();
 }

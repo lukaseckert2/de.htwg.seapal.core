@@ -1,18 +1,18 @@
 package de.htwg.seapal.controller.impl;
 
+import com.google.inject.Inject;
+import de.htwg.seapal.controller.IPersonController;
+import de.htwg.seapal.database.IPersonDatabase;
+import de.htwg.seapal.model.IPerson;
+import de.htwg.seapal.model.impl.Person;
+import de.htwg.seapal.utils.logging.ILogger;
+import de.htwg.seapal.utils.observer.Observable;
+
 import java.text.SimpleDateFormat;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Locale;
 import java.util.UUID;
-
-import com.google.inject.Inject;
-
-import de.htwg.seapal.controller.IPersonController;
-import de.htwg.seapal.database.IPersonDatabase;
-import de.htwg.seapal.model.IPerson;
-import de.htwg.seapal.utils.observer.Observable;
-import de.htwg.seapal.utils.logging.ILogger;
 
 public class PersonController extends Observable implements IPersonController {
 
@@ -336,5 +336,23 @@ public class PersonController extends Observable implements IPersonController {
     @Override
     public List<? extends IPerson> queryView(final String viewName, final String key) {
         return db.queryViews(viewName, key);
+    }
+
+    @Override
+    public IPerson authenticate(final Person account)
+            throws Exception {
+        IPerson person = db.getAccount(account.getEmail());
+
+        if (PasswordHash.validatePassword(person.getPassword(), account.getPassword())) {
+            return account;
+        }
+
+        return null;
+    }
+
+    @Override
+    public boolean accountExists(final String email)
+            throws Exception {
+        return db.getAccount(email) != null;
     }
 }

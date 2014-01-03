@@ -7,211 +7,217 @@ import java.util.ArrayList;
 import java.util.List;
 import java.util.UUID;
 
-public class Person extends ModelDocument implements IPerson {
+public class Person
+        extends ModelDocument
+        implements IPerson {
 
-	/**
-	 * Serial version UID for serialization.
-	 */
-	private static final long serialVersionUID = 1L;
+    /**
+     * Serial version UID for serialization.
+     */
+    private static final long serialVersionUID = 1L;
 
-	private String firstname = null;
+    private String firstname = null;
 
-	private String lastname = null;
+    private String lastname = null;
 
-	private Long birth;
+    private Long birth;
 
-	private Long registration;
+    private Long registration;
 
-	private Integer age = 0;
+    private Integer age = 0;
 
-	private String nationality = null;
+    private String nationality = null;
 
-	private String email = null;
+    private String email = null;
 
-	private String telephone = null;
+    private String telephone = null;
 
-	private String mobile = null;
+    private String mobile = null;
 
-	private String street = null;
+    private String street = null;
 
-	private Integer postcode = 0;
+    private Integer postcode = 0;
 
-	private String city = null;
+    private String city = null;
 
-	private String country = null;
+    private String country = null;
 
     private String password = null;
 
     private List<String> friendList = new ArrayList<>();
 
-	public Person() {
-		super(UUID.randomUUID().toString());
-		firstname = "";
-		lastname = "";
-		birth = 0L;
-		registration = 0L;
-		age = 0;
-		nationality = "";
+    private String token;
 
-		email = "";
-		telephone = "";
-		mobile = "";
+    private long timeout;
 
-		street = "";
-		postcode = 0;
-		city = "";
-		country = "";
-	}
+    public Person() {
+        super(UUID.randomUUID().toString());
+        firstname = "";
+        lastname = "";
+        birth = 0L;
+        registration = 0L;
+        age = 0;
+        nationality = "";
 
-	public Person(IPerson person) {
-		super(person.getId());
+        email = "";
+        telephone = "";
+        mobile = "";
 
-		firstname = person.getFirstname();
-		lastname = person.getLastname();
-		birth = person.getBirth();
-		registration = person.getRegistration();
-		age = person.getAge();
-		nationality = person.getNationality();
+        street = "";
+        postcode = 0;
+        city = "";
+        country = "";
+    }
 
-		email = person.getEmail();
-		telephone = person.getTelephone();
-		mobile = person.getMobile();
+    public Person(IPerson person) {
+        super(person.getId());
 
-		street = person.getStreet();
-		postcode = person.getPostcode();
-		city = person.getCity();
-		country = person.getCountry();
-	}
+        firstname = person.getFirstname();
+        lastname = person.getLastname();
+        birth = person.getBirth();
+        registration = person.getRegistration();
+        age = person.getAge();
+        nationality = person.getNationality();
 
-	@Override
-	public String getFirstname() {
-		return firstname;
-	}
+        email = person.getEmail();
+        telephone = person.getTelephone();
+        mobile = person.getMobile();
 
-	@Override
-	public void setFirstname(String firstname) {
-		this.firstname = firstname;
-	}
+        street = person.getStreet();
+        postcode = person.getPostcode();
+        city = person.getCity();
+        country = person.getCountry();
+    }
 
-	@Override
-	public String getLastname() {
-		return lastname;
-	}
+    @Override
+    public String getFirstname() {
+        return firstname;
+    }
 
-	@Override
-	public void setLastname(String lastname) {
-		this.lastname = lastname;
-	}
+    @Override
+    public void setFirstname(String firstname) {
+        this.firstname = firstname;
+    }
 
-	@Override
-	public Long getBirth() {
-		return birth;
-	}
+    @Override
+    public String getLastname() {
+        return lastname;
+    }
 
-	@Override
-	public void setBirth(Long birth) {
-		this.birth = birth;
-	}
+    @Override
+    public void setLastname(String lastname) {
+        this.lastname = lastname;
+    }
 
-	@Override
-	public Long getRegistration() {
-		return registration;
-	}
+    @Override
+    public Long getBirth() {
+        return birth;
+    }
 
-	@Override
-	public void setRegistration(Long registration) {
-		this.registration = registration;
-	}
+    @Override
+    public void setBirth(Long birth) {
+        this.birth = birth;
+    }
 
-	@Override
-	public Integer getAge() {
-		return age;
-	}
+    @Override
+    public Long getRegistration() {
+        return registration;
+    }
 
-	@Override
-	public void setAge(Integer age) {
-		this.age = age;
-	}
+    @Override
+    public void setRegistration(Long registration) {
+        this.registration = registration;
+    }
 
-	@Override
-	public String getNationality() {
-		return nationality;
-	}
+    @Override
+    public Integer getAge() {
+        return age;
+    }
 
-	@Override
-	public void setNationality(String nationality) {
-		this.nationality = nationality;
-	}
+    @Override
+    public void setAge(Integer age) {
+        this.age = age;
+    }
 
-	@Override
-	public String getEmail() {
-		return email;
-	}
+    @Override
+    public String getNationality() {
+        return nationality;
+    }
 
-	@Override
-	public void setEmail(String email) {
-		this.email = email;
-	}
+    @Override
+    public void setNationality(String nationality) {
+        this.nationality = nationality;
+    }
 
-	@Override
-	public String getTelephone() {
-		return telephone;
-	}
+    @Override
+    public String getEmail() {
+        return email;
+    }
 
-	@Override
-	public void setTelephone(String telephone) {
-		this.telephone = telephone;
-	}
+    @Override
+    public void setEmail(String email) {
+        this.email = email;
+    }
 
-	@Override
-	public String getMobile() {
-		return mobile;
-	}
+    @Override
+    public String getTelephone() {
+        return telephone;
+    }
 
-	@Override
-	public void setMobile(String mobile) {
-		this.mobile = mobile;
-	}
+    @Override
+    public void setTelephone(String telephone) {
+        this.telephone = telephone;
+    }
 
-	@Override
-	public String getStreet() {
-		return street;
-	}
+    @Override
+    public String getMobile() {
+        return mobile;
+    }
 
-	@Override
-	public void setStreet(String street) {
-		this.street = street;
-	}
+    @Override
+    public void setMobile(String mobile) {
+        this.mobile = mobile;
+    }
 
-	@Override
-	public Integer getPostcode() {
-		return postcode;
-	}
+    @Override
+    public String getStreet() {
+        return street;
+    }
 
-	@Override
-	public void setPostcode(Integer postcode) {
-		this.postcode = postcode;
-	}
+    @Override
+    public void setStreet(String street) {
+        this.street = street;
+    }
 
-	@Override
-	public String getCity() {
-		return city;
-	}
+    @Override
+    public Integer getPostcode() {
+        return postcode;
+    }
 
-	@Override
-	public void setCity(String city) {
-		this.city = city;
-	}
+    @Override
+    public void setPostcode(Integer postcode) {
+        this.postcode = postcode;
+    }
 
-	@Override
-	public String getCountry() {
-		return country;
-	}
+    @Override
+    public String getCity() {
+        return city;
+    }
 
-	@Override
-	public void setCountry(String country) {
-		this.country = country;
-	}
+    @Override
+    public void setCity(String city) {
+        this.city = city;
+    }
+
+    @Override
+    public String getCountry() {
+        return country;
+    }
+
+    @Override
+    public void setCountry(String country) {
+        this.country = country;
+    }
 
     @Override
     public List<String> getFriendList() {
@@ -231,5 +237,21 @@ public class Person extends ModelDocument implements IPerson {
     @Override
     public void setPassword(final String password) {
         this.password = password;
+    }
+    @Override
+    public void setResetToken(final String token) {
+        this.token = token;
+    }
+    @Override
+    public String getResetToken() {
+        return token;
+    }
+    @Override
+    public void setResetTimeout(final long timeout) {
+        this.timeout = timeout;
+    }
+    @Override
+    public long getResetTimeout() {
+        return this.timeout;
     }
 }

@@ -1,6 +1,7 @@
 package de.htwg.seapal.controller;
 
 import de.htwg.seapal.model.IPerson;
+import de.htwg.seapal.model.impl.Person;
 import de.htwg.seapal.utils.observer.IObservable;
 
 import java.util.List;
@@ -97,4 +98,10 @@ public interface IPersonController extends IObservable {
 	boolean savePerson(IPerson person);
 
     List<? extends IPerson> queryView(String viewName, String key);
+
+    IPerson authenticate(Person form)
+            throws Exception;
+
+    boolean accountExists(String email)
+                    throws Exception;
 }
