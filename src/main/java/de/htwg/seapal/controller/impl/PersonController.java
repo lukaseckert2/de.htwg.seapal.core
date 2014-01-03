@@ -341,9 +341,9 @@ public class PersonController extends Observable implements IPersonController {
     @Override
     public IPerson authenticate(final Person account)
             throws Exception {
-        IPerson person = db.getAccount(account.getEmail());
+        IPerson savedAccount = db.getAccount(account.getEmail());
 
-        if (PasswordHash.validatePassword(person.getPassword(), account.getPassword())) {
+        if (PasswordHash.validatePassword(account.getPassword(), savedAccount.getPassword())) {
             return account;
         }
 
