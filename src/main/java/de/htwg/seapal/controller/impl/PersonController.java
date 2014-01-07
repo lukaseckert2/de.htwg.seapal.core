@@ -351,8 +351,8 @@ public class PersonController extends Observable implements IPersonController {
     }
 
     @Override
-    public boolean accountExists(final String email)
-            throws Exception {
-        return db.getAccount(email) != null;
+    public boolean accountExists(final String email) {
+        List<? extends IPerson> accounts = db.queryViews("by_email", email);
+        return accounts.size() > 0;
     }
 }

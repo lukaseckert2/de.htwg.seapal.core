@@ -15,10 +15,6 @@ public class Mark extends ModelDocument implements IMark {
 	private String name;
 	private Double latitude;
 	private Double Longitude;
-	private Integer btm;
-	private Integer dtm;
-	private Integer cog;
-	private Integer sog;
 	private String note;
 	private Long date;
     private String photo;
@@ -28,10 +24,6 @@ public class Mark extends ModelDocument implements IMark {
 		super(UUID.randomUUID().toString());
 		this.latitude = 0D;
 		this.Longitude = 0D;
-		this.btm = 0;
-		this.dtm = 0;
-		this.cog = 0;
-		this.sog = 0;
 		this.note = "";
 		this.date = 0L;
         this.photo = "iVBORw0KGgoAAAANSUhEUgAAAAEAAAABCAIAAACQd1PeAAAACXBIWXMAAAsTAAALEwEAmpwYAAAAB3RJTUUH3QwWDTUH5nuEVQAAAB1pVFh0Q29tbWVudAAAAAAAQ3JlYXRlZCB3aXRoIEdJTVBkLmUHAAAADElEQVQI12P4//8/AAX+Av7czFnnAAAAAElFTkSuQmCC";
@@ -44,10 +36,6 @@ public class Mark extends ModelDocument implements IMark {
 		this.name = m.getName();
 		this.latitude = m.getLatitude();
 		this.Longitude = m.getLongitude();
-		this.btm = m.getBTM();
-		this.dtm = m.getDTM();
-		this.cog = m.getCOG();
-		this.sog = m.getSOG();
 		this.note = m.getNote();
 		this.date = m.getDate();
         this.photo = m.getPhoto();
@@ -92,46 +80,6 @@ public class Mark extends ModelDocument implements IMark {
 	@Override
 	public void setNote(String note) {
 		this.note = note;
-	}
-
-	@Override
-	public Integer getBTM() {
-		return btm;
-	}
-
-	@Override
-	public void setBTM(Integer btm) {
-		this.btm = btm;
-	}
-
-	@Override
-	public Integer getDTM() {
-		return dtm;
-	}
-
-	@Override
-	public void setDTM(Integer dtm) {
-		this.dtm = dtm;
-	}
-
-	@Override
-	public Integer getCOG() {
-		return cog;
-	}
-
-	@Override
-	public void setCOG(Integer cog) {
-		this.cog = cog;
-	}
-
-	@Override
-	public Integer getSOG() {
-		return sog;
-	}
-
-	@Override
-	public void setSOG(Integer sog) {
-		this.sog = sog;
 	}
 
 	@Override

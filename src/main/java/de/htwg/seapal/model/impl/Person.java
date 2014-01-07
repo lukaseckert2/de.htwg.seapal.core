@@ -45,11 +45,15 @@ public class Person
 
     private String password = null;
 
-    private List<String> friendList = new ArrayList<>();
-
     private String token;
 
     private long timeout;
+
+    private List<String> friendList = new ArrayList<>();
+
+    private List<String> sentRequests = new ArrayList<>();
+
+    private List<String> receivedRequests = new ArrayList<>();
 
     public Person() {
         super(UUID.randomUUID().toString());
@@ -259,5 +263,49 @@ public class Person
     @JsonIgnore
     public void addFriend(final String uuid) {
         friendList.add(uuid);
+    }
+    @Override
+    public List<String> getSentRequests() {
+        return this.sentRequests;
+    }
+
+    @Override
+    public void getRequestFromAccount(final List<String> setList) {
+        this.sentRequests = setList;
+    }
+
+    @Override
+    public List<String> getReceivedRequests() {
+        return this.receivedRequests;
+    }
+
+    @Override
+    public void getRequestToAccount(final List<String> setList) {
+        this.receivedRequests = setList;
+    }
+
+    /**
+     * the instance calling addFriend wants to add askedPerson to his friendList.
+     * friendList contains approved friends
+     * sentRequests contains uuids I have sent requests to
+     * receivedRequests contains uuids I have received requests from
+     *
+     * @param askedPerson the person I want to add
+     */
+    @JsonIgnore
+    @Override
+    public boolean addFriend(final IPerson askedPerson) {
+        // Other person already sent request
+        if (askedPerson.getSentRequests().contains(this.getId())) {
+            askedPerson.getSentRequests().remove(this.getId());
+            askedPerson.getFriendList().add(this.getId());
+
+            this.friendList.add(askedPerson.getId());
+            return true;
+        } else { // Other person did not already send a request
+            askedPerson.getReceivedRequests().add(this.getId());
+            this.sentRequests.add(askedPerson.getId());
+            return false;
+        }
     }
 }

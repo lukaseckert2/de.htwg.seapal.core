@@ -94,78 +94,6 @@ public class MarkController extends Observable implements IMarkController {
 	}
 
 	@Override
-	public int getBTM(UUID id) {
-		IMark mark = db.get(id);
-		if (mark == null)
-			return -1;
-		return mark.getBTM();
-	}
-
-	@Override
-	public void setBTM(UUID id, int btm) {
-		IMark mark = db.get(id);
-		if (mark == null)
-			return;
-		mark.setBTM(btm);
-		db.save(mark);
-		notifyObservers();
-	}
-
-	@Override
-	public int getDTM(UUID id) {
-		IMark mark = db.get(id);
-		if (mark == null)
-			return -1;
-		return mark.getDTM();
-	}
-
-	@Override
-	public void setDTM(UUID id, int dtm) {
-		IMark mark = db.get(id);
-		if (mark == null)
-			return;
-		mark.setDTM(dtm);
-		db.save(mark);
-		notifyObservers();
-	}
-
-	@Override
-	public int getCOG(UUID id) {
-		IMark mark = db.get(id);
-		if (mark == null)
-			return -1;
-		return mark.getCOG();
-	}
-
-	@Override
-	public void setCOG(UUID id, int cog) {
-		IMark mark = db.get(id);
-		if (mark == null)
-			return;
-		mark.setCOG(cog);
-		db.save(mark);
-		notifyObservers();
-	}
-
-	@Override
-	public int getSOG(UUID id) {
-		IMark mark = db.get(id);
-		if (mark == null)
-			return -1;
-		return mark.getSOG();
-	}
-
-	@Override
-	public void setSOG(UUID id, int sog) {
-		IMark mark = db.get(id);
-		if (mark == null)
-			return;
-		mark.setSOG(sog);
-		db.save(mark);
-		notifyObservers();
-	}
-
-	@Override
 	public long getDate(UUID id) {
 		IMark mark = db.get(id);
 		if (mark == null)
@@ -250,8 +178,6 @@ public class MarkController extends Observable implements IMarkController {
 	public String getString(UUID id) {
 		return "ID = \t" + id + "\nName = \t" + getName(id) + "\nLatitude = \t"
 				+ getLatitude(id) + "\nLongitude = \t" + getLongitude(id)
-				+ "\nCOG = \t" + getCOG(id) + "\nSOG = \t" + getSOG(id)
-				+ "\nBTM = \t" + getBTM(id) + "\nDTM = \t" + getDTM(id)
 				+ "\nDate = \t" + getDate(id) + "\nNotes = \t" + getNote(id);
 	}
 

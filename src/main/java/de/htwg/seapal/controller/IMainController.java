@@ -1,6 +1,7 @@
 package de.htwg.seapal.controller;
 
 import de.htwg.seapal.model.IModel;
+import de.htwg.seapal.model.IPerson;
 import de.htwg.seapal.model.ModelDocument;
 
 import java.util.List;
@@ -18,5 +19,11 @@ public interface IMainController {
 
     List<? extends IModel> getByParent(String document, String parent, String session, final UUID id);
 
-    public String creatDocument(final String type, final ModelDocument document);
+    public ModelDocument creatDocument(final String type, final ModelDocument document);
+
+    IPerson account(final UUID account, String session);
+
+    boolean addFriend(String session, UUID askedPersonUUID);
+
+    IPerson account(String session);
 }

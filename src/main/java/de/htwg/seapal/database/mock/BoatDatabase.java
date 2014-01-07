@@ -46,19 +46,6 @@ public class BoatDatabase implements IBoatDatabase {
 		return newBoat.getUUID();
 	}
 
-    @Override
-    public List<Boat> getBoats(final String userid, String viewId) {
-        List<Boat> boats = new LinkedList<Boat>();
-        Collection<IBoat> collection = db.values();
-        for (IBoat boat : collection) {
-            if (boat.getAccount().equals(userid)) {
-                boats.add((Boat) boat);
-            }
-        }
-
-        return boats;
-    }
-
     private UUID createNewBoatInDatabase() {
 		IBoat boat = new Boat();
 		boat.setRegisterNr("AB7737");

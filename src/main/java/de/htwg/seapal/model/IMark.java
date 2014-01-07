@@ -20,22 +20,6 @@ public interface IMark extends IModel {
 
 	void setNote(String note);
 
-	Integer getBTM();
-
-	void setBTM(Integer btm);
-
-	Integer getDTM();
-
-	void setDTM(Integer dtm);
-
-	Integer getCOG();
-
-	void setCOG(Integer cog);
-
-	Integer getSOG();
-
-	void setSOG(Integer sog);
-
 	Long getDate();
 
 	void setDate(Long date);

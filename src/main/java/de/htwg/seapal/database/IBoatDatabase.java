@@ -2,8 +2,6 @@ package de.htwg.seapal.database;
 
 import de.htwg.seapal.model.IBoat;
 
-import java.util.List;
-
 /**
  * The boat database interface.
  * <p>
@@ -17,6 +15,4 @@ import java.util.List;
  * Remark: the design file "_design/Boat" must be created manually.
  * </p>
  */
-public interface IBoatDatabase extends IDatabase<IBoat> {
-    List<de.htwg.seapal.model.impl.Boat> getBoats(String userId, String viewId);
-}
+public interface IBoatDatabase extends IDatabase<IBoat> {}

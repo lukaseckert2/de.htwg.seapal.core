@@ -29,6 +29,7 @@ public interface IDatabase<T extends IModel> {
     /**
      * Saves a data entry.
      *
+     *
      * @param data The data entry to save.
      *
      * @return Returns TRUE, if the data entry was newly created

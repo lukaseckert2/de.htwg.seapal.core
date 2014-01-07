@@ -73,4 +73,14 @@ public interface IPerson extends IModel {
     long getResetTimeout();
 
     void addFriend(String uuid);
+
+    List<String> getSentRequests();
+
+    void getRequestFromAccount(List<String> setList);
+
+    List<String> getReceivedRequests();
+
+    void getRequestToAccount(List<String> setList);
+
+    boolean addFriend(final IPerson askedPerson);
 }

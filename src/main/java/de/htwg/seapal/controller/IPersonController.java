@@ -9,7 +9,9 @@ import java.util.UUID;
 
 public interface IPersonController extends IObservable {
 
-	String getPersonFirstname(UUID personId);
+    String AUTHN_COOKIE_KEY = "id";
+
+    String getPersonFirstname(UUID personId);
 
 	void setPersonFirstname(UUID personId, String firstname);
 
@@ -102,6 +104,5 @@ public interface IPersonController extends IObservable {
     IPerson authenticate(Person form)
             throws Exception;
 
-    boolean accountExists(String email)
-                    throws Exception;
+    boolean accountExists(String email);
 }
