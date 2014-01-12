@@ -2,6 +2,7 @@ package de.htwg.seapal.model.impl;
 
 import de.htwg.seapal.model.IBoat;
 import de.htwg.seapal.model.ModelDocument;
+import org.codehaus.jackson.annotate.JsonProperty;
 
 import java.util.UUID;
 
@@ -161,12 +162,14 @@ public class Boat extends ModelDocument implements IBoat {
 	}
 
 	@Override
+    @JsonProperty("boatType")
 	public String getType() {
 		return type;
 	}
 
 	@Override
-	public void setType(String type) {
+    @JsonProperty("boatType")
+    public void setType(String type) {
 		this.type = type;
 	}
 
