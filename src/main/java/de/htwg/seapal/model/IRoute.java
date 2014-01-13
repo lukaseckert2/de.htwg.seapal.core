@@ -13,7 +13,7 @@ public interface IRoute extends IModel {
 
 	void setDate(Long date);
 
-	List<UUID> getMarks();
+	List<Double> getMarks();
 
 	void addMark(UUID mark);
 
@@ -27,4 +27,7 @@ public interface IRoute extends IModel {
 
 	void setDistance(Double distance);
 
+    void setMarks(List<Double> marks);
+
+    void setRouteEntryPoint(String routeEntryPoint);
 }

@@ -2,6 +2,7 @@ package de.htwg.seapal.model.impl;
 
 import de.htwg.seapal.model.IRoute;
 import de.htwg.seapal.model.ModelDocument;
+import org.codehaus.jackson.annotate.JsonIgnore;
 
 import java.util.LinkedList;
 import java.util.List;
@@ -16,13 +17,13 @@ public class Route extends ModelDocument implements IRoute {
 
 	private String name;
 	private Long date;
-	private List<String> marks;
+    private List<Double> marks = new LinkedList<>();
 	private String routeEntryPoint;
 	private Double distance;
 
 	public Route() {
         super(UUID.randomUUID().toString());
-		marks = new LinkedList<String>();
+		marks = new LinkedList<>();
 		this.name = "";
 		this.date = 0L;
 		this.routeEntryPoint = null;
@@ -33,11 +34,9 @@ public class Route extends ModelDocument implements IRoute {
         super(r.getId());
 		this.name = r.getName();
 		this.date = r.getDate();
-		List<String> list = new LinkedList<String>();
-		for (UUID id : r.getMarks()) {
-			list.add(id.toString());
+		for (Double id : r.getMarks()) {
+			marks.add(id);
 		}
-		this.marks = null;
 		this.routeEntryPoint = r.getRouteEntryPoint().toString();
 		this.distance = r.getDistance();
 	}
@@ -63,23 +62,21 @@ public class Route extends ModelDocument implements IRoute {
 	}
 
 	@Override
-	public List<UUID> getMarks() {
-		List<UUID> list = new LinkedList<UUID>();
-		for (String id : marks) {
-			list.add(UUID.fromString(id));
-		}
-		return list;
+	public List<Double> getMarks() {
+		return marks;
 	}
 
 	@Override
+    @JsonIgnore
 	public void addMark(UUID mark) {
-		this.marks.add(mark.toString());
+		throw new Error("do not use function");
 	}
 
 	@Override
-	public void deleteMark(UUID mark) {
-		this.marks.remove(mark.toString());
-	}
+    @JsonIgnore
+    public void deleteMark(UUID mark) {
+        throw new Error("do not use function");
+    }
 
 	@Override
 	public UUID getRouteEntryPoint() {
@@ -102,4 +99,12 @@ public class Route extends ModelDocument implements IRoute {
 	public void setDistance(Double distance) {
 		this.distance = distance;
 	}
+
+    public void setMarks(final List<Double> marks) {
+        this.marks = marks;
+    }
+
+    public void setRouteEntryPoint(final String routeEntryPoint) {
+        this.routeEntryPoint = routeEntryPoint;
+    }
 }

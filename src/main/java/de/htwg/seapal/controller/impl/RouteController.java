@@ -96,14 +96,6 @@ public class RouteController extends Observable implements IRouteController {
 	}
 
 	@Override
-	public List<UUID> getMarks(UUID id) {
-		IRoute route = db.get(id);
-		if (route == null)
-			return null;
-		return route.getMarks();
-	}
-
-	@Override
 	public void addMark(UUID id, UUID mark) {
 		IRoute route = db.get(id);
 		if (route == null)

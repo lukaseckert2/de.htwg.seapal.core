@@ -47,15 +47,6 @@ public interface IRouteController extends IObservable {
 	void setDate(UUID id, long date);
 
 	/**
-	 * Gets a list of all mark IDs of the given route ID.
-	 *
-	 * @param id
-	 *            The route ID.
-	 * @return All mark IDs of the given route.
-	 */
-	List<UUID> getMarks(UUID id);
-
-	/**
 	 * Adds a given mark to the route.
 	 *
 	 * @param id
