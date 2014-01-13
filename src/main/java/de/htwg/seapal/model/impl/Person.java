@@ -45,9 +45,11 @@ public class Person
 
     private String password = null;
 
-    private String token;
+    private String token = null;
 
-    private long timeout;
+    private long timeout = 0L;
+
+    private String googleID = null;
 
     private List<String> friendList = new ArrayList<>();
 
@@ -63,6 +65,7 @@ public class Person
         registration = 0L;
         age = 0;
         nationality = "";
+        googleID = "";
 
         email = "";
         telephone = "";
@@ -72,6 +75,10 @@ public class Person
         postcode = 0;
         city = "";
         country = "";
+        token = "";
+
+        timeout = 0L;
+        token = "";
     }
 
     public Person(IPerson person) {
@@ -92,6 +99,20 @@ public class Person
         postcode = person.getPostcode();
         city = person.getCity();
         country = person.getCountry();
+
+        password = null;
+
+        token = null;
+
+        timeout = 0L;
+
+        friendList = person.getFriendList();
+
+        sentRequests = person.getSentRequests();
+
+        receivedRequests = person.getReceivedRequests();
+
+        googleID = person.getGoogleID();
     }
 
     @Override
@@ -282,6 +303,16 @@ public class Person
     @Override
     public void getRequestToAccount(final List<String> setList) {
         this.receivedRequests = setList;
+    }
+
+    @Override
+    public String getGoogleID() {
+        return this.googleID;
+    }
+
+    @Override
+    public void setGoogleID(final String openID) {
+        this.googleID = openID;
     }
 
     /**

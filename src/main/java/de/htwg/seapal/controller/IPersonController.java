@@ -5,6 +5,7 @@ import de.htwg.seapal.model.impl.Person;
 import de.htwg.seapal.utils.observer.IObservable;
 
 import java.util.List;
+import java.util.Map;
 import java.util.UUID;
 
 public interface IPersonController extends IObservable {
@@ -105,4 +106,6 @@ public interface IPersonController extends IObservable {
             throws Exception;
 
     boolean accountExists(String email);
+
+    IPerson googleLogin(Map<String, String> userInfo, String googleID);
 }

@@ -9,10 +9,7 @@ import de.htwg.seapal.utils.logging.ILogger;
 import de.htwg.seapal.utils.observer.Observable;
 
 import java.text.SimpleDateFormat;
-import java.util.ArrayList;
-import java.util.List;
-import java.util.Locale;
-import java.util.UUID;
+import java.util.*;
 
 public class PersonController extends Observable implements IPersonController {
 
@@ -354,5 +351,32 @@ public class PersonController extends Observable implements IPersonController {
     public boolean accountExists(final String email) {
         List<? extends IPerson> accounts = db.queryViews("by_email", email);
         return accounts.size() > 0;
+    }
+
+    @Override
+    public IPerson googleLogin(final Map<String, String> userInfo, final String googleID) {
+        List<? extends IPerson> accounts = db.queryViews("googleID", googleID);
+        if (accounts.size() > 0) {
+            // Account exists and is connected to Google Account
+            return accounts.get(0);
+        }
+
+        accounts = db.queryViews("by_email", userInfo.get("Email"));
+        if (accounts.size() > 0) {
+            // Account exists, but is not connected to Google Account
+            IPerson person = accounts.get(0);
+            person.setGoogleID(googleID);
+            savePerson(person);
+            return savePerson(person) ? person : null;
+        }
+
+        // new account
+        IPerson person = new Person();
+        person.setGoogleID(googleID);
+        person.setFirstname(userInfo.get("FirstName"));
+        person.setLastname(userInfo.get("LastName"));
+        person.setEmail(userInfo.get("Email"));
+
+        return savePerson(person) ? person : null;
     }
 }

@@ -82,5 +82,9 @@ public interface IPerson extends IModel {
 
     void getRequestToAccount(List<String> setList);
 
+    String getGoogleID();
+
+    void setGoogleID(String openID);
+
     boolean addFriend(final IPerson askedPerson);
 }
