@@ -18,7 +18,6 @@ public class Route extends ModelDocument implements IRoute {
 	private String name;
 	private Long date;
     private List<Double> marks = new LinkedList<>();
-	private String routeEntryPoint;
 	private Double distance;
 
 	public Route() {
@@ -26,7 +25,6 @@ public class Route extends ModelDocument implements IRoute {
 		marks = new LinkedList<>();
 		this.name = "";
 		this.date = 0L;
-		this.routeEntryPoint = null;
 		this.distance = 0D;
 	}
 
@@ -37,7 +35,6 @@ public class Route extends ModelDocument implements IRoute {
 		for (Double id : r.getMarks()) {
 			marks.add(id);
 		}
-		this.routeEntryPoint = r.getRouteEntryPoint().toString();
 		this.distance = r.getDistance();
 	}
 
@@ -79,18 +76,6 @@ public class Route extends ModelDocument implements IRoute {
     }
 
 	@Override
-	public UUID getRouteEntryPoint() {
-		if (routeEntryPoint == null)
-			return null;
-		return UUID.fromString(routeEntryPoint);
-	}
-
-	@Override
-	public void setRouteEntryPoint(UUID mark) {
-		this.routeEntryPoint = mark.toString();
-	}
-
-	@Override
 	public Double getDistance() {
 		return distance;
 	}
@@ -102,9 +87,5 @@ public class Route extends ModelDocument implements IRoute {
 
     public void setMarks(final List<Double> marks) {
         this.marks = marks;
-    }
-
-    public void setRouteEntryPoint(final String routeEntryPoint) {
-        this.routeEntryPoint = routeEntryPoint;
     }
 }

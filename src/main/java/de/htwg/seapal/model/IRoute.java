@@ -19,15 +19,9 @@ public interface IRoute extends IModel {
 
 	void deleteMark(UUID mark);
 
-	UUID getRouteEntryPoint();
-
-	void setRouteEntryPoint(UUID mark);
-
 	Double getDistance();
 
 	void setDistance(Double distance);
 
     void setMarks(List<Double> marks);
-
-    void setRouteEntryPoint(String routeEntryPoint);
 }

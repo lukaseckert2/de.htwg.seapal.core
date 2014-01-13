@@ -2,6 +2,7 @@ package de.htwg.seapal.model.impl;
 
 import de.htwg.seapal.model.IMark;
 import de.htwg.seapal.model.ModelDocument;
+import org.codehaus.jackson.annotate.JsonProperty;
 
 import java.util.UUID;
 
@@ -53,22 +54,26 @@ public class Mark extends ModelDocument implements IMark {
 	}
 
 	@Override
-	public Double getLatitude() {
+    @JsonProperty("lat")
+    public Double getLatitude() {
 		return this.latitude;
 	}
 
 	@Override
-	public void setLatitude(Double latitude) {
+    @JsonProperty("lat")
+    public void setLatitude(Double latitude) {
 		this.latitude = latitude;
 	}
 
 	@Override
+    @JsonProperty("lng")
 	public Double getLongitude() {
 		return this.Longitude;
 	}
 
 	@Override
-	public void setLongitude(Double Longitude) {
+    @JsonProperty("lng")
+    public void setLongitude(Double Longitude) {
 		this.Longitude = Longitude;
 	}
 

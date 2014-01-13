@@ -59,24 +59,6 @@ public class RouteController extends Observable implements IRouteController {
 	}
 
 	@Override
-	public UUID getRouteEntryPoint(UUID id) {
-		IRoute route = db.get(id);
-		if (route == null)
-			return null;
-		return route.getRouteEntryPoint();
-	}
-
-	@Override
-	public void setRouteEntryPoint(UUID id, UUID mark) {
-		IRoute route = db.get(id);
-		if (route == null)
-			return;
-		route.setRouteEntryPoint(mark);
-		db.save(route);
-		notifyObservers();
-	}
-
-	@Override
 	public double getDistance(UUID id) {
 		IRoute route = db.get(id);
 		if (route == null)
@@ -148,8 +130,7 @@ public class RouteController extends Observable implements IRouteController {
 	@Override
 	public String getString(UUID id) {
 		return "ID = \t" + id + "\nName = \t" + getName(id) + "\nDistance = \t"
-				+ getDistance(id) + "\nDate = \t" + getDate(id)
-				+ "\nRouteEntryPoint = \t" + getRouteEntryPoint(id);
+				+ getDistance(id) + "\nDate = \t" + getDate(id);
 	}
 
 	@Override

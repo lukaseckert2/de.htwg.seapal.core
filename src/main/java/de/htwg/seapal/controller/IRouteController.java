@@ -67,25 +67,6 @@ public interface IRouteController extends IObservable {
 	void deleteMark(UUID id, UUID markId);
 
 	/**
-	 * Gets a route entry point of the given route ID.
-	 *
-	 * @param id
-	 *            The route ID.
-	 * @return The route entry point.
-	 */
-	UUID getRouteEntryPoint(UUID id);
-
-	/**
-	 * Sets a route entry point of the given route ID.
-	 *
-	 * @param id
-	 *            The route ID.
-	 * @param markId
-	 *            The route entry point.
-	 */
-	void setRouteEntryPoint(UUID id, UUID markId);
-
-	/**
 	 * Gets the distance of the given route ID.
 	 *
 	 * @param id
