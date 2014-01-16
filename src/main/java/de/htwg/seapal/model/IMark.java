@@ -8,11 +8,11 @@ public interface IMark extends IModel {
 
 	void setName(String name);
 
-	Double getLatitude();
+    Double getLatitude();
 
 	void setLatitude(Double latitute);
 
-	Double getLongitude();
+    Double getLongitude();
 
 	void setLongitude(Double Longitude);
 
