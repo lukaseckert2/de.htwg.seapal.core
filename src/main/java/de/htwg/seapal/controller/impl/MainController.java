@@ -6,7 +6,6 @@ import de.htwg.seapal.database.*;
 import de.htwg.seapal.model.IModel;
 import de.htwg.seapal.model.IPerson;
 import de.htwg.seapal.model.ModelDocument;
-import de.htwg.seapal.model.impl.*;
 import de.htwg.seapal.utils.logging.ILogger;
 import org.ektorp.CouchDbInstance;
 import org.ektorp.impl.StdCouchDbConnector;
@@ -25,7 +24,7 @@ public final class MainController
 
     private Map<String, IDatabase<? extends IModel>> db = new HashMap<>();
     private Map<String, StdCouchDbConnector> stdDB = new HashMap<>();
-    private Map<String, Class<? extends ModelDocument>> classes = new HashMap<>();
+    // private Map<String, Class<? extends ModelDocument>> classes = new HashMap<>();
 
     private ILogger logger;
 
@@ -36,27 +35,27 @@ public final class MainController
 
         db.put(KEY_BOAT, boatDB);
         stdDB.put(KEY_BOAT, new StdCouchDbConnector("seapal_boat_db", dbInstance));
-        classes.put(KEY_BOAT, Boat.class);
+        // classes.put(KEY_BOAT, Boat.class);
 
         db.put(KEY_MARK, markDB);
         stdDB.put(KEY_MARK, new StdCouchDbConnector("seapal_mark_db", dbInstance));
-        classes.put(KEY_MARK, Mark.class);
+        // classes.put(KEY_MARK, Mark.class);
 
         db.put(KEY_PERSON, personDB);
         stdDB.put(KEY_PERSON, new StdCouchDbConnector("seapal_person_db", dbInstance));
-        classes.put(KEY_PERSON, Person.class);
+        // classes.put(KEY_PERSON, Person.class);
 
         db.put(KEY_ROUTE, routeDB);
         stdDB.put(KEY_ROUTE, new StdCouchDbConnector("seapal_route_db", dbInstance));
-        classes.put(KEY_ROUTE, Route.class);
+        // classes.put(KEY_ROUTE, Route.class);
 
         db.put(KEY_TRIP, tripDB);
         stdDB.put(KEY_TRIP, new StdCouchDbConnector("seapal_trip_db", dbInstance));
-        classes.put(KEY_TRIP, Trip.class);
+        // classes.put(KEY_TRIP, Trip.class);
 
         db.put(KEY_WAYPOINT, waypointDB);
         stdDB.put(KEY_WAYPOINT, new StdCouchDbConnector("seapal_waypoint_db", dbInstance));
-        classes.put(KEY_WAYPOINT, Waypoint.class);
+        // classes.put(KEY_WAYPOINT, Waypoint.class);
     }
 
     @Override
@@ -66,8 +65,8 @@ public final class MainController
 
     @Override
     public boolean deleteDocument(final String session, final UUID id, final String document) {
-        IDatabase<ModelDocument> key = (IDatabase<ModelDocument>) db.get(document);
-        ModelDocument doc = key.get(id);
+        IDatabase<? extends IModel> key = db.get(document);
+        ModelDocument doc = (ModelDocument) key.get(id);
         if (doc != null && doc.getAccount().equals(session)) {
             key.delete(id);
             return true;
@@ -85,17 +84,14 @@ public final class MainController
     public List<? extends IModel> getForeignDocuments(final String document, final String session) {
         IPerson person = (IPerson) db.get(KEY_PERSON).get(UUID.fromString(session));
 
-        if (person != null && false) {
-            List<IModel> list = new ArrayList<>();
-
+        List<IModel> list = new ArrayList<>();
+        if (person != null) {
             for (String uuid : person.getFriendList()) {
                 list.addAll(getOwnDocuments(document, uuid));
             }
-
-            return list;
-        } else {
-            return new ArrayList<>();
         }
+
+        return list;
     }
 
     @Override
