@@ -68,7 +68,7 @@ public final class MainController
     public boolean deleteDocument(final String session, final UUID id, final String document) {
         IDatabase<ModelDocument> key = (IDatabase<ModelDocument>) db.get(document);
         ModelDocument doc = key.get(id);
-        if (doc.getAccount().equals(session)) {
+        if (doc != null && doc.getAccount().equals(session)) {
             key.delete(id);
             return true;
         }

@@ -2,9 +2,9 @@ package de.htwg.seapal.model.impl;
 
 import de.htwg.seapal.model.IWaypoint;
 import de.htwg.seapal.model.ModelDocument;
-import org.apache.commons.lang.builder.EqualsBuilder;
 import org.apache.commons.lang.builder.HashCodeBuilder;
 import org.apache.commons.lang.builder.ReflectionToStringBuilder;
+import org.apache.commons.lang.builder.EqualsBuilder;
 
 import java.util.UUID;
 
