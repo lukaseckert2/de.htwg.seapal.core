@@ -6,7 +6,7 @@ import de.htwg.seapal.database.*;
 import de.htwg.seapal.model.IModel;
 import de.htwg.seapal.model.IPerson;
 import de.htwg.seapal.model.ModelDocument;
-import de.htwg.seapal.utils.logging.ILogger;
+import de.htwg.seapal.model.impl.PublicPerson;import de.htwg.seapal.utils.logging.ILogger;
 import org.ektorp.CouchDbInstance;
 import org.ektorp.impl.StdCouchDbConnector;
 
@@ -59,7 +59,7 @@ public final class MainController
     }
 
     @Override
-    public List<? extends IModel> getSingleDocument(final String session, final UUID id, final String document) {
+    public Collection<? extends IModel> getSingleDocument(final String session, final UUID id, final String document) {
         return db.get(document).queryViews("singleDocument", session + id.toString());
     }
 
@@ -76,26 +76,26 @@ public final class MainController
     }
 
     @Override
-    public List<? extends IModel> getOwnDocuments(final String document, final String session) {
+    public Collection<? extends IModel> getOwnDocuments(final String document, final String session) {
         return db.get(document).queryViews("own", session);
     }
 
     @Override
-    public List<? extends IModel> getForeignDocuments(final String document, final String session) {
+    public Collection<? extends IModel> getForeignDocuments(final String document, final String session) {
         IPerson person = (IPerson) db.get(KEY_PERSON).get(UUID.fromString(session));
 
-        List<IModel> list = new ArrayList<>();
+        Collection<IModel> Collection = new ArrayList<>();
         if (person != null) {
             for (String uuid : person.getFriendList()) {
-                list.addAll(getOwnDocuments(document, uuid));
+                Collection.addAll(getOwnDocuments(document, uuid));
             }
         }
 
-        return list;
+        return Collection;
     }
 
     @Override
-    public List<? extends IModel> getByParent(final String document, final String parent, final String session, final UUID id) {
+    public Collection<? extends IModel> getByParent(final String document, final String parent, final String session, final UUID id) {
         return db.get(document).queryViews(parent, session + id.toString());
     }
 
@@ -110,11 +110,11 @@ public final class MainController
     }
 
     @Override
-    public IPerson account(final UUID account, final String session) {
+    public PublicPerson account(final UUID account, final String session) {
         IPerson person = (IPerson) db.get(KEY_PERSON).get(account);
         if (person.getFriendList().contains(session) || person.getSentRequests().contains(session) || person.getId().equals(session)) {
-            return person;
-        }
+
+            return new PublicPerson(person);}
 
         return null;
     }
@@ -130,7 +130,23 @@ public final class MainController
         return askingPerson.addFriend(askedPerson);
     }
     @Override
-    public IPerson account(final String session) {
+    public PublicPerson account(final String session) {
         return account(UUID.fromString(session), session);
     }
+
+    @Override
+    public Collection<? extends IModel> getDocuments(String document, String session, String scope) {
+        Collection<IModel> Collection = new LinkedList<>();
+        if (scope.equals("all") || scope.equals("own")) {
+            Collection.addAll(getOwnDocuments(document, session));
+        }
+
+        if (scope.equals("all") || scope.equals("foreign")) {
+            Collection.addAll(getForeignDocuments(document, session));
+        }
+
+        return Collection;
+    }
+
+
 }
