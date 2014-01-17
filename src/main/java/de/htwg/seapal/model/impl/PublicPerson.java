@@ -115,7 +115,7 @@ public final class PublicPerson {
         return this.receivedRequests;
     }
 
-    @JsonProperty("id")
+    @JsonProperty("_id")
     public String getId() {
         return this.id;
     }
