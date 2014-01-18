@@ -34,9 +34,9 @@ public interface IBoat extends IModel {
 
 	void setType(String type);
 
-	String getConstructor();
+	String getBoatConstructor();
 
-	void setConstructor(String constructor);
+	void setBoatConstructor(String constructor);
 
 	Double getLength();
 
@@ -93,4 +93,8 @@ public interface IBoat extends IModel {
 	Double getSpiSize();
 
 	void setSpiSize(Double spiSize);
+
+    String getBoatOwner();
+
+    void setBoatOwner(String boatOwner);
 }

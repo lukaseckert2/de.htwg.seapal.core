@@ -16,7 +16,6 @@ public class Mark extends ModelDocument implements IMark {
 	private String name;
 	private Double latitude;
 	private Double Longitude;
-	private String note;
 	private Long date;
     private String photo;
     private String thumbnail;
@@ -25,7 +24,6 @@ public class Mark extends ModelDocument implements IMark {
 		super(UUID.randomUUID().toString());
 		this.latitude = 0D;
 		this.Longitude = 0D;
-		this.note = "";
 		this.date = 0L;
         this.photo = "iVBORw0KGgoAAAANSUhEUgAAAAEAAAABCAIAAACQd1PeAAAACXBIWXMAAAsTAAALEwEAmpwYAAAAB3RJTUUH3QwWDTUH5nuEVQAAAB1pVFh0Q29tbWVudAAAAAAAQ3JlYXRlZCB3aXRoIEdJTVBkLmUHAAAADElEQVQI12P4//8/AAX+Av7czFnnAAAAAElFTkSuQmCC";
         this.thumbnail = this.photo;
@@ -37,7 +35,6 @@ public class Mark extends ModelDocument implements IMark {
 		this.name = m.getName();
 		this.latitude = m.getLatitude();
 		this.Longitude = m.getLongitude();
-		this.note = m.getNote();
 		this.date = m.getDate();
         this.photo = m.getPhoto();
         this.thumbnail = m.getThumbnail();
@@ -75,16 +72,6 @@ public class Mark extends ModelDocument implements IMark {
     @JsonProperty("lng")
     public void setLongitude(Double Longitude) {
 		this.Longitude = Longitude;
-	}
-
-	@Override
-	public String getNote() {
-		return note;
-	}
-
-	@Override
-	public void setNote(String note) {
-		this.note = note;
 	}
 
 	@Override

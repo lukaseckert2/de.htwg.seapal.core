@@ -16,10 +16,6 @@ public interface IMark extends IModel {
 
 	void setLongitude(Double Longitude);
 
-	String getNote();
-
-	void setNote(String note);
-
 	Long getDate();
 
 	void setDate(Long date);

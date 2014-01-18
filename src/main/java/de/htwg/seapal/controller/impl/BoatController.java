@@ -192,7 +192,7 @@ public class BoatController extends Observable implements IBoatController {
 		IBoat boat = db.get(id);
 		if (boat == null)
 			return null;
-		return boat.getConstructor();
+		return boat.getBoatConstructor();
 	}
 
 	@Override
@@ -200,7 +200,7 @@ public class BoatController extends Observable implements IBoatController {
 		IBoat boat = db.get(id);
 		if (boat == null)
 			return;
-		boat.setConstructor(Constructor);
+		boat.setBoatConstructor(Constructor);
 		db.save(boat);
 		notifyObservers();
 	}

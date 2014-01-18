@@ -36,8 +36,9 @@ public class Boat extends ModelDocument implements IBoat {
 	private Double mainSailSize;
 	private Double genuaSize;
 	private Double spiSize;
+    private String boatOwner;
 
-	public Boat() {
+    public Boat() {
         super(UUID.randomUUID().toString());
 		this.boatName = "";
 		this.registerNr = "";
@@ -61,8 +62,9 @@ public class Boat extends ModelDocument implements IBoat {
 		this.freshWaterTankSize = 0D;
 		this.mainSailSize = 0D;
 		this.genuaSize = 0D;
-		this.spiSize = 0D;
-	}
+        this.spiSize = 0D;
+        this.boatOwner = "";
+    }
 
 	public Boat(IBoat boat) {
         super(boat.getId());
@@ -74,7 +76,7 @@ public class Boat extends ModelDocument implements IBoat {
 		this.insurance = boat.getInsurance();
 		this.callSign = boat.getCallSign();
 		this.type = boat.getType();
-		this.constructor = boat.getConstructor();
+		this.constructor = boat.getBoatConstructor();
 		this.length = boat.getLength();
 		this.width = boat.getLength();
 		this.draft = boat.getDraft();
@@ -89,6 +91,7 @@ public class Boat extends ModelDocument implements IBoat {
 		this.mainSailSize = boat.getMainSailSize();
 		this.genuaSize = boat.getGenuaSize();
 		this.spiSize = boat.getGenuaSize();
+        this.boatOwner = boat.getBoatOwner();
 	}
 
 	@Override
@@ -174,12 +177,12 @@ public class Boat extends ModelDocument implements IBoat {
 	}
 
 	@Override
-	public String getConstructor() {
+	public String getBoatConstructor() {
 		return constructor;
 	}
 
 	@Override
-	public void setConstructor(String constructor) {
+	public void setBoatConstructor(String constructor) {
 		this.constructor = constructor;
 	}
 
@@ -322,4 +325,14 @@ public class Boat extends ModelDocument implements IBoat {
 	public void setSpiSize(Double spiSize) {
 		this.spiSize = spiSize;
 	}
+
+    @Override
+    public String getBoatOwner() {
+        return boatOwner;
+    }
+
+    @Override
+    public void setBoatOwner(String boatOwner) {
+        this.boatOwner = boatOwner;
+    }
 }
