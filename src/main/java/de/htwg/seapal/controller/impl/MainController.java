@@ -79,7 +79,7 @@ public final class MainController
 
     @Override
     public Collection<? extends IModel> getForeignDocuments(final String document, final String session) {
-        IAccount person = (IAccount) db.get(KEY_PERSON).get(UUID.fromString(session));
+        IAccount person = (IAccount) db.get(KEY_ACCOUNT).get(UUID.fromString(session));
 
         Collection<IModel> Collection = new ArrayList<>();
         if (person != null) {
@@ -118,13 +118,13 @@ public final class MainController
 
     @Override
     public boolean addFriend(final String session, final UUID askedPersonUUID) {
-        IAccount askingPerson = (IAccount) db.get(KEY_PERSON).get(UUID.fromString(session));
-        IAccount askedPerson = (IAccount) db.get(KEY_PERSON).get(askedPersonUUID);
+        IAccount askingPerson = (IAccount) db.get(KEY_ACCOUNT).get(UUID.fromString(session));
+        IAccount askedPerson = (IAccount) db.get(KEY_ACCOUNT).get(askedPersonUUID);
 
         boolean returnVal = askingPerson.addFriend(askedPerson);
 
-        ((IAccountDatabase) db.get(KEY_PERSON)).save(askingPerson);
-        ((IAccountDatabase) db.get(KEY_PERSON)).save(askedPerson);
+        ((IAccountDatabase) db.get(KEY_ACCOUNT)).save(askingPerson);
+        ((IAccountDatabase) db.get(KEY_ACCOUNT)).save(askedPerson);
 
         return returnVal;
     }
@@ -149,8 +149,8 @@ public final class MainController
 
     @Override
     public boolean addFriend(String session, String mail) {
-        IAccount askingPerson = (IAccount) db.get(KEY_PERSON).get(UUID.fromString(session));
-        List<? extends IModel> askedPersons = db.get(KEY_PERSON).queryViews(mail, session);
+        IAccount askingPerson = (IAccount) db.get(KEY_ACCOUNT).get(UUID.fromString(session));
+        List<? extends IModel> askedPersons = db.get(KEY_ACCOUNT).queryViews("by_email", mail);
         IAccount askedPerson;
         if (askedPersons.size() == 0 || askedPersons.size() > 1) {
             return false;
@@ -159,8 +159,8 @@ public final class MainController
         }
         boolean returnVal = askingPerson.addFriend(askedPerson);
 
-        ((IAccountDatabase) db.get(KEY_PERSON)).save(askingPerson);
-        ((IAccountDatabase) db.get(KEY_PERSON)).save(askedPerson);
+        ((IAccountDatabase) db.get(KEY_ACCOUNT)).save(askingPerson);
+        ((IAccountDatabase) db.get(KEY_ACCOUNT)).save(askedPerson);
 
         return returnVal;
     }

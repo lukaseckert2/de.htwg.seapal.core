@@ -25,7 +25,7 @@ public class Mark extends ModelDocument implements IMark {
 		this.latitude = 0D;
 		this.Longitude = 0D;
 		this.date = 0L;
-        this.photo = "iVBORw0KGgoAAAANSUhEUgAAAAEAAAABCAIAAACQd1PeAAAACXBIWXMAAAsTAAALEwEAmpwYAAAAB3RJTUUH3QwWDTUH5nuEVQAAAB1pVFh0Q29tbWVudAAAAAAAQ3JlYXRlZCB3aXRoIEdJTVBkLmUHAAAADElEQVQI12P4//8/AAX+Av7czFnnAAAAAElFTkSuQmCC";
+        this.photo = "";
         this.thumbnail = this.photo;
 	}
 

@@ -2,10 +2,9 @@ package de.htwg.seapal.model.impl;
 
 import de.htwg.seapal.model.ITrip;
 import de.htwg.seapal.model.ModelDocument;
-import org.apache.commons.lang.builder.EqualsBuilder;
-import org.apache.commons.lang.builder.HashCodeBuilder;
-import org.apache.commons.lang.builder.ReflectionToStringBuilder;
 
+import java.util.ArrayList;
+import java.util.List;
 import java.util.UUID;
 
 public class Trip extends ModelDocument implements ITrip {
@@ -15,170 +14,151 @@ public class Trip extends ModelDocument implements ITrip {
 	 */
 	private static final long serialVersionUID = -2927732338890052773L;
 
+    private String name;
+    private String boat;
+    private Long startDate;
+    private Long endDate;
+    private String from;
+    private String to;
+    private String skipper;
+    private String duration;
+    private String crew;
+    private String notes;
+    private List<Long> marks;
 
-	private String name;
-	private String startLocation;
-	private String endLocation;
-	private String crewMembers;
-	private Long startTime; // unix timestamp
-	private Long endTime; // unix timestamp
-	private Long duration;
-	private Integer motor;
-	private Double fuel;
-	private String notes;
-	private String boat; // UUID Boat
-
-	public Trip() {
+    public Trip() {
 		super(UUID.randomUUID().toString());
-		this.crewMembers = "";
-		this.name = "";
-		this.startLocation = "";
-		this.endLocation = "";
-		this.startTime = 0L;
-		this.endTime = 0L;
-		this.duration = 0L;
-		this.motor = 0;
-		this.fuel = 0D;
-		this.notes = "";
-		this.boat = "";
-	}
+        this.name = "";
+        this.startDate = 0L;
+        this.endDate = 0L;
+        this.from = "";
+        this.to = "";
+        this.skipper = "";
+        this.duration = "";
+        this.crew = "";
+        this.notes = "";
+        this.marks = new ArrayList<>();
+    }
 
 	public Trip(ITrip t) {
         super(t.getId());
+        this.name = t.getName();
+        this.startDate = t.getStartDate();
+        this.endDate = t.getEndDate();
+        this.from = t.getFrom();
+        this.to = t.getTo();
+        this.skipper = t.getSkipper();
+        this.duration = t.getDuration();
+        this.crew = t.getCrew();
+        this.notes = t.getNotes();
+        this.marks = t.getMarks();
+    }
 
-		this.name = t.getName();
-		this.startLocation = t.getStartLocation();
-		this.endLocation = t.getEndLocation();
-		this.crewMembers = t.getCrewMembers();
-		this.startTime = t.getStartTime();
-		this.endTime = t.getEndTime();
-		this.duration = t.getDuration();
-		this.motor = t.getMotor();
-		this.fuel = t.getFuel();
-		this.notes = t.getNotes();
-		this.boat = t.getBoat();
-	}
-
-	public String getName() {
+    @Override
+    public String getName() {
 		return name;
 	}
 
-	public void setName(String name) {
+    @Override
+    public void setName(String name) {
 		this.name = name;
 	}
 
-	@Override
-	public void setStartLocation(String location) {
-		this.startLocation = location;
-	}
+    @Override
+    public Long getStartDate() {
+        return startDate;
+    }
 
-	@Override
-	public String getStartLocation() {
-		return startLocation;
-	}
+    @Override
+    public void setStartDate(Long startDate) {
+        this.startDate = startDate;
+    }
 
-	@Override
-	public void setEndLocation(String location) {
-		this.endLocation = location;
-	}
+    @Override
+    public Long getEndDate() {
+        return endDate;
+    }
 
-	@Override
-	public String getEndLocation() {
-		return endLocation;
-	}
+    @Override
+    public void setEndDate(Long endDate) {
+        this.endDate = endDate;
+    }
 
-	@Override
-	public void setCrewMember(String crewMember) {
-		this.crewMembers = crewMember;
-	}
+    @Override
+    public String getFrom() {
+        return from;
+    }
 
-	@Override
-	public String getCrewMembers() {
-		return crewMembers;
-	}
+    @Override
+    public void setFrom(String from) {
+        this.from = from;
+    }
 
-	@Override
-	public void setStartTime(Long start) {
-		this.startTime = start;
-	}
+    @Override
+    public String getTo() {
+        return to;
+    }
 
-	@Override
-	public Long getStartTime() {
-		return startTime;
-	}
+    @Override
+    public void setTo(String to) {
+        this.to = to;
+    }
 
-	@Override
-	public void setEndTime(Long end) {
-		this.endTime = end;
-	}
+    @Override
+    public String getSkipper() {
+        return skipper;
+    }
 
-	@Override
-	public Long getEndTime() {
-		return endTime;
-	}
+    @Override
+    public void setSkipper(String skipper) {
+        this.skipper = skipper;
+    }
 
-	@Override
-	public void setMotor(Integer motor) {
-		this.motor = motor;
-	}
+    @Override
+    public String getDuration() {
+        return duration;
+    }
 
-	@Override
-	public Integer getMotor() {
-		return motor;
-	}
+    @Override
+    public void setDuration(String duration) {
+        this.duration = duration;
+    }
 
-	@Override
-	public void setFuel(Double percent) {
-		this.fuel = percent;
-	}
+    @Override
+    public String getCrew() {
+        return crew;
+    }
 
-	@Override
-	public Double getFuel() {
-		return fuel;
-	}
+    @Override
+    public void setCrew(String crew) {
+        this.crew = crew;
+    }
 
-	@Override
-	public void setNotes(String text) {
-		this.notes = text;
-	}
+    @Override
+    public List<Long> getMarks() {
+        return this.marks;
+    }
 
-	@Override
-	public String getNotes() {
-		return notes;
-	}
+    @Override
+    public void setMarks(List<Long> marks) {
+        this.marks = marks;
+    }
 
-	@Override
-	public String getBoat() {
-		return boat;
-	}
+    @Override
+    public String getNotes() {
+        return notes;
+    }
 
-	@Override
-	public void setBoat(String boat) {
-		this.boat = boat;
-	}
+    @Override
+    public void setNotes(String notes) {
+        this.notes = notes;
+    }
 
-	@Override
-	public String toString() {
-		return ReflectionToStringBuilder.toString(this);
-	}
+    public String getBoat() {
+        return boat;
+    }
 
-	@Override
-	public boolean equals(Object obj) {
-		return EqualsBuilder.reflectionEquals(this, obj);
-	}
-
-	@Override
-	public int hashCode() {
-		return HashCodeBuilder.reflectionHashCode(this);
-	}
-
-	@Override
-	public void setDuration(Long duration) {
-		this.duration = duration;
-	}
-
-	@Override
-	public Long getDuration() {
-		return this.duration;
-	}
+    public void setBoat(String boat) {
+        this.boat = boat;
+    }
 }

@@ -134,8 +134,11 @@ public final class Account extends ModelDocument implements IAccount {
             this.friendList.add(askedPerson.getId());
             return true;
         } else { // Other person did not already send a request
-            askedPerson.getReceivedRequests().add(this.getId());
-            this.sentRequests.add(askedPerson.getId());
+            if (!askedPerson.getReceivedRequests().contains(this.getId()))
+                askedPerson.getReceivedRequests().add(this.getId());
+
+            if (!this.sentRequests.contains(askedPerson.getId()))
+                this.sentRequests.add(askedPerson.getId());
             return false;
         }
     }

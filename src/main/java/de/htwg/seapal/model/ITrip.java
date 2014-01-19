@@ -1,49 +1,51 @@
 package de.htwg.seapal.model;
 
 
+import java.util.List;
+
 public interface ITrip extends IModel {
 
 	String getName();
 
 	void setName(String name);
 
-	String getStartLocation();
-
-	void setStartLocation(String location);
-
-	String getEndLocation();
-
-	void setEndLocation(String location);
-
-	String getCrewMembers();
-
-	void setCrewMember(String crewMember);
-
-	Integer getMotor();
-
-	void setMotor(Integer motor);
-
-	Double getFuel();
-
-	void setFuel(Double percent);
-
 	String getNotes();
 
 	void setNotes(String text);
 
-	String getBoat();
+	String getDuration();
 
-	void setBoat(String boat);
+    void setDuration(String duration);
 
-	void setStartTime(Long start);
+    Long getStartDate();
 
-	Long getStartTime();
+    void setStartDate(Long startDate);
 
-	void setEndTime(Long end);
+    Long getEndDate();
 
-	Long getEndTime();
+    void setEndDate(Long endDate);
 
-	void setDuration(Long duration);
+    String getFrom();
 
-	Long getDuration();
+    void setFrom(String from);
+
+    String getTo();
+
+    void setTo(String to);
+
+    String getSkipper();
+
+    void setSkipper(String skipper);
+
+    String getCrew();
+
+    void setCrew(String crew);
+
+    List<Long> getMarks();
+
+    void setMarks(List<Long> marks);
+
+    public String getBoat();
+
+    public void setBoat(String boat);
 }

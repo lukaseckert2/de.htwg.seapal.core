@@ -95,12 +95,14 @@ public class Boat extends ModelDocument implements IBoat {
 	}
 
 	@Override
+    @JsonProperty("name")
 	public String getBoatName() {
 		return boatName;
 	}
 
 	@Override
-	public void setBoatName(String boatName) {
+    @JsonProperty("name")
+    public void setBoatName(String boatName) {
 		this.boatName = boatName;
 	}
 
