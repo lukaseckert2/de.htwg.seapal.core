@@ -54,6 +54,10 @@ public final class SignupAccount {
     }
 
     public String getEmail() {
+        if (email == null) {
+            return "";
+        }
+
         return email;
     }
 }

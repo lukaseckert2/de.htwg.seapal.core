@@ -166,14 +166,10 @@ public class Boat extends ModelDocument implements IBoat {
 		this.callSign = callSign;
 	}
 
-	@Override
-    @JsonProperty("boatType")
 	public String getType() {
 		return type;
 	}
 
-	@Override
-    @JsonProperty("boatType")
     public void setType(String type) {
 		this.type = type;
 	}
