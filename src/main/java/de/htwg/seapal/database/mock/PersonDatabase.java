@@ -12,8 +12,8 @@ import java.util.UUID;
 
 public class PersonDatabase implements IPersonDatabase {
 
-	Map<UUID, IPerson> db = new HashMap<UUID, IPerson>();
-	private IPerson newPerson;
+    Map<UUID, IPerson> db = new HashMap<UUID, IPerson>();
+    private IPerson newPerson;
 
 	public PersonDatabase() {
 		open();

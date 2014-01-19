@@ -2,10 +2,7 @@ package de.htwg.seapal.model.impl;
 
 import de.htwg.seapal.model.IPerson;
 import de.htwg.seapal.model.ModelDocument;
-import org.codehaus.jackson.annotate.JsonIgnore;
 
-import java.util.ArrayList;
-import java.util.List;
 import java.util.UUID;
 
 public class Person
@@ -29,8 +26,6 @@ public class Person
 
     private String nationality = null;
 
-    private String email = null;
-
     private String telephone = null;
 
     private String mobile = null;
@@ -43,20 +38,6 @@ public class Person
 
     private String country = null;
 
-    private String password = null;
-
-    private String token = null;
-
-    private long timeout = 0L;
-
-    private String googleID = null;
-
-    private List<String> friendList = new ArrayList<>();
-
-    private List<String> sentRequests = new ArrayList<>();
-
-    private List<String> receivedRequests = new ArrayList<>();
-
     public Person() {
         super(UUID.randomUUID().toString());
         firstname = "";
@@ -65,9 +46,7 @@ public class Person
         registration = 0L;
         age = 0;
         nationality = "";
-        googleID = "";
 
-        email = "";
         telephone = "";
         mobile = "";
 
@@ -75,10 +54,6 @@ public class Person
         postcode = 0;
         city = "";
         country = "";
-        token = "";
-
-        timeout = 0L;
-        token = "";
     }
 
     public Person(IPerson person) {
@@ -90,8 +65,6 @@ public class Person
         registration = person.getRegistration();
         age = person.getAge();
         nationality = person.getNationality();
-
-        email = person.getEmail();
         telephone = person.getTelephone();
         mobile = person.getMobile();
 
@@ -100,19 +73,6 @@ public class Person
         city = person.getCity();
         country = person.getCountry();
 
-        password = null;
-
-        token = null;
-
-        timeout = 0L;
-
-        friendList = person.getFriendList();
-
-        sentRequests = person.getSentRequests();
-
-        receivedRequests = person.getReceivedRequests();
-
-        googleID = person.getGoogleID();
     }
 
     @Override
@@ -176,16 +136,6 @@ public class Person
     }
 
     @Override
-    public String getEmail() {
-        return email;
-    }
-
-    @Override
-    public void setEmail(String email) {
-        this.email = email;
-    }
-
-    @Override
     public String getTelephone() {
         return telephone;
     }
@@ -243,100 +193,5 @@ public class Person
     @Override
     public void setCountry(String country) {
         this.country = country;
-    }
-
-    @Override
-    public List<String> getFriendList() {
-        return friendList;
-    }
-
-    @Override
-    public void setFriendList(final List<String> friendList) {
-        this.friendList = friendList;
-    }
-
-    @Override
-    public String getPassword() {
-        return this.password;
-    }
-
-    @Override
-    public void setPassword(final String password) {
-        this.password = password;
-    }
-    @Override
-    public void setResetToken(final String token) {
-        this.token = token;
-    }
-    @Override
-    public String getResetToken() {
-        return token;
-    }
-    @Override
-    public void setResetTimeout(final long timeout) {
-        this.timeout = timeout;
-    }
-    @Override
-    public long getResetTimeout() {
-        return this.timeout;
-    }
-    @Override
-    @JsonIgnore
-    public void addFriend(final String uuid) {
-        friendList.add(uuid);
-    }
-    @Override
-    public List<String> getSentRequests() {
-        return this.sentRequests;
-    }
-
-    @Override
-    public void getRequestFromAccount(final List<String> setList) {
-        this.sentRequests = setList;
-    }
-
-    @Override
-    public List<String> getReceivedRequests() {
-        return this.receivedRequests;
-    }
-
-    @Override
-    public void getRequestToAccount(final List<String> setList) {
-        this.receivedRequests = setList;
-    }
-
-    @Override
-    public String getGoogleID() {
-        return this.googleID;
-    }
-
-    @Override
-    public void setGoogleID(final String openID) {
-        this.googleID = openID;
-    }
-
-    /**
-     * the instance calling addFriend wants to add askedPerson to his friendList.
-     * friendList contains approved friends
-     * sentRequests contains uuids I have sent requests to
-     * receivedRequests contains uuids I have received requests from
-     *
-     * @param askedPerson the person I want to add
-     */
-    @JsonIgnore
-    @Override
-    public boolean addFriend(final IPerson askedPerson) {
-        // Other person already sent request
-        if (askedPerson.getSentRequests().contains(this.getId())) {
-            askedPerson.getSentRequests().remove(this.getId());
-            askedPerson.getFriendList().add(this.getId());
-
-            this.friendList.add(askedPerson.getId());
-            return true;
-        } else { // Other person did not already send a request
-            askedPerson.getReceivedRequests().add(this.getId());
-            this.sentRequests.add(askedPerson.getId());
-            return false;
-        }
     }
 }

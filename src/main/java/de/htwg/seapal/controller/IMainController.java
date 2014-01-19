@@ -2,7 +2,6 @@ package de.htwg.seapal.controller;
 
 import de.htwg.seapal.model.IModel;
 import de.htwg.seapal.model.ModelDocument;
-import de.htwg.seapal.model.impl.PublicPerson;
 
 import java.util.Collection;
 import java.util.UUID;
@@ -21,11 +20,13 @@ public interface IMainController {
 
     public ModelDocument creatDocument(final String type, final ModelDocument document);
 
-    PublicPerson account(final UUID account, String session);
+    Collection<? extends IModel> account(final UUID account, String session);
 
     boolean addFriend(String session, UUID askedPersonUUID);
 
-    PublicPerson account(String session);
+    Collection<? extends IModel> account(String session);
 
     Collection<? extends IModel> getDocuments(String document, String session, String scope);
+
+    boolean addFriend(String session, String mail);
 }

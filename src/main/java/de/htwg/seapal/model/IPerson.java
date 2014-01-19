@@ -1,7 +1,5 @@
 package de.htwg.seapal.model;
 
-import java.util.List;
-
 public interface IPerson extends IModel {
 
 	String getFirstname();
@@ -28,10 +26,6 @@ public interface IPerson extends IModel {
 
 	void setNationality(String nationality);
 
-	String getEmail();
-
-	void setEmail(String email);
-
 	String getTelephone();
 
 	void setTelephone(String telephone);
@@ -55,36 +49,4 @@ public interface IPerson extends IModel {
 	String getCountry();
 
 	void setCountry(String country);
-
-    List<String> getFriendList();
-
-    void setFriendList(List<String> friendList);
-
-    String getPassword();
-
-    void setPassword(String password);
-
-    void setResetToken(String token);
-
-    String getResetToken();
-
-    void setResetTimeout(long timeout);
-
-    long getResetTimeout();
-
-    void addFriend(String uuid);
-
-    List<String> getSentRequests();
-
-    void getRequestFromAccount(List<String> setList);
-
-    List<String> getReceivedRequests();
-
-    void getRequestToAccount(List<String> setList);
-
-    String getGoogleID();
-
-    void setGoogleID(String openID);
-
-    boolean addFriend(final IPerson askedPerson);
 }

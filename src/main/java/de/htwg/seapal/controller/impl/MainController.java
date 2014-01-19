@@ -3,10 +3,10 @@ package de.htwg.seapal.controller.impl;
 import com.google.inject.Inject;
 import de.htwg.seapal.controller.IMainController;
 import de.htwg.seapal.database.*;
+import de.htwg.seapal.model.IAccount;
 import de.htwg.seapal.model.IModel;
-import de.htwg.seapal.model.IPerson;
 import de.htwg.seapal.model.ModelDocument;
-import de.htwg.seapal.model.impl.PublicPerson;import de.htwg.seapal.utils.logging.ILogger;
+import de.htwg.seapal.utils.logging.ILogger;
 import org.ektorp.CouchDbInstance;
 import org.ektorp.impl.StdCouchDbConnector;
 
@@ -21,41 +21,38 @@ public final class MainController
     public static final String KEY_ROUTE = "route";
     public static final String KEY_TRIP = "trip";
     public static final String KEY_WAYPOINT = "waypoint";
+    private static final String KEY_ACCOUNT = "account";
 
     private Map<String, IDatabase<? extends IModel>> db = new HashMap<>();
     private Map<String, StdCouchDbConnector> stdDB = new HashMap<>();
-    // private Map<String, Class<? extends ModelDocument>> classes = new HashMap<>();
 
     private ILogger logger;
 
     @Inject
-    public MainController(IBoatDatabase boatDB, IMarkDatabase markDB, IPersonDatabase personDB, IRouteDatabase routeDB, ITripDatabase tripDB, IWaypointDatabase waypointDB, ILogger logger, CouchDbInstance dbInstance) {
+    public MainController(IBoatDatabase boatDB, IMarkDatabase markDB, IPersonDatabase personDB, IRouteDatabase routeDB, ITripDatabase tripDB, IWaypointDatabase waypointDB, IAccountDatabase accountDB, ILogger logger, CouchDbInstance dbInstance) {
         this.logger = logger;
         this.logger.info("constructor", "Called MainController()");
 
         db.put(KEY_BOAT, boatDB);
         stdDB.put(KEY_BOAT, new StdCouchDbConnector("seapal_boat_db", dbInstance));
-        // classes.put(KEY_BOAT, Boat.class);
 
         db.put(KEY_MARK, markDB);
         stdDB.put(KEY_MARK, new StdCouchDbConnector("seapal_mark_db", dbInstance));
-        // classes.put(KEY_MARK, Mark.class);
 
         db.put(KEY_PERSON, personDB);
         stdDB.put(KEY_PERSON, new StdCouchDbConnector("seapal_person_db", dbInstance));
-        // classes.put(KEY_PERSON, Person.class);
 
         db.put(KEY_ROUTE, routeDB);
         stdDB.put(KEY_ROUTE, new StdCouchDbConnector("seapal_route_db", dbInstance));
-        // classes.put(KEY_ROUTE, Route.class);
 
         db.put(KEY_TRIP, tripDB);
         stdDB.put(KEY_TRIP, new StdCouchDbConnector("seapal_trip_db", dbInstance));
-        // classes.put(KEY_TRIP, Trip.class);
 
         db.put(KEY_WAYPOINT, waypointDB);
         stdDB.put(KEY_WAYPOINT, new StdCouchDbConnector("seapal_waypoint_db", dbInstance));
-        // classes.put(KEY_WAYPOINT, Waypoint.class);
+
+        db.put(KEY_ACCOUNT, accountDB);
+        stdDB.put(KEY_ACCOUNT, new StdCouchDbConnector("seapal_account_db", dbInstance));
     }
 
     @Override
@@ -82,7 +79,7 @@ public final class MainController
 
     @Override
     public Collection<? extends IModel> getForeignDocuments(final String document, final String session) {
-        IPerson person = (IPerson) db.get(KEY_PERSON).get(UUID.fromString(session));
+        IAccount person = (IAccount) db.get(KEY_PERSON).get(UUID.fromString(session));
 
         Collection<IModel> Collection = new ArrayList<>();
         if (person != null) {
@@ -110,27 +107,29 @@ public final class MainController
     }
 
     @Override
-    public PublicPerson account(final UUID account, final String session) {
-        IPerson person = (IPerson) db.get(KEY_PERSON).get(account);
+    public Collection<? extends IModel> account(final UUID account, final String session) {
+        IAccount person = (IAccount) db.get(KEY_ACCOUNT).get(account);
         if (person.getFriendList().contains(session) || person.getSentRequests().contains(session) || person.getId().equals(session)) {
+            return db.get("person").queryViews("own", session);
+        }
 
-            return new PublicPerson(person);}
-
-        return null;
+        return new LinkedList<>();
     }
 
     @Override
     public boolean addFriend(final String session, final UUID askedPersonUUID) {
-        IPerson askingPerson = (IPerson) db.get(KEY_PERSON).get(UUID.fromString(session));
-        IPerson askedPerson = (IPerson) db.get(KEY_PERSON).get(askedPersonUUID);
+        IAccount askingPerson = (IAccount) db.get(KEY_PERSON).get(UUID.fromString(session));
+        IAccount askedPerson = (IAccount) db.get(KEY_PERSON).get(askedPersonUUID);
 
-        ((IPersonDatabase) db.get(KEY_PERSON)).save(askingPerson);
-        ((IPersonDatabase) db.get(KEY_PERSON)).save(askedPerson);
+        boolean returnVal = askingPerson.addFriend(askedPerson);
 
-        return askingPerson.addFriend(askedPerson);
+        ((IAccountDatabase) db.get(KEY_PERSON)).save(askingPerson);
+        ((IAccountDatabase) db.get(KEY_PERSON)).save(askedPerson);
+
+        return returnVal;
     }
     @Override
-    public PublicPerson account(final String session) {
+    public Collection<? extends IModel> account(final String session) {
         return account(UUID.fromString(session), session);
     }
 
@@ -146,6 +145,24 @@ public final class MainController
         }
 
         return Collection;
+    }
+
+    @Override
+    public boolean addFriend(String session, String mail) {
+        IAccount askingPerson = (IAccount) db.get(KEY_PERSON).get(UUID.fromString(session));
+        List<? extends IModel> askedPersons = db.get(KEY_PERSON).queryViews(mail, session);
+        IAccount askedPerson;
+        if (askedPersons.size() == 0 || askedPersons.size() > 1) {
+            return false;
+        } else {
+            askedPerson = (IAccount) askedPersons.get(0);
+        }
+        boolean returnVal = askingPerson.addFriend(askedPerson);
+
+        ((IAccountDatabase) db.get(KEY_PERSON)).save(askingPerson);
+        ((IAccountDatabase) db.get(KEY_PERSON)).save(askedPerson);
+
+        return returnVal;
     }
 
 
