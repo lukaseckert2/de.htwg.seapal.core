@@ -3,21 +3,24 @@ package de.htwg.seapal.model.impl;
 import de.htwg.seapal.model.IAccount;
 import org.codehaus.jackson.annotate.JsonProperty;
 
+import java.util.LinkedList;
 import java.util.List;
 
 public final class PublicPerson {
-    private final String email;
-    private final List<String> friendList;
-    private final List<String> sentRequests;
-    private final List<String> receivedRequests;
-    private final String id;
+    private String email;
+    private List<String> friendList = new LinkedList<>();
+    private List<String> sentRequests = new LinkedList<>();
+    private List<String> receivedRequests = new LinkedList<>();
+    private String id;
 
     public PublicPerson(IAccount person) {
-        email = person.getEmail();
-        friendList = person.getFriendList();
-        sentRequests = person.getSentRequests();
-        receivedRequests = person.getReceivedRequests();
-        id = person.getId();
+        if (person != null) {
+            email = person.getEmail();
+            friendList = person.getFriendList();
+            sentRequests = person.getSentRequests();
+            receivedRequests = person.getReceivedRequests();
+            id = person.getId();
+        }
     }
 
     @JsonProperty("_id")

@@ -88,14 +88,14 @@ public final class MainController
 
     @Override
     public ModelDocument creatDocument(final String type, final ModelDocument document, String session) {
-        if (document.getAccount().equals("") || document.getAccount() == null) {
+        if (document.getAccount() == null || document.getAccount().equals("")) {
             document.setAccount(session);
         }
 
         PublicPerson publicPerson = controller.getInternalInfo(session);
         boolean friendDocument = publicPerson.getFriendList().contains(document.getAccount());
         boolean askingPersonsDocument = publicPerson.getReceivedRequests().contains(document.getAccount());
-        boolean ownDocument = document.getAccount().equals(IAccountController.AUTHN_COOKIE_KEY);
+        boolean ownDocument = document.getAccount().equals(session);
         if (!ownDocument && !askingPersonsDocument && !friendDocument) {
             return null;
         }
