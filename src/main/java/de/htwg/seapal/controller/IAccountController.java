@@ -3,6 +3,7 @@ package de.htwg.seapal.controller;
 import de.htwg.seapal.model.IAccount;
 import de.htwg.seapal.model.IPerson;
 import de.htwg.seapal.model.impl.PublicPerson;
+import de.htwg.seapal.model.impl.SignupAccount;
 import de.htwg.seapal.utils.observer.IObservable;
 
 import java.util.List;
@@ -27,7 +28,7 @@ public interface IAccountController extends IObservable {
 
     List<IAccount> getAllAccounts();
 
-    boolean saveAccount(IAccount Account, boolean createHash);
+    UUID saveAccount(SignupAccount Account, boolean createHash);
 
     List<? extends IAccount> queryView(String viewName, String key);
 
@@ -42,4 +43,6 @@ public interface IAccountController extends IObservable {
     IPerson getPerson(UUID uuid);
 
     PublicPerson getInternalInfo(String session);
+
+    UUID saveAccount(IAccount account, boolean createHash);
 }

@@ -28,15 +28,14 @@ public final class MainController
     private Map<String, IDatabase<? extends IModel>> db = new HashMap<>();
     private Map<String, StdCouchDbConnector> stdDB = new HashMap<>();
 
+    @Inject
     private ILogger logger;
 
     @Inject
     private IAccountController controller;
 
     @Inject
-    public MainController(IBoatDatabase boatDB, IMarkDatabase markDB, IPersonDatabase personDB, IRouteDatabase routeDB, ITripDatabase tripDB, IWaypointDatabase waypointDB, IAccountDatabase accountDB, ILogger logger, CouchDbInstance dbInstance) {
-        this.logger = logger;
-        this.logger.info("constructor", "Called MainController()");
+    public MainController(IBoatDatabase boatDB, IMarkDatabase markDB, IPersonDatabase personDB, IRouteDatabase routeDB, ITripDatabase tripDB, IWaypointDatabase waypointDB, IAccountDatabase accountDB, CouchDbInstance dbInstance) {
 
         db.put(KEY_BOAT, boatDB);
         stdDB.put(KEY_BOAT, new StdCouchDbConnector("seapal_boat_db", dbInstance));
@@ -80,20 +79,6 @@ public final class MainController
     @Override
     public Collection<? extends IModel> getOwnDocuments(final String document, final String session) {
         return db.get(document).queryViews("own", session);
-    }
-
-    @Override
-    public Collection<? extends IModel> getForeignDocuments(final String document, final String session) {
-        IAccount person = (IAccount) db.get(KEY_ACCOUNT).get(UUID.fromString(session));
-
-        Collection<IModel> Collection = new ArrayList<>();
-        if (person != null) {
-            for (String uuid : person.getFriendList()) {
-                Collection.addAll(getOwnDocuments(document, uuid));
-            }
-        }
-
-        return Collection;
     }
 
     @Override
@@ -158,8 +143,38 @@ public final class MainController
             Collection.addAll(getOwnDocuments(document, session));
         }
 
-        if (scope.equals("all") || scope.equals("foreign")) {
-            Collection.addAll(getForeignDocuments(document, session));
+        if (scope.equals("all") || scope.equals("foreign") || scope.equals("friends")) {
+            Collection.addAll(getFriendDocuments(document, session));
+        }
+
+        if (scope.equals("all") || scope.equals("foreign") || scope.equals("asking")) {
+            Collection.addAll(getAskingDocuments(document, session));
+        }
+
+        return Collection;
+    }
+
+    private Collection<? extends IModel> getAskingDocuments(String document, String session) {
+        IAccount person = (IAccount) db.get(KEY_ACCOUNT).get(UUID.fromString(session));
+
+        Collection<IModel> Collection = new ArrayList<>();
+        if (person != null) {
+            for (String uuid : person.getReceivedRequests()) {
+                Collection.addAll(getOwnDocuments(document, uuid));
+            }
+        }
+
+        return Collection;
+    }
+
+    private Collection<? extends IModel> getFriendDocuments(String document, String session) {
+        IAccount person = (IAccount) db.get(KEY_ACCOUNT).get(UUID.fromString(session));
+
+        Collection<IModel> Collection = new ArrayList<>();
+        if (person != null) {
+            for (String uuid : person.getFriendList()) {
+                Collection.addAll(getOwnDocuments(document, uuid));
+            }
         }
 
         return Collection;

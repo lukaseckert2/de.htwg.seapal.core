@@ -7,8 +7,8 @@ import de.htwg.seapal.database.IAccountDatabase;
 import de.htwg.seapal.model.IAccount;
 import de.htwg.seapal.model.IPerson;
 import de.htwg.seapal.model.impl.Account;
-import de.htwg.seapal.model.impl.Person;
 import de.htwg.seapal.model.impl.PublicPerson;
+import de.htwg.seapal.model.impl.SignupAccount;
 import de.htwg.seapal.utils.logging.ILogger;
 import de.htwg.seapal.utils.observer.Observable;
 
@@ -68,21 +68,21 @@ public final class AccountController extends Observable implements IAccountContr
     }
 
     @Override
-    public boolean saveAccount(IAccount account, boolean createHash) {
+    public UUID saveAccount(SignupAccount account, boolean createHash) {
         if (createHash)
             try {
                 account.setPassword(PasswordHash.createHash(account.getPassword()));
             } catch (Exception e) {
                 logger.exc(e);
-                return false;
+                return null;
             }
 
-        boolean returnVal = db.save(account);
+        // side effects!
+        if (db.save(account.getAccount())) {
+            controller.savePerson(account.getPerson());
+        }
 
-        IPerson person = new Person();
-        person.setAccount(account.getId());
-
-        return returnVal && controller.savePerson(person);
+        return account.getId();
     }
 
     @Override
@@ -130,22 +130,25 @@ public final class AccountController extends Observable implements IAccountContr
             return accounts.get(0);
         }
 
-        accounts = db.queryViews("by_email", userInfo.get("Email"));
+        accounts = db.queryViews("by_email", userInfo.get(KEY_EMAIL));
         if (accounts.size() > 0) {
             // Account exists, but is not connected to Google Account
             IAccount person = accounts.get(0);
             person.setGoogleID(googleID);
-            saveAccount(person, false);
-            return saveAccount(person, false) ? person : null;
+            return saveAccount(person) ? person : null;
         }
 
 
         IAccount account = new Account();
         account.setGoogleID(googleID);
-        account.setEmail(userInfo.get("Email"));
-        saveAccount(account, false);
+        account.setEmail(userInfo.get(KEY_EMAIL));
+        saveAccount(new SignupAccount(account, userInfo.get(KEY_FIRST_NAME), userInfo.get(KEY_LAST_NAME)), false);
 
         return account;
+    }
+
+    private boolean saveAccount(IAccount person) {
+        return db.save(person);
     }
 
     @Override
@@ -156,5 +159,20 @@ public final class AccountController extends Observable implements IAccountContr
     @Override
     public PublicPerson getInternalInfo(String session) {
         return new PublicPerson(getAccount(UUID.fromString(session)));
+    }
+
+    @Override
+    public UUID saveAccount(IAccount account, boolean createHash) {
+        if (createHash)
+            try {
+                account.setPassword(PasswordHash.createHash(account.getPassword()));
+            } catch (Exception e) {
+                logger.exc(e);
+            }
+
+        // side effects!
+        db.save(account);
+
+        return UUID.fromString(account.getId());
     }
 }

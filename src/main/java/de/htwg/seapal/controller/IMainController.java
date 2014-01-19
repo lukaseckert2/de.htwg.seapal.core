@@ -14,8 +14,6 @@ public interface IMainController {
 
     Collection<? extends IModel> getOwnDocuments(String document, final String session);
 
-    Collection<? extends IModel> getForeignDocuments(String document, final String session);
-
     Collection<? extends IModel> getByParent(String document, String parent, String session, final UUID id);
 
     public ModelDocument creatDocument(final String type, final ModelDocument document, String session);

@@ -15,27 +15,16 @@ public class Person
     private static final long serialVersionUID = 1L;
 
     private String firstname = null;
-
     private String lastname = null;
-
     private Long birth;
-
     private Long registration;
-
     private Integer age = 0;
-
     private String nationality = null;
-
     private String telephone = null;
-
     private String mobile = null;
-
     private String street = null;
-
     private Integer postcode = 0;
-
     private String city = null;
-
     private String country = null;
 
     public Person() {
