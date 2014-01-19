@@ -24,4 +24,8 @@ public class NullLogger implements ILogger {
 
 	}
 
+    @Override
+    public void exc(Exception e) {
+    }
+
 }

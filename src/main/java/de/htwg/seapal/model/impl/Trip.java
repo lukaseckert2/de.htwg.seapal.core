@@ -24,7 +24,7 @@ public class Trip extends ModelDocument implements ITrip {
     private String duration;
     private String crew;
     private String notes;
-    private List<Long> marks;
+    private List<Double> marks;
 
     public Trip() {
 		super(UUID.randomUUID().toString());
@@ -135,12 +135,12 @@ public class Trip extends ModelDocument implements ITrip {
     }
 
     @Override
-    public List<Long> getMarks() {
+    public List<Double> getMarks() {
         return this.marks;
     }
 
     @Override
-    public void setMarks(List<Long> marks) {
+    public void setMarks(List<Double> marks) {
         this.marks = marks;
     }
 

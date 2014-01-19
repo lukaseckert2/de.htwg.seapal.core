@@ -41,9 +41,9 @@ public interface ITrip extends IModel {
 
     void setCrew(String crew);
 
-    List<Long> getMarks();
+    List<Double> getMarks();
 
-    void setMarks(List<Long> marks);
+    void setMarks(List<Double> marks);
 
     public String getBoat();
 
