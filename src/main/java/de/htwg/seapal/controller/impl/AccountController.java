@@ -68,11 +68,19 @@ public final class AccountController extends Observable implements IAccountContr
     }
 
     @Override
-    public boolean saveAccount(IAccount Account) {
-        boolean returnVal = db.save(Account);
+    public boolean saveAccount(IAccount account, boolean createHash) {
+        if (createHash)
+            try {
+                account.setPassword(PasswordHash.createHash(account.getPassword()));
+            } catch (Exception e) {
+                logger.exc(e);
+                return false;
+            }
+
+        boolean returnVal = db.save(account);
 
         IPerson person = new Person();
-        person.setAccount(Account.getId());
+        person.setAccount(account.getId());
 
         return returnVal && controller.savePerson(person);
     }
@@ -83,12 +91,15 @@ public final class AccountController extends Observable implements IAccountContr
     }
 
     @Override
-    public IAccount authenticate(final IAccount account)
-            throws Exception {
+    public IAccount authenticate(final IAccount account) {
         IAccount savedAccount = db.getAccount(account.getEmail());
 
-        if (savedAccount != null && PasswordHash.validatePassword(account.getPassword(), savedAccount.getPassword())) {
-            return savedAccount;
+        try {
+            if (savedAccount != null && PasswordHash.validatePassword(account.getPassword(), savedAccount.getPassword())) {
+                return savedAccount;
+            }
+        } catch (Exception e) {
+            logger.exc(e);
         }
 
         return null;
@@ -98,6 +109,17 @@ public final class AccountController extends Observable implements IAccountContr
     public boolean accountExists(final String email) {
         List<? extends IAccount> accounts = db.queryViews("by_email", email);
         return accounts.size() > 0;
+    }
+
+    @Override
+    public IAccount getByMail(String email) {
+        List<? extends IAccount> list = db.queryViews("by_email", email);
+
+        if (list.size() == 0 || list.size() > 1){
+            return null;
+        }
+
+        return list.get(0);
     }
 
     @Override
@@ -113,15 +135,15 @@ public final class AccountController extends Observable implements IAccountContr
             // Account exists, but is not connected to Google Account
             IAccount person = accounts.get(0);
             person.setGoogleID(googleID);
-            saveAccount(person);
-            return saveAccount(person) ? person : null;
+            saveAccount(person, false);
+            return saveAccount(person, false) ? person : null;
         }
 
 
         IAccount account = new Account();
         account.setGoogleID(googleID);
         account.setEmail(userInfo.get("Email"));
-        saveAccount(account);
+        saveAccount(account, false);
 
         return account;
     }

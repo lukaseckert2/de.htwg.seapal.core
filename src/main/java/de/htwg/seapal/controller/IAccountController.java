@@ -19,18 +19,20 @@ public interface IAccountController extends IObservable {
     List<UUID> getAccounts();
 
     UUID newAccount();
+
     IAccount getAccount(UUID AccountId);
 
     List<IAccount> getAllAccounts();
 
-    boolean saveAccount(IAccount Account);
+    boolean saveAccount(IAccount Account, boolean createHash);
 
     List<? extends IAccount> queryView(String viewName, String key);
 
-    IAccount authenticate(IAccount account)
-            throws Exception;
+    IAccount authenticate(IAccount account);
 
     boolean accountExists(String email);
+
+    IAccount getByMail(String email);
 
     IAccount googleLogin(Map<String, String> userInfo, String googleID);
 
