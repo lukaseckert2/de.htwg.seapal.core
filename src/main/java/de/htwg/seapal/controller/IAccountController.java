@@ -11,6 +11,9 @@ import java.util.UUID;
 
 public interface IAccountController extends IObservable {
     String AUTHN_COOKIE_KEY = "id";
+    String KEY_EMAIL = "email";
+    String KEY_FIRST_NAME = "first_name";
+    String KEY_LAST_NAME = "last_name";
 
     void closeDB();
 

@@ -121,6 +121,8 @@ public final class Account extends ModelDocument implements IAccount {
      * sentRequests contains uuids I have sent requests to
      * receivedRequests contains uuids I have received requests from
      *
+     * this method should be in AccountController, but it is easier to read, if it happens in the asking person object.
+     *
      * @param askedPerson the person I want to add
      */
     @JsonIgnore
@@ -129,6 +131,7 @@ public final class Account extends ModelDocument implements IAccount {
         // Other person already sent request
         if (askedPerson.getSentRequests().contains(this.getId())) {
             askedPerson.getSentRequests().remove(this.getId());
+            this.receivedRequests.remove(askedPerson.getId());
             askedPerson.getFriendList().add(this.getId());
 
             this.friendList.add(askedPerson.getId());
@@ -151,6 +154,17 @@ public final class Account extends ModelDocument implements IAccount {
     @Override
     public void setEmail(String email) {
         this.email = email;
+    }
+
+    @Override
+    public void aboutRequest(IAccount askedPerson) {
+        this.friendList.remove(askedPerson.getId());
+        this.sentRequests.remove(askedPerson.getId());
+        this.receivedRequests.remove(askedPerson.getId());
+
+        askedPerson.getFriendList().remove(this.getId());
+        askedPerson.getSentRequests().remove(this.getId());
+        askedPerson.getReceivedRequests().remove(this.getId());
     }
 
 }

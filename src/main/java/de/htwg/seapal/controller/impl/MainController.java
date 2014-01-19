@@ -1,11 +1,13 @@
 package de.htwg.seapal.controller.impl;
 
 import com.google.inject.Inject;
+import de.htwg.seapal.controller.IAccountController;
 import de.htwg.seapal.controller.IMainController;
 import de.htwg.seapal.database.*;
 import de.htwg.seapal.model.IAccount;
 import de.htwg.seapal.model.IModel;
 import de.htwg.seapal.model.ModelDocument;
+import de.htwg.seapal.model.impl.PublicPerson;
 import de.htwg.seapal.utils.logging.ILogger;
 import org.ektorp.CouchDbInstance;
 import org.ektorp.impl.StdCouchDbConnector;
@@ -27,6 +29,9 @@ public final class MainController
     private Map<String, StdCouchDbConnector> stdDB = new HashMap<>();
 
     private ILogger logger;
+
+    @Inject
+    private IAccountController controller;
 
     @Inject
     public MainController(IBoatDatabase boatDB, IMarkDatabase markDB, IPersonDatabase personDB, IRouteDatabase routeDB, ITripDatabase tripDB, IWaypointDatabase waypointDB, IAccountDatabase accountDB, ILogger logger, CouchDbInstance dbInstance) {
@@ -97,7 +102,19 @@ public final class MainController
     }
 
     @Override
-    public ModelDocument creatDocument(final String type, final ModelDocument document) {
+    public ModelDocument creatDocument(final String type, final ModelDocument document, String session) {
+        if (document.getAccount().equals("") || document.getAccount() == null) {
+            document.setAccount(session);
+        }
+
+        PublicPerson publicPerson = controller.getInternalInfo(session);
+        boolean friendDocument = publicPerson.getFriendList().contains(document.getAccount());
+        boolean askingPersonsDocument = publicPerson.getReceivedRequests().contains(document.getAccount());
+        boolean ownDocument = document.getAccount().equals(IAccountController.AUTHN_COOKIE_KEY);
+        if (!ownDocument && !askingPersonsDocument && !friendDocument) {
+            return null;
+        }
+
         if (document.isNew()) {
             stdDB.get(type).create(document);
         } else {
@@ -128,6 +145,7 @@ public final class MainController
 
         return returnVal;
     }
+
     @Override
     public Collection<? extends IModel> account(final String session) {
         return account(UUID.fromString(session), session);
@@ -165,5 +183,14 @@ public final class MainController
         return returnVal;
     }
 
+    @Override
+    public void abortRequest(String session, UUID id) {
+        IAccount askingPerson = (IAccount) db.get(KEY_ACCOUNT).get(UUID.fromString(session));
+        IAccount askedPerson = (IAccount) db.get(KEY_ACCOUNT).get(id);
 
+        askingPerson.aboutRequest(askedPerson);
+
+        ((IAccountDatabase) db.get(KEY_ACCOUNT)).save(askingPerson);
+        ((IAccountDatabase) db.get(KEY_ACCOUNT)).save(askedPerson);
+    }
 }

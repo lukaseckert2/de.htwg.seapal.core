@@ -18,7 +18,7 @@ public interface IMainController {
 
     Collection<? extends IModel> getByParent(String document, String parent, String session, final UUID id);
 
-    public ModelDocument creatDocument(final String type, final ModelDocument document);
+    public ModelDocument creatDocument(final String type, final ModelDocument document, String session);
 
     Collection<? extends IModel> account(final UUID account, String session);
 
@@ -29,4 +29,6 @@ public interface IMainController {
     Collection<? extends IModel> getDocuments(String document, String session, String scope);
 
     boolean addFriend(String session, String mail);
+
+    void abortRequest(String session, UUID id);
 }
