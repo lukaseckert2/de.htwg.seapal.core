@@ -8,11 +8,11 @@ import java.util.List;
  * Observer class for the observer pattern.
  */
 public class Observable implements IObservable {
-	
+
 	/**
 	 * The subsribers.
 	 */
-	private List<IObserver> subscribers = new ArrayList<IObserver>(2);
+	private final List<IObserver> subscribers = new ArrayList<>(2);
 
 	@Override
 	public void addObserver(IObserver s) {

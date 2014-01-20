@@ -18,7 +18,7 @@ import java.util.Map;
 import java.util.UUID;
 
 public final class AccountController extends Observable implements IAccountController {
-    protected IAccountDatabase db;
+    private final IAccountDatabase db;
     private final ILogger logger;
 
     @Inject
@@ -44,7 +44,7 @@ public final class AccountController extends Observable implements IAccountContr
     @Override
     public List<UUID> getAccounts() {
         List<IAccount> persons = db.loadAll();
-        List<UUID> list = new ArrayList<UUID>();
+        List<UUID> list = new ArrayList<>();
         for (IAccount person : persons) {
             list.add(person.getUUID());
         }

@@ -61,7 +61,7 @@ public interface _IRace
 		public String id;
 		public String name;
 		public RaceBoat boat;
-		public List<RaceWaypoint> waypoints = new ArrayList<RaceWaypoint>();
+		public List<RaceWaypoint> waypoints = new ArrayList<>();
 
 		public RaceTrip() { }
 
@@ -130,7 +130,7 @@ public interface _IRace
 	public static class RaceControlPoint {
 		public String id;
 		public String name;
-		public List<RaceCoordinate> coords = new ArrayList<RaceCoordinate>();
+		public List<RaceCoordinate> coords = new ArrayList<>();
 
 		public RaceControlPoint() { }
 

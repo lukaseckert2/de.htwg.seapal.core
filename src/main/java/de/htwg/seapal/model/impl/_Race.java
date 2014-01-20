@@ -24,8 +24,8 @@ public class _Race
 		super(UUID.randomUUID().toString());
 		this.name = "";
 		this.boatClass = "";
-		this.trips = new ArrayList<RaceTrip>();
-		this.controlPoints = new ArrayList<RaceControlPoint>();
+		this.trips = new ArrayList<>();
+		this.controlPoints = new ArrayList<>();
 	}
 
 	public _Race(_IRace race) {

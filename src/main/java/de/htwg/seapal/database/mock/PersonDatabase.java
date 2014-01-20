@@ -12,7 +12,7 @@ import java.util.UUID;
 
 public class PersonDatabase implements IPersonDatabase {
 
-    Map<UUID, IPerson> db = new HashMap<UUID, IPerson>();
+    private final Map<UUID, IPerson> db = new HashMap<>();
     private IPerson newPerson;
 
 	public PersonDatabase() {

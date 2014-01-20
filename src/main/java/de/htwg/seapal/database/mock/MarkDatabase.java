@@ -11,7 +11,7 @@ import java.util.Map;
 import java.util.UUID;
 
 public class MarkDatabase implements IMarkDatabase {
-	Map<UUID, IMark> db = new HashMap<UUID, IMark>();
+	private final Map<UUID, IMark> db = new HashMap<>();
 	private IMark newMark;
 
 	public MarkDatabase() {

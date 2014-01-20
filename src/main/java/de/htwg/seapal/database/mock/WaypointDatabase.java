@@ -12,7 +12,7 @@ import java.util.UUID;
 
 public class WaypointDatabase implements IWaypointDatabase {
 
-	Map<UUID, IWaypoint> db = new HashMap<UUID, IWaypoint>();
+	private final Map<UUID, IWaypoint> db = new HashMap<>();
 	private IWaypoint newWaypoint;
 
 	public WaypointDatabase() {

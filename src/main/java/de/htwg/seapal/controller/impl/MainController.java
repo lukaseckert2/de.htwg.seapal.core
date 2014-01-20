@@ -17,16 +17,16 @@ import java.util.*;
 public final class MainController
         implements IMainController {
 
-    public static final String KEY_BOAT = "boat";
-    public static final String KEY_MARK = "mark";
-    public static final String KEY_PERSON = "person";
-    public static final String KEY_ROUTE = "route";
-    public static final String KEY_TRIP = "trip";
-    public static final String KEY_WAYPOINT = "waypoint";
+    private static final String KEY_BOAT = "boat";
+    private static final String KEY_MARK = "mark";
+    private static final String KEY_PERSON = "person";
+    private static final String KEY_ROUTE = "route";
+    private static final String KEY_TRIP = "trip";
+    private static final String KEY_WAYPOINT = "waypoint";
     private static final String KEY_ACCOUNT = "account";
 
-    private Map<String, IDatabase<? extends IModel>> db = new HashMap<>();
-    private Map<String, StdCouchDbConnector> stdDB = new HashMap<>();
+    private final Map<String, IDatabase<? extends IModel>> couchDBRepositorySupportDB = new HashMap<>();
+    private final Map<String, StdCouchDbConnector> stdDB = new HashMap<>();
 
     @Inject
     private ILogger logger;
@@ -37,39 +37,39 @@ public final class MainController
     @Inject
     public MainController(IBoatDatabase boatDB, IMarkDatabase markDB, IPersonDatabase personDB, IRouteDatabase routeDB, ITripDatabase tripDB, IWaypointDatabase waypointDB, IAccountDatabase accountDB, CouchDbInstance dbInstance) {
 
-        db.put(KEY_BOAT, boatDB);
+        couchDBRepositorySupportDB.put(KEY_BOAT, boatDB);
         stdDB.put(KEY_BOAT, new StdCouchDbConnector("seapal_boat_db", dbInstance));
 
-        db.put(KEY_MARK, markDB);
+        couchDBRepositorySupportDB.put(KEY_MARK, markDB);
         stdDB.put(KEY_MARK, new StdCouchDbConnector("seapal_mark_db", dbInstance));
 
-        db.put(KEY_PERSON, personDB);
+        couchDBRepositorySupportDB.put(KEY_PERSON, personDB);
         stdDB.put(KEY_PERSON, new StdCouchDbConnector("seapal_person_db", dbInstance));
 
-        db.put(KEY_ROUTE, routeDB);
+        couchDBRepositorySupportDB.put(KEY_ROUTE, routeDB);
         stdDB.put(KEY_ROUTE, new StdCouchDbConnector("seapal_route_db", dbInstance));
 
-        db.put(KEY_TRIP, tripDB);
+        couchDBRepositorySupportDB.put(KEY_TRIP, tripDB);
         stdDB.put(KEY_TRIP, new StdCouchDbConnector("seapal_trip_db", dbInstance));
 
-        db.put(KEY_WAYPOINT, waypointDB);
+        couchDBRepositorySupportDB.put(KEY_WAYPOINT, waypointDB);
         stdDB.put(KEY_WAYPOINT, new StdCouchDbConnector("seapal_waypoint_db", dbInstance));
 
-        db.put(KEY_ACCOUNT, accountDB);
+        couchDBRepositorySupportDB.put(KEY_ACCOUNT, accountDB);
         stdDB.put(KEY_ACCOUNT, new StdCouchDbConnector("seapal_account_db", dbInstance));
     }
 
     @Override
     public Collection<? extends IModel> getSingleDocument(final String session, final UUID id, final String document) {
-        return db.get(document).queryViews("singleDocument", session + id.toString());
+        return couchDBRepositorySupportDB.get(document).queryViews("singleDocument", session + id.toString());
     }
 
     @Override
     public boolean deleteDocument(final String session, final UUID id, final String document) {
-        IDatabase<? extends IModel> key = db.get(document);
-        ModelDocument doc = (ModelDocument) key.get(id);
+        IDatabase<? extends IModel> database = couchDBRepositorySupportDB.get(document);
+        ModelDocument doc = (ModelDocument) database.get(id);
         if (doc != null && doc.getAccount().equals(session)) {
-            key.delete(id);
+            database.delete(id);
             return true;
         }
 
@@ -78,12 +78,12 @@ public final class MainController
 
     @Override
     public Collection<? extends IModel> getOwnDocuments(final String document, final String session) {
-        return db.get(document).queryViews("own", session);
+        return couchDBRepositorySupportDB.get(document).queryViews("own", session);
     }
 
     @Override
     public Collection<? extends IModel> getByParent(final String document, final String parent, final String session, final UUID id) {
-        return db.get(document).queryViews(parent, session + id.toString());
+        return couchDBRepositorySupportDB.get(document).queryViews(parent, session + id.toString());
     }
 
     @Override
@@ -110,9 +110,9 @@ public final class MainController
 
     @Override
     public Collection<? extends IModel> account(final UUID account, final String session) {
-        IAccount person = (IAccount) db.get(KEY_ACCOUNT).get(account);
+        IAccount person = (IAccount) couchDBRepositorySupportDB.get(KEY_ACCOUNT).get(account);
         if (person.getFriendList().contains(session) || person.getSentRequests().contains(session) || person.getId().equals(session)) {
-            return db.get("person").queryViews("own", session);
+            return couchDBRepositorySupportDB.get("person").queryViews("own", session);
         }
 
         return new LinkedList<>();
@@ -120,13 +120,13 @@ public final class MainController
 
     @Override
     public boolean addFriend(final String session, final UUID askedPersonUUID) {
-        IAccount askingPerson = (IAccount) db.get(KEY_ACCOUNT).get(UUID.fromString(session));
-        IAccount askedPerson = (IAccount) db.get(KEY_ACCOUNT).get(askedPersonUUID);
+        IAccount askingPerson = (IAccount) couchDBRepositorySupportDB.get(KEY_ACCOUNT).get(UUID.fromString(session));
+        IAccount askedPerson = (IAccount) couchDBRepositorySupportDB.get(KEY_ACCOUNT).get(askedPersonUUID);
 
         boolean returnVal = askingPerson.addFriend(askedPerson);
 
-        ((IAccountDatabase) db.get(KEY_ACCOUNT)).save(askingPerson);
-        ((IAccountDatabase) db.get(KEY_ACCOUNT)).save(askedPerson);
+        ((IAccountDatabase) couchDBRepositorySupportDB.get(KEY_ACCOUNT)).save(askingPerson);
+        ((IAccountDatabase) couchDBRepositorySupportDB.get(KEY_ACCOUNT)).save(askedPerson);
 
         return returnVal;
     }
@@ -155,7 +155,7 @@ public final class MainController
     }
 
     private Collection<? extends IModel> getAskingDocuments(String document, String session) {
-        IAccount person = (IAccount) db.get(KEY_ACCOUNT).get(UUID.fromString(session));
+        IAccount person = (IAccount) couchDBRepositorySupportDB.get(KEY_ACCOUNT).get(UUID.fromString(session));
 
         Collection<IModel> Collection = new ArrayList<>();
         if (person != null) {
@@ -168,7 +168,7 @@ public final class MainController
     }
 
     private Collection<? extends IModel> getFriendDocuments(String document, String session) {
-        IAccount person = (IAccount) db.get(KEY_ACCOUNT).get(UUID.fromString(session));
+        IAccount person = (IAccount) couchDBRepositorySupportDB.get(KEY_ACCOUNT).get(UUID.fromString(session));
 
         Collection<IModel> Collection = new ArrayList<>();
         if (person != null) {
@@ -182,8 +182,8 @@ public final class MainController
 
     @Override
     public boolean addFriend(String session, String mail) {
-        IAccount askingPerson = (IAccount) db.get(KEY_ACCOUNT).get(UUID.fromString(session));
-        List<? extends IModel> askedPersons = db.get(KEY_ACCOUNT).queryViews("by_email", mail);
+        IAccount askingPerson = (IAccount) couchDBRepositorySupportDB.get(KEY_ACCOUNT).get(UUID.fromString(session));
+        List<? extends IModel> askedPersons = couchDBRepositorySupportDB.get(KEY_ACCOUNT).queryViews("by_email", mail);
         IAccount askedPerson;
         if (askedPersons.size() == 0 || askedPersons.size() > 1) {
             return false;
@@ -192,20 +192,20 @@ public final class MainController
         }
         boolean returnVal = askingPerson.addFriend(askedPerson);
 
-        ((IAccountDatabase) db.get(KEY_ACCOUNT)).save(askingPerson);
-        ((IAccountDatabase) db.get(KEY_ACCOUNT)).save(askedPerson);
+        ((IAccountDatabase) couchDBRepositorySupportDB.get(KEY_ACCOUNT)).save(askingPerson);
+        ((IAccountDatabase) couchDBRepositorySupportDB.get(KEY_ACCOUNT)).save(askedPerson);
 
         return returnVal;
     }
 
     @Override
     public void abortRequest(String session, UUID id) {
-        IAccount askingPerson = (IAccount) db.get(KEY_ACCOUNT).get(UUID.fromString(session));
-        IAccount askedPerson = (IAccount) db.get(KEY_ACCOUNT).get(id);
+        IAccount askingPerson = (IAccount) couchDBRepositorySupportDB.get(KEY_ACCOUNT).get(UUID.fromString(session));
+        IAccount askedPerson = (IAccount) couchDBRepositorySupportDB.get(KEY_ACCOUNT).get(id);
 
         askingPerson.aboutRequest(askedPerson);
 
-        ((IAccountDatabase) db.get(KEY_ACCOUNT)).save(askingPerson);
-        ((IAccountDatabase) db.get(KEY_ACCOUNT)).save(askedPerson);
+        ((IAccountDatabase) couchDBRepositorySupportDB.get(KEY_ACCOUNT)).save(askingPerson);
+        ((IAccountDatabase) couchDBRepositorySupportDB.get(KEY_ACCOUNT)).save(askedPerson);
     }
 }

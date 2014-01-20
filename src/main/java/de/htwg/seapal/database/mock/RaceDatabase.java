@@ -10,7 +10,7 @@ import java.util.*;
 
 public class RaceDatabase implements IRaceDatabase {
 
-	Map<UUID, _IRace> db = new HashMap<UUID, _IRace>();
+	private final Map<UUID, _IRace> db = new HashMap<>();
 	private _IRace newRace;
 
 	public RaceDatabase() {
@@ -44,7 +44,7 @@ public class RaceDatabase implements IRaceDatabase {
 	}
 
 	private List<RaceControlPoint> generateControlPoints() {
-		List<RaceControlPoint> controlPoints = new ArrayList<RaceControlPoint>();
+		List<RaceControlPoint> controlPoints = new ArrayList<>();
 		controlPoints.add(generateLine(0.1, 0.1, 0.1, 0.2));
 		controlPoints.add(generateMark(0.1, 0.1));
 		controlPoints.add(generateMark(0.2, 0.2));
@@ -53,20 +53,20 @@ public class RaceDatabase implements IRaceDatabase {
 	}
 
 	private RaceControlPoint generateLine(double lat1, double lng1, double lat2, double lng2) {
-		List<RaceCoordinate> coords = new ArrayList<RaceCoordinate>();
+		List<RaceCoordinate> coords = new ArrayList<>();
 		coords.add(new RaceCoordinate(lat1, lng1));
 		coords.add(new RaceCoordinate(lat2, lng2));
 		return new RaceControlPoint(UUID.randomUUID().toString(), "line", coords);
 	}
 
 	private RaceControlPoint generateMark(double lat, double lng) {
-		List<RaceCoordinate> coords = new ArrayList<RaceCoordinate>();
+		List<RaceCoordinate> coords = new ArrayList<>();
 		coords.add(new RaceCoordinate(lat, lng));
 		return new RaceControlPoint(UUID.randomUUID().toString(), "buoy", coords);
 	}
 
 	private List<RaceTrip> generateTrips() {
-		List<RaceTrip> trips = new ArrayList<RaceTrip>();
+		List<RaceTrip> trips = new ArrayList<>();
 		trips.add(new RaceTrip(
 				UUID.randomUUID().toString(),
 				"trip1",
@@ -80,7 +80,7 @@ public class RaceDatabase implements IRaceDatabase {
 	}
 
 	private List<RaceWaypoint> generateWaypoints(Double posOffset) {
-		List<RaceWaypoint> waypoints = new ArrayList<RaceWaypoint>();
+		List<RaceWaypoint> waypoints = new ArrayList<>();
 		waypoints.add(new RaceWaypoint(UUID.randomUUID().toString(),
 				new RaceCoordinate(0.1 + posOffset, 0.3 + posOffset), 1000000000L, 2, 3, 4, 5, null));
 		waypoints.add(new RaceWaypoint(UUID.randomUUID().toString(),
@@ -100,7 +100,7 @@ public class RaceDatabase implements IRaceDatabase {
 
 	@Override
 	public boolean save(_IRace data) {
-		if (!db.containsKey(data)) {
+		if (!db.containsKey(data.getUUID())) {
 			newRace = data;
 		}
 		db.put(data.getUUID(), data);

@@ -9,7 +9,7 @@ import java.util.*;
 
 public class BoatDatabase implements IBoatDatabase {
 
-	Map<UUID, IBoat> db = new HashMap<UUID, IBoat>();
+	private final Map<UUID, IBoat> db = new HashMap<>();
 	private IBoat newBoat;
 
 	public BoatDatabase() {

@@ -12,7 +12,7 @@ import java.util.UUID;
 
 public class TripDatabase implements ITripDatabase {
 
-	Map<UUID, ITrip> db = new HashMap<UUID, ITrip>();
+	private final Map<UUID, ITrip> db = new HashMap<>();
 	private ITrip newTrip;
 
 	public TripDatabase() {

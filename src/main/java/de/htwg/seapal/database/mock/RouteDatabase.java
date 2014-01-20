@@ -11,7 +11,7 @@ import java.util.Map;
 import java.util.UUID;
 
 public class RouteDatabase implements IRouteDatabase {
-	Map<UUID, IRoute> db = new HashMap<UUID, IRoute>();
+	private final Map<UUID, IRoute> db = new HashMap<>();
 	private IRoute newRoute;
 
 	public RouteDatabase() {
