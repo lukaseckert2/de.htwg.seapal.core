@@ -45,6 +45,7 @@ public final class SignupAccount {
 
     public IAccount getAccount() {
         if (this.account != null) {
+            this.id = account.getUUID();
             return this.account;
         } else {
             IAccount account = new Account();
