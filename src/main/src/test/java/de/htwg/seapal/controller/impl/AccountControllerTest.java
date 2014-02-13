@@ -1,22 +1,25 @@
 package de.htwg.seapal.controller.impl;
 
-import com.google.inject.Inject;
+import com.google.inject.Guice;
+import com.google.inject.Injector;
+import de.htwg.seapal.controller.IAccountController;
 import org.junit.After;
 import org.junit.Before;
 import org.junit.Test;
 
 public final class AccountControllerTest {
 
-    @Inject
-    private AccountController controller;
+    Injector injector = Guice.createInjector(new TestModule());
+    private IAccountController controller;
 
     @Before
     public void setUp() throws Exception {
-
+        controller = injector.getInstance(IAccountController.class);
     }
 
     @After
     public void tearDown() throws Exception {
+        System.gc();
     }
 
     @Test

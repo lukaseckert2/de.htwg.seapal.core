@@ -41,7 +41,7 @@ public class Trip extends ModelDocument implements ITrip {
     }
 
 	public Trip(ITrip t) {
-        super(t.getId());
+        super(t);
         this.name = t.getName();
         this.startDate = t.getStartDate();
         this.endDate = t.getEndDate();

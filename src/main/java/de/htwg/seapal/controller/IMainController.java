@@ -8,9 +8,9 @@ import java.util.UUID;
 
 public interface IMainController {
 
-    Collection<? extends IModel> getSingleDocument(String session, UUID id, String document);
+    Collection<? extends IModel> getSingleDocument(String document, String session, UUID id);
 
-    boolean deleteDocument(String session, UUID id, String document);
+    boolean deleteDocument(String document, String session, UUID id);
 
     Collection<? extends IModel> getOwnDocuments(String document, final String session);
 

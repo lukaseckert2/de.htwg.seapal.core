@@ -62,7 +62,8 @@ class PasswordHash
     public static String createHash(String password)
         throws NoSuchAlgorithmException, InvalidKeySpecException
     {
-        return createHash(password.toCharArray());
+        String hash = createHash(password.toCharArray());
+        return hash;
     }
 
     /**

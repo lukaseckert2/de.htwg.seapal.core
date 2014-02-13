@@ -64,7 +64,7 @@ public class Waypoint extends ModelDocument implements IWaypoint {
     */
 
 	public Waypoint(IWaypoint w) {
-		super(w.getId());
+		super(w);
 		this.name = w.getName();
 		this.latitude = w.getLatitude();
 		this.Longitude = w.getLongitude();
@@ -74,11 +74,11 @@ public class Waypoint extends ModelDocument implements IWaypoint {
 		this.dtm = w.getDTM();
 		this.cog = w.getCOG();
 		this.sog = w.getSOG();
-		this.headedFor = w.getHeadedFor().toString();
+		this.headedFor = w.getHeadedFor();
 		this.maneuver = w.getManeuver();
 		this.foreSail = w.getForesail();
 		this.mainSail = w.getMainsail();
-		this.trip = w.getTrip().toString();
+		this.trip = w.getTrip();
 	}
 
 	@Override

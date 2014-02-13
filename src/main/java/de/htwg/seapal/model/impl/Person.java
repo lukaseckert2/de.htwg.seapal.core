@@ -46,7 +46,7 @@ public class Person
     }
 
     public Person(IPerson person) {
-        super(person.getId());
+        super(person);
 
         firstname = person.getFirstname();
         lastname = person.getLastname();

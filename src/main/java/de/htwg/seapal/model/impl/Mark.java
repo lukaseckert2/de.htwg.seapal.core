@@ -30,7 +30,7 @@ public class Mark extends ModelDocument implements IMark {
 	}
 
 	public Mark(IMark m) {
-        super(m.getId());
+        super(m);
 
 		this.name = m.getName();
 		this.latitude = m.getLatitude();

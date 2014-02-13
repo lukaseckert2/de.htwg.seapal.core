@@ -1,6 +1,7 @@
 package de.htwg.seapal.database;
 
 import de.htwg.seapal.model.IModel;
+import de.htwg.seapal.model.ModelDocument;
 
 import java.util.List;
 import java.util.UUID;
@@ -68,5 +69,9 @@ public interface IDatabase<T extends IModel> {
      */
     boolean close();
 
+    void create(ModelDocument document);
+
     List<? extends T> queryViews(String viewName, String key);
+
+    void update(ModelDocument document);
 }

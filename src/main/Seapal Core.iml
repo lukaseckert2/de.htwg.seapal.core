@@ -28,6 +28,7 @@
         <SOURCES />
       </library>
     </orderEntry>
+    <orderEntry type="library" name="SBT: com.google.inject:guice:3.0" level="project" />
   </component>
 </module>
 

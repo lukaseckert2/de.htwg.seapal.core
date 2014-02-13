@@ -34,7 +34,7 @@ public final class Account extends ModelDocument implements IAccount {
     }
 
     public Account(IAccount account) {
-        super(account.getId());
+        super(account);
         password = account.getPassword();
         token = account.getResetToken();
         timeout = account.getResetTimeout();

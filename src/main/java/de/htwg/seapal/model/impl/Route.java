@@ -29,7 +29,7 @@ public class Route extends ModelDocument implements IRoute {
 	}
 
 	public Route(IRoute r) {
-        super(r.getId());
+        super(r);
 		this.name = r.getName();
 		this.date = r.getDate();
 		for (Double id : r.getMarks()) {

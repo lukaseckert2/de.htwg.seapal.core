@@ -41,6 +41,7 @@ public final class SignupAccount {
         this.account = account;
         this.firstName = s;
         this.lastName = s1;
+        this.password = account.getPassword();
     }
 
     public IAccount getAccount() {
@@ -58,6 +59,9 @@ public final class SignupAccount {
 
     public void setPassword(String password) {
         this.password = password;
+        if (this.account != null) {
+            this.account.setPassword(password);
+        }
     }
 
     public IPerson getPerson() {

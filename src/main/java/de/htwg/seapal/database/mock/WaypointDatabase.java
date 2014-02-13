@@ -3,6 +3,7 @@ package de.htwg.seapal.database.mock;
 import com.google.common.collect.ImmutableList;
 import de.htwg.seapal.database.IWaypointDatabase;
 import de.htwg.seapal.model.IWaypoint;
+import de.htwg.seapal.model.ModelDocument;
 import de.htwg.seapal.model.impl.Waypoint;
 
 import java.util.HashMap;
@@ -22,12 +23,12 @@ public class WaypointDatabase implements IWaypointDatabase {
 	@Override
 	public boolean open() {
 		// create test data
-		UUID id = createNewBoatInDatabase();
+		UUID id = createNewWaypointInDatabase();
 		newWaypoint = get(id);
 		newWaypoint.setName("Waypoint-NEW");
 		save(newWaypoint);
 		for (int i = 1; i < 10; i++) {
-			id = createNewBoatInDatabase();
+			id = createNewWaypointInDatabase();
 			IWaypoint waypoint = get(id);
 			waypoint.setName("Waypoint-" + i);
 			save(waypoint);
@@ -39,9 +40,20 @@ public class WaypointDatabase implements IWaypointDatabase {
 	public boolean close() {
 		return true;
 	}
+
+    @Override
+    public void create(ModelDocument document) {
+        //To change body of implemented methods use File | Settings | File Templates.
+    }
+
     @Override
     public List<? extends IWaypoint> queryViews(final String viewName, final String key) {
         return null;  //To change body of implemented methods use File | Settings | File Templates.
+    }
+
+    @Override
+    public void update(ModelDocument document) {
+        //To change body of implemented methods use File | Settings | File Templates.
     }
 
     @Override
@@ -49,7 +61,7 @@ public class WaypointDatabase implements IWaypointDatabase {
 		return newWaypoint.getUUID();
 	}
 
-	private UUID createNewBoatInDatabase() {
+	private UUID createNewWaypointInDatabase() {
 		IWaypoint waypoint = new Waypoint();
 		UUID id = waypoint.getUUID();
 		db.put(id, waypoint);

@@ -24,7 +24,13 @@ public abstract class ModelDocument implements IModel, Serializable {
         this.id = uuid;
     }
 
-	@JsonIgnore
+    public ModelDocument(IModel model) {
+        this.id = model.getId();
+        this.revision = model.getRevision();
+        this.account = model.getAccount();
+    }
+
+    @JsonIgnore
 	@Override
 	public UUID getUUID() {
 		return UUID.fromString(id);

@@ -3,6 +3,7 @@ package de.htwg.seapal.database.mock;
 import com.google.common.collect.ImmutableList;
 import de.htwg.seapal.database.IPersonDatabase;
 import de.htwg.seapal.model.IPerson;
+import de.htwg.seapal.model.ModelDocument;
 import de.htwg.seapal.model.impl.Person;
 
 import java.util.HashMap;
@@ -48,9 +49,20 @@ public class PersonDatabase implements IPersonDatabase {
 	public boolean close() {
 		return true;
 	}
+
+    @Override
+    public void create(ModelDocument document) {
+        //To change body of implemented methods use File | Settings | File Templates.
+    }
+
     @Override
     public List<? extends IPerson> queryViews(final String viewName, final String key) {
         return null;  //To change body of implemented methods use File | Settings | File Templates.
+    }
+
+    @Override
+    public void update(ModelDocument document) {
+        //To change body of implemented methods use File | Settings | File Templates.
     }
 
     @Override

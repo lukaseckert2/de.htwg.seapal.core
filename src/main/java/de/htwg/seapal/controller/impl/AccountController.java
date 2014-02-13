@@ -71,7 +71,8 @@ public final class AccountController extends Observable implements IAccountContr
     public UUID saveAccount(SignupAccount account, boolean createHash) {
         if (createHash)
             try {
-                account.setPassword(PasswordHash.createHash(account.getPassword()));
+                String hash = PasswordHash.createHash(account.getPassword());
+                account.setPassword(hash);
             } catch (Exception e) {
                 logger.exc(e);
                 return null;

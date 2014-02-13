@@ -9,8 +9,6 @@ import de.htwg.seapal.model.IModel;
 import de.htwg.seapal.model.ModelDocument;
 import de.htwg.seapal.model.impl.PublicPerson;
 import de.htwg.seapal.utils.logging.ILogger;
-import org.ektorp.CouchDbInstance;
-import org.ektorp.impl.StdCouchDbConnector;
 
 import java.util.*;
 
@@ -26,7 +24,6 @@ public final class MainController
     private static final String KEY_ACCOUNT = "account";
 
     private final Map<String, IDatabase<? extends IModel>> couchDBRepositorySupportDB = new HashMap<>();
-    private final Map<String, StdCouchDbConnector> stdDB = new HashMap<>();
 
     @Inject
     private ILogger logger;
@@ -35,37 +32,24 @@ public final class MainController
     private IAccountController controller;
 
     @Inject
-    public MainController(IBoatDatabase boatDB, IMarkDatabase markDB, IPersonDatabase personDB, IRouteDatabase routeDB, ITripDatabase tripDB, IWaypointDatabase waypointDB, IAccountDatabase accountDB, CouchDbInstance dbInstance) {
+    public MainController(IBoatDatabase boatDB, IMarkDatabase markDB, IPersonDatabase personDB, IRouteDatabase routeDB, ITripDatabase tripDB, IWaypointDatabase waypointDB, IAccountDatabase accountDB) {
 
         couchDBRepositorySupportDB.put(KEY_BOAT, boatDB);
-        stdDB.put(KEY_BOAT, new StdCouchDbConnector("seapal_boat_db", dbInstance));
-
         couchDBRepositorySupportDB.put(KEY_MARK, markDB);
-        stdDB.put(KEY_MARK, new StdCouchDbConnector("seapal_mark_db", dbInstance));
-
         couchDBRepositorySupportDB.put(KEY_PERSON, personDB);
-        stdDB.put(KEY_PERSON, new StdCouchDbConnector("seapal_person_db", dbInstance));
-
         couchDBRepositorySupportDB.put(KEY_ROUTE, routeDB);
-        stdDB.put(KEY_ROUTE, new StdCouchDbConnector("seapal_route_db", dbInstance));
-
         couchDBRepositorySupportDB.put(KEY_TRIP, tripDB);
-        stdDB.put(KEY_TRIP, new StdCouchDbConnector("seapal_trip_db", dbInstance));
-
         couchDBRepositorySupportDB.put(KEY_WAYPOINT, waypointDB);
-        stdDB.put(KEY_WAYPOINT, new StdCouchDbConnector("seapal_waypoint_db", dbInstance));
-
         couchDBRepositorySupportDB.put(KEY_ACCOUNT, accountDB);
-        stdDB.put(KEY_ACCOUNT, new StdCouchDbConnector("seapal_account_db", dbInstance));
     }
 
     @Override
-    public Collection<? extends IModel> getSingleDocument(final String session, final UUID id, final String document) {
+    public Collection<? extends IModel> getSingleDocument(final String document, final String session, final UUID id) {
         return couchDBRepositorySupportDB.get(document).queryViews("singleDocument", session + id.toString());
     }
 
     @Override
-    public boolean deleteDocument(final String session, final UUID id, final String document) {
+    public boolean deleteDocument(final String document, final String session, final UUID id) {
         IDatabase<? extends IModel> database = couchDBRepositorySupportDB.get(document);
         ModelDocument doc = (ModelDocument) database.get(id);
         if (doc != null && doc.getAccount().equals(session)) {
@@ -101,9 +85,9 @@ public final class MainController
         }
 
         if (document.isNew()) {
-            stdDB.get(type).create(document);
+            couchDBRepositorySupportDB.get(type).create(document);
         } else {
-            stdDB.get(type).update(document);
+            couchDBRepositorySupportDB.get(type).update(document);
         }
         return document;
     }
