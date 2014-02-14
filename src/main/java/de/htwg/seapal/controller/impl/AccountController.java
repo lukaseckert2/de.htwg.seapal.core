@@ -5,14 +5,12 @@ import de.htwg.seapal.controller.IAccountController;
 import de.htwg.seapal.controller.IPersonController;
 import de.htwg.seapal.database.IAccountDatabase;
 import de.htwg.seapal.model.IAccount;
-import de.htwg.seapal.model.IPerson;
 import de.htwg.seapal.model.impl.Account;
 import de.htwg.seapal.model.impl.PublicPerson;
 import de.htwg.seapal.model.impl.SignupAccount;
 import de.htwg.seapal.utils.logging.ILogger;
 import de.htwg.seapal.utils.observer.Observable;
 
-import java.util.ArrayList;
 import java.util.List;
 import java.util.Map;
 import java.util.UUID;
@@ -30,41 +28,8 @@ public final class AccountController extends Observable implements IAccountContr
         this.logger = logger;
     }
 
-    @Override
-    public void closeDB() {
-        db.close();
-        logger.info("AccountController", "Database closed");
-    }
-
-    @Override
-    public void deleteAccount(UUID AccountId) {
-        db.delete(AccountId);
-    }
-
-    @Override
-    public List<UUID> getAccounts() {
-        List<IAccount> persons = db.loadAll();
-        List<UUID> list = new ArrayList<>();
-        for (IAccount person : persons) {
-            list.add(person.getUUID());
-        }
-        return list;
-    }
-
-    @Override
-    public UUID newAccount() {
-
-        return db.create();
-    }
-
-    @Override
-    public IAccount getAccount(UUID AccountId) {
+    private IAccount getAccount(UUID AccountId) {
         return db.get(AccountId);
-    }
-
-    @Override
-    public List<IAccount> getAllAccounts() {
-        return db.loadAll();
     }
 
     @Override
@@ -113,17 +78,6 @@ public final class AccountController extends Observable implements IAccountContr
     }
 
     @Override
-    public IAccount getByMail(String email) {
-        List<? extends IAccount> list = db.queryViews("by_email", email);
-
-        if (list.size() == 0 || list.size() > 1){
-            return null;
-        }
-
-        return list.get(0);
-    }
-
-    @Override
     public IAccount googleLogin(final Map<String, String> userInfo, final String googleID) {
         List<? extends IAccount> accounts = db.queryViews("googleID", googleID);
         if (accounts.size() > 0) {
@@ -150,11 +104,6 @@ public final class AccountController extends Observable implements IAccountContr
 
     private boolean saveAccount(IAccount person) {
         return db.save(person);
-    }
-
-    @Override
-    public IPerson getPerson(UUID uuid) {
-        return controller.getByAccount(uuid);
     }
 
     @Override

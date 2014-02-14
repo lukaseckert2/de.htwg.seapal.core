@@ -7,14 +7,23 @@ import org.junit.After;
 import org.junit.Before;
 import org.junit.Test;
 
+import java.io.File;
+
 public final class AccountControllerTest {
 
-    Injector injector = Guice.createInjector(new TestModule());
+    private Injector injector;
     private IAccountController controller;
+
+    private static final String SCRIPT = "/Users/mogli/Code/Seapal-Web/setupDB/";
 
     @Before
     public void setUp() throws Exception {
+        injector = Guice.createInjector(new TestModule());
         controller = injector.getInstance(IAccountController.class);
+        ProcessBuilder pb = new ProcessBuilder("/bin/bash", "setupDB.sh");
+        pb.directory(new File(SCRIPT));
+        Process p = pb.start();
+        p.waitFor();
     }
 
     @After
@@ -24,7 +33,7 @@ public final class AccountControllerTest {
 
     @Test
     public void testInjector() throws  Exception {
-        assert(controller != null);
+        assert(controller!= null);
     }
 
     @Test
