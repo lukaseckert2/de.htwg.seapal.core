@@ -4,10 +4,7 @@ import com.google.inject.Inject;
 import de.htwg.seapal.controller.IAccountController;
 import de.htwg.seapal.controller.IMainController;
 import de.htwg.seapal.database.*;
-import de.htwg.seapal.model.IAccount;
-import de.htwg.seapal.model.IMark;
-import de.htwg.seapal.model.IModel;
-import de.htwg.seapal.model.ModelDocument;
+import de.htwg.seapal.model.*;
 import de.htwg.seapal.model.impl.PublicPerson;
 import de.htwg.seapal.utils.logging.ILogger;
 
@@ -225,5 +222,14 @@ public final class MainController
         } else {
             return null;
         }
+    }
+
+    @Override
+    public Map<String, String> realName(UUID id) {
+        IPerson person = (IPerson) couchDBRepositorySupportDB.get(KEY_PERSON).get(id);
+        Map<String, String> returnVal = new HashMap<>();
+        returnVal.put("firstName", person.getFirstname());
+        returnVal.put("lastName", person.getLastname());
+        return returnVal;
     }
 }
