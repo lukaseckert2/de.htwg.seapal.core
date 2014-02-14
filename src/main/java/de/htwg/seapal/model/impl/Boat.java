@@ -2,7 +2,6 @@ package de.htwg.seapal.model.impl;
 
 import de.htwg.seapal.model.IBoat;
 import de.htwg.seapal.model.ModelDocument;
-import org.codehaus.jackson.annotate.JsonProperty;
 
 import java.util.UUID;
 
@@ -68,7 +67,7 @@ public class Boat extends ModelDocument implements IBoat {
 
     public Boat(IBoat boat) {
         super(boat);
-        this.boatName = boat.getBoatName();
+        this.boatName = boat.getName();
         this.registerNr = boat.getRegisterNr();
         this.sailSign = boat.getSailSign();
         this.homePort = boat.getHomePort();
@@ -95,14 +94,12 @@ public class Boat extends ModelDocument implements IBoat {
     }
 
     @Override
-    @JsonProperty("name")
-    public String getBoatName() {
+    public String getName() {
         return boatName;
     }
 
     @Override
-    @JsonProperty("name")
-    public void setBoatName(String boatName) {
+    public void setName(String boatName) {
         this.boatName = boatName;
     }
 

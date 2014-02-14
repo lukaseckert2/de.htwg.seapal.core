@@ -9,6 +9,7 @@ import de.htwg.seapal.model.IModel;
 import de.htwg.seapal.model.ModelDocument;
 import de.htwg.seapal.model.impl.Account;
 import de.htwg.seapal.model.impl.Boat;
+import de.htwg.seapal.model.impl.Person;
 import de.htwg.seapal.model.impl.SignupAccount;
 import org.junit.After;
 import org.junit.Before;
@@ -151,6 +152,7 @@ public final class MainControllerTest {
         Collection<? extends IModel> collection = controller.account(account.getUUID(), crewMember1.getAccount().toString());
         assert (collection != null);
         assert (collection.size() == 1);
+        assert (((Person) collection.toArray()[0]).getFirstname().equals("Alfred"));
 
         collection = controller.account(account.getUUID(), crewMember2.getAccount().toString());
         assert (collection != null);
@@ -159,7 +161,44 @@ public final class MainControllerTest {
 
     @Test
     public void testAddFriend() throws Exception {
+        Account crewMember1 = new Account();
+        crewMember1.setAccount(crewMember1.getUUID().toString());
+        crewMember1.setEmail("crewMember1@123.de");
+        crewMember1.setPassword("test");
+        SignupAccount save = new SignupAccount(crewMember1, "Alfred", "von Tirpitz");
+        accountController.saveAccount(save, true);
 
+        IAccount account = new Account();
+        account.setAccount(account.getUUID().toString());
+        account.addFriend(crewMember1);
+        account.setEmail("account@123.de");
+        account.setPassword("test");
+        SignupAccount save3 = new SignupAccount(account, "Karl", "Dönitz");
+        accountController.saveAccount(save3, true);
+
+        controller.addFriend(crewMember1.getAccount(), account.getAccount());
+        assert (crewMember1.getSentRequests().size() == 1);
+        assert (crewMember1.getReceivedRequests().size() == 0);
+        assert (crewMember1.getFriendList().size() == 0);
+        assert (account.getSentRequests().size() == 0);
+        assert (account.getReceivedRequests().size() == 1);
+        assert (account.getFriendList().size() == 0);
+
+        controller.addFriend(crewMember1.getAccount(), account.getAccount());
+        assert (crewMember1.getSentRequests().size() == 1);
+        assert (crewMember1.getReceivedRequests().size() == 0);
+        assert (crewMember1.getFriendList().size() == 0);
+        assert (account.getSentRequests().size() == 0);
+        assert (account.getReceivedRequests().size() == 1);
+        assert (account.getFriendList().size() == 0);
+
+        controller.addFriend(account.getAccount(), crewMember1.getAccount());
+        assert (crewMember1.getSentRequests().size() == 0);
+        assert (crewMember1.getReceivedRequests().size() == 0);
+        assert (crewMember1.getFriendList().size() == 1);
+        assert (account.getSentRequests().size() == 0);
+        assert (account.getReceivedRequests().size() == 0);
+        assert (account.getFriendList().size() == 1);
     }
 
     @Test
@@ -183,7 +222,7 @@ public final class MainControllerTest {
         Collection<? extends IModel> collection = controller.account(account.getAccount());
         assert (collection != null);
         assert (collection.size() == 1);
-        //assert ("Karl".equals((Person) collection.toArray()[0]).getFirstname());
+        assert (((Person) collection.toArray()[0]).getFirstname().equals("Karl"));
     }
 
     @Test

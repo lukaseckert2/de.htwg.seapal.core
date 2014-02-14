@@ -47,8 +47,14 @@ public final class AccountDatabase implements IAccountDatabase {
                     list.add(account);
                 }
             }
+        } else if (viewName.equals("by_email")) {
+            for (IAccount account : db.values()) {
+                if (key.equals(account.getEmail())) {
+                    list.add(account);
+                }
+            }
         } else {
-            throw new RuntimeException("method not implemented");
+            throw new RuntimeException(viewName + " method not implemented");
         }
         return list;
     }

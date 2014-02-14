@@ -2,9 +2,9 @@ package de.htwg.seapal.model;
 
 public interface IBoat extends IModel {
 
-	String getBoatName();
+	String getName();
 
-	void setBoatName(String boatName);
+	void setName(String boatName);
 
 	String getRegisterNr();
 
