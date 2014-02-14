@@ -11,14 +11,14 @@ import de.htwg.seapal.utils.logging.ILogger;
 public final class TestModule extends AbstractModule {
     @Override
     protected void configure() {
-        bind(IBoatDatabase.class).to(de.htwg.seapal.database.mock.BoatDatabase.class);
-        bind(IPersonDatabase.class).to(de.htwg.seapal.database.mock.PersonDatabase.class);
-        bind(ITripDatabase.class).to(de.htwg.seapal.database.mock.TripDatabase.class);
-        bind(IMarkDatabase.class).to(de.htwg.seapal.database.mock.MarkDatabase.class);
-        bind(IWaypointDatabase.class).to(de.htwg.seapal.database.mock.WaypointDatabase.class);
-        bind(IRouteDatabase.class).to(de.htwg.seapal.database.mock.RouteDatabase.class);
-        bind(IRaceDatabase.class).to(de.htwg.seapal.database.mock.RaceDatabase.class);
-        bind(IAccountDatabase.class).to(de.htwg.seapal.database.mock.AccountDatabase.class);
+        bind(IBoatDatabase.class).to(de.htwg.seapal.database.mock.BoatDatabase.class).in(Singleton.class);
+        bind(IPersonDatabase.class).to(de.htwg.seapal.database.mock.PersonDatabase.class).in(Singleton.class);
+        bind(ITripDatabase.class).to(de.htwg.seapal.database.mock.TripDatabase.class).in(Singleton.class);
+        bind(IMarkDatabase.class).to(de.htwg.seapal.database.mock.MarkDatabase.class).in(Singleton.class);
+        bind(IWaypointDatabase.class).to(de.htwg.seapal.database.mock.WaypointDatabase.class).in(Singleton.class);
+        bind(IRouteDatabase.class).to(de.htwg.seapal.database.mock.RouteDatabase.class).in(Singleton.class);
+        bind(IRaceDatabase.class).to(de.htwg.seapal.database.mock.RaceDatabase.class).in(Singleton.class);
+        bind(IAccountDatabase.class).to(de.htwg.seapal.database.mock.AccountDatabase.class).in(Singleton.class);
 
         bind(IMainController.class).to(MainController.class).in(Singleton.class);
         bind(IAccountController.class).to(AccountController.class).in(Singleton.class);

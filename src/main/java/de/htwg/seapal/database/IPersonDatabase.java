@@ -1,7 +1,6 @@
 package de.htwg.seapal.database;
 
 import de.htwg.seapal.model.IPerson;
-import de.htwg.seapal.model.impl.Person;
 
 /**
  * The person database interface.
@@ -17,6 +16,4 @@ import de.htwg.seapal.model.impl.Person;
  * </p>
  */
 public interface IPersonDatabase extends IDatabase<IPerson> {
-    Person getAccount(String email)
-            throws Exception;
 }
