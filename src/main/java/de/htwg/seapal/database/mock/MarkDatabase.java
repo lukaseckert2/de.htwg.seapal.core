@@ -6,84 +6,105 @@ import de.htwg.seapal.model.IMark;
 import de.htwg.seapal.model.ModelDocument;
 import de.htwg.seapal.model.impl.Mark;
 
-import java.util.HashMap;
-import java.util.List;
-import java.util.Map;
-import java.util.UUID;
+import java.io.File;
+import java.io.FileInputStream;
+import java.io.FileNotFoundException;
+import java.io.InputStream;
+import java.util.*;
 
 public class MarkDatabase implements IMarkDatabase {
-	private final Map<UUID, IMark> db = new HashMap<>();
-	private IMark newMark;
 
-	public MarkDatabase() {
-		open();
-	}
+    private final Map<UUID, IMark> db = new HashMap<>();
+    private final Map<UUID, File> db2 = new HashMap<>();
 
-	@Override
-	public boolean open() {
-		// create test data
-		UUID id = createNewMarkInDatabase();
-		newMark = get(id);
-		newMark.setName("Mark-NEW");
-		save(newMark);
-		for (int i = 1; i < 10; i++) {
-			id = createNewMarkInDatabase();
-			IMark mark = get(id);
-			mark.setName("Mark-" + i);
-			save(mark);
-		}
-		return true;
-	}
+    public MarkDatabase() {
+        open();
+    }
 
-	@Override
-	public boolean close() {
-		return true;
-	}
+    @Override
+    public boolean open() {
+        return true;
+    }
+
+    @Override
+    public boolean close() {
+        return true;
+    }
 
     @Override
     public void create(ModelDocument document) {
-        //To change body of implemented methods use File | Settings | File Templates.
+        document.setRevision("1");
+        db.put(document.getUUID(), (IMark) document);
     }
 
     @Override
     public List<? extends IMark> queryViews(final String viewName, final String key) {
-        return null;  //To change body of implemented methods use File | Settings | File Templates.
+        List<IMark> list = new LinkedList<>();
+        if (viewName.equals("singleDocument")) {
+            for (IMark mark : db.values()) {
+                if (key.equals(mark.getAccount() + mark.getId())) {
+                    list.add(mark);
+                }
+            }
+        } else if (viewName.equals("own")) {
+            for (IMark mark : db.values()) {
+                if (key.equals(mark.getAccount())) {
+                    list.add(mark);
+                }
+            }
+        } else {
+            throw new RuntimeException("method not implemented");
+        }
+        return list;
     }
 
     @Override
     public void update(ModelDocument document) {
-        //To change body of implemented methods use File | Settings | File Templates.
+        db.put(document.getUUID(), (IMark) document);
     }
 
     @Override
-	public UUID create() {
-		return newMark.getUUID();
-	}
+    public UUID create() {
+        throw new RuntimeException("method not implemented");
+    }
 
-	private UUID createNewMarkInDatabase() {
-		IMark mark = new Mark();
-		UUID id = mark.getUUID();
-		db.put(id, mark);
-		return id;
-	}
+    @Override
+    public boolean save(IMark mark) {
+        throw new RuntimeException("method not implemented");
+    }
 
-	@Override
-	public boolean save(IMark mark) {
-		return true;
-	}
+    @Override
+    public void delete(UUID id) {
+        db.remove(id);
+    }
 
-	@Override
-	public void delete(UUID id) {
+    @Override
+    public IMark get(UUID id) {
+        IMark mark = db.get(id);
+        if (mark != null)
+            return new Mark(mark);
+        return null;
+    }
 
-	}
+    @Override
+    public List<IMark> loadAll() {
+        return ImmutableList.copyOf(db.values());
+    }
 
-	@Override
-	public IMark get(UUID id) {
-		return new Mark(db.get(id));
-	}
+    @Override
+    public boolean addPhoto(IMark mark, String contentType, File file) throws FileNotFoundException {
+        db2.put(mark.getUUID(), file);
+        return true;
+    }
 
-	@Override
-	public List<IMark> loadAll() {
-		return ImmutableList.copyOf(db.values());
-	}
+    @Override
+    public InputStream getPhoto(UUID uuid) {
+        try {
+            return new FileInputStream(db2.get(uuid));
+        } catch (FileNotFoundException e) {
+            e.printStackTrace();
+        }
+
+        return null;
+    }
 }

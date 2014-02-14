@@ -7,7 +7,6 @@ import java.io.File;
 import java.io.FileNotFoundException;
 import java.io.InputStream;
 import java.util.Collection;
-import java.util.Map;
 import java.util.UUID;
 
 public interface IMainController {
@@ -37,6 +36,4 @@ public interface IMainController {
     public boolean addPhoto(String session, UUID uuid, String contentType, File file) throws FileNotFoundException;
 
     public InputStream getPhoto(String session, UUID uuid) throws FileNotFoundException;
-
-    Map<String, String> realName(UUID id);
 }

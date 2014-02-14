@@ -170,7 +170,8 @@ public final class MainController
         IAccount askingPerson = (IAccount) couchDBRepositorySupportDB.get(KEY_ACCOUNT).get(UUID.fromString(session));
         List<? extends IModel> askedPersons = couchDBRepositorySupportDB.get(KEY_ACCOUNT).queryViews("by_email", mail);
         IAccount askedPerson;
-        if (askedPersons.size() == 0 || askedPersons.size() > 1) {
+        if (askedPersons.size() != 1) {
+            // should never happen, because an email should be an unique identifier
             return false;
         } else {
             askedPerson = (IAccount) askedPersons.get(0);
@@ -199,11 +200,7 @@ public final class MainController
         Collection collection = getSingleDocument("mark", session, uuid);
         if (collection.size() == 1) {
             IMark mark = (IMark) collection.toArray()[0];
-            if (mark.getAccount().equals(session)) {
                 return ((IMarkDatabase) couchDBRepositorySupportDB.get(KEY_MARK)).addPhoto(mark, contentType, file);
-            } else {
-                return false;
-            }
         } else {
             return false;
         }
@@ -214,22 +211,9 @@ public final class MainController
         Collection collection = getSingleDocument("mark", session, uuid);
         if (collection.size() == 1) {
             IMark mark = (IMark) collection.toArray()[0];
-            if (mark.getAccount().equals(session)) {
                 return ((IMarkDatabase) couchDBRepositorySupportDB.get(KEY_MARK)).getPhoto(mark.getUUID());
-            } else {
-                return null;
-            }
         } else {
             return null;
         }
-    }
-
-    @Override
-    public Map<String, String> realName(UUID id) {
-        IPerson person = (IPerson) couchDBRepositorySupportDB.get(KEY_PERSON).get(id);
-        Map<String, String> returnVal = new HashMap<>();
-        returnVal.put("firstName", person.getFirstname());
-        returnVal.put("lastName", person.getLastname());
-        return returnVal;
     }
 }
