@@ -5,11 +5,15 @@ import de.htwg.seapal.controller.IAccountController;
 import de.htwg.seapal.controller.IMainController;
 import de.htwg.seapal.database.*;
 import de.htwg.seapal.model.IAccount;
+import de.htwg.seapal.model.IMark;
 import de.htwg.seapal.model.IModel;
 import de.htwg.seapal.model.ModelDocument;
 import de.htwg.seapal.model.impl.PublicPerson;
 import de.htwg.seapal.utils.logging.ILogger;
 
+import java.io.File;
+import java.io.FileNotFoundException;
+import java.io.InputStream;
 import java.util.*;
 
 public final class MainController
@@ -191,5 +195,35 @@ public final class MainController
 
         ((IAccountDatabase) couchDBRepositorySupportDB.get(KEY_ACCOUNT)).save(askingPerson);
         ((IAccountDatabase) couchDBRepositorySupportDB.get(KEY_ACCOUNT)).save(askedPerson);
+    }
+
+    @Override
+    public boolean addPhoto(String session, UUID uuid, String contentType, File file) throws FileNotFoundException {
+        Collection collection = getSingleDocument("mark", session, uuid);
+        if (collection.size() == 1) {
+            IMark mark = (IMark) collection.toArray()[0];
+            if (mark.getAccount().equals(session)) {
+                return ((IMarkDatabase) couchDBRepositorySupportDB.get(KEY_MARK)).addPhoto(mark, contentType, file);
+            } else {
+                return false;
+            }
+        } else {
+            return false;
+        }
+    }
+
+    @Override
+    public InputStream getPhoto(String session, UUID uuid) throws FileNotFoundException {
+        Collection collection = getSingleDocument("mark", session, uuid);
+        if (collection.size() == 1) {
+            IMark mark = (IMark) collection.toArray()[0];
+            if (mark.getAccount().equals(session)) {
+                return ((IMarkDatabase) couchDBRepositorySupportDB.get(KEY_MARK)).getPhoto(mark.getUUID());
+            } else {
+                return null;
+            }
+        } else {
+            return null;
+        }
     }
 }

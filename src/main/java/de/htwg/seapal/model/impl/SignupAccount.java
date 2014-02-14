@@ -7,6 +7,11 @@ import java.util.UUID;
 
 public final class SignupAccount {
     private String email;
+    private String password;
+    private UUID id;
+    private String firstName;
+    private String lastName;
+
 
     public void setEmail(String email) {
         this.email = email;
@@ -19,11 +24,6 @@ public final class SignupAccount {
     public void setLastName(String lastName) {
         this.lastName = lastName;
     }
-
-    private String password;
-    private UUID id;
-    private String firstName;
-    private String lastName;
 
     public String getFirstName() {
         return firstName;

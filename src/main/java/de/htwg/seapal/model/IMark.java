@@ -20,12 +20,6 @@ public interface IMark extends IModel {
 
 	void setDate(Long date);
 
-    @JsonProperty("image_big")
-    String getPhoto();
-
-    @JsonProperty("image_big")
-    void setPhoto(String image);
-
     @JsonProperty("image_thumb")
     String getThumbnail();
 

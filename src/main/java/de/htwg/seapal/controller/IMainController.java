@@ -3,6 +3,9 @@ package de.htwg.seapal.controller;
 import de.htwg.seapal.model.IModel;
 import de.htwg.seapal.model.ModelDocument;
 
+import java.io.File;
+import java.io.FileNotFoundException;
+import java.io.InputStream;
 import java.util.Collection;
 import java.util.UUID;
 
@@ -29,4 +32,8 @@ public interface IMainController {
     boolean addFriend(String session, String mail);
 
     void abortRequest(String session, UUID id);
+
+    public boolean addPhoto(String session, UUID uuid, String contentType, File file) throws FileNotFoundException;
+
+    public InputStream getPhoto(String session, UUID uuid) throws FileNotFoundException;
 }
