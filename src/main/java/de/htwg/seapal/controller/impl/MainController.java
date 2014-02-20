@@ -53,7 +53,12 @@ public final class MainController
     public boolean deleteDocument(final String document, final String session, final UUID id) {
         IDatabase<? extends IModel> database = couchDBRepositorySupportDB.get(document);
         ModelDocument doc = (ModelDocument) database.get(id);
-        if (doc != null && doc.getAccount().equals(session)) {
+        /* TODO : check if you should be able to delete a document from a friends logbook */
+        PublicPerson publicPerson = controller.getInternalInfo(session);
+        boolean friendDocument = publicPerson.getFriendList().contains(doc.getAccount());
+        boolean ownDocument = doc.getAccount().equals(session);
+        
+        if (doc != null && (ownDocument || friendDocument)) {
             database.delete(id);
             return true;
         }
@@ -79,7 +84,9 @@ public final class MainController
 
         PublicPerson publicPerson = controller.getInternalInfo(session);
         boolean friendDocument = publicPerson.getFriendList().contains(document.getAccount());
-        boolean askingPersonsDocument = publicPerson.getReceivedRequests().contains(document.getAccount());
+        /* TODO :  check if asking person should really get access to the documents */
+        boolean askingPersonsDocument = false;
+        //boolean askingPersonsDocument = publicPerson.getReceivedRequests().contains(document.getAccount());
         boolean ownDocument = document.getAccount().equals(session);
         if (!ownDocument && !askingPersonsDocument && !friendDocument) {
             return null;
