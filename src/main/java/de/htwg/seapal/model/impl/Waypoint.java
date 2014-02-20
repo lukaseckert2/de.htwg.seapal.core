@@ -2,9 +2,11 @@ package de.htwg.seapal.model.impl;
 
 import de.htwg.seapal.model.IWaypoint;
 import de.htwg.seapal.model.ModelDocument;
+
 import org.apache.commons.lang.builder.HashCodeBuilder;
 import org.apache.commons.lang.builder.ReflectionToStringBuilder;
 import org.apache.commons.lang.builder.EqualsBuilder;
+import org.codehaus.jackson.annotate.JsonProperty;
 
 import java.util.UUID;
 
@@ -209,21 +211,25 @@ public class Waypoint extends ModelDocument implements IWaypoint {
 	}
 
 	@Override
+    @JsonProperty("lat")
 	public Double getLatitude() {
 		return latitude;
 	}
 
 	@Override
+    @JsonProperty("lat")
 	public void setLatitude(Double latitude) {
 		this.latitude = latitude;
 	}
 
 	@Override
+    @JsonProperty("lng")
 	public Double getLongitude() {
 		return Longitude;
 	}
 
 	@Override
+    @JsonProperty("lng")
 	public void setLongitude(Double Longitude) {
 		this.Longitude = Longitude;
 	}
