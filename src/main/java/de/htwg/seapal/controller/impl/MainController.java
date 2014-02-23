@@ -57,7 +57,7 @@ public final class MainController
         IDatabase<? extends IModel> database = couchDBRepositorySupportDB.get(document);
         ModelDocument doc = (ModelDocument) database.get(id);
         /* TODO : check if you should be able to delete a document from a friends logbook */
-        PublicPerson publicPerson = controller.getInternalInfo(session);
+        PublicPerson publicPerson = controller.getInternalInfo(session, session);
         boolean friendDocument = publicPerson.getFriendList().contains(doc.getAccount());
         boolean ownDocument = doc.getAccount().equals(session);
 
@@ -91,7 +91,7 @@ public final class MainController
             document.setAccount(session);
         }
 
-        PublicPerson publicPerson = controller.getInternalInfo(session);
+        PublicPerson publicPerson = controller.getInternalInfo(session, session);
         boolean friendDocument = publicPerson.getFriendList().contains(document.getAccount());
         /* TODO :  check if asking person should really get access to the documents */
         boolean askingPersonsDocument = false;
@@ -138,14 +138,18 @@ public final class MainController
     }
 
     @Override
-    public Collection<? extends IModel> getDocuments(String document, String session, String scope) {
+    public Collection<? extends IModel> getDocuments(String document, String session, String userid, String scope) {
+        if (!session.equals(userid) && controller.getInternalInfo(session, userid) == null) {
+            return new ArrayList<>();
+        }
+
         Collection<IModel> Collection = new LinkedList<>();
         if (scope.equals("all") || scope.equals("own")) {
-            Collection.addAll(getOwnDocuments(document, session));
+            Collection.addAll(getOwnDocuments(document, userid));
         }
 
         if (scope.equals("all") || scope.equals("friends")) {
-            Collection.addAll(getFriendDocuments(document, session));
+            Collection.addAll(getFriendDocuments(document, userid));
         }
 
         return Collection;

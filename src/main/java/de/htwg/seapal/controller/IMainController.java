@@ -27,7 +27,7 @@ public interface IMainController {
 
     Collection<? extends IModel> account(String session);
 
-    Collection<? extends IModel> getDocuments(String document, String session, String scope);
+    Collection<? extends IModel> getDocuments(String document, String session, String userid, String scope);
 
     boolean addFriend(String session, String mail);
 

@@ -25,7 +25,7 @@ public interface IAccountController extends IObservable {
 
     IAccount googleLogin(Map<String, String> userInfo, String googleID);
 
-    PublicPerson getInternalInfo(String session);
+    PublicPerson getInternalInfo(String session, String userid);
 
     UUID saveAccount(IAccount account, boolean createHash);
 }

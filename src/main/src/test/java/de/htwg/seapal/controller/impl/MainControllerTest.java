@@ -265,17 +265,17 @@ public final class MainControllerTest {
         Boat boat3 = createBoat(UUID.fromString(crewMember2.getAccount()));
         controller.creatDocument("boat", boat3, crewMember2.getAccount());
 
-        Collection<? extends IModel> collection = controller.getDocuments("boat", account.getAccount(), "own");
+        Collection<? extends IModel> collection = controller.getDocuments("boat", account.getAccount(), account.getAccount(), "own");
         assert (collection.size() == 1);
         Boat result = (Boat) collection.toArray()[0];
         assert (result.equals(boat));
 
-        collection = controller.getDocuments("boat", crewMember1.getAccount(), "friends");
+        collection = controller.getDocuments("boat", crewMember1.getAccount(), crewMember1.getAccount(), "friends");
         assert (collection.size() == 1);
         result = (Boat) collection.toArray()[0];
         assert (result.equals(boat));
 
-        collection = controller.getDocuments("boat", crewMember2.getAccount(), "asking");
+        collection = controller.getDocuments("boat", crewMember2.getAccount(), crewMember2.getAccount() , "asking");
         assert (collection.size() == 1);
         result = (Boat) collection.toArray()[0];
         assert (result.equals(boat));
