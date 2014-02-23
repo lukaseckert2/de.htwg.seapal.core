@@ -4,7 +4,10 @@ import com.google.inject.Inject;
 import de.htwg.seapal.controller.IAccountController;
 import de.htwg.seapal.controller.IMainController;
 import de.htwg.seapal.database.*;
-import de.htwg.seapal.model.*;
+import de.htwg.seapal.model.IAccount;
+import de.htwg.seapal.model.IMark;
+import de.htwg.seapal.model.IModel;
+import de.htwg.seapal.model.ModelDocument;
 import de.htwg.seapal.model.impl.PublicPerson;
 import de.htwg.seapal.utils.logging.ILogger;
 
@@ -57,8 +60,14 @@ public final class MainController
         PublicPerson publicPerson = controller.getInternalInfo(session);
         boolean friendDocument = publicPerson.getFriendList().contains(doc.getAccount());
         boolean ownDocument = doc.getAccount().equals(session);
-        
+
         if (doc != null && (ownDocument || friendDocument)) {
+            if (document.equals(KEY_TRIP)) {
+                Collection<? extends IModel> docs = getByParent("waypoint", KEY_TRIP, session, id);
+                for (IModel waypoint : docs) {
+                    deleteDocument("waypoint", session, waypoint.getUUID());
+                }
+            }
             database.delete(id);
             return true;
         }
@@ -135,12 +144,8 @@ public final class MainController
             Collection.addAll(getOwnDocuments(document, session));
         }
 
-        if (scope.equals("all") || scope.equals("foreign") || scope.equals("friends")) {
+        if (scope.equals("all") || scope.equals("friends")) {
             Collection.addAll(getFriendDocuments(document, session));
-        }
-
-        if (scope.equals("all") || scope.equals("foreign") || scope.equals("asking")) {
-            Collection.addAll(getAskingDocuments(document, session));
         }
 
         return Collection;
@@ -207,7 +212,7 @@ public final class MainController
         Collection collection = getSingleDocument("mark", session, uuid);
         if (collection.size() == 1) {
             IMark mark = (IMark) collection.toArray()[0];
-                return ((IMarkDatabase) couchDBRepositorySupportDB.get(KEY_MARK)).addPhoto(mark, contentType, file);
+            return ((IMarkDatabase) couchDBRepositorySupportDB.get(KEY_MARK)).addPhoto(mark, contentType, file);
         } else {
             return false;
         }
@@ -218,7 +223,7 @@ public final class MainController
         Collection collection = getSingleDocument("mark", session, uuid);
         if (collection.size() == 1) {
             IMark mark = (IMark) collection.toArray()[0];
-                return ((IMarkDatabase) couchDBRepositorySupportDB.get(KEY_MARK)).getPhoto(mark.getUUID());
+            return ((IMarkDatabase) couchDBRepositorySupportDB.get(KEY_MARK)).getPhoto(mark.getUUID());
         } else {
             return null;
         }
