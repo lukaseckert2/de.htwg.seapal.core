@@ -217,7 +217,7 @@ public final class MainController
                 return ((IMarkDatabase) couchDBRepositorySupportDB.get(KEY_MARK)).addPhoto(mark, contentType, file);
             } else if (type.equals("waypoint")) {
                 IWaypoint waypoint = (IWaypoint) collection.toArray()[0];
-                return ((IWaypointDatabase) couchDBRepositorySupportDB.get(KEY_MARK)).addPhoto(waypoint, contentType, file);
+                return ((IWaypointDatabase) couchDBRepositorySupportDB.get(KEY_WAYPOINT)).addPhoto(waypoint, contentType, file);
             } else {
                 return false;
             }
@@ -235,7 +235,7 @@ public final class MainController
                 return ((IMarkDatabase) couchDBRepositorySupportDB.get(KEY_MARK)).getPhoto(mark.getUUID());
             } else if (type.equals("waypoint")) {
                 IWaypoint mark = (IWaypoint) collection.toArray()[0];
-                return ((IWaypointDatabase) couchDBRepositorySupportDB.get(KEY_MARK)).getPhoto(mark.getUUID());
+                return ((IWaypointDatabase) couchDBRepositorySupportDB.get(KEY_WAYPOINT)).getPhoto(mark.getUUID());
             }
         }
 
