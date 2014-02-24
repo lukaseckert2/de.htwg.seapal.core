@@ -4,10 +4,7 @@ import com.google.inject.Inject;
 import de.htwg.seapal.controller.IAccountController;
 import de.htwg.seapal.controller.IMainController;
 import de.htwg.seapal.database.*;
-import de.htwg.seapal.model.IAccount;
-import de.htwg.seapal.model.IMark;
-import de.htwg.seapal.model.IModel;
-import de.htwg.seapal.model.ModelDocument;
+import de.htwg.seapal.model.*;
 import de.htwg.seapal.model.impl.PublicPerson;
 import de.htwg.seapal.utils.logging.ILogger;
 
@@ -212,24 +209,36 @@ public final class MainController
     }
 
     @Override
-    public boolean addPhoto(String session, UUID uuid, String contentType, File file) throws FileNotFoundException {
-        Collection collection = getSingleDocument("mark", session, uuid);
+    public boolean addPhoto(String session, UUID uuid, String contentType, File file, String type) throws FileNotFoundException {
+        Collection collection = getSingleDocument(type, session, uuid);
         if (collection.size() == 1) {
-            IMark mark = (IMark) collection.toArray()[0];
-            return ((IMarkDatabase) couchDBRepositorySupportDB.get(KEY_MARK)).addPhoto(mark, contentType, file);
+            if (type.equals("mark")) {
+                IMark mark = (IMark) collection.toArray()[0];
+                return ((IMarkDatabase) couchDBRepositorySupportDB.get(KEY_MARK)).addPhoto(mark, contentType, file);
+            } else if (type.equals("waypoint")) {
+                IWaypoint waypoint = (IWaypoint) collection.toArray()[0];
+                return ((IWaypointDatabase) couchDBRepositorySupportDB.get(KEY_MARK)).addPhoto(waypoint, contentType, file);
+            } else {
+                return false;
+            }
         } else {
             return false;
         }
     }
 
     @Override
-    public InputStream getPhoto(String session, UUID uuid) throws FileNotFoundException {
-        Collection collection = getSingleDocument("mark", session, uuid);
+    public InputStream getPhoto(String session, UUID uuid, String type) throws FileNotFoundException {
+        Collection collection = getSingleDocument(type, session, uuid);
         if (collection.size() == 1) {
-            IMark mark = (IMark) collection.toArray()[0];
-            return ((IMarkDatabase) couchDBRepositorySupportDB.get(KEY_MARK)).getPhoto(mark.getUUID());
-        } else {
-            return null;
+            if (type.equals("mark")) {
+                IMark mark = (IMark) collection.toArray()[0];
+                return ((IMarkDatabase) couchDBRepositorySupportDB.get(KEY_MARK)).getPhoto(mark.getUUID());
+            } else if (type.equals("waypoint")) {
+                IWaypoint mark = (IWaypoint) collection.toArray()[0];
+                return ((IWaypointDatabase) couchDBRepositorySupportDB.get(KEY_MARK)).getPhoto(mark.getUUID());
+            }
         }
+
+        return null;
     }
 }

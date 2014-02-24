@@ -33,7 +33,7 @@ public interface IMainController {
 
     void abortRequest(String session, UUID id);
 
-    public boolean addPhoto(String session, UUID uuid, String contentType, File file) throws FileNotFoundException;
+    public boolean addPhoto(String session, UUID uuid, String contentType, File file, String type) throws FileNotFoundException;
 
-    public InputStream getPhoto(String session, UUID uuid) throws FileNotFoundException;
+    public InputStream getPhoto(String session, UUID uuid, String type) throws FileNotFoundException;
 }

@@ -2,6 +2,11 @@ package de.htwg.seapal.database;
 
 import de.htwg.seapal.model.IWaypoint;
 
+import java.io.File;
+import java.io.FileNotFoundException;
+import java.io.InputStream;
+import java.util.UUID;
+
 /**
  * The waypoint database interface.
  * <p>
@@ -15,4 +20,8 @@ import de.htwg.seapal.model.IWaypoint;
  * Remark: the design file "_design/Waypoint" must be created manually.
  * </p>
  */
-public interface IWaypointDatabase extends IDatabase<IWaypoint> {}
+public interface IWaypointDatabase extends IDatabase<IWaypoint> {
+    boolean addPhoto(IWaypoint mark, String contentType, File file) throws FileNotFoundException;
+
+    InputStream getPhoto(UUID uuid);
+}

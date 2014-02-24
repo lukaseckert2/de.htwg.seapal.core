@@ -377,12 +377,12 @@ public final class MainControllerTest {
         Mark mark = new Mark();
         mark.setAccount(crewMember1.getAccount());
         controller.creatDocument("mark", mark, crewMember1.getAccount());
-        controller.addPhoto(crewMember1.getAccount(), mark.getUUID(), "application/octet-stream", new File(SCRIPT + "setupDB.sh"));
-        assert (!controller.addPhoto(UUID.randomUUID().toString(), mark.getUUID(), "application/octet-stream", new File(SCRIPT + "setupDB.sh")));
-        assert (!controller.addPhoto(crewMember1.getAccount(), UUID.randomUUID(), "application/octet-stream", new File(SCRIPT + "setupDB.sh")));
+        controller.addPhoto(crewMember1.getAccount(), mark.getUUID(), "application/octet-stream", new File(SCRIPT + "setupDB.sh"), "mark");
+        assert (!controller.addPhoto(UUID.randomUUID().toString(), mark.getUUID(), "application/octet-stream", new File(SCRIPT + "setupDB.sh"), "mark"));
+        assert (!controller.addPhoto(crewMember1.getAccount(), UUID.randomUUID(), "application/octet-stream", new File(SCRIPT + "setupDB.sh"), "mark"));
         byte[] bytes = new byte[5];
-        controller.getPhoto(crewMember1.getAccount(), mark.getUUID()).read(bytes);
-        assert (null == controller.getPhoto(UUID.randomUUID().toString(), mark.getUUID()));
+        controller.getPhoto(crewMember1.getAccount(), mark.getUUID(), "mark").read(bytes);
+        assert (null == controller.getPhoto(UUID.randomUUID().toString(), mark.getUUID(), "mark"));
         String s = new String(bytes);
         System.out.println(s);
         assert (s.equals("#!/bi"));

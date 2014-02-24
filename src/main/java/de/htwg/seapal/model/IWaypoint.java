@@ -80,4 +80,8 @@ public interface IWaypoint extends IModel {
     void setBoat(String s);
 
     String getBoat();
+
+    String getImage_thumb();
+
+    void setImage_thumb(String image);
 }
