@@ -3,7 +3,6 @@ package de.htwg.seapal.model.impl;
 import de.htwg.seapal.model.IMark;
 import de.htwg.seapal.model.ModelDocument;
 import org.codehaus.jackson.annotate.JsonIgnore;
-import org.codehaus.jackson.annotate.JsonProperty;
 
 import java.util.UUID;
 
@@ -15,29 +14,29 @@ public class Mark extends ModelDocument implements IMark {
 	private static final long serialVersionUID = 1L;
 
 	private String name;
-	private Double latitude;
-	private Double Longitude;
+	private Double lat;
+	private Double lng;
 	private Long date;
-    private String thumbnail;
+    private String image_thumb;
     @JsonIgnore
     public Object _attachments;
 
     public Mark() {
 		super(UUID.randomUUID().toString());
-		this.latitude = 0D;
-		this.Longitude = 0D;
+		this.lat = 0D;
+		this.lng = 0D;
 		this.date = 0L;
-        this.thumbnail = "";
+        this.image_thumb = "";
 	}
 
 	public Mark(IMark m) {
         super(m);
 
 		this.name = m.getName();
-		this.latitude = m.getLatitude();
-		this.Longitude = m.getLongitude();
+		this.lat = m.getLat();
+		this.lng = m.getLng();
 		this.date = m.getDate();
-        this.thumbnail = m.getThumbnail();
+        this.image_thumb = m.getImage_thumb();
 	}
 
 	@Override
@@ -51,27 +50,23 @@ public class Mark extends ModelDocument implements IMark {
 	}
 
 	@Override
-    @JsonProperty("lat")
-    public Double getLatitude() {
-		return this.latitude;
+    public Double getLat() {
+		return this.lat;
 	}
 
 	@Override
-    @JsonProperty("lat")
-    public void setLatitude(Double latitude) {
-		this.latitude = latitude;
+    public void setLat(Double lat) {
+		this.lat = lat;
 	}
 
 	@Override
-    @JsonProperty("lng")
-	public Double getLongitude() {
-		return this.Longitude;
+	public Double getLng() {
+		return this.lng;
 	}
 
 	@Override
-    @JsonProperty("lng")
-    public void setLongitude(Double Longitude) {
-		this.Longitude = Longitude;
+    public void setLng(Double Longitude) {
+		this.lng = Longitude;
 	}
 
 	@Override
@@ -85,11 +80,11 @@ public class Mark extends ModelDocument implements IMark {
 	}
 
     @Override
-    public String getThumbnail() {
-        return this.thumbnail;
+    public String getImage_thumb() {
+        return this.image_thumb;
     }
     @Override
-    public void setThumbnail(final String image) {
-        this.thumbnail = image;
+    public void setImage_thumb(final String image) {
+        this.image_thumb = image;
     }
 }

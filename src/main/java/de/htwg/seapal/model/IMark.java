@@ -1,28 +1,24 @@
 package de.htwg.seapal.model;
 
-import org.codehaus.jackson.annotate.JsonProperty;
-
 public interface IMark extends IModel {
 
 	String getName();
 
 	void setName(String name);
 
-    Double getLatitude();
+    Double getLat();
 
-	void setLatitude(Double latitute);
+	void setLat(Double latitute);
 
-    Double getLongitude();
+    Double getLng();
 
-	void setLongitude(Double Longitude);
+	void setLng(Double Longitude);
 
 	Long getDate();
 
 	void setDate(Long date);
 
-    @JsonProperty("image_thumb")
-    String getThumbnail();
+    String getImage_thumb();
 
-    @JsonProperty("image_thumb")
-    void setThumbnail(String image);
+    void setImage_thumb(String image);
 }

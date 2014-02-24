@@ -8,7 +8,7 @@ import java.util.List;
 
 public final class PublicPerson {
     private String email;
-    private List<String> friendList = new LinkedList<>();
+    private List<String> friend_list = new LinkedList<>();
     private List<String> sentRequests = new LinkedList<>();
     private List<String> receivedRequests = new LinkedList<>();
     private String id;
@@ -16,7 +16,7 @@ public final class PublicPerson {
     public PublicPerson(IAccount person) {
         if (person != null) {
             email = person.getEmail();
-            friendList = person.getFriendList();
+            friend_list = person.getFriendList();
             sentRequests = person.getSentRequests();
             receivedRequests = person.getReceivedRequests();
             id = person.getId();
@@ -28,22 +28,18 @@ public final class PublicPerson {
         return this.id;
     }
 
-    @JsonProperty("friend_list")
-    public List<String> getFriendList() {
-        return friendList;
+    public List<String> getFriend_list() {
+        return friend_list;
     }
 
-    @JsonProperty("email")
     public String getEmail() {
         return email;
     }
 
-    @JsonProperty("sentRequests")
     public List<String> getSentRequests() {
         return sentRequests;
     }
 
-    @JsonProperty("receivedRequests")
     public List<String> getReceivedRequests() {
         return receivedRequests;
     }

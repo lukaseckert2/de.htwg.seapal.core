@@ -69,13 +69,13 @@ public interface IWaypoint extends IModel {
 
 	void setDate(Long date);
 
-	Double getLatitude();
+	Double getLat();
 
-	void setLatitude(Double latitude);
+	void setLat(Double latitude);
 
-	Double getLongitude();
+	Double getLng();
 
-	void setLongitude(Double Longitude);
+	void setLng(Double Longitude);
 
     void setBoat(String s);
 

@@ -2,11 +2,9 @@ package de.htwg.seapal.model.impl;
 
 import de.htwg.seapal.model.IWaypoint;
 import de.htwg.seapal.model.ModelDocument;
-
+import org.apache.commons.lang.builder.EqualsBuilder;
 import org.apache.commons.lang.builder.HashCodeBuilder;
 import org.apache.commons.lang.builder.ReflectionToStringBuilder;
-import org.apache.commons.lang.builder.EqualsBuilder;
-import org.codehaus.jackson.annotate.JsonProperty;
 
 import java.util.UUID;
 
@@ -17,8 +15,8 @@ public class Waypoint extends ModelDocument implements IWaypoint {
 	 */
 	private static final long serialVersionUID = 1L;
 	private String name;
-	private Double latitude;
-	private Double Longitude;
+	private Double lat;
+	private Double lng;
 	private Long date; // unix timestamp
 	private String note;
 	private Integer btm;
@@ -49,8 +47,8 @@ public class Waypoint extends ModelDocument implements IWaypoint {
 		foreSail = f;
 		mainSail = msail;
 		this.name = "";
-		this.latitude = 0D;
-		this.Longitude = 0D;
+		this.lat = 0D;
+		this.lng = 0D;
 		this.date = 0L;
 		this.note = "";
 		this.btm = 0;
@@ -68,8 +66,8 @@ public class Waypoint extends ModelDocument implements IWaypoint {
 	public Waypoint(IWaypoint w) {
 		super(w);
 		this.name = w.getName();
-		this.latitude = w.getLatitude();
-		this.Longitude = w.getLongitude();
+		this.lat = w.getLat();
+		this.lng = w.getLng();
 		this.date = w.getDate();
 		this.note = w.getNote();
 		this.btm = w.getBTM();
@@ -211,27 +209,23 @@ public class Waypoint extends ModelDocument implements IWaypoint {
 	}
 
 	@Override
-    @JsonProperty("lat")
-	public Double getLatitude() {
-		return latitude;
+	public Double getLat() {
+		return lat;
 	}
 
 	@Override
-    @JsonProperty("lat")
-	public void setLatitude(Double latitude) {
-		this.latitude = latitude;
+	public void setLat(Double lat) {
+		this.lat = lat;
 	}
 
 	@Override
-    @JsonProperty("lng")
-	public Double getLongitude() {
-		return Longitude;
+	public Double getLng() {
+		return lng;
 	}
 
 	@Override
-    @JsonProperty("lng")
-	public void setLongitude(Double Longitude) {
-		this.Longitude = Longitude;
+	public void setLng(Double Longitude) {
+		this.lng = Longitude;
 	}
     @Override
     public void setBoat(final String s) {

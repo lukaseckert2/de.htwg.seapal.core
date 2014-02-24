@@ -58,7 +58,7 @@ public final class MainController
         ModelDocument doc = (ModelDocument) database.get(id);
         /* TODO : check if you should be able to delete a document from a friends logbook */
         PublicPerson publicPerson = controller.getInternalInfo(session, session);
-        boolean friendDocument = publicPerson.getFriendList().contains(doc.getAccount());
+        boolean friendDocument = publicPerson.getFriend_list().contains(doc.getAccount());
         boolean ownDocument = doc.getAccount().equals(session);
 
         if (doc != null && (ownDocument || friendDocument)) {
@@ -92,7 +92,7 @@ public final class MainController
         }
 
         PublicPerson publicPerson = controller.getInternalInfo(session, session);
-        boolean friendDocument = publicPerson.getFriendList().contains(document.getAccount());
+        boolean friendDocument = publicPerson.getFriend_list().contains(document.getAccount());
         /* TODO :  check if asking person should really get access to the documents */
         boolean askingPersonsDocument = false;
         //boolean askingPersonsDocument = publicPerson.getReceivedRequests().contains(document.getAccount());
