@@ -35,13 +35,13 @@ public interface IWaypoint extends IModel {
 	 */
 	String getHeadedFor();
 
-	Maneuver getManeuver();
+    String getManeuver();
 
-	ForeSail getForesail();
+    String getForesail();
 
-	MainSail getMainsail();
+    String getMainsail();
 
-	void setForesail(ForeSail foreSail);
+	void setForesail(String foreSail);
 
 	void setName(String name);
 
@@ -57,9 +57,9 @@ public interface IWaypoint extends IModel {
 
 	void setHeadedFor(String markId);
 
-	void setManeuver(Maneuver maneuver);
+	void setManeuver(String maneuver);
 
-	void setMainsail(MainSail mainSail);
+	void setMainsail(String mainSail);
 
 	String getTrip();
 

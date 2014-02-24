@@ -25,9 +25,9 @@ public class Waypoint extends ModelDocument implements IWaypoint {
 	private Integer cog;
 	private Integer sog;
 	private String headedFor; // UUID Mark
-	private Maneuver maneuver;
-	private ForeSail foreSail;
-	private MainSail mainSail;
+	private String maneuver;
+	private String foreSail;
+	private String mainSail;
 	private String trip; // UUID Trip
     private String boat;
     private String image_thumb;
@@ -36,9 +36,9 @@ public class Waypoint extends ModelDocument implements IWaypoint {
 
     public Waypoint() {
 		super(UUID.randomUUID().toString());
-		maneuver = Maneuver.NONE;
-		foreSail = ForeSail.NONE;
-		mainSail = MainSail.NONE;
+		maneuver = "";
+		foreSail = "";
+		mainSail = "";
 	}
 
     /*
@@ -124,22 +124,22 @@ public class Waypoint extends ModelDocument implements IWaypoint {
 	}
 
 	@Override
-	public Maneuver getManeuver() {
+	public String getManeuver() {
 		return maneuver;
 	}
 
 	@Override
-	public ForeSail getForesail() {
+	public String getForesail() {
 		return foreSail;
 	}
 
 	@Override
-	public MainSail getMainsail() {
+	public String getMainsail() {
 		return mainSail;
 	}
 
 	@Override
-	public void setForesail(final ForeSail foreSail) {
+	public void setForesail(final String foreSail) {
 		this.foreSail = foreSail;
 	}
 
@@ -179,12 +179,12 @@ public class Waypoint extends ModelDocument implements IWaypoint {
 	}
 
 	@Override
-	public void setManeuver(final Maneuver maneuver) {
+	public void setManeuver(final String maneuver) {
 		this.maneuver = maneuver;
 	}
 
 	@Override
-	public void setMainsail(final MainSail mainSail) {
+	public void setMainsail(final String mainSail) {
 		this.mainSail = mainSail;
 	}
 
