@@ -152,13 +152,21 @@ public final class MainController
         return Collection;
     }
 
-    private Collection<? extends IModel> getAskingDocuments(String document, String session) {
+    @Override
+    public Collection<? extends IModel> getAskingPerson(String session) {
+        Collection<IModel> Collection = new LinkedList<>();
+        Collection.addAll(getAskingDocuments(session));
+
+        return Collection;
+    }
+
+    private Collection<? extends IModel> getAskingDocuments(String session) {
         IAccount person = (IAccount) couchDBRepositorySupportDB.get(KEY_ACCOUNT).get(UUID.fromString(session));
 
         Collection<IModel> Collection = new ArrayList<>();
         if (person != null) {
             for (String uuid : person.getReceivedRequests()) {
-                Collection.addAll(getOwnDocuments(document, uuid));
+                Collection.addAll(getOwnDocuments(KEY_PERSON, uuid));
             }
         }
 

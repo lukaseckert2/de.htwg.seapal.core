@@ -36,4 +36,6 @@ public interface IMainController {
     public boolean addPhoto(String session, UUID uuid, String contentType, File file, String type) throws FileNotFoundException;
 
     public InputStream getPhoto(String session, UUID uuid, String type) throws FileNotFoundException;
+
+    Collection<? extends IModel> getAskingPerson(String session);
 }
