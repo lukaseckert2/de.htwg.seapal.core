@@ -48,9 +48,9 @@ public class Waypoint extends ModelDocument implements IWaypoint {
         this.lng = w.getLng();
         this.date = w.getDate();
         this.note = w.getNote();
-        this.btm = w.getBTM();
-        this.dtm = w.getDTM();
-        this.cog = w.getCOG();
+        this.btm = w.getBtm();
+        this.dtm = w.getDtm();
+        this.cog = w.getCog();
         this.sog = w.getSOG();
         this.headedFor = w.getHeadedFor();
         this.maneuver = w.getManeuver();
@@ -70,17 +70,17 @@ public class Waypoint extends ModelDocument implements IWaypoint {
     }
 
     @Override
-    public String getBTM() {
+    public String getBtm() {
         return btm;
     }
 
     @Override
-    public String getDTM() {
+    public String getDtm() {
         return dtm;
     }
 
     @Override
-    public String getCOG() {
+    public String getCog() {
         return cog;
     }
 
@@ -128,22 +128,22 @@ public class Waypoint extends ModelDocument implements IWaypoint {
     }
 
     @Override
-    public void setBTM(final String btm) {
+    public void setBtm(final String btm) {
         this.btm = btm;
     }
 
     @Override
-    public void setDTM(final String dtm) {
+    public void setDtm(final String dtm) {
         this.dtm = dtm;
     }
 
     @Override
-    public void setCOG(final String cog) {
-        this.cog = cog;
+    public void setCog(final String Cog) {
+        this.cog = Cog;
     }
 
     @Override
-    public void setSOG(final String sog) {
+    public void setSog(final String sog) {
         this.sog = sog;
     }
 
