@@ -128,7 +128,7 @@ public final class Account extends ModelDocument implements IAccount {
     @JsonIgnore
     @Override
     public boolean addFriend(final IAccount askedPerson) {
-        if (this.getFriendList().contains(askedPerson.getAccount()) && askedPerson.getFriendList().contains(this.getAccount())) {
+        if (this.getFriendList().contains(askedPerson.getId()) && askedPerson.getFriendList().contains(this.getId())) {
             return false;
         }
 

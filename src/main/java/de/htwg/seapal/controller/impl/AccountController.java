@@ -61,7 +61,7 @@ public final class AccountController extends Observable implements IAccountContr
 
     @Override
     public IAccount authenticate(final IAccount account) {
-        IAccount savedAccount = db.getAccount(account.getEmail());
+        IAccount savedAccount = db.getAccount(account.getEmail().toUpperCase());
 
         try {
             if (savedAccount != null && PasswordHash.validatePassword(account.getPassword(), savedAccount.getPassword())) {
