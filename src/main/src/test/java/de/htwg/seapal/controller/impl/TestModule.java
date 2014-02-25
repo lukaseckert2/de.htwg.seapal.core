@@ -19,6 +19,7 @@ public final class TestModule extends AbstractModule {
         bind(IRouteDatabase.class).to(de.htwg.seapal.database.mock.RouteDatabase.class).in(Singleton.class);
         bind(IRaceDatabase.class).to(de.htwg.seapal.database.mock.RaceDatabase.class).in(Singleton.class);
         bind(IAccountDatabase.class).to(de.htwg.seapal.database.mock.AccountDatabase.class).in(Singleton.class);
+        bind(ISettingDatabase.class).to(de.htwg.seapal.database.mock.SettingDatabase.class).in(Singleton.class);
 
         bind(IMainController.class).to(MainController.class).in(Singleton.class);
         bind(IAccountController.class).to(AccountController.class).in(Singleton.class);
@@ -28,19 +29,25 @@ public final class TestModule extends AbstractModule {
 
     private static class Logger implements  ILogger {
 
+        private static String getLineNumber() {
+            Exception e = new Exception();
+            StackTraceElement s = e.getStackTrace()[2];
+            return String.format("%s.%s, %d", s.getClassName(), s.getMethodName(), s.getLineNumber());
+        }
+
         @Override
         public void info(String tag, String msg) {
-            System.out.printf("I: <%s> <%s>%n", tag, msg);
+            System.out.printf("I (%s): <%s> <%s>%n", getLineNumber(), tag, msg);
         }
 
         @Override
         public void warn(String tag, String msg) {
-            System.out.printf("W: <%s> <%s>%n", tag, msg);
+            System.out.printf("W (%s): <%s> <%s>%n", getLineNumber(), tag, msg);
         }
 
         @Override
         public void error(String tag, String msg) {
-            System.out.printf("E: <%s> <%s>%n", tag, msg);
+            System.out.printf("E (%s): <%s> <%s>%n", getLineNumber(), tag, msg);
         }
 
         @Override

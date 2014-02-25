@@ -109,7 +109,7 @@ public final class AccountController extends Observable implements IAccountContr
     @Override
     public PublicPerson getInternalInfo(String session, String userid) {
         IAccount account = getAccount(UUID.fromString(userid));
-        if (session.equals(userid) || account.getFriendList().contains(session)) {
+        if (account != null && (session.equals(userid) || account.getFriendList().contains(session))) {
             return new PublicPerson(getAccount(UUID.fromString(session)));
         } else {
             return null;

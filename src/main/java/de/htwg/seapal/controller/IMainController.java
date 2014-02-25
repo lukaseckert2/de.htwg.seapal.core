@@ -21,11 +21,7 @@ public interface IMainController {
 
     public ModelDocument creatDocument(final String type, final ModelDocument document, String session);
 
-    Collection<? extends IModel> account(final UUID account, String session);
-
     boolean addFriend(String session, UUID askedPersonUUID);
-
-    Collection<? extends IModel> account(String session);
 
     Collection<? extends IModel> getDocuments(String document, String session, String userid, String scope);
 

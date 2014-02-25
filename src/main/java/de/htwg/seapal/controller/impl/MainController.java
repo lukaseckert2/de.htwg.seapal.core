@@ -16,6 +16,7 @@ import java.util.*;
 public final class MainController
         implements IMainController {
 
+    // the keys for the different entities
     private static final String KEY_BOAT = "boat";
     private static final String KEY_MARK = "mark";
     private static final String KEY_PERSON = "person";
@@ -25,7 +26,6 @@ public final class MainController
     private static final String KEY_ACCOUNT = "account";
     private static final String KEY_SETTING = "setting";
 
-    private static final String VIEW_SINGLEDOCUMENT = "singleDocument";
     private static final String VIEW_OWN = "own";
     private static final String VIEW_BY_EMAIL = "by_email";
 
@@ -55,10 +55,11 @@ public final class MainController
 
         PublicPerson person = controller.getInternalInfo(session, session);
 
-        if (person.getId().equals(result.getAccount()) || person.getFriend_list().contains(result.getAccount())) {
+        if (person != null && result != null &&  (person.getId().equals(result.getAccount()) || person.getFriend_list().contains(result.getAccount()))) {
             return result;
         }
 
+        logger.info("document not found", String.format("document: %s, session: %s, id: %s", document, session, id));
         return null;
     }
 
@@ -122,7 +123,7 @@ public final class MainController
      * @param type     is the type of the document
      * @param document is the document to be created. it has been parsed from JSON to POJO
      * @param session  session is the session cookie of the logged in user
-     * @return the document, that has been saved. It contains the UUID and the account it is related to
+     * @return the document that has been saved. It contains the UUID and the account it is related to
      */
     @Override
     public ModelDocument creatDocument(final String type, final ModelDocument document, String session) {
@@ -164,16 +165,6 @@ public final class MainController
     }
 
     @Override
-    public Collection<? extends IModel> account(final UUID account, final String session) {
-        IAccount person = (IAccount) DBConnections.get(KEY_ACCOUNT).get(account);
-        if (person.getFriendList().contains(session) || person.getSentRequests().contains(session) || person.getId().equals(session)) {
-            return DBConnections.get(KEY_PERSON).queryViews(VIEW_OWN, session);
-        }
-
-        return new LinkedList<>();
-    }
-
-    @Override
     public boolean addFriend(final String session, final UUID askedPersonUUID) {
         IAccount askingPerson = (IAccount) DBConnections.get(KEY_ACCOUNT).get(UUID.fromString(session));
         IAccount askedPerson = (IAccount) DBConnections.get(KEY_ACCOUNT).get(askedPersonUUID);
@@ -186,10 +177,6 @@ public final class MainController
         return returnVal;
     }
 
-    @Override
-    public Collection<? extends IModel> account(final String session) {
-        return account(UUID.fromString(session), session);
-    }
 
     @Override
     public Collection<? extends IModel> getDocuments(String document, String session, String userid, String scope) {

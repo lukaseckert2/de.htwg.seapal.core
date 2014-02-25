@@ -7,7 +7,10 @@ import de.htwg.seapal.controller.IMainController;
 import de.htwg.seapal.model.IAccount;
 import de.htwg.seapal.model.IModel;
 import de.htwg.seapal.model.ModelDocument;
-import de.htwg.seapal.model.impl.*;
+import de.htwg.seapal.model.impl.Account;
+import de.htwg.seapal.model.impl.Boat;
+import de.htwg.seapal.model.impl.Mark;
+import de.htwg.seapal.model.impl.SignupAccount;
 import org.junit.After;
 import org.junit.Before;
 import org.junit.Test;
@@ -47,53 +50,77 @@ public final class MainControllerTest {
 
     @Test
     public void testGetSingleDocument() throws Exception {
-        UUID owner = UUID.randomUUID();
-        Boat boat = createBoat(owner);
-        ModelDocument boat2 = controller.creatDocument("boat", boat, owner.toString());
-        IModel collection = controller.getSingleDocument("boat", owner.toString(), boat.getUUID());
+        Account crewMember1 = new Account();
+        crewMember1.setAccount(crewMember1.getUUID().toString());
+        crewMember1.setEmail("crewMember1@123.de");
+        crewMember1.setPassword("test");
+        SignupAccount save = new SignupAccount(crewMember1, "Alfred", "von Tirpitz");
+        accountController.saveAccount(save, true);
+
+        Boat boat = createBoat(UUID.fromString(crewMember1.getAccount()));
+        ModelDocument boat2 = controller.creatDocument("boat", boat, crewMember1.getAccount());
+        IModel collection = controller.getSingleDocument("boat", crewMember1.getAccount(), boat.getUUID());
         assert (collection != null);
         assert (boat.equals(collection));
     }
 
     @Test
     public void testDeleteDocument() throws Exception {
-        UUID owner = UUID.randomUUID();
-        Boat boat = createBoat(owner);
-        controller.creatDocument("boat", boat, owner.toString());
-        assert (controller.deleteDocument("boat", owner.toString(), boat.getUUID()));
-        IModel collection = controller.getSingleDocument("boat", owner.toString(), boat.getUUID());
-        assert (collection != null);
+        Account crewMember1 = new Account();
+        crewMember1.setAccount(crewMember1.getUUID().toString());
+        crewMember1.setEmail("crewMember1@123.de");
+        crewMember1.setPassword("test");
+        SignupAccount save = new SignupAccount(crewMember1, "Alfred", "von Tirpitz");
+        accountController.saveAccount(save, true);
+
+        Boat boat = createBoat(UUID.fromString(crewMember1.getAccount()));
+        controller.creatDocument("boat", boat, crewMember1.getAccount());
+        assert (controller.deleteDocument("boat", crewMember1.getAccount(), boat.getUUID()));
+        IModel collection = controller.getSingleDocument("boat", crewMember1.getAccount(), boat.getUUID());
+        assert (collection == null);
     }
 
     /**
      * try to delete a document whose uuid does not exist
-     * @throws Exception
-     */
-    @Test
-    public void testDeleteDocument2() throws Exception {
-        UUID owner = UUID.randomUUID();
-        Boat boat = createBoat(owner);
-        controller.creatDocument("boat", boat, owner.toString());
-        assert (!controller.deleteDocument("boat", owner.toString(), UUID.randomUUID()));
-        IModel collection = controller.getSingleDocument("boat", owner.toString(), boat.getUUID());
-        assert (collection != null);
-    }
-
-    /**
      *
      * @throws Exception
      */
     @Test
+    public void testDeleteDocument2() throws Exception {
+        Account crewMember1 = new Account();
+        crewMember1.setAccount(crewMember1.getUUID().toString());
+        crewMember1.setEmail("crewMember1@123.de");
+        crewMember1.setPassword("test");
+        SignupAccount save = new SignupAccount(crewMember1, "Alfred", "von Tirpitz");
+        accountController.saveAccount(save, true);
+
+        Boat boat = createBoat(UUID.fromString(crewMember1.getAccount()));
+        controller.creatDocument("boat", boat, crewMember1.getAccount());
+        assert (!controller.deleteDocument("boat", crewMember1.getAccount(), UUID.randomUUID()));
+        IModel collection = controller.getSingleDocument("boat", crewMember1.getAccount(), boat.getUUID());
+        assert (collection != null);
+    }
+
+    /**
+     * @throws Exception
+     */
+    @Test
     public void testGetOwnDocuments() throws Exception {
-        UUID owner = UUID.randomUUID();
-        Boat boat = createBoat(owner);
-        controller.creatDocument("boat", boat, owner.toString());
-        Boat boat2 = createBoat(owner);
-        controller.creatDocument("boat", boat2, owner.toString());
+        Account crewMember1 = new Account();
+        crewMember1.setAccount(crewMember1.getUUID().toString());
+        crewMember1.setEmail("crewMember1@123.de");
+        crewMember1.setPassword("test");
+        SignupAccount save = new SignupAccount(crewMember1, "Alfred", "von Tirpitz");
+        accountController.saveAccount(save, true);
+
+        Boat boat = createBoat(UUID.fromString(crewMember1.getAccount()));
+        controller.creatDocument("boat", boat, crewMember1.getAccount());
+        Boat boat2 = createBoat(UUID.fromString(crewMember1.getAccount()));
+        controller.creatDocument("boat", boat2, crewMember1.getAccount());
         UUID owner2 = UUID.randomUUID();
         Boat boat3 = createBoat(owner2);
-        controller.creatDocument("boat", boat3, owner.toString());
-        Collection<? extends IModel> collection = controller.getOwnDocuments("boat", owner.toString());
+        controller.creatDocument("boat", boat3, crewMember1.getAccount());
+        Collection<? extends IModel> collection = controller.getOwnDocuments("boat", crewMember1.getAccount());
         assert (collection != null);
         assert (collection.size() == 2);
         if (((Boat) collection.toArray()[0]).getId().equals(boat.getId())) {
@@ -107,28 +134,6 @@ public final class MainControllerTest {
 
     @Test
     public void testGetByParent() throws Exception {
-        UUID owner = UUID.randomUUID();
-        Boat boat = createBoat(owner);
-        ModelDocument boat2 = controller.creatDocument("boat", boat, owner.toString());
-        Collection<? extends IModel> collection = controller.getByParent("boat", "singleDocument", owner.toString(), boat.getUUID());
-        assert (collection != null);
-        assert (collection.size() == 1);
-        assert (boat.equals(collection.toArray()[0]));
-    }
-
-    @Test
-    public void testCreatDocument() throws Exception {
-        UUID owner = UUID.randomUUID();
-        Boat boat = new Boat();
-        ModelDocument boat2 = controller.creatDocument("boat", boat, owner.toString());
-        controller.creatDocument("boat", boat, owner.toString());
-        IModel collection = controller.getSingleDocument("boat", owner.toString(), boat.getUUID());
-        assert (collection != null);
-        assert (boat.equals(collection));
-    }
-
-    @Test
-    public void testAccount() throws Exception {
         Account crewMember1 = new Account();
         crewMember1.setAccount(crewMember1.getUUID().toString());
         crewMember1.setEmail("crewMember1@123.de");
@@ -136,30 +141,29 @@ public final class MainControllerTest {
         SignupAccount save = new SignupAccount(crewMember1, "Alfred", "von Tirpitz");
         accountController.saveAccount(save, true);
 
-        IAccount crewMember2 = new Account();
-        crewMember2.setAccount(crewMember2.getUUID().toString());
-        crewMember2.setEmail("crewMember2@123.de");
-        crewMember2.setPassword("test");
-        SignupAccount save2 = new SignupAccount(crewMember2, "Ernst", "Lindemann");
-        accountController.saveAccount(save2, true);
-
-        IAccount account = new Account();
-        account.setAccount(account.getUUID().toString());
-        account.addFriend(crewMember1);
-        crewMember1.addFriend(account);
-        account.setEmail("account@123.de");
-        account.setPassword("test");
-        SignupAccount save3 = new SignupAccount(account, "Karl", "Dönitz");
-        accountController.saveAccount(save3, true);
-
-        Collection<? extends IModel> collection = controller.account(account.getUUID(), crewMember1.getAccount().toString());
+        Boat boat = createBoat(crewMember1.getUUID());
+        ModelDocument boat2 = controller.creatDocument("boat", boat, crewMember1.getAccount());
+        Collection<? extends IModel> collection = controller.getByParent("boat", "singleDocument", crewMember1.getAccount(), boat.getUUID());
         assert (collection != null);
         assert (collection.size() == 1);
-        assert (((Person) collection.toArray()[0]).getFirstname().equals("Alfred"));
+        assert (boat.equals(collection.toArray()[0]));
+    }
 
-        collection = controller.account(account.getUUID(), crewMember2.getAccount().toString());
+    @Test
+    public void testCreatDocument() throws Exception {
+        Account crewMember1 = new Account();
+        crewMember1.setAccount(crewMember1.getUUID().toString());
+        crewMember1.setEmail("crewMember1@123.de");
+        crewMember1.setPassword("test");
+        SignupAccount save = new SignupAccount(crewMember1, "Alfred", "von Tirpitz");
+        accountController.saveAccount(save, true);
+
+        Boat boat = new Boat();
+        ModelDocument boat2 = controller.creatDocument("boat", boat, crewMember1.getId());
+        controller.creatDocument("boat", boat, crewMember1.getId());
+        IModel collection = controller.getSingleDocument("boat", crewMember1.getId(), boat.getUUID());
         assert (collection != null);
-        assert (collection.size() == 0);
+        assert (boat.equals(collection));
     }
 
     @Test
@@ -207,30 +211,6 @@ public final class MainControllerTest {
         assert (account.getSentRequests().size() == 0);
         assert (account.getReceivedRequests().size() == 0);
         assert (account.getFriendList().size() == 1);
-    }
-
-    @Test
-    public void testAccount2() throws Exception {
-        Account crewMember1 = new Account();
-        crewMember1.setAccount(crewMember1.getUUID().toString());
-        crewMember1.setEmail("crewMember1@123.de");
-        crewMember1.setPassword("test");
-        SignupAccount save = new SignupAccount(crewMember1, "Alfred", "von Tirpitz");
-        accountController.saveAccount(save, true);
-
-        IAccount account = new Account();
-        account.setAccount(account.getUUID().toString());
-        account.addFriend(crewMember1);
-        crewMember1.addFriend(account);
-        account.setEmail("account@123.de");
-        account.setPassword("test");
-        SignupAccount save3 = new SignupAccount(account, "Karl", "Dönitz");
-        accountController.saveAccount(save3, true);
-
-        Collection<? extends IModel> collection = controller.account(account.getAccount());
-        assert (collection != null);
-        assert (collection.size() == 1);
-        assert (((Person) collection.toArray()[0]).getFirstname().equals("Karl"));
     }
 
     @Test
