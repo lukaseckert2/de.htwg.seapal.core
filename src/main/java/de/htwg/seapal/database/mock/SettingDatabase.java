@@ -7,7 +7,7 @@ import de.htwg.seapal.model.ModelDocument;
 import java.util.List;
 import java.util.UUID;
 
-public final class ISettingDatabaseImpl implements ISettingDatabase {
+public final class SettingDatabase implements ISettingDatabase {
     @Override
     public boolean open() {
         throw new RuntimeException("not implemented");
