@@ -183,4 +183,9 @@ public class Person
     public void setCountry(String country) {
         this.country = country;
     }
+
+    @Override
+    public boolean isValid() {
+        return true;
+    }
 }

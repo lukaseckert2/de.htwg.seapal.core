@@ -88,4 +88,9 @@ public class Route extends ModelDocument implements IRoute {
     public void setMarks(final List<Double> marks) {
         this.marks = marks;
     }
+
+    @Override
+    public boolean isValid() {
+        return true;
+    }
 }

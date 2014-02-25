@@ -87,4 +87,9 @@ public class Mark extends ModelDocument implements IMark {
     public void setImage_thumb(final String image) {
         this.image_thumb = image;
     }
+
+    @Override
+    public boolean isValid() {
+        return true;
+    }
 }

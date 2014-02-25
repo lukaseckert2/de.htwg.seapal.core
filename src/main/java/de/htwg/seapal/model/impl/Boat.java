@@ -365,4 +365,9 @@ public class Boat extends ModelDocument implements IBoat {
             return false;
         }
     }
+
+    @Override
+    public boolean isValid() {
+        return true;
+    }
 }

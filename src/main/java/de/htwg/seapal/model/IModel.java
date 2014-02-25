@@ -24,4 +24,6 @@ public interface IModel {
     void setAccount(String uuid);
 
     String getRevision();
+
+    boolean isValid();
 }

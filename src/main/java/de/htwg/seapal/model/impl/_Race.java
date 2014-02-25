@@ -76,4 +76,9 @@ public class _Race
 		this.controlPoints = controlPoints;
 	}
 
+
+    @Override
+    public boolean isValid() {
+        return true;
+    }
 }

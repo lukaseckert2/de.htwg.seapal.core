@@ -161,4 +161,9 @@ public class Trip extends ModelDocument implements ITrip {
     public void setBoat(String boat) {
         this.boat = boat;
     }
+
+    @Override
+    public boolean isValid() {
+        return boat != null && !boat.equals("");
+    }
 }

@@ -238,4 +238,9 @@ public class Waypoint extends ModelDocument implements IWaypoint {
     public void setImage_thumb(final String image) {
         this.image_thumb = image;
     }
+
+    @Override
+    public boolean isValid() {
+        return boat != null && !boat.equals("") && trip != null && !trip.equals("");
+    }
 }

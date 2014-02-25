@@ -128,6 +128,10 @@ public final class Account extends ModelDocument implements IAccount {
     @JsonIgnore
     @Override
     public boolean addFriend(final IAccount askedPerson) {
+        if (this.getFriendList().contains(askedPerson.getAccount()) && askedPerson.getFriendList().contains(this.getAccount())) {
+            return true;
+        }
+
         // Other person already sent request
         if (askedPerson.getSentRequests().contains(this.getId())) {
             askedPerson.getSentRequests().remove(this.getId());
@@ -167,4 +171,8 @@ public final class Account extends ModelDocument implements IAccount {
         askedPerson.getReceivedRequests().remove(this.getId());
     }
 
+    @Override
+    public boolean isValid() {
+        return true;
+    }
 }
