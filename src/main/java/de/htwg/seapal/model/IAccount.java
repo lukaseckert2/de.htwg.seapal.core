@@ -37,5 +37,5 @@ public interface IAccount extends IModel {
 
     void setEmail(String email);
 
-    void aboutRequest(IAccount askedPerson);
+    void abortRequest(IAccount askedPerson);
 }

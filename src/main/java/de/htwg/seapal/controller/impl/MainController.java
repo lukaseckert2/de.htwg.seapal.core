@@ -23,6 +23,7 @@ public final class MainController
     private static final String KEY_TRIP = "trip";
     private static final String KEY_WAYPOINT = "waypoint";
     private static final String KEY_ACCOUNT = "account";
+    private static final String KEY_SETTING = "setting";
 
     private static final String VIEW_SINGLEDOCUMENT = "singleDocument";
     private static final String VIEW_OWN = "own";
@@ -37,7 +38,7 @@ public final class MainController
     private IAccountController controller;
 
     @Inject
-    public MainController(IBoatDatabase boatDB, IMarkDatabase markDB, IPersonDatabase personDB, IRouteDatabase routeDB, ITripDatabase tripDB, IWaypointDatabase waypointDB, IAccountDatabase accountDB) {
+    public MainController(IBoatDatabase boatDB, IMarkDatabase markDB, IPersonDatabase personDB, IRouteDatabase routeDB, ITripDatabase tripDB, IWaypointDatabase waypointDB, IAccountDatabase accountDB, ISettingDatabase settingDB) {
         DBConnections.put(KEY_BOAT, boatDB);
         DBConnections.put(KEY_MARK, markDB);
         DBConnections.put(KEY_PERSON, personDB);
@@ -45,6 +46,7 @@ public final class MainController
         DBConnections.put(KEY_TRIP, tripDB);
         DBConnections.put(KEY_WAYPOINT, waypointDB);
         DBConnections.put(KEY_ACCOUNT, accountDB);
+        DBConnections.put(KEY_SETTING, settingDB);
     }
 
     @Override
@@ -266,7 +268,7 @@ public final class MainController
         IAccount askingPerson = (IAccount) DBConnections.get(KEY_ACCOUNT).get(UUID.fromString(session));
         IAccount askedPerson = (IAccount) DBConnections.get(KEY_ACCOUNT).get(id);
 
-        askingPerson.aboutRequest(askedPerson);
+        askingPerson.abortRequest(askedPerson);
 
         ((IAccountDatabase) DBConnections.get(KEY_ACCOUNT)).save(askingPerson);
         ((IAccountDatabase) DBConnections.get(KEY_ACCOUNT)).save(askedPerson);

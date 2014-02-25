@@ -161,7 +161,7 @@ public final class Account extends ModelDocument implements IAccount {
     }
 
     @Override
-    public void aboutRequest(IAccount askedPerson) {
+    public void abortRequest(IAccount askedPerson) {
         this.friendList.remove(askedPerson.getId());
         this.sentRequests.remove(askedPerson.getId());
         this.receivedRequests.remove(askedPerson.getId());
