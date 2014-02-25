@@ -203,6 +203,10 @@ public final class MainController
      */
     @Override
     public boolean addFriend(final String session, final UUID askedPersonUUID) {
+        if (session.equals(askedPersonUUID.toString())) {
+            return false;
+        }
+
         IAccount askingPerson = (IAccount) DBConnections.get(KEY_ACCOUNT).get(UUID.fromString(session));
         IAccount askedPerson = (IAccount) DBConnections.get(KEY_ACCOUNT).get(askedPersonUUID);
         if (askedPerson == null || askingPerson == null) {
@@ -307,13 +311,17 @@ public final class MainController
     @Override
     public boolean addFriend(String session, String mail) {
         IAccount askingPerson = (IAccount) DBConnections.get(KEY_ACCOUNT).get(UUID.fromString(session));
-        List<? extends IModel> askedPersons = DBConnections.get(KEY_ACCOUNT).queryViews(VIEW_BY_EMAIL, mail);
+        List<? extends IModel> askedPersons = DBConnections.get(KEY_ACCOUNT).queryViews(VIEW_BY_EMAIL, mail.toUpperCase());
         IAccount askedPerson;
         if (askedPersons.size() != 1) {
             // in case the email is not registered
             return false;
         } else {
             askedPerson = (IAccount) askedPersons.get(0);
+        }
+
+        if (askedPerson.getUUID().equals(askingPerson.getUUID())) {
+            return false;
         }
 
         boolean returnVal = askingPerson.addFriend(askedPerson);

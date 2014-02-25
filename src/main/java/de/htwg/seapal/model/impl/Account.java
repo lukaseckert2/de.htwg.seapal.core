@@ -129,7 +129,7 @@ public final class Account extends ModelDocument implements IAccount {
     @Override
     public boolean addFriend(final IAccount askedPerson) {
         if (this.getFriendList().contains(askedPerson.getAccount()) && askedPerson.getFriendList().contains(this.getAccount())) {
-            return true;
+            return false;
         }
 
         // Other person already sent request
