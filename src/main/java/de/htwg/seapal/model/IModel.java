@@ -1,5 +1,7 @@
 package de.htwg.seapal.model;
 
+import org.codehaus.jackson.annotate.JsonIgnore;
+
 import java.util.UUID;
 
 public interface IModel {
@@ -25,5 +27,6 @@ public interface IModel {
 
     String getRevision();
 
+    @JsonIgnore
     boolean isValid();
 }
