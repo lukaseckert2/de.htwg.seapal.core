@@ -67,6 +67,10 @@ public final class MainControllerTest {
         assert (collection.size() == 0);
     }
 
+    /**
+     * try to delete a document whose uuid does not exist
+     * @throws Exception
+     */
     @Test
     public void testDeleteDocument2() throws Exception {
         UUID owner = UUID.randomUUID();
@@ -78,6 +82,10 @@ public final class MainControllerTest {
         assert (collection.size() == 1);
     }
 
+    /**
+     *
+     * @throws Exception
+     */
     @Test
     public void testGetOwnDocuments() throws Exception {
         UUID owner = UUID.randomUUID();
@@ -271,11 +279,6 @@ public final class MainControllerTest {
         assert (result.equals(boat));
 
         collection = controller.getDocuments("boat", crewMember1.getAccount(), crewMember1.getAccount(), "friends");
-        assert (collection.size() == 1);
-        result = (Boat) collection.toArray()[0];
-        assert (result.equals(boat));
-
-        collection = controller.getDocuments("boat", crewMember2.getAccount(), crewMember2.getAccount() , "asking");
         assert (collection.size() == 1);
         result = (Boat) collection.toArray()[0];
         assert (result.equals(boat));

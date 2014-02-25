@@ -6,6 +6,9 @@ import de.htwg.seapal.model.IWaypoint;
 import de.htwg.seapal.model.ModelDocument;
 import de.htwg.seapal.model.impl.Waypoint;
 
+import java.io.File;
+import java.io.FileNotFoundException;
+import java.io.InputStream;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
@@ -86,4 +89,14 @@ public class WaypointDatabase implements IWaypointDatabase {
 	public List<IWaypoint> loadAll() {
 		return ImmutableList.copyOf(db.values());
 	}
+
+    @Override
+    public boolean addPhoto(IWaypoint mark, String contentType, File file) throws FileNotFoundException {
+        return false;
+    }
+
+    @Override
+    public InputStream getPhoto(UUID uuid) {
+        return null;
+    }
 }

@@ -18,17 +18,17 @@ public class Waypoint extends ModelDocument implements IWaypoint {
 	private String name;
 	private Double lat;
 	private Double lng;
-	private Long date; // unix timestamp
+	private Long date;
 	private String note;
 	private Integer btm;
 	private Integer dtm;
 	private Integer cog;
 	private Integer sog;
-	private String headedFor; // UUID Mark
+	private String headedFor;
 	private String maneuver;
 	private String foreSail;
 	private String mainSail;
-	private String trip; // UUID Trip
+	private String trip;
     private String boat;
     private String image_thumb;
     @JsonIgnore
@@ -40,32 +40,6 @@ public class Waypoint extends ModelDocument implements IWaypoint {
 		foreSail = "";
 		mainSail = "";
 	}
-
-    /*
-	@JsonCreator
-	public Waypoint(@JsonProperty("maneuver") Maneuver m,
-			@JsonProperty("foresail") ForeSail f,
-			@JsonProperty("mainsail") MainSail msail) {
-		super(UUID.randomUUID().toString());
-		maneuver = m;
-		foreSail = f;
-		mainSail = msail;
-		this.name = "";
-		this.lat = 0D;
-		this.lng = 0D;
-		this.date = 0L;
-		this.note = "";
-		this.btm = 0;
-		this.dtm = 0;
-		this.cog = 0;
-		this.sog = 0;
-		this.headedFor = "";
-		this.maneuver = m;
-		this.foreSail = f;
-		this.mainSail = msail;
-		this.trip = "";
-	}
-    */
 
 	public Waypoint(IWaypoint w) {
 		super(w);

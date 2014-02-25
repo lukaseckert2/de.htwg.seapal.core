@@ -24,7 +24,11 @@ public final class MainController
     private static final String KEY_WAYPOINT = "waypoint";
     private static final String KEY_ACCOUNT = "account";
 
-    private final Map<String, IDatabase<? extends IModel>> couchDBRepositorySupportDB = new HashMap<>();
+    private static final String VIEW_SINGLEDOCUMENT = "singleDocument";
+    private static final String VIEW_OWN = "own";
+    private static final String VIEW_BY_EMAIL = "by_email";
+
+    private final Map<String, IDatabase<? extends IModel>> DBConnections = new HashMap<>();
 
     @Inject
     private ILogger logger;
@@ -34,35 +38,38 @@ public final class MainController
 
     @Inject
     public MainController(IBoatDatabase boatDB, IMarkDatabase markDB, IPersonDatabase personDB, IRouteDatabase routeDB, ITripDatabase tripDB, IWaypointDatabase waypointDB, IAccountDatabase accountDB) {
-
-        couchDBRepositorySupportDB.put(KEY_BOAT, boatDB);
-        couchDBRepositorySupportDB.put(KEY_MARK, markDB);
-        couchDBRepositorySupportDB.put(KEY_PERSON, personDB);
-        couchDBRepositorySupportDB.put(KEY_ROUTE, routeDB);
-        couchDBRepositorySupportDB.put(KEY_TRIP, tripDB);
-        couchDBRepositorySupportDB.put(KEY_WAYPOINT, waypointDB);
-        couchDBRepositorySupportDB.put(KEY_ACCOUNT, accountDB);
+        DBConnections.put(KEY_BOAT, boatDB);
+        DBConnections.put(KEY_MARK, markDB);
+        DBConnections.put(KEY_PERSON, personDB);
+        DBConnections.put(KEY_ROUTE, routeDB);
+        DBConnections.put(KEY_TRIP, tripDB);
+        DBConnections.put(KEY_WAYPOINT, waypointDB);
+        DBConnections.put(KEY_ACCOUNT, accountDB);
     }
 
     @Override
     public Collection<? extends IModel> getSingleDocument(final String document, final String session, final UUID id) {
-        return couchDBRepositorySupportDB.get(document).queryViews("singleDocument", session + id.toString());
+        return DBConnections.get(document).queryViews(VIEW_SINGLEDOCUMENT, session + id.toString());
     }
 
     @Override
     public boolean deleteDocument(final String document, final String session, final UUID id) {
-        IDatabase<? extends IModel> database = couchDBRepositorySupportDB.get(document);
+        IDatabase<? extends IModel> database = DBConnections.get(document);
         ModelDocument doc = (ModelDocument) database.get(id);
-        /* TODO : check if you should be able to delete a document from a friends logbook */
+        if (doc == null) {
+            return false;
+        }
+
         PublicPerson publicPerson = controller.getInternalInfo(session, session);
-        boolean friendDocument = publicPerson.getFriend_list().contains(doc.getAccount());
+        List<String> friendList = publicPerson.getFriend_list();
+        boolean friendDocument = friendList.contains(doc.getAccount());
         boolean ownDocument = doc.getAccount().equals(session);
 
-        if (doc != null && (ownDocument || friendDocument)) {
+        if (ownDocument || friendDocument) {
             if (document.equals(KEY_TRIP)) {
-                Collection<? extends IModel> docs = getByParent("waypoint", KEY_TRIP, session, id);
+                Collection<? extends IModel> docs = getByParent(KEY_WAYPOINT, KEY_TRIP, session, id);
                 for (IModel waypoint : docs) {
-                    deleteDocument("waypoint", session, waypoint.getUUID());
+                    deleteDocument(KEY_WAYPOINT, session, waypoint.getUUID());
                 }
             }
             database.delete(id);
@@ -74,12 +81,12 @@ public final class MainController
 
     @Override
     public Collection<? extends IModel> getOwnDocuments(final String document, final String session) {
-        return couchDBRepositorySupportDB.get(document).queryViews("own", session);
+        return DBConnections.get(document).queryViews(VIEW_OWN, session);
     }
 
     @Override
     public Collection<? extends IModel> getByParent(final String document, final String parent, final String session, final UUID id) {
-        return couchDBRepositorySupportDB.get(document).queryViews(parent, session + id.toString());
+        return DBConnections.get(document).queryViews(parent, session + id.toString());
     }
 
     @Override
@@ -90,27 +97,24 @@ public final class MainController
 
         PublicPerson publicPerson = controller.getInternalInfo(session, session);
         boolean friendDocument = publicPerson.getFriend_list().contains(document.getAccount());
-        /* TODO :  check if asking person should really get access to the documents */
-        boolean askingPersonsDocument = false;
-        //boolean askingPersonsDocument = publicPerson.getReceivedRequests().contains(document.getAccount());
         boolean ownDocument = document.getAccount().equals(session);
-        if (!ownDocument && !askingPersonsDocument && !friendDocument) {
+        if (!ownDocument && !friendDocument) {
             return null;
         }
 
         if (document.isNew()) {
-            couchDBRepositorySupportDB.get(type).create(document);
+            DBConnections.get(type).create(document);
         } else {
-            couchDBRepositorySupportDB.get(type).update(document);
+            DBConnections.get(type).update(document);
         }
         return document;
     }
 
     @Override
     public Collection<? extends IModel> account(final UUID account, final String session) {
-        IAccount person = (IAccount) couchDBRepositorySupportDB.get(KEY_ACCOUNT).get(account);
+        IAccount person = (IAccount) DBConnections.get(KEY_ACCOUNT).get(account);
         if (person.getFriendList().contains(session) || person.getSentRequests().contains(session) || person.getId().equals(session)) {
-            return couchDBRepositorySupportDB.get("person").queryViews("own", session);
+            return DBConnections.get(KEY_PERSON).queryViews(VIEW_OWN, session);
         }
 
         return new LinkedList<>();
@@ -118,13 +122,13 @@ public final class MainController
 
     @Override
     public boolean addFriend(final String session, final UUID askedPersonUUID) {
-        IAccount askingPerson = (IAccount) couchDBRepositorySupportDB.get(KEY_ACCOUNT).get(UUID.fromString(session));
-        IAccount askedPerson = (IAccount) couchDBRepositorySupportDB.get(KEY_ACCOUNT).get(askedPersonUUID);
+        IAccount askingPerson = (IAccount) DBConnections.get(KEY_ACCOUNT).get(UUID.fromString(session));
+        IAccount askedPerson = (IAccount) DBConnections.get(KEY_ACCOUNT).get(askedPersonUUID);
 
         boolean returnVal = askingPerson.addFriend(askedPerson);
 
-        ((IAccountDatabase) couchDBRepositorySupportDB.get(KEY_ACCOUNT)).save(askingPerson);
-        ((IAccountDatabase) couchDBRepositorySupportDB.get(KEY_ACCOUNT)).save(askedPerson);
+        ((IAccountDatabase) DBConnections.get(KEY_ACCOUNT)).save(askingPerson);
+        ((IAccountDatabase) DBConnections.get(KEY_ACCOUNT)).save(askedPerson);
 
         return returnVal;
     }
@@ -161,7 +165,7 @@ public final class MainController
     }
 
     private Collection<? extends IModel> getAskingDocuments(String session) {
-        IAccount person = (IAccount) couchDBRepositorySupportDB.get(KEY_ACCOUNT).get(UUID.fromString(session));
+        IAccount person = (IAccount) DBConnections.get(KEY_ACCOUNT).get(UUID.fromString(session));
 
         Collection<IModel> Collection = new ArrayList<>();
         if (person != null) {
@@ -174,7 +178,7 @@ public final class MainController
     }
 
     private Collection<? extends IModel> getFriendDocuments(String document, String session) {
-        IAccount person = (IAccount) couchDBRepositorySupportDB.get(KEY_ACCOUNT).get(UUID.fromString(session));
+        IAccount person = (IAccount) DBConnections.get(KEY_ACCOUNT).get(UUID.fromString(session));
 
         Collection<IModel> Collection = new ArrayList<>();
         if (person != null) {
@@ -188,8 +192,8 @@ public final class MainController
 
     @Override
     public boolean addFriend(String session, String mail) {
-        IAccount askingPerson = (IAccount) couchDBRepositorySupportDB.get(KEY_ACCOUNT).get(UUID.fromString(session));
-        List<? extends IModel> askedPersons = couchDBRepositorySupportDB.get(KEY_ACCOUNT).queryViews("by_email", mail);
+        IAccount askingPerson = (IAccount) DBConnections.get(KEY_ACCOUNT).get(UUID.fromString(session));
+        List<? extends IModel> askedPersons = DBConnections.get(KEY_ACCOUNT).queryViews(VIEW_BY_EMAIL, mail);
         IAccount askedPerson;
         if (askedPersons.size() != 1) {
             // should never happen, because an email should be an unique identifier
@@ -199,33 +203,33 @@ public final class MainController
         }
         boolean returnVal = askingPerson.addFriend(askedPerson);
 
-        ((IAccountDatabase) couchDBRepositorySupportDB.get(KEY_ACCOUNT)).save(askingPerson);
-        ((IAccountDatabase) couchDBRepositorySupportDB.get(KEY_ACCOUNT)).save(askedPerson);
+        ((IAccountDatabase) DBConnections.get(KEY_ACCOUNT)).save(askingPerson);
+        ((IAccountDatabase) DBConnections.get(KEY_ACCOUNT)).save(askedPerson);
 
         return returnVal;
     }
 
     @Override
     public void abortRequest(String session, UUID id) {
-        IAccount askingPerson = (IAccount) couchDBRepositorySupportDB.get(KEY_ACCOUNT).get(UUID.fromString(session));
-        IAccount askedPerson = (IAccount) couchDBRepositorySupportDB.get(KEY_ACCOUNT).get(id);
+        IAccount askingPerson = (IAccount) DBConnections.get(KEY_ACCOUNT).get(UUID.fromString(session));
+        IAccount askedPerson = (IAccount) DBConnections.get(KEY_ACCOUNT).get(id);
 
         askingPerson.aboutRequest(askedPerson);
 
-        ((IAccountDatabase) couchDBRepositorySupportDB.get(KEY_ACCOUNT)).save(askingPerson);
-        ((IAccountDatabase) couchDBRepositorySupportDB.get(KEY_ACCOUNT)).save(askedPerson);
+        ((IAccountDatabase) DBConnections.get(KEY_ACCOUNT)).save(askingPerson);
+        ((IAccountDatabase) DBConnections.get(KEY_ACCOUNT)).save(askedPerson);
     }
 
     @Override
     public boolean addPhoto(String session, UUID uuid, String contentType, File file, String type) throws FileNotFoundException {
         Collection collection = getSingleDocument(type, session, uuid);
         if (collection.size() == 1) {
-            if (type.equals("mark")) {
+            if (type.equals(KEY_MARK)) {
                 IMark mark = (IMark) collection.toArray()[0];
-                return ((IMarkDatabase) couchDBRepositorySupportDB.get(KEY_MARK)).addPhoto(mark, contentType, file);
-            } else if (type.equals("waypoint")) {
+                return ((IMarkDatabase) DBConnections.get(KEY_MARK)).addPhoto(mark, contentType, file);
+            } else if (type.equals(KEY_WAYPOINT)) {
                 IWaypoint waypoint = (IWaypoint) collection.toArray()[0];
-                return ((IWaypointDatabase) couchDBRepositorySupportDB.get(KEY_WAYPOINT)).addPhoto(waypoint, contentType, file);
+                return ((IWaypointDatabase) DBConnections.get(KEY_WAYPOINT)).addPhoto(waypoint, contentType, file);
             } else {
                 return false;
             }
@@ -238,12 +242,12 @@ public final class MainController
     public InputStream getPhoto(String session, UUID uuid, String type) throws FileNotFoundException {
         Collection collection = getSingleDocument(type, session, uuid);
         if (collection.size() == 1) {
-            if (type.equals("mark")) {
+            if (type.equals(KEY_MARK)) {
                 IMark mark = (IMark) collection.toArray()[0];
-                return ((IMarkDatabase) couchDBRepositorySupportDB.get(KEY_MARK)).getPhoto(mark.getUUID());
-            } else if (type.equals("waypoint")) {
+                return ((IMarkDatabase) DBConnections.get(KEY_MARK)).getPhoto(mark.getUUID());
+            } else if (type.equals(KEY_WAYPOINT)) {
                 IWaypoint mark = (IWaypoint) collection.toArray()[0];
-                return ((IWaypointDatabase) couchDBRepositorySupportDB.get(KEY_WAYPOINT)).getPhoto(mark.getUUID());
+                return ((IWaypointDatabase) DBConnections.get(KEY_WAYPOINT)).getPhoto(mark.getUUID());
             }
         }
 
