@@ -5,13 +5,13 @@ public interface IWaypoint extends IModel {
 
 	String getNote();
 
-	Integer getBTM();
+    String getBTM();
 
-	Integer getDTM();
+    String getDTM();
 
-	Integer getCOG();
+    String getCOG();
 
-	Integer getSOG();
+    String getSOG();
 
 	String getHeadedFor();
 
@@ -27,13 +27,13 @@ public interface IWaypoint extends IModel {
 
 	void setNote(String note);
 
-	void setBTM(Integer btm);
+	void setBTM(String btm);
 
-	void setDTM(Integer dtm);
+	void setDTM(String dtm);
 
-	void setCOG(Integer cog);
+	void setCOG(String cog);
 
-	void setSOG(Integer sog);
+	void setSOG(String sog);
 
 	void setHeadedFor(String markId);
 

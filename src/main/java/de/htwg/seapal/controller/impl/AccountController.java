@@ -2,8 +2,8 @@ package de.htwg.seapal.controller.impl;
 
 import com.google.inject.Inject;
 import de.htwg.seapal.controller.IAccountController;
-import de.htwg.seapal.controller.IPersonController;
 import de.htwg.seapal.database.IAccountDatabase;
+import de.htwg.seapal.database.IPersonDatabase;
 import de.htwg.seapal.model.IAccount;
 import de.htwg.seapal.model.impl.Account;
 import de.htwg.seapal.model.impl.PublicPerson;
@@ -15,21 +15,24 @@ import java.util.List;
 import java.util.Map;
 import java.util.UUID;
 
+/**
+ * AccountController is the other interface between database and view layer. It complements the interface in
+ * MainController. This class cares more about the accounts and AuthN/Z, MainController cares more about the documents
+ * which belong the the accounts.
+ */
 public final class AccountController extends Observable implements IAccountController {
-    private final IAccountDatabase db;
-    private final ILogger logger;
 
     @Inject
-    private IPersonController controller;
+    private IAccountDatabase db;
 
     @Inject
-    public AccountController(IAccountDatabase db, ILogger logger) {
-        this.db = db;
-        this.logger = logger;
-    }
+    private ILogger logger;
 
-    private IAccount getAccount(UUID AccountId) {
-        return db.get(AccountId);
+    @Inject
+    private IPersonDatabase controller;
+
+    @Inject
+    public AccountController() {
     }
 
     @Override
@@ -45,7 +48,7 @@ public final class AccountController extends Observable implements IAccountContr
 
         // side effects!
         if (db.save(account.getAccount())) {
-            controller.savePerson(account.getPerson());
+            controller.save(account.getPerson());
         }
 
         return account.getId();
@@ -71,12 +74,26 @@ public final class AccountController extends Observable implements IAccountContr
         return null;
     }
 
+    /**
+     * check if there is an exisiting account for this email address.
+     *
+     * @param email the email address to be checked.
+     * @return true, if the account exists.
+     */
     @Override
     public boolean accountExists(final String email) {
         List<? extends IAccount> accounts = db.queryViews("by_email", email);
         return accounts.size() > 0;
     }
 
+    /**
+     * perform a login with Google. If there is already an account with the email address of this Google Account, it
+     * connects the Google ID to the existing account. If the account
+     *
+     * @param userInfo
+     * @param googleID
+     * @return
+     */
     @Override
     public IAccount googleLogin(final Map<String, String> userInfo, final String googleID) {
         List<? extends IAccount> accounts = db.queryViews("googleID", googleID);
@@ -90,7 +107,7 @@ public final class AccountController extends Observable implements IAccountContr
             // Account exists, but is not connected to Google Account
             IAccount person = accounts.get(0);
             person.setGoogleID(googleID);
-            return saveAccount(person) ? person : null;
+            return db.save(person) ? person : null;
         }
 
 
@@ -102,19 +119,16 @@ public final class AccountController extends Observable implements IAccountContr
         return account;
     }
 
-    private boolean saveAccount(IAccount person) {
-        return db.save(person);
-    }
-
     @Override
     public PublicPerson getInternalInfo(String session, String userid) {
-        IAccount account = getAccount(UUID.fromString(userid));
+        IAccount account = db.get(UUID.fromString(userid));
         if (account != null && (session.equals(userid) || account.getFriendList().contains(session))) {
-            return new PublicPerson(getAccount(UUID.fromString(session)));
+            return new PublicPerson(db.get(UUID.fromString(session)));
         } else {
             return null;
         }
     }
+
 
     @Override
     public UUID saveAccount(IAccount account, boolean createHash) {

@@ -4,7 +4,6 @@ import com.google.inject.AbstractModule;
 import com.google.inject.Singleton;
 import de.htwg.seapal.controller.IAccountController;
 import de.htwg.seapal.controller.IMainController;
-import de.htwg.seapal.controller.IPersonController;
 import de.htwg.seapal.database.*;
 import de.htwg.seapal.utils.logging.ILogger;
 
@@ -23,7 +22,6 @@ public final class TestModule extends AbstractModule {
 
         bind(IMainController.class).to(MainController.class).in(Singleton.class);
         bind(IAccountController.class).to(AccountController.class).in(Singleton.class);
-        bind(IPersonController.class).to(PersonController.class).in(Singleton.class);
         bind(ILogger.class).to(Logger.class);
     }
 

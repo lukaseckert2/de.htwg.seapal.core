@@ -13,6 +13,10 @@ import java.io.FileNotFoundException;
 import java.io.InputStream;
 import java.util.*;
 
+/**
+ * MainController is the main interface between the database and the view. To make it more scaleable in the future, it
+ * should not convert the documents retrieved from the database to POJO.
+ */
 public final class MainController
         implements IMainController {
 
@@ -49,13 +53,21 @@ public final class MainController
         DBConnections.put(KEY_SETTING, settingDB);
     }
 
+    /**
+     * get a single document of a certain type.
+     *
+     * @param document the type of the document.
+     * @param session  the uuid of the user who wants this document.
+     * @param id       the id of the document
+     * @return the document, if it exisits and the user is allowed to view it. null, if not.
+     */
     @Override
     public IModel getSingleDocument(final String document, final String session, final UUID id) {
         IModel result = DBConnections.get(document).get(id);
 
         PublicPerson person = controller.getInternalInfo(session, session);
 
-        if (person != null && result != null &&  (person.getId().equals(result.getAccount()) || person.getFriend_list().contains(result.getAccount()))) {
+        if (person != null && result != null && (person.getId().equals(result.getAccount()) || person.getFriend_list().contains(result.getAccount()))) {
             return result;
         }
 
@@ -63,6 +75,14 @@ public final class MainController
         return null;
     }
 
+    /**
+     * delete one document.
+     *
+     * @param document the type of the document.
+     * @param session  the UUID of the user who wants to delete the document.
+     * @param id       the UUID of the document.
+     * @return if the document has been deleted.
+     */
     @Override
     public boolean deleteDocument(final String document, final String session, final UUID id) {
         IDatabase<? extends IModel> database = DBConnections.get(document);
@@ -91,6 +111,13 @@ public final class MainController
         return false;
     }
 
+    /**
+     * get all documents of one type of one account.
+     *
+     * @param document the type of the document.
+     * @param session  the uuid of the account the photos will be retrieved.
+     * @return a list of the documents.
+     */
     @Override
     public Collection<? extends IModel> getOwnDocuments(final String document, final String session) {
         return DBConnections.get(document).queryViews(VIEW_OWN, session);
@@ -107,9 +134,9 @@ public final class MainController
      * and the key of the parent document
      *
      * @param document the document type we're searching for
-     * @param parent the parent document type
-     * @param session the session of the user
-     * @param id the id of the parent document
+     * @param parent   the parent document type
+     * @param session  the session of the user
+     * @param id       the id of the parent document
      * @return list with the documents found
      */
     @Override
@@ -134,7 +161,7 @@ public final class MainController
         }
 
         // let the document check itself, if it is valid
-        if(!document.isValid()) {
+        if (!document.isValid()) {
             return null;
         }
 
@@ -164,10 +191,23 @@ public final class MainController
         return document;
     }
 
+    /**
+     * send a friend request or approve a request. The account with the UUID <i>session</i> asks the account with the
+     * UUID <i>askedPersonUUID</i>. This method just retrieves the account objects, calls the addFriend method of the
+     * asking account and then saves the changed objects.
+     *
+     * @param session         the uuid of the asking person
+     * @param askedPersonUUID the uuid of the asked person
+     * @return true, if the the askedPerson is in the friendlist, false, if the askedPerson only has been asked and he
+     *         still has to approve the request
+     */
     @Override
     public boolean addFriend(final String session, final UUID askedPersonUUID) {
         IAccount askingPerson = (IAccount) DBConnections.get(KEY_ACCOUNT).get(UUID.fromString(session));
         IAccount askedPerson = (IAccount) DBConnections.get(KEY_ACCOUNT).get(askedPersonUUID);
+        if (askedPerson == null || askingPerson == null) {
+            return false;
+        }
 
         boolean returnVal = askingPerson.addFriend(askedPerson);
 
@@ -177,18 +217,36 @@ public final class MainController
         return returnVal;
     }
 
-
+    /**
+     * returns all documents of one type, depending on the requested scope.
+     *
+     * @param document the type of the document you want to retrieve. One of boat, mark, person, route, trip, waypoint
+     *                 or setting
+     * @param session  the uuid of the account which wants to retrieve the documents.
+     * @param userid   the userid of the accounts you want to see the documents from.
+     * @param scope    the scope of the documents. remember: if session != userid then scope == "own", or you're able to see
+     *                 the documents of the friends of your friends.
+     * @return a list with documents.
+     */
     @Override
     public Collection<? extends IModel> getDocuments(String document, String session, String userid, String scope) {
+        if (!session.equals(userid) && !scope.equals("own")) {
+            throw new RuntimeException("Either you call with session == userid OR you call with scopbe == own so you're not able to see the documents of the friends of your friend.");
+        }
+
+        // check if sb wants to see his own documents or if not, if he is allowed to
         if (!session.equals(userid) && controller.getInternalInfo(session, userid) == null) {
             return new ArrayList<>();
         }
 
         Collection<IModel> Collection = new LinkedList<>();
+
+        // add own documents
         if (scope.equals("all") || scope.equals("own")) {
             Collection.addAll(getOwnDocuments(document, userid));
         }
 
+        // add documents of friends
         if (scope.equals("all") || scope.equals("friends")) {
             Collection.addAll(getFriendDocuments(document, userid));
         }
@@ -196,15 +254,15 @@ public final class MainController
         return Collection;
     }
 
+    /**
+     * retrieve a list of all persons which have sent friend requests.
+     *
+     * @param session the session of the account who wants to view the persons of the accounts which have sent a
+     *                friend request.
+     * @return list of all person objects which have sent friend requests.
+     */
     @Override
     public Collection<? extends IModel> getAskingPerson(String session) {
-        Collection<IModel> Collection = new LinkedList<>();
-        Collection.addAll(getAskingDocuments(session));
-
-        return Collection;
-    }
-
-    private Collection<? extends IModel> getAskingDocuments(String session) {
         IAccount person = (IAccount) DBConnections.get(KEY_ACCOUNT).get(UUID.fromString(session));
 
         Collection<IModel> Collection = new ArrayList<>();
@@ -217,6 +275,12 @@ public final class MainController
         return Collection;
     }
 
+    /**
+     * retrieve a list of documents of a specific type of all friends.
+     *
+     * @param session the session of the account who wants to view the documents of his friends.
+     * @return list of all documents of a specific type of all friends.
+     */
     private Collection<? extends IModel> getFriendDocuments(String document, String session) {
         IAccount person = (IAccount) DBConnections.get(KEY_ACCOUNT).get(UUID.fromString(session));
 
@@ -230,13 +294,23 @@ public final class MainController
         return Collection;
     }
 
+    /**
+     * send a friend request or approve a request. The account with the UUID <i>session</i> asks the account with the
+     * UUID <i>askedPersonUUID</i>. This method just retrieves the account objects, calls the addFriend method of the
+     * asking account and then saves the changed objects.
+     *
+     * @param session the uuid of the asking person
+     * @param mail    the email adress of the asked person
+     * @return true, if the the askedPerson is in the friendlist, false, if the askedPerson only has been asked and he
+     *         still has to approve the request
+     */
     @Override
     public boolean addFriend(String session, String mail) {
         IAccount askingPerson = (IAccount) DBConnections.get(KEY_ACCOUNT).get(UUID.fromString(session));
         List<? extends IModel> askedPersons = DBConnections.get(KEY_ACCOUNT).queryViews(VIEW_BY_EMAIL, mail);
         IAccount askedPerson;
         if (askedPersons.size() != 1) {
-            // should never happen, because an email should be an unique identifier
+            // in case the email is not registered
             return false;
         } else {
             askedPerson = (IAccount) askedPersons.get(0);
@@ -250,10 +324,20 @@ public final class MainController
         return returnVal;
     }
 
+    /**
+     * delete friend or friends. This method removes the UUIDs of each other from the three lists. So you're able to
+     * delete a sent or received friend request or to delete a already approved friend.
+     *
+     * @param session the UUID of the account which wants to delete the friend.
+     * @param id      the UUID of the account whose request or friendship will be deleted.
+     */
     @Override
     public void abortRequest(String session, UUID id) {
         IAccount askingPerson = (IAccount) DBConnections.get(KEY_ACCOUNT).get(UUID.fromString(session));
         IAccount askedPerson = (IAccount) DBConnections.get(KEY_ACCOUNT).get(id);
+        if (askedPerson == null || askingPerson == null) {
+            return;
+        }
 
         askingPerson.abortRequest(askedPerson);
 
@@ -261,6 +345,19 @@ public final class MainController
         ((IAccountDatabase) DBConnections.get(KEY_ACCOUNT)).save(askedPerson);
     }
 
+    /**
+     * Add a photo to a mark or waypoint. The mark or waypoint objects already contain a thumbnail, but the real sized
+     * image is to big to just add it as an base64 string to the object, so it has to be saved as a couchdb native
+     * attachement.
+     *
+     * @param session     the uuid of the logged in user.
+     * @param uuid        the uuid of the mark or waypoint the photo will be added to.
+     * @param contentType the contenttype of the photo (image/jpg).
+     * @param file        the file which contains the photo blob.
+     * @param type        the type of the document (whether mark or waypoint)
+     * @return if the photo has been added
+     * @throws FileNotFoundException
+     */
     @Override
     public boolean addPhoto(String session, UUID uuid, String contentType, File file, String type) throws FileNotFoundException {
         IModel document = getSingleDocument(type, session, uuid);
@@ -279,6 +376,15 @@ public final class MainController
         }
     }
 
+    /**
+     * retrieves the photo attached to a mark or waypoint.
+     *
+     * @param session the uuid of the logged in user.
+     * @param uuid    the uuid of the mark or waypoint the photo will be retrieved from.
+     * @param type    the type of the document (whether mark or waypoint)
+     * @return an InputStream containing the blob of the photo.
+     * @throws FileNotFoundException
+     */
     @Override
     public InputStream getPhoto(String session, UUID uuid, String type) throws FileNotFoundException {
         IModel document = getSingleDocument(type, session, uuid);
