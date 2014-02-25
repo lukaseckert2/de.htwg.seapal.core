@@ -11,7 +11,7 @@ import java.util.UUID;
 
 public interface IMainController {
 
-    Collection<? extends IModel> getSingleDocument(String document, String session, UUID id);
+    IModel getSingleDocument(String document, String session, UUID id);
 
     boolean deleteDocument(String document, String session, UUID id);
 

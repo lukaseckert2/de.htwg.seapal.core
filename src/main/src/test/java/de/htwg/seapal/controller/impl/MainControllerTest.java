@@ -50,10 +50,9 @@ public final class MainControllerTest {
         UUID owner = UUID.randomUUID();
         Boat boat = createBoat(owner);
         ModelDocument boat2 = controller.creatDocument("boat", boat, owner.toString());
-        Collection<? extends IModel> collection = controller.getSingleDocument("boat", owner.toString(), boat.getUUID());
+        IModel collection = controller.getSingleDocument("boat", owner.toString(), boat.getUUID());
         assert (collection != null);
-        assert (collection.size() == 1);
-        assert (boat.equals(collection.toArray()[0]));
+        assert (boat.equals(collection));
     }
 
     @Test
@@ -62,9 +61,8 @@ public final class MainControllerTest {
         Boat boat = createBoat(owner);
         controller.creatDocument("boat", boat, owner.toString());
         assert (controller.deleteDocument("boat", owner.toString(), boat.getUUID()));
-        Collection<? extends IModel> collection = controller.getSingleDocument("boat", owner.toString(), boat.getUUID());
+        IModel collection = controller.getSingleDocument("boat", owner.toString(), boat.getUUID());
         assert (collection != null);
-        assert (collection.size() == 0);
     }
 
     /**
@@ -77,9 +75,8 @@ public final class MainControllerTest {
         Boat boat = createBoat(owner);
         controller.creatDocument("boat", boat, owner.toString());
         assert (!controller.deleteDocument("boat", owner.toString(), UUID.randomUUID()));
-        Collection<? extends IModel> collection = controller.getSingleDocument("boat", owner.toString(), boat.getUUID());
+        IModel collection = controller.getSingleDocument("boat", owner.toString(), boat.getUUID());
         assert (collection != null);
-        assert (collection.size() == 1);
     }
 
     /**
@@ -125,10 +122,9 @@ public final class MainControllerTest {
         Boat boat = new Boat();
         ModelDocument boat2 = controller.creatDocument("boat", boat, owner.toString());
         controller.creatDocument("boat", boat, owner.toString());
-        Collection<? extends IModel> collection = controller.getSingleDocument("boat", owner.toString(), boat.getUUID());
+        IModel collection = controller.getSingleDocument("boat", owner.toString(), boat.getUUID());
         assert (collection != null);
-        assert (collection.size() == 1);
-        assert (boat.equals(collection.toArray()[0]));
+        assert (boat.equals(collection));
     }
 
     @Test
@@ -183,8 +179,8 @@ public final class MainControllerTest {
         accountController.saveAccount(save3, true);
 
         controller.addFriend(crewMember1.getAccount(), account.getEmail());
-        crewMember1 = (Account) controller.getSingleDocument("account", crewMember1.getAccount(), UUID.fromString(crewMember1.getId())).toArray()[0];
-        account = (Account) controller.getSingleDocument("account", account.getAccount(), UUID.fromString(account.getId())).toArray()[0];
+        crewMember1 = (Account) controller.getSingleDocument("account", crewMember1.getAccount(), UUID.fromString(crewMember1.getId()));
+        account = (Account) controller.getSingleDocument("account", account.getAccount(), UUID.fromString(account.getId()));
         assert (crewMember1.getSentRequests().size() == 1);
         assert (crewMember1.getReceivedRequests().size() == 0);
         assert (crewMember1.getFriendList().size() == 0);
@@ -193,8 +189,8 @@ public final class MainControllerTest {
         assert (account.getFriendList().size() == 0);
 
         controller.addFriend(crewMember1.getAccount(), account.getEmail());
-        crewMember1 = (Account) controller.getSingleDocument("account", crewMember1.getAccount(), UUID.fromString(crewMember1.getId())).toArray()[0];
-        account = (Account) controller.getSingleDocument("account", account.getAccount(), UUID.fromString(account.getId())).toArray()[0];
+        crewMember1 = (Account) controller.getSingleDocument("account", crewMember1.getAccount(), UUID.fromString(crewMember1.getId()));
+        account = (Account) controller.getSingleDocument("account", account.getAccount(), UUID.fromString(account.getId()));
         assert (crewMember1.getSentRequests().size() == 1);
         assert (crewMember1.getReceivedRequests().size() == 0);
         assert (crewMember1.getFriendList().size() == 0);
@@ -203,8 +199,8 @@ public final class MainControllerTest {
         assert (account.getFriendList().size() == 0);
 
         controller.addFriend(account.getAccount(), crewMember1.getEmail());
-        crewMember1 = (Account) controller.getSingleDocument("account", crewMember1.getAccount(), UUID.fromString(crewMember1.getId())).toArray()[0];
-        account = (Account) controller.getSingleDocument("account", account.getAccount(), UUID.fromString(account.getId())).toArray()[0];
+        crewMember1 = (Account) controller.getSingleDocument("account", crewMember1.getAccount(), UUID.fromString(crewMember1.getId()));
+        account = (Account) controller.getSingleDocument("account", account.getAccount(), UUID.fromString(account.getId()));
         assert (crewMember1.getSentRequests().size() == 0);
         assert (crewMember1.getReceivedRequests().size() == 0);
         assert (crewMember1.getFriendList().size() == 1);
@@ -301,8 +297,8 @@ public final class MainControllerTest {
         accountController.saveAccount(save3, true);
 
         controller.addFriend(crewMember1.getAccount(), UUID.fromString(account.getAccount()));
-        crewMember1 = (Account) controller.getSingleDocument("account", crewMember1.getAccount(), UUID.fromString(crewMember1.getId())).toArray()[0];
-        account = (Account) controller.getSingleDocument("account", account.getAccount(), UUID.fromString(account.getId())).toArray()[0];
+        crewMember1 = (Account) controller.getSingleDocument("account", crewMember1.getAccount(), UUID.fromString(crewMember1.getId()));
+        account = (Account) controller.getSingleDocument("account", account.getAccount(), UUID.fromString(account.getId()));
         assert (crewMember1.getSentRequests().size() == 1);
         assert (crewMember1.getReceivedRequests().size() == 0);
         assert (crewMember1.getFriendList().size() == 0);
@@ -311,8 +307,8 @@ public final class MainControllerTest {
         assert (account.getFriendList().size() == 0);
 
         controller.addFriend(crewMember1.getAccount(), UUID.fromString(account.getAccount()));
-        crewMember1 = (Account) controller.getSingleDocument("account", crewMember1.getAccount(), UUID.fromString(crewMember1.getId())).toArray()[0];
-        account = (Account) controller.getSingleDocument("account", account.getAccount(), UUID.fromString(account.getId())).toArray()[0];
+        crewMember1 = (Account) controller.getSingleDocument("account", crewMember1.getAccount(), UUID.fromString(crewMember1.getId()));
+        account = (Account) controller.getSingleDocument("account", account.getAccount(), UUID.fromString(account.getId()));
         assert (crewMember1.getSentRequests().size() == 1);
         assert (crewMember1.getReceivedRequests().size() == 0);
         assert (crewMember1.getFriendList().size() == 0);
@@ -321,8 +317,8 @@ public final class MainControllerTest {
         assert (account.getFriendList().size() == 0);
 
         controller.addFriend(account.getAccount(), UUID.fromString(crewMember1.getAccount()));
-        crewMember1 = (Account) controller.getSingleDocument("account", crewMember1.getAccount(), UUID.fromString(crewMember1.getId())).toArray()[0];
-        account = (Account) controller.getSingleDocument("account", account.getAccount(), UUID.fromString(account.getId())).toArray()[0];
+        crewMember1 = (Account) controller.getSingleDocument("account", crewMember1.getAccount(), UUID.fromString(crewMember1.getId()));
+        account = (Account) controller.getSingleDocument("account", account.getAccount(), UUID.fromString(account.getId()));
         assert (crewMember1.getSentRequests().size() == 0);
         assert (crewMember1.getReceivedRequests().size() == 0);
         assert (crewMember1.getFriendList().size() == 1);
@@ -348,8 +344,8 @@ public final class MainControllerTest {
         accountController.saveAccount(save3, true);
 
         controller.addFriend(crewMember1.getAccount(), account.getEmail());
-        crewMember1 = (Account) controller.getSingleDocument("account", crewMember1.getAccount(), UUID.fromString(crewMember1.getId())).toArray()[0];
-        account = (Account) controller.getSingleDocument("account", account.getAccount(), UUID.fromString(account.getId())).toArray()[0];
+        crewMember1 = (Account) controller.getSingleDocument("account", crewMember1.getAccount(), UUID.fromString(crewMember1.getId()));
+        account = (Account) controller.getSingleDocument("account", account.getAccount(), UUID.fromString(account.getId()));
         assert (crewMember1.getSentRequests().size() == 1);
         assert (crewMember1.getReceivedRequests().size() == 0);
         assert (crewMember1.getFriendList().size() == 0);
@@ -358,8 +354,8 @@ public final class MainControllerTest {
         assert (account.getFriendList().size() == 0);
 
         controller.abortRequest(crewMember1.getAccount(), UUID.fromString(account.getAccount()));
-        crewMember1 = (Account) controller.getSingleDocument("account", crewMember1.getAccount(), UUID.fromString(crewMember1.getId())).toArray()[0];
-        account = (Account) controller.getSingleDocument("account", account.getAccount(), UUID.fromString(account.getId())).toArray()[0];
+        crewMember1 = (Account) controller.getSingleDocument("account", crewMember1.getAccount(), UUID.fromString(crewMember1.getId()));
+        account = (Account) controller.getSingleDocument("account", account.getAccount(), UUID.fromString(account.getId()));
         assert (crewMember1.getSentRequests().size() == 0);
         assert (crewMember1.getReceivedRequests().size() == 0);
         assert (crewMember1.getFriendList().size() == 0);

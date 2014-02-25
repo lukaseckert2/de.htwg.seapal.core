@@ -48,8 +48,16 @@ public final class MainController
     }
 
     @Override
-    public Collection<? extends IModel> getSingleDocument(final String document, final String session, final UUID id) {
-        return DBConnections.get(document).queryViews(VIEW_SINGLEDOCUMENT, session + id.toString());
+    public IModel getSingleDocument(final String document, final String session, final UUID id) {
+        IModel result = DBConnections.get(document).get(id);
+
+        PublicPerson person = controller.getInternalInfo(session, session);
+
+        if (person.getId().equals(result.getAccount()) || person.getFriend_list().contains(result.getAccount())) {
+            return result;
+        }
+
+        return null;
     }
 
     @Override
@@ -222,13 +230,13 @@ public final class MainController
 
     @Override
     public boolean addPhoto(String session, UUID uuid, String contentType, File file, String type) throws FileNotFoundException {
-        Collection collection = getSingleDocument(type, session, uuid);
-        if (collection.size() == 1) {
+        IModel document = getSingleDocument(type, session, uuid);
+        if (document != null) {
             if (type.equals(KEY_MARK)) {
-                IMark mark = (IMark) collection.toArray()[0];
+                IMark mark = (IMark) document;
                 return ((IMarkDatabase) DBConnections.get(KEY_MARK)).addPhoto(mark, contentType, file);
             } else if (type.equals(KEY_WAYPOINT)) {
-                IWaypoint waypoint = (IWaypoint) collection.toArray()[0];
+                IWaypoint waypoint = (IWaypoint) document;
                 return ((IWaypointDatabase) DBConnections.get(KEY_WAYPOINT)).addPhoto(waypoint, contentType, file);
             } else {
                 return false;
@@ -240,14 +248,14 @@ public final class MainController
 
     @Override
     public InputStream getPhoto(String session, UUID uuid, String type) throws FileNotFoundException {
-        Collection collection = getSingleDocument(type, session, uuid);
-        if (collection.size() == 1) {
+        IModel document = getSingleDocument(type, session, uuid);
+        if (document != null) {
             if (type.equals(KEY_MARK)) {
-                IMark mark = (IMark) collection.toArray()[0];
+                IMark mark = (IMark) document;
                 return ((IMarkDatabase) DBConnections.get(KEY_MARK)).getPhoto(mark.getUUID());
             } else if (type.equals(KEY_WAYPOINT)) {
-                IWaypoint mark = (IWaypoint) collection.toArray()[0];
-                return ((IWaypointDatabase) DBConnections.get(KEY_WAYPOINT)).getPhoto(mark.getUUID());
+                IWaypoint waypoint = (IWaypoint) document;
+                return ((IWaypointDatabase) DBConnections.get(KEY_WAYPOINT)).getPhoto(waypoint.getUUID());
             }
         }
 
