@@ -1,5 +1,17 @@
 package de.htwg.seapal.model;
 
+/**
+ * a simple document representing an attachement in couchdb. will be saved to a Map<String, Attachement>.
+ *     "_attachments": {
+ *        "photo": {
+ *            "content_type": "image/jpeg",
+ *            "revpos": 4,
+ *            "digest": "md5-FG8DlMjSN+YOPSZKzxDb0A==",
+ *            "length": 265777,
+ *            "stub": true
+ *        }
+ *    }
+ */
 public final class Attachement {
     private String content_type;
     private Integer revpos;

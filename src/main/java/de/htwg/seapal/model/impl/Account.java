@@ -8,6 +8,13 @@ import java.util.ArrayList;
 import java.util.List;
 import java.util.UUID;
 
+/**
+ * the account object represents the account info to be saved as json document in couchdb and contains all the
+ * information the user might be able to see (friendlists and email adress, but not password, token and googleID). this
+ * information is not able to be edited directly by the user. he cannot send friend requests by POSTing a new account
+ * document but by using the route for it because all the actions changing the account document have side effects to
+ * other documents (such as sending mails or changing the account object of an user who receives the friend request.
+ */
 public final class Account extends ModelDocument implements IAccount {
     private String password = null;
 
@@ -120,7 +127,7 @@ public final class Account extends ModelDocument implements IAccount {
      * friendList contains approved friends
      * sentRequests contains uuids I have sent requests to
      * receivedRequests contains uuids I have received requests from
-     *
+     * <p/>
      * this method should be in AccountController, but it is easier to read, if it happens in the asking person object.
      *
      * @param askedPerson the person I want to add

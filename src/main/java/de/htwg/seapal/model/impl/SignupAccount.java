@@ -5,6 +5,12 @@ import de.htwg.seapal.model.IPerson;
 
 import java.util.UUID;
 
+/**
+ * this object represents the POST data of the signup form. it won't be saved as it is, but it is needed to parse the
+ * information out of the request the user sends, when he hits "Signup" with a filled form. After the JSON object is
+ * parsed, the controller creates the Account object out of the SignupAccount object, hashes the password and saves the
+ * Account object.
+ */
 public final class SignupAccount {
     private String email;
     private String password;
@@ -12,6 +18,16 @@ public final class SignupAccount {
     private String firstName;
     private String lastName;
 
+    private IAccount account = null;
+
+    public SignupAccount() {}
+
+    public SignupAccount(IAccount account, String s, String s1) {
+        this.account = account;
+        this.firstName = s;
+        this.lastName = s1;
+        this.password = account.getPassword();
+    }
 
     public void setEmail(String email) {
         this.email = email;
@@ -31,17 +47,6 @@ public final class SignupAccount {
 
     public String getLastName() {
         return lastName;
-    }
-
-    private IAccount account = null;
-
-    public SignupAccount() {}
-
-    public SignupAccount(IAccount account, String s, String s1) {
-        this.account = account;
-        this.firstName = s;
-        this.lastName = s1;
-        this.password = account.getPassword();
     }
 
     public IAccount getAccount() {

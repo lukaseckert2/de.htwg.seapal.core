@@ -161,9 +161,9 @@ public final class AccountController extends Observable implements IAccountContr
     /**
      * saves an account.
      *
-     * @param account
-     * @param createHash
-     * @return
+     * @param account the account to be saved.
+     * @param createHash whether the password should be hashed.
+     * @return the uuid of the saved account.
      */
     @Override
     public UUID saveAccount(IAccount account, boolean createHash) {

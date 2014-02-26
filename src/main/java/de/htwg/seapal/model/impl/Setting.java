@@ -5,6 +5,9 @@ import de.htwg.seapal.model.ModelDocument;
 
 import java.util.UUID;
 
+/**
+ * personal setting of an account.
+ */
 public final class Setting extends ModelDocument implements ISetting {
     private String distanceUnit;
     private String temperatureUnit;
