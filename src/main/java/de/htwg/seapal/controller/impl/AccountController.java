@@ -35,6 +35,13 @@ public final class AccountController extends Observable implements IAccountContr
     public AccountController() {
     }
 
+    /**
+     * saves a new account.
+     *
+     * @param account the account to be saved.
+     * @param createHash whether the password has to be hashed or not.
+     * @return the uuid of the new account.
+     */
     @Override
     public UUID saveAccount(SignupAccount account, boolean createHash) {
         if (createHash)
@@ -46,7 +53,8 @@ public final class AccountController extends Observable implements IAccountContr
                 return null;
             }
 
-        // side effects!
+        // side effects. account.getAccount tells SignupAccount checks how the account has been created and changes its
+        // state according to it.
         if (db.save(account.getAccount())) {
             controller.save(account.getPerson());
         }
@@ -54,11 +62,24 @@ public final class AccountController extends Observable implements IAccountContr
         return account.getId();
     }
 
+    /**
+     * query a view in the db.
+     *
+     * @param viewName the name of the view.
+     * @param key the key.
+     * @return a list containing the found documents.
+     */
     @Override
     public List<? extends IAccount> queryView(String viewName, String key) {
         return db.queryViews(viewName, key);
     }
 
+    /**
+     * authenticate a login request.
+     *
+     * @param account the account information parsed from the request containing the clear text password.
+     * @return the saved account with the hashed password or null, if it failed.
+     */
     @Override
     public IAccount authenticate(final IAccount account) {
         IAccount savedAccount = db.getAccount(account.getEmail().toUpperCase());
@@ -119,6 +140,13 @@ public final class AccountController extends Observable implements IAccountContr
         return account;
     }
 
+    /**
+     * get the info of an account such as friend list and email adress.
+     *
+     * @param session the uuid of the logged in user.
+     * @param userid the uuid of the account the logged in user wants to see.
+     * @return the information object or null, if it failed.
+     */
     @Override
     public PublicPerson getInternalInfo(String session, String userid) {
         IAccount account = db.get(UUID.fromString(userid));
@@ -130,6 +158,13 @@ public final class AccountController extends Observable implements IAccountContr
     }
 
 
+    /**
+     * saves an account.
+     *
+     * @param account
+     * @param createHash
+     * @return
+     */
     @Override
     public UUID saveAccount(IAccount account, boolean createHash) {
         if (createHash)

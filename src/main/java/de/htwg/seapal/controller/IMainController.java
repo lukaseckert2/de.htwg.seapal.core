@@ -2,6 +2,7 @@ package de.htwg.seapal.controller;
 
 import de.htwg.seapal.model.IModel;
 import de.htwg.seapal.model.ModelDocument;
+import org.ektorp.UpdateConflictException;
 
 import java.io.File;
 import java.io.FileNotFoundException;
@@ -19,7 +20,7 @@ public interface IMainController {
 
     Collection<? extends IModel> getByParent(String document, String parent, String session, final UUID id);
 
-    public ModelDocument creatDocument(final String type, final ModelDocument document, String session);
+    public ModelDocument creatDocument(final String type, final ModelDocument document, String session) throws UpdateConflictException;
 
     boolean addFriend(String session, UUID askedPersonUUID);
 

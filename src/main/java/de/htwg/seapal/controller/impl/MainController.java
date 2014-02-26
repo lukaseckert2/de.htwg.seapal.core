@@ -7,6 +7,7 @@ import de.htwg.seapal.database.*;
 import de.htwg.seapal.model.*;
 import de.htwg.seapal.model.impl.PublicPerson;
 import de.htwg.seapal.utils.logging.ILogger;
+import org.ektorp.UpdateConflictException;
 
 import java.io.File;
 import java.io.FileNotFoundException;
@@ -120,7 +121,11 @@ public final class MainController
      */
     @Override
     public Collection<? extends IModel> getOwnDocuments(final String document, final String session) {
-        return DBConnections.get(document).queryViews(VIEW_OWN, session);
+        try {
+            return DBConnections.get(document).queryViews(VIEW_OWN, session);
+        } catch (Exception e) {
+            return new ArrayList<>();
+        }
     }
 
     /**
@@ -141,7 +146,11 @@ public final class MainController
      */
     @Override
     public Collection<? extends IModel> getByParent(final String document, final String parent, final String session, final UUID id) {
-        return DBConnections.get(document).queryViews(parent, session + id.toString());
+        try {
+            return DBConnections.get(document).queryViews(parent, session + id.toString());
+        } catch (Exception e) {
+            return new ArrayList<>();
+        }
     }
 
     /**
@@ -153,7 +162,7 @@ public final class MainController
      * @return the document that has been saved. It contains the UUID and the account it is related to
      */
     @Override
-    public ModelDocument creatDocument(final String type, final ModelDocument document, String session) {
+    public ModelDocument creatDocument(final String type, final ModelDocument document, String session) throws UpdateConflictException {
         // the app should set to which account belongs to the new document. If this is not the case, the currently
         // logged in user will be the owner.
         if (document.getAccount() == null || document.getAccount().equals("")) {
@@ -237,6 +246,8 @@ public final class MainController
     @Override
     public Collection<? extends IModel> getDocuments(String document, String session, String userid, String scope) {
         if (!session.equals(userid) && !scope.equals("own")) {
+            // this is not a runtime exception but a compiler unchecked programming error, but putting it into try
+            // catches everywhere shouldn't be necessary. so this should only happen during development and testing
             throw new RuntimeException("Either you call with session == userid OR you call with scopbe == own so you're not able to see the documents of the friends of your friend.");
         }
 
