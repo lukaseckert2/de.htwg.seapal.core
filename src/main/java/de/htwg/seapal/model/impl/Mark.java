@@ -2,7 +2,6 @@ package de.htwg.seapal.model.impl;
 
 import de.htwg.seapal.model.IMark;
 import de.htwg.seapal.model.ModelDocument;
-import org.codehaus.jackson.annotate.JsonIgnore;
 
 import java.util.UUID;
 
@@ -18,8 +17,6 @@ public class Mark extends ModelDocument implements IMark {
 	private Double lng;
 	private Long date;
     private String image_thumb;
-    @JsonIgnore
-    public Object _attachments;
 
     public Mark() {
 		super(UUID.randomUUID().toString());

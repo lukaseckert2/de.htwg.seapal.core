@@ -5,7 +5,6 @@ import de.htwg.seapal.model.ModelDocument;
 import org.apache.commons.lang.builder.EqualsBuilder;
 import org.apache.commons.lang.builder.HashCodeBuilder;
 import org.apache.commons.lang.builder.ReflectionToStringBuilder;
-import org.codehaus.jackson.annotate.JsonIgnore;
 
 import java.util.UUID;
 
@@ -31,8 +30,6 @@ public class Waypoint extends ModelDocument implements IWaypoint {
     private String trip;
     private String boat;
     private String image_thumb;
-    @JsonIgnore
-    public Object _attachments;
 
     public Waypoint() {
         super(UUID.randomUUID().toString());

@@ -91,8 +91,8 @@ public class WaypointDatabase implements IWaypointDatabase {
 	}
 
     @Override
-    public boolean addPhoto(IWaypoint mark, String contentType, File file) throws FileNotFoundException {
-        return false;
+    public String addPhoto(IWaypoint mark, String contentType, File file) throws FileNotFoundException {
+        return "";
     }
 
     @Override

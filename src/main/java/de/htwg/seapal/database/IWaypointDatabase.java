@@ -21,7 +21,7 @@ import java.util.UUID;
  * </p>
  */
 public interface IWaypointDatabase extends IDatabase<IWaypoint> {
-    boolean addPhoto(IWaypoint mark, String contentType, File file) throws FileNotFoundException;
+    String addPhoto(IWaypoint mark, String contentType, File file) throws FileNotFoundException;
 
     InputStream getPhoto(UUID uuid);
 }

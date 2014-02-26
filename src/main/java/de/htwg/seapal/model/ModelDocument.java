@@ -4,6 +4,7 @@ import org.codehaus.jackson.annotate.JsonIgnore;
 import org.codehaus.jackson.annotate.JsonProperty;
 
 import java.io.Serializable;
+import java.util.Map;
 import java.util.UUID;
 
 /**
@@ -19,6 +20,8 @@ public abstract class ModelDocument implements IModel, Serializable {
 	private String id;
 	private String revision;
     private String account;
+    private Map<String, Attachement> _attachments;
+
 
     public ModelDocument(final String uuid) {
         this.id = uuid;
@@ -156,5 +159,15 @@ public abstract class ModelDocument implements IModel, Serializable {
     @Override
     public void setAccount(String uuid) {
         this.account = uuid;
+    }
+
+    @Override
+    public Map<String, Attachement> get_attachments() {
+        return _attachments;
+    }
+
+    @Override
+    public void set_attachments(Map<String, Attachement> _attachments) {
+        this._attachments = _attachments;
     }
 }

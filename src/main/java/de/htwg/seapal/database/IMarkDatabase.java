@@ -22,7 +22,7 @@ import java.util.UUID;
  */
 public interface IMarkDatabase extends IDatabase<IMark> {
 
-    boolean addPhoto(IMark mark, String contentType, File file) throws FileNotFoundException;
+    String addPhoto(IMark mark, String contentType, File file) throws FileNotFoundException;
 
     InputStream getPhoto(UUID uuid);
 }

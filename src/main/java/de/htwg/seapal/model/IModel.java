@@ -2,6 +2,7 @@ package de.htwg.seapal.model;
 
 import org.codehaus.jackson.annotate.JsonIgnore;
 
+import java.util.Map;
 import java.util.UUID;
 
 public interface IModel {
@@ -29,4 +30,8 @@ public interface IModel {
 
     @JsonIgnore
     boolean isValid();
+
+    Map<String, Attachement> get_attachments();
+
+    void set_attachments(Map<String, Attachement> _attachments);
 }

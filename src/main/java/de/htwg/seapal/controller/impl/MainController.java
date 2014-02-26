@@ -185,6 +185,8 @@ public final class MainController
         if (document.isNew()) {
             DBConnections.get(type).create(document);
         } else {
+            IModel savedDocument = DBConnections.get(type).get(document.getUUID());
+            document.set_attachments(savedDocument.get_attachments());
             DBConnections.get(type).update(document);
         }
 
@@ -367,7 +369,7 @@ public final class MainController
      * @throws FileNotFoundException
      */
     @Override
-    public boolean addPhoto(String session, UUID uuid, String contentType, File file, String type) throws FileNotFoundException {
+    public String addPhoto(String session, UUID uuid, String contentType, File file, String type) throws FileNotFoundException {
         IModel document = getSingleDocument(type, session, uuid);
         if (document != null) {
             if (type.equals(KEY_MARK)) {
@@ -377,10 +379,10 @@ public final class MainController
                 IWaypoint waypoint = (IWaypoint) document;
                 return ((IWaypointDatabase) DBConnections.get(KEY_WAYPOINT)).addPhoto(waypoint, contentType, file);
             } else {
-                return false;
+                return null;
             }
         } else {
-            return false;
+            return null;
         }
     }
 

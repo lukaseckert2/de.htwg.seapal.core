@@ -92,9 +92,9 @@ public class MarkDatabase implements IMarkDatabase {
     }
 
     @Override
-    public boolean addPhoto(IMark mark, String contentType, File file) throws FileNotFoundException {
+    public String addPhoto(IMark mark, String contentType, File file) throws FileNotFoundException {
         db2.put(mark.getUUID(), file);
-        return true;
+        return "";
     }
 
     @Override
