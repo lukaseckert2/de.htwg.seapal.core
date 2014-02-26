@@ -19,7 +19,7 @@ public class Boat extends ModelDocument implements IBoat {
     private String yachtclub;
     private String insurance;
     private String callSign;
-    private String type;
+    private String boatType;
     private String constructor;
     private Double length;
     private Double width;
@@ -46,7 +46,7 @@ public class Boat extends ModelDocument implements IBoat {
         this.yachtclub = "";
         this.insurance = "";
         this.callSign = "";
-        this.type = "";
+        this.boatType = "";
         this.constructor = "";
         this.length = 0D;
         this.width = 0D;
@@ -74,7 +74,7 @@ public class Boat extends ModelDocument implements IBoat {
         this.yachtclub = boat.getYachtclub();
         this.insurance = boat.getInsurance();
         this.callSign = boat.getCallSign();
-        this.type = boat.getType();
+        this.boatType = boat.getBoatType();
         this.constructor = boat.getBoatConstructor();
         this.length = boat.getLength();
         this.width = boat.getLength();
@@ -163,12 +163,12 @@ public class Boat extends ModelDocument implements IBoat {
         this.callSign = callSign;
     }
 
-    public String getType() {
-        return type;
+    public String getBoatType() {
+        return boatType;
     }
 
-    public void setType(String type) {
-        this.type = type;
+    public void setBoatType(String type) {
+        this.boatType = type;
     }
 
     @Override
@@ -343,7 +343,7 @@ public class Boat extends ModelDocument implements IBoat {
             returnValue = returnValue && yachtclub.equals(boat.yachtclub);
             returnValue = returnValue && insurance.equals(boat.insurance);
             returnValue = returnValue && callSign.equals(boat.callSign);
-            returnValue = returnValue && type.equals(boat.type);
+            returnValue = returnValue && boatType.equals(boat.boatType);
             returnValue = returnValue && constructor.equals(boat.constructor);
             returnValue = returnValue && length.equals(boat.length);
             returnValue = returnValue && width.equals(boat.width);

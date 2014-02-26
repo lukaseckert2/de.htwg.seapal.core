@@ -30,9 +30,9 @@ public interface IBoat extends IModel {
 
 	void setCallSign(String callSign);
 
-	String getType();
+	String getBoatType();
 
-	void setType(String type);
+	void setBoatType(String type);
 
 	String getBoatConstructor();
 
