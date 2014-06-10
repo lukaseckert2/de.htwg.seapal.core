@@ -1,18 +1,40 @@
 package de.htwg.seapal.controller.impl;
 
-import com.google.inject.Inject;
-import de.htwg.seapal.controller.IAccountController;
-import de.htwg.seapal.controller.IMainController;
-import de.htwg.seapal.database.*;
-import de.htwg.seapal.model.*;
-import de.htwg.seapal.model.impl.PublicPerson;
-import de.htwg.seapal.utils.logging.ILogger;
-import org.ektorp.UpdateConflictException;
-
 import java.io.File;
 import java.io.FileNotFoundException;
 import java.io.InputStream;
-import java.util.*;
+import java.util.ArrayList;
+import java.util.Collection;
+import java.util.HashMap;
+import java.util.LinkedList;
+import java.util.List;
+import java.util.Map;
+import java.util.UUID;
+
+import org.ektorp.UpdateConflictException;
+
+import com.google.inject.Inject;
+
+import de.htwg.seapal.controller.IAccountController;
+import de.htwg.seapal.controller.IMainController;
+import de.htwg.seapal.database.IAccountDatabase;
+import de.htwg.seapal.database.IBoatDatabase;
+import de.htwg.seapal.database.IDatabase;
+import de.htwg.seapal.database.IMarkDatabase;
+import de.htwg.seapal.database.IPersonDatabase;
+import de.htwg.seapal.database.IRouteDatabase;
+import de.htwg.seapal.database.ISettingDatabase;
+import de.htwg.seapal.database.ITripDatabase;
+import de.htwg.seapal.database.IWaypointDatabase;
+import de.htwg.seapal.database.IWaypointDatabase.WaypointPictureBean;
+import de.htwg.seapal.model.IAccount;
+import de.htwg.seapal.model.IMark;
+import de.htwg.seapal.model.IModel;
+import de.htwg.seapal.model.ITrip;
+import de.htwg.seapal.model.IWaypoint;
+import de.htwg.seapal.model.ModelDocument;
+import de.htwg.seapal.model.impl.PublicPerson;
+import de.htwg.seapal.utils.logging.ILogger;
 
 /**
  * MainController is the main interface between the database and the view. To make it more scaleable in the future, it
@@ -420,5 +442,62 @@ public final class MainController
         }
 
         return null;
+    }
+    
+    /**
+	 * Gets all waypoints of a trip which have a picture assigned.
+	 * Returns list of the form [{waypointId, thumbImage}, ...]
+	 * thumbImage is of the form "data:image/jpg;base64,[binaryData]" for direct use as src of image tags.
+	 * @param startIndex Number of entries to skip before returning the values.
+	 */
+    @Override
+    public List<WaypointPictureBean> getPhotosOfTrip(String session, UUID tripId, int startIndex, int count) {
+    	IWaypointDatabase db = (IWaypointDatabase)DBConnections.get(KEY_WAYPOINT);
+    	return db.getPhotosByTripId(tripId, startIndex, count);
+    }   
+
+	/**
+	 * Gets the waypoints objects of a trip (with extended query parameters).
+	 * @param startIndex Number of entries to skip before returning the values.
+	 * @param count Specify 0 to reveive all items.
+	 */
+    @Override
+    public List<? extends IWaypoint> getWaypointsByTripId(UUID tripId, int startIndex, int count) {
+    	IWaypointDatabase db = (IWaypointDatabase)DBConnections.get(KEY_WAYPOINT);
+    	return db.getWaypointsByTripId(tripId, startIndex, count);
+    }
+    
+    /**
+	 * Returns all trips of the specified boat.
+	 * Note that only the properties name, startDate, from and to are initialized.
+	 */
+    @Override
+    public List<? extends ITrip> getTripsByBoatSlim(UUID boatId) {
+    	ITripDatabase db = (ITripDatabase)DBConnections.get(KEY_TRIP);
+		List<? extends ITrip> result = db.getTripsByBoatSlim(boatId.toString());
+		
+		return result;
+    }
+    
+
+	/**
+	 * Returns a set of trip objects for a boat ordered by the startDate.
+	 * @param skip Number of items to skip before returning the results
+	 */
+    @Override
+    public  List<? extends ITrip> getTripsByBoat(UUID boatId, long startDate, int skip, int count, boolean descending) {
+    	ITripDatabase db = (ITripDatabase)DBConnections.get(KEY_TRIP);
+		List<? extends ITrip> result = db.getTripsByBoat(boatId.toString(), startDate, skip, count, descending);
+		
+		return result;
+    }
+    
+	/**
+	 * Returns all waypoints of the specified trip. Note that not all properties get initialized!
+	 */
+    @Override
+    public List<? extends IWaypoint> getWaypointsOfTripSlim(UUID tripId) {
+    	IWaypointDatabase db = (IWaypointDatabase)DBConnections.get(KEY_WAYPOINT);
+    	return db.getWaypointsOfTripSlim(tripId);
     }
 }

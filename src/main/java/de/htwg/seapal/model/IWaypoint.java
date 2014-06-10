@@ -20,6 +20,9 @@ public interface IWaypoint extends IModel {
     String getForesail();
 
     String getMainsail();
+    
+    
+    
 
 	void setForesail(String foreSail);
 
@@ -64,4 +67,7 @@ public interface IWaypoint extends IModel {
     String getImage_thumb();
 
     void setImage_thumb(String image);
+    
+    Double getTempCelsius();
+    void setTempCelcius(Double degrees);
 }

@@ -5,7 +5,7 @@ organization := "de.htwg.seapal"
 name := "core"
 
 // version
-version := "1.0-SNAPSHOT"
+version := "1.1-SNAPSHOT"
 
 // general project dependencies
 libraryDependencies ++= Seq(

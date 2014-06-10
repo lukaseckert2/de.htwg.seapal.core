@@ -1,11 +1,13 @@
 package de.htwg.seapal.database.mock;
 
 import com.google.common.collect.ImmutableList;
+
 import de.htwg.seapal.database.ITripDatabase;
 import de.htwg.seapal.model.ITrip;
 import de.htwg.seapal.model.ModelDocument;
 import de.htwg.seapal.model.impl.Trip;
 
+import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
@@ -85,5 +87,17 @@ public class TripDatabase implements ITripDatabase {
 	@Override
 	public boolean save(ITrip trip) {
 		return true;
+	}
+
+	@Override
+	public List<? extends ITrip> getTripsByBoat(String boatId, long startDate,
+			int skip, int count, boolean descending) {
+		
+		return new ArrayList<>(db.values());
+	}
+
+	@Override
+	public List<? extends ITrip> getTripsByBoatSlim(String boatId) {
+		return new ArrayList<>(db.values());
 	}
 }

@@ -1,6 +1,7 @@
 package de.htwg.seapal.database.mock;
 
 import com.google.common.collect.ImmutableList;
+
 import de.htwg.seapal.database.IWaypointDatabase;
 import de.htwg.seapal.model.IWaypoint;
 import de.htwg.seapal.model.ModelDocument;
@@ -9,6 +10,7 @@ import de.htwg.seapal.model.impl.Waypoint;
 import java.io.File;
 import java.io.FileNotFoundException;
 import java.io.InputStream;
+import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
@@ -99,4 +101,23 @@ public class WaypointDatabase implements IWaypointDatabase {
     public InputStream getPhoto(UUID uuid) {
         return null;
     }
+
+	@Override
+	public List<WaypointPictureBean> getPhotosByTripId(UUID tripId,
+			int startIndex, int count) {
+		
+		return null;
+	}
+
+	@Override
+	public List<? extends IWaypoint> getWaypointsByTripId(UUID tripId,
+			int startIndex, int count) {
+		
+		return new ArrayList<>(db.values());
+	}
+
+	@Override
+	public List<? extends IWaypoint> getWaypointsOfTripSlim(UUID tripId) {
+		return new ArrayList<>(db.values());
+	}
 }

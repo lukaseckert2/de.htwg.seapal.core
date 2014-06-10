@@ -2,6 +2,7 @@ package de.htwg.seapal.model.impl;
 
 import de.htwg.seapal.model.IWaypoint;
 import de.htwg.seapal.model.ModelDocument;
+
 import org.apache.commons.lang.builder.EqualsBuilder;
 import org.apache.commons.lang.builder.HashCodeBuilder;
 import org.apache.commons.lang.builder.ReflectionToStringBuilder;
@@ -30,6 +31,7 @@ public class Waypoint extends ModelDocument implements IWaypoint {
     private String trip;
     private String boat;
     private String image_thumb;
+    private Double tempCelsius;
 
     public Waypoint() {
         super(UUID.randomUUID().toString());
@@ -242,4 +244,14 @@ public class Waypoint extends ModelDocument implements IWaypoint {
     public boolean isValid() {
         return boat != null && !boat.equals("") && trip != null && !trip.equals("");
     }
+
+	@Override
+	public Double getTempCelsius() {
+		return this.tempCelsius;
+	}
+
+	@Override
+	public void setTempCelcius(Double degrees) {
+		this.tempCelsius = degrees;
+	}
 }

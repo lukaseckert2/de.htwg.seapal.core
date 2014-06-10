@@ -1,13 +1,18 @@
 package de.htwg.seapal.controller;
 
+import de.htwg.seapal.database.IWaypointDatabase.WaypointPictureBean;
 import de.htwg.seapal.model.IModel;
+import de.htwg.seapal.model.ITrip;
+import de.htwg.seapal.model.IWaypoint;
 import de.htwg.seapal.model.ModelDocument;
+
 import org.ektorp.UpdateConflictException;
 
 import java.io.File;
 import java.io.FileNotFoundException;
 import java.io.InputStream;
 import java.util.Collection;
+import java.util.List;
 import java.util.UUID;
 
 public interface IMainController {
@@ -35,4 +40,14 @@ public interface IMainController {
     public InputStream getPhoto(String session, UUID uuid, String type) throws FileNotFoundException;
 
     Collection<? extends IModel> getAskingPerson(String session);
+    
+    List<WaypointPictureBean> getPhotosOfTrip(String session, UUID tripId, int startIndex, int count);
+    
+    List<? extends IWaypoint> getWaypointsByTripId(UUID tripId, int startIndex, int count);
+    
+    List<? extends ITrip> getTripsByBoatSlim(UUID boatId);
+    
+    List<? extends ITrip> getTripsByBoat(UUID boatId, long startDate, int skip, int count, boolean descending);
+    
+    List<? extends IWaypoint> getWaypointsOfTripSlim(UUID tripId);
 }

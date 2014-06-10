@@ -74,4 +74,7 @@ public interface IDatabase<T extends IModel> {
     List<? extends T> queryViews(String viewName, String key);
 
     void update(ModelDocument document);
+    
+    
+   
 }
