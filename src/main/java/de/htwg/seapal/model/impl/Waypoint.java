@@ -32,6 +32,11 @@ public class Waypoint extends ModelDocument implements IWaypoint {
     private String boat;
     private String image_thumb;
     private Double tempCelsius;
+    private Double windSpeed;
+    private Double windDirection;
+    private Double wavesHeight;
+    private Double atmosPressure;
+    private Double cloudage;
 
     public Waypoint() {
         super(UUID.randomUUID().toString());
@@ -56,6 +61,10 @@ public class Waypoint extends ModelDocument implements IWaypoint {
         this.foreSail = w.getForesail();
         this.mainSail = w.getMainsail();
         this.trip = w.getTrip();
+        this.tempCelsius = w.getTempCelsius();
+        this.windSpeed = w.getWindSpeedBeaufort();
+        this.windDirection = w.getWindDirection();
+        this.wavesHeight = w.getWavesHeight();
     }
 
     @Override
@@ -253,5 +262,55 @@ public class Waypoint extends ModelDocument implements IWaypoint {
 	@Override
 	public void setTempCelcius(Double degrees) {
 		this.tempCelsius = degrees;
+	}
+
+	@Override
+	public Double getWindSpeedBeaufort() {
+		return this.windSpeed;
+	}
+
+	@Override
+	public void setWindSpeedBeaufort(Double beaufort) {
+		this.windSpeed = beaufort;
+	}
+
+	@Override
+	public Double getWindDirection() {
+		return this.windDirection;
+	}
+
+	@Override
+	public void setWindDirection(Double degrees) {
+		this.windDirection = degrees;
+	}
+
+	@Override
+	public Double getWavesHeight() {
+		return this.wavesHeight;
+	}
+
+	@Override
+	public void setWavesHeight(Double meters) {
+		this.wavesHeight = meters;
+	}
+
+	@Override
+	public Double getCloudage() {
+		return this.cloudage;
+	}
+
+	@Override
+	public void setCloudage(double value) {
+		this.cloudage = value;
+	}
+
+	@Override
+	public Double getAtmosPressure() {
+		return this.atmosPressure;
+	}
+
+	@Override
+	public void setAtmosPressure(double hectopascal) {
+		this.atmosPressure = hectopascal;
 	}
 }

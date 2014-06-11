@@ -70,4 +70,19 @@ public interface IWaypoint extends IModel {
     
     Double getTempCelsius();
     void setTempCelcius(Double degrees);
+    
+    Double getWindSpeedBeaufort();
+    void setWindSpeedBeaufort(Double beaufort);
+    
+    Double getWindDirection();
+    void setWindDirection(Double degrees);
+    
+    Double getWavesHeight();
+    void setWavesHeight(Double meters);
+    
+    Double getCloudage();
+    void setCloudage(double value);
+    
+    Double getAtmosPressure();
+    void setAtmosPressure(double hectopascal);
 }
