@@ -85,4 +85,8 @@ public interface IWaypoint extends IModel {
     
     Double getAtmosPressure();
     void setAtmosPressure(double hectopascal);
+    
+    Double getHumidity();
+    void setHumidity(double percent);
+    
 }

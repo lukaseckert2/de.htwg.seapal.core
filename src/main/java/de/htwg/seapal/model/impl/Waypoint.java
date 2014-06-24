@@ -37,6 +37,7 @@ public class Waypoint extends ModelDocument implements IWaypoint {
     private Double wavesHeight;
     private Double atmosPressure;
     private Double cloudage;
+    private Double humidity;
 
     public Waypoint() {
         super(UUID.randomUUID().toString());
@@ -313,4 +314,16 @@ public class Waypoint extends ModelDocument implements IWaypoint {
 	public void setAtmosPressure(double hectopascal) {
 		this.atmosPressure = hectopascal;
 	}
+
+	@Override
+	public Double getHumidity() {
+		return humidity;
+	}
+
+	@Override
+	public void setHumidity(double humidity) { 
+		this.humidity = humidity;
+	}
+	
+	
 }
