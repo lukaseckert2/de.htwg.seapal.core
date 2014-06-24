@@ -261,7 +261,7 @@ public class Waypoint extends ModelDocument implements IWaypoint {
 	}
 
 	@Override
-	public void setTempCelcius(Double degrees) {
+	public void setTempCelsius(Double degrees) {
 		this.tempCelsius = degrees;
 	}
 
@@ -301,7 +301,7 @@ public class Waypoint extends ModelDocument implements IWaypoint {
 	}
 
 	@Override
-	public void setCloudage(double value) {
+	public void setCloudage(Double value) {
 		this.cloudage = value;
 	}
 
@@ -311,7 +311,7 @@ public class Waypoint extends ModelDocument implements IWaypoint {
 	}
 
 	@Override
-	public void setAtmosPressure(double hectopascal) {
+	public void setAtmosPressure(Double hectopascal) {
 		this.atmosPressure = hectopascal;
 	}
 
@@ -321,7 +321,7 @@ public class Waypoint extends ModelDocument implements IWaypoint {
 	}
 
 	@Override
-	public void setHumidity(double humidity) { 
+	public void setHumidity(Double humidity) { 
 		this.humidity = humidity;
 	}
 	

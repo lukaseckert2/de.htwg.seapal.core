@@ -69,7 +69,7 @@ public interface IWaypoint extends IModel {
     void setImage_thumb(String image);
     
     Double getTempCelsius();
-    void setTempCelcius(Double degrees);
+    void setTempCelsius(Double degrees);
     
     Double getWindSpeedBeaufort();
     void setWindSpeedBeaufort(Double beaufort);
@@ -81,12 +81,12 @@ public interface IWaypoint extends IModel {
     void setWavesHeight(Double meters);
     
     Double getCloudage();
-    void setCloudage(double value);
+    void setCloudage(Double value);
     
     Double getAtmosPressure();
-    void setAtmosPressure(double hectopascal);
+    void setAtmosPressure(Double hectopascal);
     
     Double getHumidity();
-    void setHumidity(double percent);
+    void setHumidity(Double percent);
     
 }
